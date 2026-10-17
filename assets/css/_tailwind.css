@@ -1,0 +1,103 @@
+/* The input of the CSS build. Never published.
+ *
+ * The leading underscore marks an input: a file that is bundled into another
+ * and that `assets!` must not publish on its own. The build reads this file
+ * and writes assets/css/site.css, which is the one that ships:
+ *
+ *     mise run css          # once, minified
+ *     mise run css:watch    # again on each change
+ */
+
+@import "tailwindcss";
+
+/* Where the class names are.
+ *
+ * Tailwind resolves each path against this stylesheet and keeps its automatic
+ * detection on as well. These are explicit for two reasons: `.rsx` is not an
+ * extension Tailwind knows, and an explicit glob states the contract.
+ */
+
+/* The templates. A .rsx file is Rust with an HTML-shaped body. */
+@source "../../src/pages/**/*.rsx";
+
+/* Plain Rust holds class names too -- a helper that builds a class string,
+ * or a handler choosing one. */
+@source "../../src/**/*.rs";
+
+/* The scripts hold class names too: the viewer toggles state through data
+ * attributes, but a class it adds must still reach the build. */
+@source "../js/**/*.js";
+
+/* ------------------------------------------------------------------ tokens
+ *
+ * Close to docs.stripe.com: near-white surfaces, hairline borders, slate
+ * text, and one accent (Stripe's blurple) for the current entry and links.
+ */
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Ubuntu, sans-serif;
+  --color-ink: #1a1b25;    /* headings */
+  --color-body: #414552;   /* running text */
+  --color-muted: #687385;  /* secondary text, nav entries */
+  --color-line: #ebeef1;   /* hairlines */
+  --color-wash: #f6f8fa;   /* sidebar hover, viewer backdrop */
+  --color-accent: #635bff;
+  --color-accent-strong: #533afd;
+}
+
+@layer components {
+  .topbar {
+    @apply h-15 shrink-0 flex items-center gap-3 px-6 border-b border-line bg-white;
+  }
+  .brand { @apply text-[17px] font-bold tracking-tight text-ink; }
+  .brand-divider { @apply h-5 w-px bg-line; }
+  .brand-sub { @apply text-[15px] font-medium text-muted; }
+  .topbar-link { @apply text-sm font-medium text-muted hover:text-ink transition-colors; }
+
+  .sidebar {
+    @apply min-h-0 max-h-[40vh] lg:max-h-none flex flex-col border-b lg:border-b-0 lg:border-r border-line bg-white;
+  }
+  .sidebar-search { @apply relative px-4 pt-5 pb-3; }
+  .sidebar-search input {
+    @apply w-full h-9 pl-3 pr-8 text-sm rounded-md border border-line bg-white text-ink
+      placeholder:text-muted shadow-[0_1px_1px_rgb(0_0_0/0.03)]
+      focus:outline-none focus:border-accent focus:ring-3 focus:ring-accent/15 transition;
+  }
+  .search-key { @apply absolute right-6 top-[29px] text-[11px] leading-none text-muted border border-line rounded px-1.5 py-0.5 pointer-events-none; }
+
+  .sidebar-nav { @apply flex-1 overflow-y-auto px-4 pb-8 text-sm; }
+  .nav-heading { @apply mt-5 mb-1.5 px-2 text-[13px] font-semibold text-ink; }
+  .nav-link {
+    @apply block px-2 py-[5px] rounded-md text-muted hover:text-ink hover:bg-wash transition-colors;
+  }
+  .nav-link[aria-current="page"] { @apply text-accent font-medium bg-accent/6 hover:text-accent; }
+  .nav-empty { @apply px-2 py-2 text-muted; }
+
+  .outlet { @apply shrink-0 px-8 lg:px-12 pt-8 pb-6; }
+  .crumbs { @apply flex items-center gap-2 mb-3 text-[13px] text-muted; }
+  .crumbs a { @apply text-accent hover:text-accent-strong; }
+  .title { @apply text-[28px] leading-tight font-bold tracking-tight text-ink; }
+  .lede { @apply mt-2 max-w-2xl text-base leading-relaxed text-body; }
+  .pager { @apply shrink-0 flex gap-2 pt-1; }
+  .pager a {
+    @apply text-sm font-medium px-3 py-1.5 rounded-md border border-line text-body hover:text-ink hover:border-[#d8dee4] shadow-[0_1px_1px_rgb(0_0_0/0.03)] transition-colors;
+  }
+  .badge { @apply inline-flex items-center h-6 px-2 text-xs font-medium rounded-md bg-wash text-body border border-line; }
+  .badge-link { @apply text-accent hover:text-accent-strong; }
+  kbd { @apply inline-block px-1.5 text-[12px] font-sans text-body border border-line rounded bg-wash; }
+
+  .viewer {
+    @apply relative flex-1 min-h-[360px] mx-8 lg:mx-12 mb-8 rounded-xl border border-line bg-wash overflow-hidden;
+  }
+  .viewer canvas { @apply block size-full outline-none; }
+  .viewer-overlay {
+    @apply absolute inset-0 hidden flex-col items-center justify-center gap-3 text-sm text-muted bg-wash/80 backdrop-blur-[2px];
+  }
+  .viewer[data-state="empty"] [data-show="empty"],
+  .viewer[data-state="loading"] [data-show="loading"],
+  .viewer[data-state="error"] [data-show="error"] { @apply flex; }
+  .viewer-toolbar { @apply absolute left-3 bottom-3 flex gap-1 p-1 rounded-lg bg-white/90 border border-line shadow-sm backdrop-blur; }
+  .viewer[data-state="empty"] .viewer-toolbar { @apply hidden; }
+  .tool { @apply px-2.5 py-1 text-[13px] font-medium rounded-md text-body hover:bg-wash cursor-pointer transition-colors; }
+  .tool[aria-pressed="true"] { @apply text-accent bg-accent/8; }
+  .spinner { @apply size-6 rounded-full border-2 border-line border-t-accent animate-spin; }
+}

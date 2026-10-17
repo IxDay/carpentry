@@ -1,0 +1,16 @@
+# The configuration of this environment.
+#
+# The framework owns `[app]` and `[server]`. Every other section is claimed by
+# the plugin instance registered under that name in src/main.rs, and a section
+# nothing claims stops the build rather than being silently ignored -- a
+# misspelt section must never build clean.
+#
+# Layered, highest precedence first: $CARPENTRY_CONFIG, /etc/carpentry/development.toml,
+# ./carpentry_development.toml, ./config/development.toml. $CARPENTRY_ENV picks the
+# environment; without it, development.
+
+[app]
+name = "Carpentry"
+
+[logging]
+level = "debug"
