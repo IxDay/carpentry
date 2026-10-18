@@ -34,17 +34,19 @@ and Fabrication of Wood Joints*.
 - The `tsugite` branch of this repository holds the full upstream history,
   unchanged, up to commit `8e17e06` (2024-11-29). It shares no history with
   `main`.
-- The `.glb` files in `public/joints/` were exported from a local clone of
-  that repository, at `/Users/max/Documents/Dev/misc/tmp/carpentry.Qvg/tsugite`.
-  That clone has local changes that are not in the `tsugite` branch:
+- The `tsugite-export` branch is `tsugite` plus 2 commits. They add the
+  scripts that made the `.glb` files in `public/joints/`:
   - `recover_examples.py` gets back joints that were deleted from the
     upstream repository, as `.tsu` files in `recovered_joints/`.
   - `export_examples_glb.py` exports each `.tsu` file to
     `examples_glb/<group>/<name>.glb`.
   - `export_gallery_glb.py` holds the shared exporter: one node per timber,
     and an `assemble` animation.
+- The scripts first ran in a local clone at
+  `/Users/max/Documents/Dev/misc/tmp/carpentry.Qvg/tsugite`. The
+  `tsugite-export` branch holds the same files.
 
-To make the models again, run this in the clone, then copy `examples_glb/*`
+To make the models again, check out `tsugite-export`, run this, then copy `examples_glb/*`
 into `public/joints/`:
 
 ```
