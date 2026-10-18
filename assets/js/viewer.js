@@ -159,14 +159,16 @@ function mark(pathname) {
 }
 
 filter.addEventListener("input", () => {
-  // Digits match the number whatever its padding: "7" finds Joint 007.
-  const query = filter.value.trim().toLowerCase().replace(/^0+(?=\d)/, "");
+  const query = filter.value.trim().toLowerCase();
   let shown = 0;
   for (const link of links()) {
-    const text = link.textContent.toLowerCase().replace(/\b0+(?=\d)/g, "");
-    const match = !query || text.includes(query);
+    const match = !query || link.textContent.toLowerCase().includes(query);
     link.parentElement.hidden = !match;
     shown += match;
+  }
+  // A group with nothing left in it loses its heading too.
+  for (const group of nav.querySelectorAll(".nav-group")) {
+    group.hidden = !group.querySelector("li:not([hidden])");
   }
   empty.hidden = shown > 0;
 });

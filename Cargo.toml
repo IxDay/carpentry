@@ -25,3 +25,4 @@ brocanth-assets = { path = "/Users/max/Documents/Dev/rust/brocanth/crates/brocan
 brocanth-server = { path = "/Users/max/Documents/Dev/rust/brocanth/crates/brocanth-server" }
 tokio = { version = "1", features = ["rt-multi-thread"] }  # the reactor `serve` runs on
 serde = { version = "1", features = ["derive"] }  # the config plugin reads typed sections
+serde_json = "1.0.154"

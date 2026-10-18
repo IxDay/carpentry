@@ -406,15 +406,15 @@ mod tests {
             .map(|(template, _)| template.pattern())
             .collect();
         patterns.sort();
-        assert_eq!(patterns, ["/", "/joints/{id}"]);
+        assert_eq!(patterns, ["/", "/joints/{group}/{name}"]);
     }
 
     #[test]
     fn a_path_that_exists_with_a_verb_that_does_not_is_a_405() {
         let router = router().expect("the pages produce a table");
         let allow = router
-            .allow_for("/joints/7")
-            .expect("/joints/{id} is a route");
+            .allow_for("/joints/repo/3_1")
+            .expect("/joints/{group}/{name} is a route");
         assert_eq!(allow.to_string(), "GET, HEAD");
     }
 }

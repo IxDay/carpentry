@@ -11,7 +11,6 @@
 // import the bare name `three` and only a map resolves that in a browser.
 
 use crate::joints;
-use crate::pages::routes;
 use crate::pages::views::link::{Link, NavLink};
 use crate::pages::TITLE;
 
@@ -52,15 +51,19 @@ pub fn Layout(layout: &str, path: &str, children: Element) -> Element {
                         <ul>
                             <li><NavLink to="/" current={path == "/"}>Overview</NavLink></li>
                         </ul>
-                        <h2 class="nav-heading">Three-timber joints</h2>
-                        <ul>
-                            for joint in joints::all() {
-                                let to = routes::joints::id::path(joint.number());
-                                <li>
-                                    <NavLink to={&to} current={path == to}>{joint.name()}</NavLink>
-                                </li>
-                            }
-                        </ul>
+                        for group in joints::Group::ALL {
+                            <section class="nav-group">
+                                <h2 class="nav-heading">{group.title()}</h2>
+                                <ul>
+                                    for joint in joints::in_group(group) {
+                                        let to = joint.path();
+                                        <li>
+                                            <NavLink to={&to} current={path == to}>{joint.title()}</NavLink>
+                                        </li>
+                                    }
+                                </ul>
+                            </section>
+                        }
                         <p id="joint-empty" class="nav-empty" hidden>No joint matches.</p>
                     </nav>
                 </aside>

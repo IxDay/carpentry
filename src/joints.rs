@@ -1,60 +1,180 @@
-//! The joint catalogue: the tsugite gallery, exported one `.glb` per joint.
+//! The joint catalogue: every `.tsu` joint in the tsugite repository,
+//! exported one `.glb` per joint by `export_examples_glb.py`.
 //!
-//! The files are `public/joints/joint_000.glb` to `joint_183.glb`. They sit in
-//! `public/` and not `assets/` because the viewer fetches them by a name a
-//! visitor can bookmark and share; a fingerprint would change that name on
-//! every rebuild for files that never change.
+//! The files are `public/joints/<group>/<name>.glb`. They sit in `public/`
+//! and not `assets/` because the viewer fetches them by a name a visitor can
+//! bookmark and share; a fingerprint would change that name on every rebuild
+//! for files that never change.
 //!
-//! Every joint in the gallery is the same kind: three timbers meeting in a
-//! 3x3x3 voxel grid (`search_results/noc_3/dim_3` upstream). Each file holds
-//! one node per timber and an `assemble` animation that slides them together.
+//! Nothing here lists the joints by hand. The catalogue is read off what
+//! `assets!` embedded, so adding a file is the whole of adding a joint (after
+//! `touch src/assets.rs`). A folder that is not a [`Group`] fails a test
+//! rather than vanishing from the sidebar.
 
-/// How many joints the gallery holds. A test below holds this to the files
-/// in `public/joints`, so a file added or removed there fails the build's
-/// tests rather than a link in the sidebar.
-pub const COUNT: u16 = 184;
+use std::sync::OnceLock;
 
-/// One joint, by its gallery number.
+use crate::assets::{Asset, ASSETS};
+
+/// Where a joint came from: one subfolder of `examples_glb/` upstream.
 ///
-/// Only [`Joint::parse`] and [`all`] build one, and both check the range, so
-/// a `Joint` always names a file that exists.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub struct Joint(u16);
+/// The order of the variants is the order of the sidebar.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub enum Group {
+    Repo,
+    Setup,
+    PaperData,
+    UserStudy,
+    TsuHistory,
+}
+
+impl Group {
+    pub const ALL: [Group; 5] = [
+        Group::Repo,
+        Group::Setup,
+        Group::PaperData,
+        Group::UserStudy,
+        Group::TsuHistory,
+    ];
+
+    /// The folder name, which is also the URL segment.
+    pub fn slug(self) -> &'static str {
+        match self {
+            Group::Repo => "repo",
+            Group::Setup => "setup",
+            Group::PaperData => "paper_data",
+            Group::UserStudy => "user_study",
+            Group::TsuHistory => "tsu_history",
+        }
+    }
+
+    pub fn title(self) -> &'static str {
+        match self {
+            Group::Repo => "Repository examples",
+            Group::Setup => "Setup",
+            Group::PaperData => "Paper data",
+            Group::UserStudy => "User study",
+            Group::TsuHistory => "Earlier versions",
+        }
+    }
+
+    pub fn from_slug(slug: &str) -> Option<Self> {
+        Self::ALL.into_iter().find(|group| group.slug() == slug)
+    }
+}
+
+/// One joint. Only [`all`] and [`find`] hand one out, and both read it off
+/// an embedded file, so a `Joint` always names a model that is served.
+#[derive(Clone, Copy)]
+pub struct Joint {
+    pub group: Group,
+    /// The file stem, which is also the URL segment.
+    pub name: &'static str,
+    asset: &'static Asset,
+}
 
 impl Joint {
-    /// The joint a URL segment names, or `None` for anything outside the
-    /// gallery. `"042"` and `"42"` are the same joint.
-    pub fn parse(segment: &str) -> Option<Self> {
-        let number: u16 = segment.parse().ok()?;
-        (number < COUNT).then_some(Self(number))
+    /// The name the sidebar and the heading show: the file stem with its
+    /// underscores read as spaces.
+    pub fn title(self) -> String {
+        let words: Vec<&str> = self.name.split('_').filter(|w| !w.is_empty()).collect();
+        let mut title = words.join(" ");
+        if let Some(first) = title.get(..1) {
+            title.replace_range(..1, &first.to_uppercase());
+        }
+        title
     }
 
-    pub fn number(self) -> u16 {
-        self.0
+    pub fn file_name(self) -> &'static str {
+        self.asset.logical.rsplit('/').next().unwrap_or(self.name)
     }
 
-    /// The name the sidebar and the heading show.
-    pub fn name(self) -> String {
-        format!("Joint {:03}", self.0)
+    pub fn path(self) -> String {
+        crate::pages::routes::joints::group::name::path(self.group.slug(), self.name)
     }
 
     /// The URL of the model, as `public/` publishes it.
     pub fn glb(self) -> &'static str {
-        crate::assets::url(&format!("joints/joint_{:03}.glb", self.0))
+        self.asset.published
     }
 
-    pub fn previous(self) -> Option<Self> {
-        self.0.checked_sub(1).map(Self)
+    /// How many timbers the joint has, read from the model's node names.
+    /// `None` for a file that is not the binary glTF the exporter writes.
+    pub fn timbers(self) -> Option<usize> {
+        #[derive(serde::Deserialize)]
+        struct Gltf {
+            nodes: Vec<Node>,
+        }
+        #[derive(serde::Deserialize)]
+        struct Node {
+            #[serde(default)]
+            name: String,
+        }
+
+        // A .glb is a 12-byte header, then chunks; the first is the JSON.
+        let body = self.asset.body;
+        let length = u32::from_le_bytes(body.get(12..16)?.try_into().ok()?) as usize;
+        let json = body.get(20..20 + length)?;
+        let gltf: Gltf = serde_json::from_slice(json).ok()?;
+        Some(
+            gltf.nodes
+                .iter()
+                .filter(|n| n.name.starts_with("timber_"))
+                .count(),
+        )
     }
 
-    pub fn next(self) -> Option<Self> {
-        (self.0 + 1 < COUNT).then_some(Self(self.0 + 1))
+    pub fn previous(self) -> Option<Joint> {
+        let at = self.index();
+        at.checked_sub(1).map(|i| all()[i])
+    }
+
+    pub fn next(self) -> Option<Joint> {
+        all().get(self.index() + 1).copied()
+    }
+
+    fn index(self) -> usize {
+        all()
+            .iter()
+            .position(|joint| joint.asset.logical == self.asset.logical)
+            .expect("a Joint comes out of the catalogue")
     }
 }
 
-/// Every joint, in gallery order.
-pub fn all() -> impl Iterator<Item = Joint> {
-    (0..COUNT).map(Joint)
+/// Every joint, in sidebar order: by group, then by name.
+pub fn all() -> &'static [Joint] {
+    static CATALOGUE: OnceLock<Vec<Joint>> = OnceLock::new();
+    CATALOGUE.get_or_init(|| {
+        let mut joints: Vec<Joint> = ASSETS.iter().filter_map(parse).collect();
+        // Case-blind, so `Untitled` does not sort ahead of `science_agora_…`.
+        joints.sort_by_key(|joint| (joint.group, joint.name.to_lowercase()));
+        joints
+    })
+}
+
+/// The joints of one group, in sidebar order.
+pub fn in_group(group: Group) -> impl Iterator<Item = Joint> {
+    all()
+        .iter()
+        .copied()
+        .filter(move |joint| joint.group == group)
+}
+
+/// The joint a URL names, or `None`.
+pub fn find(group: &str, name: &str) -> Option<Joint> {
+    let group = Group::from_slug(group)?;
+    in_group(group).find(|joint| joint.name == name)
+}
+
+/// `joints/<group>/<name>.glb` to a joint; anything else is not one.
+fn parse(asset: &'static Asset) -> Option<Joint> {
+    let rest = asset.logical.strip_prefix("joints/")?;
+    let (group, file) = rest.split_once('/')?;
+    let name = file.strip_suffix(".glb")?;
+    Some(Joint {
+        group: Group::from_slug(group)?,
+        name,
+        asset,
+    })
 }
 
 #[cfg(test)]
@@ -62,35 +182,57 @@ mod tests {
     use super::*;
 
     #[test]
-    fn every_joint_names_a_published_model() {
+    fn every_model_under_joints_belongs_to_a_group() {
+        let models = ASSETS
+            .iter()
+            .filter(|a| a.logical.starts_with("joints/"))
+            .count();
+        assert_eq!(
+            all().len(),
+            models,
+            "a folder under public/joints is not a Group"
+        );
+        assert!(models > 0);
+    }
+
+    #[test]
+    fn every_group_has_joints() {
+        for group in Group::ALL {
+            assert!(in_group(group).next().is_some(), "{group:?} is empty");
+        }
+    }
+
+    #[test]
+    fn every_model_has_its_timbers() {
         for joint in all() {
+            let timbers = joint.timbers();
             assert!(
-                crate::assets::lookup(joint.glb()).is_some(),
-                "{} has no model",
-                joint.name()
+                matches!(timbers, Some(2..)),
+                "{} has {timbers:?} timbers",
+                joint.file_name()
             );
         }
     }
 
     #[test]
-    fn no_published_model_is_missing_from_the_catalogue() {
-        let beyond = format!("/joints/joint_{COUNT:03}.glb");
-        assert!(crate::assets::lookup(&beyond).is_none());
+    fn a_joint_is_found_by_the_url_it_links_to() {
+        for joint in all() {
+            let found = find(joint.group.slug(), joint.name).map(|j| j.glb());
+            assert_eq!(found, Some(joint.glb()));
+        }
+        assert!(find("repo", "no_such_joint").is_none());
+        assert!(find("no_such_group", "3_1").is_none());
     }
 
     #[test]
-    fn a_number_outside_the_gallery_is_not_a_joint() {
-        assert_eq!(Joint::parse("42").map(Joint::number), Some(42));
-        assert_eq!(Joint::parse("042").map(Joint::number), Some(42));
-        assert_eq!(Joint::parse(&COUNT.to_string()), None);
-        assert_eq!(Joint::parse("-1"), None);
-        assert_eq!(Joint::parse("x"), None);
+    fn the_ends_of_the_catalogue_have_no_neighbour_beyond_them() {
+        assert!(all()[0].previous().is_none());
+        assert!(all()[all().len() - 1].next().is_none());
     }
 
     #[test]
-    fn the_ends_of_the_gallery_have_no_neighbour_beyond_them() {
-        assert_eq!(Joint::parse("0").and_then(Joint::previous), None);
-        let last = (COUNT - 1).to_string();
-        assert_eq!(Joint::parse(&last).and_then(Joint::next), None);
+    fn a_title_reads_underscores_as_spaces() {
+        let joint = find("tsu_history", "setup_joint_-_Copy_3").expect("the file exists");
+        assert_eq!(joint.title(), "Setup joint - Copy 3");
     }
 }
