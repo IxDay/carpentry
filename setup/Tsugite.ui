@@ -435,7 +435,7 @@
       <item>
        <widget class="QPushButton" name="buttonGALLERY">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="text">
          <string>Gallery mode</string>

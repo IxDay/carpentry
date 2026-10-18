@@ -1,0 +1,18 @@
+[project]
+name = "tsugite"
+version = "0.1.0"
+description = "Interactive design and fabrication of wood joints (UIST 2020)"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "multipledispatch",
+    "numpy<2",
+    "pillow",
+    "pygltflib>=1.16.5",
+    "pyopengl",
+    "pyqt5>=5.15.10",
+    "pyrr",
+    "six",
+]
+
+[tool.uv]
+package = false

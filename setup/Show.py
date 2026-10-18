@@ -9,6 +9,7 @@ class Show:
         self.parent = parent
         self.type = type
         self.view = ViewSettings()
+        self.uniform_locs = {}
         self.create_color_shaders()
         self.create_texture_shaders()
 
@@ -25,84 +26,89 @@ class Show:
         if (self.view.open_joint and self.view.open_ratio<self.type.noc-1) or (not self.view.open_joint and self.view.open_ratio>0):
             self.view.set_joint_opening_distance(self.type.noc)
 
+    # GLSL 1.20 shaders: macOS only offers a legacy GL 2.1 context next to the
+    # fixed-function calls this app uses, so explicit layout locations are not available.
+    def _link_program(self, vertex_shader, fragment_shader):
+        program = glCreateProgram()
+        glAttachShader(program, OpenGL.GL.shaders.compileShader(vertex_shader, GL_VERTEX_SHADER))
+        glAttachShader(program, OpenGL.GL.shaders.compileShader(fragment_shader, GL_FRAGMENT_SHADER))
+        for i, name in enumerate(("position", "color", "inTexCoords")):
+            glBindAttribLocation(program, i, name)
+        glLinkProgram(program)
+        if glGetProgramiv(program, GL_LINK_STATUS) != GL_TRUE:
+            raise RuntimeError(glGetProgramInfoLog(program))
+        self.uniform_locs[int(program)] = {name: glGetUniformLocation(program, name)
+                                           for name in ("transform", "translate", "myColor")}
+        return program
+
+    def loc(self, name):
+        return self.uniform_locs.get(int(glGetIntegerv(GL_CURRENT_PROGRAM)), {}).get(name, -1)
+
     def create_color_shaders(self):
         vertex_shader = """
-          #version 150
-        #extension GL_ARB_explicit_attrib_location : require
-        #extension GL_ARB_explicit_uniform_location : require
-        layout(location = 0) in vec3 position;
-        layout(location = 1) in vec3 color;
-        layout(location = 2) in vec2 inTexCoords;
-        layout(location = 3) uniform mat4 transform;
-        layout(location = 4) uniform mat4 translate;
-        layout(location = 5) uniform vec3 myColor;
-        out vec3 newColor;
-        out vec2 outTexCoords;
+        #version 120
+        attribute vec3 position;
+        attribute vec3 color;
+        attribute vec2 inTexCoords;
+        uniform mat4 transform;
+        uniform mat4 translate;
+        uniform vec3 myColor;
+        varying vec3 newColor;
+        varying vec2 outTexCoords;
         void main()
         {
-            gl_Position = transform* translate* vec4(position, 1.0f);
+            gl_Position = transform * translate * vec4(position, 1.0);
             newColor = myColor;
             outTexCoords = inTexCoords;
         }
         """
 
         fragment_shader = """
-        #version 150
-        in vec3 newColor;
-        in vec2 outTexCoords;
-        out vec4 outColor;
-        uniform sampler2D samplerTex;
+        #version 120
+        varying vec3 newColor;
+        varying vec2 outTexCoords;
         void main()
         {
-            outColor = vec4(newColor, 1.0);
+            gl_FragColor = vec4(newColor, 1.0);
         }
         """
-        # Compiling the shaders
-        self.shader_col = OpenGL.GL.shaders.compileProgram(OpenGL.GL.shaders.compileShader(vertex_shader, GL_VERTEX_SHADER),
-                                                  OpenGL.GL.shaders.compileShader(fragment_shader, GL_FRAGMENT_SHADER))
+        self.shader_col = self._link_program(vertex_shader, fragment_shader)
 
     def create_texture_shaders(self):
         vertex_shader = """
-        #version 150
-        #extension GL_ARB_explicit_attrib_location : require
-        #extension GL_ARB_explicit_uniform_location : require
-        layout(location = 0) in vec3 position;
-        layout(location = 1) in vec3 color;
-        layout(location = 2) in vec2 inTexCoords;
-        layout(location = 3) uniform mat4 transform;
-        layout(location = 4) uniform mat4 translate;
-        out vec3 newColor;
-        out vec2 outTexCoords;
+        #version 120
+        attribute vec3 position;
+        attribute vec3 color;
+        attribute vec2 inTexCoords;
+        uniform mat4 transform;
+        uniform mat4 translate;
+        varying vec3 newColor;
+        varying vec2 outTexCoords;
         void main()
         {
-            gl_Position = transform* translate* vec4(position, 1.0f);
+            gl_Position = transform * translate * vec4(position, 1.0);
             newColor = color;
             outTexCoords = inTexCoords;
         }
         """
 
         fragment_shader = """
-        #version 150
-        in vec3 newColor;
-        in vec2 outTexCoords;
-        out vec4 outColor;
+        #version 120
+        varying vec3 newColor;
+        varying vec2 outTexCoords;
         uniform sampler2D samplerTex;
         void main()
         {
-            outColor = texture(samplerTex, outTexCoords);
+            gl_FragColor = texture2D(samplerTex, outTexCoords);
         }
         """
-        
-
-        # Compiling the shaders
-        self.shader_tex = OpenGL.GL.shaders.compileProgram(OpenGL.GL.shaders.compileShader(vertex_shader, GL_VERTEX_SHADER),
-                                                  OpenGL.GL.shaders.compileShader(fragment_shader, GL_FRAGMENT_SHADER))
+        self.shader_tex = self._link_program(vertex_shader, fragment_shader)
 
     def init_shader(self,shader):
         glUseProgram(shader)
         rot_x = pyrr.Matrix44.from_x_rotation(self.view.xrot)
         rot_y = pyrr.Matrix44.from_y_rotation(self.view.yrot)
-        glUniformMatrix4fv(3, 1, GL_FALSE, rot_x * rot_y)
+        glUniformMatrix4fv(self.loc('transform'), 1, GL_FALSE, rot_x * rot_y)
 
     def draw_geometries(self, geos,clear_depth_buffer=True, translation_vec=np.array([0,0,0])):
         # Define translation matrices for opening
@@ -118,7 +124,7 @@ class Show:
         for geo in geos:
             if geo==None: continue
             if self.view.hidden[geo.n]: continue
-            glUniformMatrix4fv(4, 1, GL_FALSE, moves[geo.n])
+            glUniformMatrix4fv(self.loc('translate'), 1, GL_FALSE, moves[geo.n])
             glDrawElements(geo.draw_type, geo.count, GL_UNSIGNED_INT,  ctypes.c_void_p(4*geo.start_index))
 
     def resizeGL(self, width, height):
@@ -165,7 +171,7 @@ class Show:
         for geo in show_geos:
             if geo==None: continue
             if self.view.hidden[geo.n]: continue
-            glUniformMatrix4fv(4, 1, GL_FALSE, moves_show[geo.n])
+            glUniformMatrix4fv(self.loc('translate'), 1, GL_FALSE, moves_show[geo.n])
             glDrawElements(geo.draw_type, geo.count, GL_UNSIGNED_INT,  ctypes.c_void_p(4*geo.start_index))
         glEnable(GL_DEPTH_TEST)
         glStencilFunc(GL_EQUAL,1,1)
@@ -174,7 +180,7 @@ class Show:
         for geo in screen_geos:
             if geo==None: continue
             if self.view.hidden[geo.n]: continue
-            glUniformMatrix4fv(4, 1, GL_FALSE, moves[geo.n])
+            glUniformMatrix4fv(self.loc('translate'), 1, GL_FALSE, moves[geo.n])
             glDrawElements(geo.draw_type, geo.count, GL_UNSIGNED_INT,  ctypes.c_void_p(4*geo.start_index))
         glDisable(GL_STENCIL_TEST)
         glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE)
@@ -182,7 +188,7 @@ class Show:
         for geo in show_geos:
             if geo==None: continue
             if self.view.hidden[geo.n]: continue
-            glUniformMatrix4fv(4, 1, GL_FALSE, moves_show[geo.n])
+            glUniformMatrix4fv(self.loc('translate'), 1, GL_FALSE, moves_show[geo.n])
             glDrawElements(geo.draw_type, geo.count, GL_UNSIGNED_INT,  ctypes.c_void_p(4*geo.start_index))
 
     def pick(self,xpos,ypos,height):
@@ -198,7 +204,7 @@ class Show:
             glMatrixMode(GL_MODELVIEW)
             rot_x = pyrr.Matrix44.from_x_rotation(self.view.xrot)
             rot_y = pyrr.Matrix44.from_y_rotation(self.view.yrot)
-            glUniformMatrix4fv(3, 1, GL_FALSE, rot_x * rot_y)
+            glUniformMatrix4fv(self.loc('transform'), 1, GL_FALSE, rot_x * rot_y)
             glPolygonOffset(1.0,1.0)
 
             ########################## Draw colorful top faces ##########################
@@ -209,7 +215,7 @@ class Show:
                 col = np.zeros(3, dtype=np.float64)
                 col[n%3] = 1.0
                 if n>2: col[(n+1)%self.type.dim] = 1.0
-                glUniform3f(5, col[0], col[1], col[2])
+                glUniform3f(self.loc('myColor'), col[0], col[1], col[2])
                 self.draw_geometries([self.type.mesh.indices_fpick_not_top[n]],clear_depth_buffer=False)
                 if n==0 or n==self.type.noc-1: mos = 1
                 else: mos = 2
@@ -218,7 +224,7 @@ class Show:
                     # Draw top faces
                     for i in range(self.type.dim*self.type.dim):
                         col -= col_step
-                        glUniform3f(5, col[0], col[1], col[2])
+                        glUniform3f(self.loc('myColor'), col[0], col[1], col[2])
                         top = ElementProperties(GL_QUADS, 4, self.type.mesh.indices_fpick_top[n].start_index+mos*4*i+4*m, n)
                         self.draw_geometries([top],clear_depth_buffer=False)
 
@@ -253,16 +259,11 @@ class Show:
                             if pick_n==self.type.noc-1: pick_d = 1
                             elif int(i/self.type.dim)>=self.type.dim: pick_d = 1
                             #print("pick",pick_n,pick_d,pick_x,pick_y)
-        """
         else: #gallerymode
-            if xpos>0 and xpos<2000 and ypos>0 and ypos<1600:
-                i = int(xpos/400)
-                j = int(ypos/400)
-                index = i*4+j
-                mesh.select.gallstate=index
-                mesh.select.state = -1
-                mesh.select.suggstate = -1
-        """
+            if 0<xpos<self.parent.width and 0<ypos<self.parent.height:
+                i = int(xpos/int(self.parent.width/5))
+                j = int(ypos/int(self.parent.height/4))
+                if i<5 and j<4: self.type.mesh.select.gallstate = i*4+j
         ### Update selection
         if pick_x !=None and pick_d!=None and pick_y!=None and pick_n!=None:
             ### Initialize selection
@@ -282,7 +283,7 @@ class Show:
         # Draw base face (hovered)
         if self.type.mesh.select.state==0:
             glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT)
-            glUniform3f(5, 0.2, 0.2, 0.2) #dark grey
+            glUniform3f(self.loc('myColor'), 0.2, 0.2, 0.2) #dark grey
             G1 = self.type.mesh.indices_fpick_not_top
             for face in self.type.mesh.select.faces:
                 if self.type.mesh.select.n==0 or self.type.mesh.select.n==self.type.noc-1: mos = 1
@@ -307,21 +308,21 @@ class Show:
     def difference_suggestion(self,index):
         glPushAttrib(GL_ENABLE_BIT)
         # draw faces of additional part
-        #glUniform3f(5, 1.0, 1.0, 1.0) # white
+        #glUniform3f(self.loc('myColor'), 1.0, 1.0, 1.0) # white
         #for n in range(self.type.noc):
         #    G0 = [self.type.sugs[index].indices_fall[n]]
         #    G1 = self.type.mesh.indices_fall
         #    self.draw_geometries_with_excluded_area(G0,G1)
 
         # draw faces of subtracted part
-        #glUniform3f(5, 1.0, 0.5, 0.5) # pink/red
+        #glUniform3f(self.loc('myColor'), 1.0, 0.5, 0.5) # pink/red
         #for n in range(self.type.noc):
         #    G0 = [self.type.mesh.indices_fall[n]]
         #    G1 = self.type.sugs[index].indices_fall
         #    self.draw_geometries_with_excluded_area(G0,G1)
 
         # draw outlines
-        glUniform3f(5, 0.0, 0.0, 0.0) # black
+        glUniform3f(self.loc('myColor'), 0.0, 0.0, 0.0) # black
         glLineWidth(3)
         glEnable(GL_LINE_STIPPLE)
         glLineStipple(2, 0xAAAA)
@@ -348,7 +349,7 @@ class Show:
 
         ############################# Draw hidden lines #############################
         glClear(GL_DEPTH_BUFFER_BIT)
-        glUniform3f(5,0.0,0.0,0.0) # black
+        glUniform3f(self.loc('myColor'),0.0,0.0,0.0) # black
         glPushAttrib(GL_ENABLE_BIT)
         glLineWidth(1)
         glLineStipple(3, 0xAAAA) #dashed line
@@ -363,10 +364,10 @@ class Show:
         ############################ Draw visible lines #############################
         for n in range(mesh.parent.noc):
             if not mesh.mainmesh or (mesh.eval.interlocks[n] and self.view.show_feedback) or not self.view.show_feedback:
-                glUniform3f(5,0.0,0.0,0.0) # black
+                glUniform3f(self.loc('myColor'),0.0,0.0,0.0) # black
                 glLineWidth(lw)
             else:
-                glUniform3f(5,1.0,0.0,0.0) # red
+                glUniform3f(self.loc('myColor'),1.0,0.0,0.0) # red
                 glLineWidth(lw+1)
             G0 = [mesh.indices_lns[n]]
             G1 = mesh.indices_fall
@@ -376,7 +377,7 @@ class Show:
         if mesh.mainmesh:
             ################ When joint is fully open, draw dahsed lines ################
             if hidden and not self.view.hidden[0] and not self.view.hidden[1] and self.view.open_ratio==1+0.5*(mesh.parent.noc-2):
-                glUniform3f(5,0.0,0.0,0.0) # black
+                glUniform3f(self.loc('myColor'),0.0,0.0,0.0) # black
                 glPushAttrib(GL_ENABLE_BIT)
                 glLineWidth(2)
                 glLineStipple(1, 0x00FF)
@@ -395,7 +396,7 @@ class Show:
 
     def unfabricatable(self):
         col = [1.0, 0.8, 0.5] # orange
-        glUniform3f(5, col[0], col[1], col[2])
+        glUniform3f(self.loc('myColor'), col[0], col[1], col[2])
         for n in range(self.type.noc):
             if not self.type.mesh.eval.fab_direction_ok[n]:
                 G0 = [self.type.mesh.indices_fall[n]]
@@ -407,14 +408,14 @@ class Show:
     def unconnected(self):
         # 1. Draw hidden geometry
         col = [1.0, 0.8, 0.7]  # light red orange
-        glUniform3f(5, col[0], col[1], col[2])
+        glUniform3f(self.loc('myColor'), col[0], col[1], col[2])
         for n in range(self.type.mesh.parent.noc):
             if not self.type.mesh.eval.connected[n]:
                 self.draw_geometries([self.type.mesh.indices_not_fcon[n]])
 
         # 1. Draw visible geometry
         col = [1.0, 0.2, 0.0] # red orange
-        glUniform3f(5, col[0], col[1], col[2])
+        glUniform3f(self.loc('myColor'), col[0], col[1], col[2])
         G0 = self.type.mesh.indices_not_fcon
         G1 = self.type.mesh.indices_fcon
         self.draw_geometries_with_excluded_area(G0,G1)
@@ -426,7 +427,7 @@ class Show:
                 for m in range(2): # browse the two parts
                     # a) Unbridge part 1
                     col = self.view.unbridge_colors[n][m]
-                    glUniform3f(5, col[0], col[1], col[2])
+                    glUniform3f(self.loc('myColor'), col[0], col[1], col[2])
                     G0 = [self.type.mesh.indices_not_fbridge[n][m]]
                     G1 = [self.type.mesh.indices_not_fbridge[n][1-m],
                           self.type.mesh.indices_fall[1-n],
@@ -435,20 +436,20 @@ class Show:
 
     def checker(self):
         # 1. Draw hidden geometry
-        glUniform3f(5, 1.0, 0.2, 0.0) # red orange
+        glUniform3f(self.loc('myColor'), 1.0, 0.2, 0.0) # red orange
         glLineWidth(8)
         for n in range(self.type.mesh.parent.noc):
             if self.type.mesh.eval.checker[n]:
                 self.draw_geometries([self.type.mesh.indices_chess_lines[n]])
-        glUniform3f(5, 0.0, 0.0, 0.0) # back to black
+        glUniform3f(self.loc('myColor'), 0.0, 0.0, 0.0) # back to black
 
     def arrows(self):
         #glClear(GL_DEPTH_BUFFER_BIT)
-        glUniform3f(5, 0.0, 0.0, 0.0)
+        glUniform3f(self.loc('myColor'), 0.0, 0.0, 0.0)
         ############################## Direction arrows ################################
         for n in range(self.type.noc):
-            if (self.type.mesh.eval.interlocks[n]): glUniform3f(5,0.0,0.0,0.0) # black
-            else: glUniform3f(5,1.0,0.0,0.0) # red
+            if (self.type.mesh.eval.interlocks[n]): glUniform3f(self.loc('myColor'),0.0,0.0,0.0) # black
+            else: glUniform3f(self.loc('myColor'),1.0,0.0,0.0) # red
             glLineWidth(3)
             G1 = self.type.mesh.indices_fall
             G0 = self.type.mesh.indices_arrows[n]
@@ -463,13 +464,13 @@ class Show:
     def nondurable(self):
         # 1. Draw hidden geometry
         col = [1.0, 1.0, 0.8] # super light yellow
-        glUniform3f(5, col[0], col[1], col[2])
+        glUniform3f(self.loc('myColor'), col[0], col[1], col[2])
         for n in range(self.type.noc):
             self.draw_geometries_with_excluded_area([self.type.mesh.indices_fbrk[n]],[self.type.mesh.indices_not_fbrk[n]])
 
         # Draw visible geometry
         col = [1.0, 1.0, 0.4] # light yellow
-        glUniform3f(5, col[0], col[1], col[2])
+        glUniform3f(self.loc('myColor'), col[0], col[1], col[2])
         self.draw_geometries_with_excluded_area(self.type.mesh.indices_fbrk,self.type.mesh.indices_not_fbrk)
 
     def milling_paths(self):
@@ -479,7 +480,7 @@ class Show:
             glLineWidth(3)
             for n in range(self.type.noc):
                 if self.type.mesh.eval.fab_direction_ok[n]:
-                    glUniform3f(5,cols[n][0],cols[n][1],cols[n][2])
+                    glUniform3f(self.loc('myColor'),cols[n][0],cols[n][1],cols[n][2])
                     self.draw_geometries([self.type.mesh.indices_milling_path[n]])
 
     def resizeEvent(self, event):

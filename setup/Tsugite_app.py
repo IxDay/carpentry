@@ -113,6 +113,10 @@ class GLWidget(QGLWidget):
             self.type.mesh.select.move([self.x,self.y], self.show.view.xrot, self.show.view.yrot)
 
         
+        if self.show.view.gallery:
+            self.paint_gallery()
+            return
+
         # Display main geometry
         self.show.end_grains()
         if self.show.view.show_feedback:
@@ -167,9 +171,30 @@ class GLWidget(QGLWidget):
         
 
 
+    def paint_gallery(self):
+        cw = int(self.width/5)
+        ch = int(self.height/4)
+        for i in range(5):
+            for j in range(4):
+                index = i*4+j
+                if index>=len(self.type.gals): return
+                glViewport(i*cw,self.height-(j+1)*ch,cw,ch)
+                glLoadIdentity()
+                if index==self.type.mesh.select.gallstate: # grey background if hovered
+                    glEnable(GL_SCISSOR_TEST)
+                    glScissor(i*cw,self.height-(j+1)*ch,cw,ch)
+                    glClearColor(0.9, 0.9, 0.9, 1.0) # light grey
+                    glClear(GL_COLOR_BUFFER_BIT)
+                    glDisable(GL_SCISSOR_TEST)
+                self.show.joint_geometry(mesh=self.type.gals[index],lw=2,hidden=False)
+
     def mousePressEvent(self, e):
         print("mouse_pressed")
-        if e.button() == Qt.LeftButton:
+        if e.button() == Qt.LeftButton and self.show.view.gallery:
+            index = self.type.mesh.select.gallstate
+            if 0<=index<len(self.type.gals):
+                self.parent.close_gallery(self.type.gals[index].height_fields)
+        elif e.button() == Qt.LeftButton:
             if time.time()-self.click_time<0.2:
                 self.show.view.open_joint = not self.show.view.open_joint
             elif self.type.mesh.select.state==0: #face hovered
@@ -320,9 +345,13 @@ class mainWindow(QMainWindow):
     from _mainWindow import set_standard_rotation
     from _mainWindow import set_closest_plane_rotation
     from _mainWindow import set_ui_values
+    from _mainWindow import open_gallery
+    from _mainWindow import close_gallery
 
     def keyPressEvent(self, e):
-        if e.key()==Qt.Key_Shift:
+        if e.key()==Qt.Key_Escape and self.glWidget.show.view.gallery:
+            self.close_gallery()
+        elif e.key()==Qt.Key_Shift:
             self.glWidget.type.mesh.select.shift = True
             self.glWidget.type.mesh.select.refresh = True
 

@@ -1174,29 +1174,45 @@ class Types:
                 sugg_hfs = produce_suggestions(self,self.mesh.height_fields)
                 for i in range(len(sugg_hfs)): self.sugs.append(Geometries(self,mainmesh=False,hfs=sugg_hfs[i]))
 
+    # Pre-computed valid joints exist only for this configuration (search_results/ in the repo root)
+    GALLERY_FIXED_SIDES = "2,0:1,0:0,1"
+    GALLERY_PAGE_SIZE = 20
+
+    def gallery_location(self):
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        location = os.path.join(root, "search_results", "noc_"+str(self.noc), "dim_"+str(self.dim), "fs_")
+        location += "_".join("".join(str(fs.ax)+str(fs.dir) for fs in sides) for sides in self.fixed.sides)
+        return os.path.join(location, "allvalid_reduced")
+
+    def open_gallery(self):
+        # Switch to the configuration of the search results, keep the fabrication settings
+        fs = FixedSides(self, side_str=self.GALLERY_FIXED_SIDES).sides
+        self.reset(fs=fs, sax=2, dim=3, ang=self.ang, td=list(self.real_tim_dims), incremental=self.incremental, align_ax=self.fab.align_ax, fabdia=self.fab.real_dia, fabtol=self.fab.tol, finterp=self.fab.interp, fabext=self.fab.ext, fspe=self.fab.speed, fspi=self.fab.spindlespeed)
+
+    def gallery_size(self):
+        location = self.gallery_location()
+        if not os.path.isdir(location): return 0
+        return len([f for f in os.listdir(location) if f.endswith(".npy")])
+
     def init_gallery(self,start_index):
+        total = self.gallery_size()
+        if start_index<0 or start_index>=total: start_index = 0 # wrap around after the last page
         self.gallary_start_index = start_index
         self.gals = []
         self.sugs = []
-        # Folder
-        location = os.path.abspath(os.getcwd())
-        location = location.split(os.sep)
-        location.pop()
-        location = os.sep.join(location)
-        location += os.sep+"search_results"+os.sep+"noc_"+str(self.noc)+os.sep+"dim_"+str(self.dim)+os.sep+"fs_"
-        for i in range(len(self.fixed.sides)):
-            for fs in self.fixed.sides[i]:
-                location+=str(fs.ax)+str(fs.dir)
-            if i!=len(self.fixed.sides)-1: location+=("_")
-        location+=os.sep+"allvalid"
-        maxi = len(os.listdir(location))-1
-        for i in range(20):
-            if (i+start_index)>maxi: break
-            try:
-                hfs = np.load(location+os.sep+"height_fields_"+str(start_index+i)+".npy")
-                self.gals.append(Geometries(self,mainmesh=False,hfs=hfs))
-            except:
-                abc = 0
+        location = self.gallery_location()
+        for i in range(start_index, min(start_index+self.GALLERY_PAGE_SIZE, total)):
+            hfs = np.load(os.path.join(location, "height_fields_"+str(i)+".npy")).astype(int)
+            self.gals.append(Geometries(self,mainmesh=False,hfs=hfs))
+        self.combine_and_buffer_indices()
+        return total
+
+    def close_gallery(self, hfs=None):
+        if hfs is not None: self.mesh = Geometries(self,hfs=hfs)
+        self.gals = []
+        self.gallary_start_index = -self.GALLERY_PAGE_SIZE
+        self.update_suggestions()
+        self.combine_and_buffer_indices()
 
     def save(self,filename="joint.tsu"):
 

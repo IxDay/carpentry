@@ -59,6 +59,7 @@ def setupUi(self):
     self.findChild(QPushButton, "buttonR").clicked.connect(self.randomize_geometry)
     self.findChild(QPushButton, "buttonC").clicked.connect(self.clear_geometry)
     #gallery
+    self.findChild(QPushButton, "buttonGALLERY").clicked.connect(self.open_gallery)
     #---Fabrication
     self.findChild(QDoubleSpinBox, "spinDIA").valueChanged.connect(self.set_milling_bit_diameter)
     self.findChild(QDoubleSpinBox, "spinTOL").valueChanged.connect(self.set_fab_tolerance)
@@ -316,6 +317,30 @@ def set_closest_plane_rotation(self):
     yrot = round(yrot/nang,0)*nang
     self.glWidget.show.view.xrot = xrot
     self.glWidget.show.view.yrot = yrot
+
+@pyqtSlot()
+def open_gallery(self):
+    type = self.glWidget.type
+    view = self.glWidget.show.view
+    if not view.gallery:
+        type.open_gallery()
+        self.set_ui_values()
+        view.gallery = True
+        start = 0
+    else: start = type.gallary_start_index+type.GALLERY_PAGE_SIZE # next page
+    total = type.init_gallery(start)
+    if total==0:
+        self.close_gallery()
+        self.statusBar.showMessage("Gallery data not found: "+type.gallery_location())
+        return
+    first = type.gallary_start_index+1
+    last = type.gallary_start_index+len(type.gals)
+    self.statusBar.showMessage("Gallery: joints "+str(first)+"-"+str(last)+" of "+str(total)+". CLICK a joint to edit it, PRESS 'Gallery mode' for the next page, PRESS Esc to leave.")
+
+def close_gallery(self, hfs=None):
+    self.glWidget.show.view.gallery = False
+    self.glWidget.type.close_gallery(hfs)
+    self.statusBar.showMessage("To open and close the joint: PRESS 'Open/close joint' button or DOUBLE-CLICK anywhere inside the window.")
 
 def set_ui_values(self):
     self.findChild(QComboBox, "comboSLIDE").setCurrentIndex(self.glWidget.type.sax)
