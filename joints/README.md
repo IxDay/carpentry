@@ -1,10 +1,13 @@
 # joints
 
-Sixteen Japanese timber joints (継ぎ手 / 仕口) from the
-[thejoinery](https://sketchfab.com/thejoinery) collection on Sketchfab, rebuilt
-and baked in a pastel paper-sunrise style. There is **no garden or ground
-plane**: the timbers float against the paper backdrop, which keeps the focus on
-the cut geometry.
+Twenty-one Japanese timber joints (継ぎ手 / 仕口) in a pastel paper-sunrise
+style. Seventeen are from the [thejoinery](https://sketchfab.com/thejoinery)
+collection on Sketchfab, rebuilt and baked; four column-and-beam (`shikuchi`)
+joints with no licensed source model are authored in this repository from the
+reference sheet 柱（軸組）の納まり, with
+[`tools/author_joint.py`](../tools/author_joint.py). There is **no garden or
+ground plane**: the timbers float against the paper backdrop, which keeps the
+focus on the cut geometry.
 
 ## Layout
 
@@ -21,6 +24,7 @@ Names are romanised; `part-a`/`part-b` are the two main timbers, `key`,
 
 | Asset | Japanese | License | Pieces |
 |---|---|---|---|
+| [`daimochi-tsugi`](../tools/author_joint.py) | 台持ち継ぎ | CC BY 4.0 (authored) | 3 |
 | [`hako-sen-tsugi`](https://sketchfab.com/3d-models/hako-sen-tsugi-881723f8c6794db5a9dbe9dc2fb3a69b) | 箱栓継ぎ | CC BY 4.0 | 4 |
 | [`hira-isuka-tsugi`](https://sketchfab.com/3d-models/hira-isuka-tsugi-bd6b1bea223144868199fee6a28baf5c) | 平居木継ぎ | CC BY 4.0 | 2 |
 | [`kakeawase-komisen-tsugi`](https://sketchfab.com/3d-models/kakeawase-komisen-tsugi-ac403983452d4524a7e23350c2ace36c) | 掛け合わせ込み栓継ぎ | CC BY 4.0 | 3 |
@@ -30,18 +34,24 @@ Names are romanised; `part-a`/`part-b` are the two main timbers, `key`,
 | [`koshikake-ari-tsugi`](https://sketchfab.com/3d-models/koshikake-ari-tsugi-6a06924b8c5243c0beee65e5535d1820) | 腰掛け蟻継ぎ | CC BY 4.0 | 2 |
 | [`meji-tsukikake-awase-tsugi`](https://sketchfab.com/3d-models/meji-tsukikake-awase-tsugi-64cc903d315b40d6a5f8f6086befa1fd) | 目地突掛け合わせ継ぎ | CC BY 4.0 | 2 |
 | [`miyajima-tsugi`](https://sketchfab.com/3d-models/miyajima-tsugi-40104d0e736c4bb0b2a75e2c91db0730) | 宮島継ぎ | CC BY 4.0 | 3 |
+| [`niho-sashi-shikuchi`](../tools/author_joint.py) | 二方差し仕口 | CC BY 4.0 (authored) | 3 |
 | [`nimai-kama-tsugi`](https://sketchfab.com/3d-models/nimai-kama-tsugi-5aa7e4181c674070a9d0c291c0f129f9) | 二枚鎌継ぎ | CC BY 4.0 | 5 |
 | [`okkake-daisen-tsugi`](https://sketchfab.com/3d-models/okkake-daisen-tsugi-5b161a4a18ae4054a820d32df2b20ca5) | 追掛け大栓継ぎ | CC BY 4.0 | 4 |
 | [`osaka-jo-otemon-hikae-bashira-tsugi`](https://sketchfab.com/3d-models/osaka-jo-otemon-hikae-bashira-tsugi-a1cf8bd826504ef2acc1b34510a06d27) | 大阪城大手門控え柱継ぎ | CC BY 4.0 | 2 |
 | [`otoshi-ari-hozo-shikuchi`](https://sketchfab.com/3d-models/otoshi-ari-hozo-shikuchi-269f0b5a914e437ba10c0aed445711df) | 落し蟻枘仕口 | CC BY 4.0 | 3 |
+| [`sampo-sashi-shikuchi`](../tools/author_joint.py) | 三方差し仕口 | CC BY 4.0 (authored) | 3 |
 | [`shihou-ari-tsugi`](https://sketchfab.com/3d-models/shihou-ari-tsugi-c1d6168a3b4e49a983c3ba815e0b4437) | 四方蟻継ぎ | CC BY 4.0 | 2 |
+| [`suitsuki-sashi-shikuchi`](https://sketchfab.com/3d-models/suitsuki-sashi-shikuchi-2edef5371cb34374b9b6046e435603b6) | 吸付差し仕口 | CC BY 4.0 | 2 |
 | [`yatoi-hozo-shachi-sen-shiguchi`](https://sketchfab.com/3d-models/yatoi-hozo-shachi-sen-shiguchi-5f3cc05626b641f19bd42d30a976db3d) | 雇い枘車知栓仕口 | **CC BY-SA 4.0** | 5 |
+| [`yatoi-hozo-shikuchi`](../tools/author_joint.py) | 雇い枘仕口 | CC BY 4.0 (authored) | 3 |
 | [`yose-ari-hozo-shikuchi`](https://sketchfab.com/3d-models/yose-ari-hozo-shikuchi-3e2f52c247a84a7f9a4caaaefefa4744) | 寄せ蟻枘仕口 | CC BY 4.0 | 2 |
 
-All sixteen models are by **thejoinery** (<https://sketchfab.com/thejoinery>).
-Every `sources/<id>.json` repeats the title, author, canonical URL, license and
-the change list in its `source` object, and the same credit is embedded in each
-GLB's `asset.copyright`.
+The seventeen Sketchfab models are by **thejoinery**
+(<https://sketchfab.com/thejoinery>). Every `sources/<id>.json` repeats the
+title, author, canonical URL, license and the change list in its `source`
+object, and the same credit is embedded in each GLB's `asset.copyright`. The
+four authored joints carry the project as author and credit the reference sheet
+they were drawn from.
 
 ## Changes from the source models
 
@@ -62,8 +72,8 @@ The Sketchfab models are authored in millimetres and exploded. For each one:
   the other's;
 - `meji-tsukikake-awase-tsugi`, `miyajima-tsugi`, `osaka-jo-otemon-hikae-bashira-tsugi`,
   `yose-ari-hozo-shikuchi`, `otoshi-ari-hozo-shikuchi`, `nimai-kama-tsugi`,
-  `yatoi-hozo-shachi-sen-shiguchi`: closed poses corrected the same way (found by
-  scanning to contact and checking every mating face pair, 0.00-0.05 mm). The
+  `yatoi-hozo-shachi-sen-shiguchi`: closed poses corrected the same way (found
+  by scanning to contact and checking every mating face pair, 0.00-0.05 mm). The
   dovetail joints needed a second stage: `yose-ari-hozo-shikuchi` drops into the
   entry pocket then slides along the dovetail, `otoshi-ari-hozo-shikuchi` drops
   onto the slope before its wedge key goes in, `nimai-kama-tsugi` lifts a blade
@@ -71,6 +81,9 @@ The Sketchfab models are authored in millimetres and exploded. For each one:
   its dovetail rim corners moved up to 1.2 mm so its faces are parallel to the
   diagonal slide. In `yatoi-hozo-shachi-sen-shiguchi` the loose tenon is moved
   into its seat in the post (it stays there when the beam is withdrawn);
+- `suitsuki-sashi-shikuchi`: the generated offset stopped the beam 45 mm above
+  the post's shelf, leaving the tenon out of its pocket and no shared vertices.
+  The closed pose drops it the full 200 mm, flush with the post top;
 - `osaka-jo-otemon-hikae-bashira-tsugi`: the model is authored at 18 mm where the
   others are 120 mm, so the bake looked blurred and the checks were too coarse.
   Enlarged 6.67x (`tools/rescale_joint.py`), and the motion corrected: the splice
@@ -85,6 +98,19 @@ The Sketchfab models are authored in millimetres and exploded. For each one:
 
 The author's exploded arrangement is kept in the static GLB. The `assemble`
 offsets in each source close the joint for the animation below.
+
+The four authored joints (`daimochi-tsugi`, `yatoi-hozo-shikuchi`,
+`sampo-sashi-shikuchi`, `niho-sashi-shikuchi`) are different in kind: they are
+modelled to the reference sheet already **closed**, then exploded for the
+animation, rather than captured exploded and closed in place. `author_joint.py`
+builds each timber from axis-aligned boxes minus the mortises and housings, welds
+the boundary, and records the reverse of the exploded offsets as `assemble`. They
+share the same timbers, scale, normals, bake and animation as the imported set,
+and are checked the same way (closed pose watertight and manifold, zero volumetric
+overlap between timbers, every mating face in contact). `daimochi-tsugi` is a
+splice; the other three are `shikuchi` (loose-tenon, three-face and two-face
+`差し`) and were added because the reference sheet is almost entirely
+column-and-beam work while the imported collection is almost entirely splices.
 
 ## Assemble animation
 
@@ -134,6 +160,14 @@ The capture JSON comes from `tools/sketchfab_capture.mjs`; see
 [`tools/README.md`](../tools/README.md). Use `--no-animation` to bake without
 the `assemble` clip, or `--fps` to change its sample rate.
 
+The four authored joints have no capture step; regenerate their sources from the
+joint definitions, then bake and preview the same way:
+
+```sh
+python3 author_joint.py                 # rewrites all four sources
+python3 author_joint.py daimochi-tsugi  # or one
+```
+
 To browse the result:
 
 ```sh
@@ -178,6 +212,14 @@ together, where the key goes):
   tapered trapezoid wedge and the deliberate gap at the stub tenon.
 - Sketchfab model by thejoinery (no animation) —
   <https://sketchfab.com/3d-models/kanawa-tsugi-713b9b3a98344094a008535738348791>.
+
+Used to author the four joints with no source model (shapes, proportions, which
+face each mortise opens on, where the key goes):
+
+- `joints.jpg`, `joints-2.jpg` — reference sheets of `継ぎ手` and `仕口`
+  (column-and-beam `納まり`), included at the repository root.
+- thejoinery, <https://thejoinery.jp/> — the source collection the imported
+  models come from, and the visual reference for the authored ones.
 
 ## Licensing
 

@@ -1,15 +1,17 @@
 # Japanese joinery
 
-Sixteen Japanese timber joints (継ぎ手 and 仕口) as interactive 3D models that
+Twenty-one Japanese timber joints (継ぎ手 and 仕口) as interactive 3D models that
 assemble and come apart, with the tools that rebuild them and the site that shows
 them: **<https://ixday.github.io/carpentry/>**.
 
-The models are by [thejoinery](https://sketchfab.com/thejoinery) on Sketchfab
-(CC BY 4.0, one CC BY-SA 4.0). They were read from the public viewer, split into
-timbers, re-lit with a baked paper-sunrise look, given an `assemble` animation,
-and corrected where the author's pose was not the true closed joint. Per-model
-links, attribution, the change list and the references used are in
-[`joints/README.md`](joints/README.md).
+Seventeen models are by [thejoinery](https://sketchfab.com/thejoinery) on
+Sketchfab (CC BY 4.0, one CC BY-SA 4.0). They were read from the public viewer,
+split into timbers, re-lit with a baked paper-sunrise look, given an `assemble`
+animation, and corrected where the author's pose was not the true closed joint.
+Four joints with no licensed source model (three column-and-beam `shikuchi`, one
+splice) are authored in this repository from the reference sheet, using
+`tools/author_joint.py`. Per-model links, attribution, the change list and the
+references used are in [`joints/README.md`](joints/README.md).
 
 ## Layout
 
@@ -18,11 +20,15 @@ links, attribution, the change list and the references used are in
 - `joints/<id>/<piece>.glb` — the same timbers one by one, in world space
 - `joints/previews/sunset_<id>.png` — 1100×1100 renders of the shipped GLBs
 - `joints/sources/<id>.json` — the source: faces of every timber (in the
-  author's exploded pose), the closed-pose offsets (`assemble`), an optional
-  `approach` stage, and the attribution
+  exploded pose), the closed-pose offsets (`assemble`), an optional `approach`
+  stage, and the attribution
 - `docs/` — the generated GitHub Pages site (`tools/build_site.py`)
 - `tools/` — capture, import, bake, check and site tools; see
   [`tools/README.md`](tools/README.md)
+- `joints.jpg`, `joints-2.jpg` — the reference sheets the authored joints were
+  drawn from
+- `PLAN.md` — inventory, coverage against the reference sheet, and the queue of
+  joints still to add
 
 Every GLB is Y-up and right-handed, with flat per-face normals and an indexed
 `COLOR_0`. The material is `KHR_materials_unlit`: the lighting, cast shadows and
@@ -39,7 +45,9 @@ python3 tools/viewer.py --open
 Serves the same page that is published on GitHub Pages: one anchored section per
 joint, the assembly animation, the scroll wheel zooms the model, Up / Down step
 between joints, and on a phone the index becomes a slide-in menu with one joint
-per screen.
+per screen. The index has a search box at the top (`/` focuses it): it matches
+romanised and Japanese names, ranks the hits, and on a phone it filters the
+same slide-in menu.
 
 ## The baked look
 
@@ -67,6 +75,7 @@ occlusion gradients have vertices to land on. The rig constants and flags are in
 
 ```sh
 cd tools
+python3 author_joint.py                      # regenerate the authored sources
 for f in ../joints/sources/*.json; do
     id=$(basename "$f" .json)
     python3 bake.py "$f" ../joints --level "$id" --pieces --no-ground \
@@ -78,12 +87,16 @@ python3 validate.py ../joints
 python3 build_site.py --repo-url https://github.com/IxDay/carpentry
 ```
 
-`--no-animation` drops the `assemble` clip. Importing a new Sketchfab model and
-checking an animation for timbers passing through each other are described in
-[`tools/README.md`](tools/README.md).
+The `author_joint.py` line only touches the four authored sources; the imported
+ones come from captures. `--no-animation` drops the `assemble` clip. Importing a
+new Sketchfab model and checking an animation for timbers passing through each
+other are described in [`tools/README.md`](tools/README.md).
 
 ## Licensing
 
-The CC BY 4.0 models may be reused with attribution; each GLB's `asset.copyright`
-and `joints/sources/<id>.json` carry it. `yatoi-hozo-shachi-sen-shiguchi` is CC BY-SA 4.0: its
-baked GLB and pieces are a derivative and are distributed under the same license.
+The CC BY 4.0 models may be reused with attribution; each GLB's
+`asset.copyright` and `joints/sources/<id>.json` carry it. `yatoi-hozo-shachi-sen-shiguchi`
+is CC BY-SA 4.0: its baked GLB and pieces are a derivative and are distributed
+under the same license. The four authored joints (`daimochi-tsugi`,
+`yatoi-hozo-shikuchi`, `sampo-sashi-shikuchi`, `niho-sashi-shikuchi`) are
+original geometry, released CC BY 4.0.

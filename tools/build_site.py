@@ -127,6 +127,9 @@ def footer(repo_url):
         baked paper-sunrise look and given an assembly animation. The animations were checked
         for timbers passing through each other, and some meshes were corrected where the
         author's pose was not the true closed joint.</p>
+      <p>Four joints with no licensed source model &mdash; 台持ち継ぎ, 雇い枘仕口,
+        三方差し仕口 and 二方差し仕口 &mdash; are authored for this collection from the
+        reference sheet 柱（軸組）の納まり and released CC BY 4.0.</p>
       <h2>References</h2>
       <ul>
 %s
@@ -141,10 +144,25 @@ def copy_if_changed(src, dst):
     shutil.copyfile(src, dst)
 
 
+def copy_vendor(out):
+    """Copy the pinned third-party scripts the page loads (see vendor/README.md)."""
+    src = os.path.join(HERE, "vendor")
+    dst = os.path.join(out, "vendor")
+    os.makedirs(dst, exist_ok=True)
+    wanted = {name for name in os.listdir(src)
+              if name != "README.md" and os.path.isfile(os.path.join(src, name))}
+    for name in sorted(wanted):
+        copy_if_changed(os.path.join(src, name), os.path.join(dst, name))
+    for name in os.listdir(dst):
+        if name not in wanted:
+            os.remove(os.path.join(dst, name))
+
+
 def build(joints_dir, out, repo_url):
     joints = load_joints(joints_dir)
     for sub in ("models", "posters"):
         os.makedirs(os.path.join(out, sub), exist_ok=True)
+    copy_vendor(out)
     keep = set()
     for j in joints:
         copy_if_changed(j["glb"], os.path.join(out, "models", j["slug"] + ".glb"))

@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Japanese joinery</title>
-  <meta name="description" content="Sixteen Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble and come apart.">
+  <meta name="description" content="Twenty-one Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble and come apart.">
   <meta property="og:title" content="Japanese joinery">
-  <meta property="og:description" content="Sixteen Japanese timber joints as interactive 3D models that assemble and come apart.">
+  <meta property="og:description" content="Twenty-one Japanese timber joints as interactive 3D models that assemble and come apart.">
   <meta property="og:image" content="posters/{{OG_IMAGE}}.png">
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+  <script src="vendor/ufuzzy.min.js"></script>
   <style>
     :root {
       --paper: #efe5d6;
@@ -70,6 +71,22 @@
     }
     nav.index h1 { font: 600 1.05rem/1.3 Georgia, "Iowan Old Style", serif; margin: 0 0 .25rem; letter-spacing: .01em; }
     nav.index p { margin: 0 0 1.25rem; color: var(--muted); font-size: .85rem; }
+    nav.index .search { margin: 0 0 .9rem; }
+    nav.index .search input {
+      display: block; width: 100%;
+      font: inherit; font-size: .9rem; line-height: 1.2;
+      padding: .45rem .6rem;
+      color: var(--ink); background: var(--card);
+      border: 1px solid var(--line); border-radius: 6px;
+      appearance: none; -webkit-appearance: none;
+    }
+    nav.index .search input::placeholder { color: var(--jp); }
+    nav.index .search input:focus {
+      border-color: var(--accent);
+      outline: 2px solid var(--accent); outline-offset: 1px;
+    }
+    nav.index .search .status { margin: .4rem .1rem 0; font-size: .75rem; color: var(--muted); }
+    nav.index .search .status[hidden] { display: none; }
     nav.index ol { list-style: none; margin: 0; padding: 0; }
     nav.index a {
       display: block;
@@ -154,6 +171,9 @@
       nav.index {
         position: fixed; z-index: 30; top: 0; bottom: 0; left: 0;
         width: min(82vw, 20rem); max-height: none; padding: 1.5rem 1rem;
+        /* the desktop rule's align-self: start stops the fixed drawer from
+           taking the full viewport height; it would clip the last joints */
+        align-self: auto;
         background: var(--paper); border-right: 1px solid var(--line);
         transform: translateX(-102%); visibility: hidden;
         transition: transform .25s ease, visibility 0s .25s;
@@ -227,7 +247,13 @@
       <button class="menu-close" type="button" aria-label="Close the menu">&times;</button>
       <h1>Japanese joinery</h1>
       <p>{{COUNT}} joints that assemble and come apart.</p>
-      <ol>
+      <div class="search">
+        <input id="search" type="search" placeholder="Search joints" autocomplete="off"
+            spellcheck="false" aria-label="Search joints" aria-controls="joint-list"
+            aria-describedby="search-status">
+        <p class="status" id="search-status" role="status" aria-live="polite" hidden></p>
+      </div>
+      <ol id="joint-list">
 {{NAV}}
       </ol>
     </nav>
@@ -301,6 +327,87 @@
     addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
     mobile.addEventListener('change', () => setMenu(false));
     addEventListener('scroll', () => document.getElementById('hint')?.remove(), { once: true, passive: true, capture: true });
+
+    // Full-text search over the index: uFuzzy pre-filters the query against one
+    // haystack string per joint, ranks the hits and the list is reordered to the
+    // ranking. The options are uFuzzy's documented `unicode: true` set, so the
+    // Japanese names are searchable as well as the romanised ones.
+    {
+      const input = document.getElementById('search');
+      const status = document.getElementById('search-status');
+      const list = document.getElementById('joint-list');
+      const nav = list.closest('nav');
+      const rows = [...list.children].map(li => {
+        const a = li.querySelector('a');
+        const jp = li.querySelector('.jp');
+        return {
+          li, a,
+          hay: [a.querySelector('.name').textContent.trim(),
+                jp ? jp.textContent.trim() : '',
+                a.hash.slice(1)].join(' '),
+        };
+      });
+      const hay = rows.map(r => r.hay);
+      const uf = new uFuzzy({
+        unicode: true,
+        interSplit: "[^\\p{L}\\d']+",
+        intraSplit: "\\p{Ll}\\p{Lu}",
+        intraBound: "\\p{L}\\d|\\d\\p{L}|\\p{Ll}\\p{Lu}",
+        intraChars: "[\\p{L}\\d']",
+        intraContr: "'\\p{L}{1,2}\\b",
+        intraMode: 1,
+      });
+
+      const reset = () => {
+        rows.forEach(r => list.append(r.li));
+        rows.forEach(r => { r.li.hidden = false; });
+        nav.scrollTop = 0;
+        status.hidden = true;
+        status.textContent = '';
+      };
+
+      const search = () => {
+        const q = input.value.trim();
+        if (!q) return reset();
+        const idxs = uf.filter(hay, q);
+        let hits = [];
+        if (idxs && idxs.length) {
+          const info = uf.info(idxs, hay, q);
+          const order = info ? uf.sort(info, hay, q) : idxs;
+          const idx = info ? info.idx : idxs;
+          hits = order.map(i => rows[idx[i]]);
+        }
+        hits.forEach(r => { r.li.hidden = false; list.append(r.li); });
+        const found = new Set(hits);
+        rows.forEach(r => { if (!found.has(r)) r.li.hidden = true; });
+        nav.scrollTop = 0;
+        status.hidden = false;
+        status.textContent = hits.length
+          ? `${hits.length} of ${rows.length} joints`
+          : `No joints match “${q}”`;
+      };
+
+      input.addEventListener('input', search);
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && input.value) {
+          e.preventDefault();
+          e.stopPropagation();       // clear the query, do not close the menu
+          input.value = '';
+          reset();
+        } else if (e.key === 'Enter') {
+          const first = rows.find(r => !r.li.hidden);
+          if (!first) return;
+          e.preventDefault();
+          first.a.click();           // follows the anchor, closes the mobile menu
+        }
+      });
+      addEventListener('keydown', e => {
+        if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+        if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+        e.preventDefault();
+        input.focus();
+      });
+    }
 
     // One page = the visible height of the scroller, measured here (not 100dvh)
     // and again only when the window really changes (rotation, resize).

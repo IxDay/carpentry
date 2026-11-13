@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Japanese joinery</title>
-  <meta name="description" content="Sixteen Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble and come apart.">
+  <meta name="description" content="Twenty-one Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble and come apart.">
   <meta property="og:title" content="Japanese joinery">
-  <meta property="og:description" content="Sixteen Japanese timber joints as interactive 3D models that assemble and come apart.">
-  <meta property="og:image" content="posters/hako-sen-tsugi.png">
+  <meta property="og:description" content="Twenty-one Japanese timber joints as interactive 3D models that assemble and come apart.">
+  <meta property="og:image" content="posters/daimochi-tsugi.png">
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+  <script src="vendor/ufuzzy.min.js"></script>
   <style>
     :root {
       --paper: #efe5d6;
@@ -70,6 +71,22 @@
     }
     nav.index h1 { font: 600 1.05rem/1.3 Georgia, "Iowan Old Style", serif; margin: 0 0 .25rem; letter-spacing: .01em; }
     nav.index p { margin: 0 0 1.25rem; color: var(--muted); font-size: .85rem; }
+    nav.index .search { margin: 0 0 .9rem; }
+    nav.index .search input {
+      display: block; width: 100%;
+      font: inherit; font-size: .9rem; line-height: 1.2;
+      padding: .45rem .6rem;
+      color: var(--ink); background: var(--card);
+      border: 1px solid var(--line); border-radius: 6px;
+      appearance: none; -webkit-appearance: none;
+    }
+    nav.index .search input::placeholder { color: var(--jp); }
+    nav.index .search input:focus {
+      border-color: var(--accent);
+      outline: 2px solid var(--accent); outline-offset: 1px;
+    }
+    nav.index .search .status { margin: .4rem .1rem 0; font-size: .75rem; color: var(--muted); }
+    nav.index .search .status[hidden] { display: none; }
     nav.index ol { list-style: none; margin: 0; padding: 0; }
     nav.index a {
       display: block;
@@ -154,6 +171,9 @@
       nav.index {
         position: fixed; z-index: 30; top: 0; bottom: 0; left: 0;
         width: min(82vw, 20rem); max-height: none; padding: 1.5rem 1rem;
+        /* the desktop rule's align-self: start stops the fixed drawer from
+           taking the full viewport height; it would clip the last joints */
+        align-self: auto;
         background: var(--paper); border-right: 1px solid var(--line);
         transform: translateX(-102%); visibility: hidden;
         transition: transform .25s ease, visibility 0s .25s;
@@ -196,7 +216,7 @@
       section.joint h2 a .hash { display: none; }
       section.joint .jp { font-size: .9rem; }
       section.joint header::after {
-        content: counter(joint) " / 16";
+        content: counter(joint) " / 21";
         position: absolute; right: 1rem; top: max(1rem, calc(env(safe-area-inset-top) + .4rem));
         font-size: .75rem; color: var(--muted); letter-spacing: .04em;
       }
@@ -226,8 +246,15 @@
     <nav class="index" id="index" aria-label="Joints">
       <button class="menu-close" type="button" aria-label="Close the menu">&times;</button>
       <h1>Japanese joinery</h1>
-      <p>16 joints that assemble and come apart.</p>
-      <ol>
+      <p>21 joints that assemble and come apart.</p>
+      <div class="search">
+        <input id="search" type="search" placeholder="Search joints" autocomplete="off"
+            spellcheck="false" aria-label="Search joints" aria-controls="joint-list"
+            aria-describedby="search-status">
+        <p class="status" id="search-status" role="status" aria-live="polite" hidden></p>
+      </div>
+      <ol id="joint-list">
+        <li><a href="#daimochi-tsugi"><span class="name">Daimochi-tsugi</span><span class="jp" lang="ja">台持ち継ぎ</span></a></li>
         <li><a href="#hako-sen-tsugi"><span class="name">Hako-sen-tsugi</span><span class="jp" lang="ja">箱栓継ぎ</span></a></li>
         <li><a href="#hira-isuka-tsugi"><span class="name">Hira-isuka-tsugi</span><span class="jp" lang="ja">平居木継ぎ</span></a></li>
         <li><a href="#kakeawase-komisen-tsugi"><span class="name">Kakeawase-komisen-tsugi</span><span class="jp" lang="ja">掛け合わせ込み栓継ぎ</span></a></li>
@@ -237,16 +264,37 @@
         <li><a href="#koshikake-ari-tsugi"><span class="name">Koshikake-ari-tsugi</span><span class="jp" lang="ja">腰掛け蟻継ぎ</span></a></li>
         <li><a href="#meji-tsukikake-awase-tsugi"><span class="name">Meji-tsukikake-awase-tsugi</span><span class="jp" lang="ja">目地突掛け合わせ継ぎ</span></a></li>
         <li><a href="#miyajima-tsugi"><span class="name">Miyajima-tsugi</span><span class="jp" lang="ja">宮島継ぎ</span></a></li>
+        <li><a href="#niho-sashi-shikuchi"><span class="name">Niho-sashi-shikuchi</span><span class="jp" lang="ja">二方差し仕口</span></a></li>
         <li><a href="#nimai-kama-tsugi"><span class="name">Nimai-kama-tsugi</span><span class="jp" lang="ja">二枚鎌継ぎ</span></a></li>
         <li><a href="#okkake-daisen-tsugi"><span class="name">Okkake-daisen-tsugi</span><span class="jp" lang="ja">追掛け大栓継ぎ</span></a></li>
         <li><a href="#osaka-jo-otemon-hikae-bashira-tsugi"><span class="name">Osaka-jo Otemon Hikae-bashira-tsugi</span><span class="jp" lang="ja">大阪城大手門控え柱継ぎ</span></a></li>
         <li><a href="#otoshi-ari-hozo-shikuchi"><span class="name">Otoshi-ari-hozo-shikuchi</span><span class="jp" lang="ja">落し蟻枘仕口</span></a></li>
+        <li><a href="#sampo-sashi-shikuchi"><span class="name">Sampo-sashi-shikuchi</span><span class="jp" lang="ja">三方差し仕口</span></a></li>
         <li><a href="#shihou-ari-tsugi"><span class="name">Shihou-ari-tsugi</span><span class="jp" lang="ja">四方蟻継ぎ</span></a></li>
+        <li><a href="#suitsuki-sashi-shikuchi"><span class="name">Suitsuki-sashi-shikuchi</span><span class="jp" lang="ja">吸付差し仕口</span></a></li>
         <li><a href="#yatoi-hozo-shachi-sen-shiguchi"><span class="name">Yatoi-hozo-shachi-sen-shiguchi</span><span class="jp" lang="ja">雇い枘車知栓仕口</span></a></li>
+        <li><a href="#yatoi-hozo-shikuchi"><span class="name">Yatoi-hozo-shikuchi</span><span class="jp" lang="ja">雇い枘仕口</span></a></li>
         <li><a href="#yose-ari-hozo-shikuchi"><span class="name">Yose-ari-hozo-shikuchi</span><span class="jp" lang="ja">寄せ蟻枘仕口</span></a></li>
       </ol>
     </nav>
     <main>
+      <section class="joint" id="daimochi-tsugi">
+        <header>
+          <h2><a href="#daimochi-tsugi">Daimochi-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">台持ち継ぎ</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-daimochi-tsugi" data-src="models/daimochi-tsugi.glb"
+              alt="Daimochi-tsugi assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-daimochi-tsugi">Replay</button>
+        </div>
+        <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified.
+          <a href="https://github.com/ixday/carpentry">Original on Sketchfab</a>.</p>
+      </section>
       <section class="joint" id="hako-sen-tsugi">
         <header>
           <h2><a href="#hako-sen-tsugi">Hako-sen-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
@@ -400,6 +448,23 @@
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified.
           <a href="https://sketchfab.com/3d-models/miyajima-tsugi-40104d0e736c4bb0b2a75e2c91db0730">Original on Sketchfab</a>.</p>
       </section>
+      <section class="joint" id="niho-sashi-shikuchi">
+        <header>
+          <h2><a href="#niho-sashi-shikuchi">Niho-sashi-shikuchi<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">二方差し仕口</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-niho-sashi-shikuchi" data-src="models/niho-sashi-shikuchi.glb"
+              alt="Niho-sashi-shikuchi assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-niho-sashi-shikuchi">Replay</button>
+        </div>
+        <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified.
+          <a href="https://github.com/ixday/carpentry">Original on Sketchfab</a>.</p>
+      </section>
       <section class="joint" id="nimai-kama-tsugi">
         <header>
           <h2><a href="#nimai-kama-tsugi">Nimai-kama-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
@@ -468,6 +533,23 @@
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified.
           <a href="https://sketchfab.com/3d-models/otoshi-ari-hozo-shikuchi-269f0b5a914e437ba10c0aed445711df">Original on Sketchfab</a>.</p>
       </section>
+      <section class="joint" id="sampo-sashi-shikuchi">
+        <header>
+          <h2><a href="#sampo-sashi-shikuchi">Sampo-sashi-shikuchi<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">三方差し仕口</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-sampo-sashi-shikuchi" data-src="models/sampo-sashi-shikuchi.glb"
+              alt="Sampo-sashi-shikuchi assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-sampo-sashi-shikuchi">Replay</button>
+        </div>
+        <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified.
+          <a href="https://github.com/ixday/carpentry">Original on Sketchfab</a>.</p>
+      </section>
       <section class="joint" id="shihou-ari-tsugi">
         <header>
           <h2><a href="#shihou-ari-tsugi">Shihou-ari-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
@@ -485,6 +567,23 @@
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified.
           <a href="https://sketchfab.com/3d-models/shihou-ari-tsugi-c1d6168a3b4e49a983c3ba815e0b4437">Original on Sketchfab</a>.</p>
       </section>
+      <section class="joint" id="suitsuki-sashi-shikuchi">
+        <header>
+          <h2><a href="#suitsuki-sashi-shikuchi">Suitsuki-sashi-shikuchi<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">吸付差し仕口</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-suitsuki-sashi-shikuchi" data-src="models/suitsuki-sashi-shikuchi.glb"
+              alt="Suitsuki-sashi-shikuchi assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-suitsuki-sashi-shikuchi">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified.
+          <a href="https://sketchfab.com/3d-models/suitsuki-sashi-shikuchi-2edef5371cb34374b9b6046e435603b6">Original on Sketchfab</a>.</p>
+      </section>
       <section class="joint" id="yatoi-hozo-shachi-sen-shiguchi">
         <header>
           <h2><a href="#yatoi-hozo-shachi-sen-shiguchi">Yatoi-hozo-shachi-sen-shiguchi<span class="hash" aria-hidden="true">#</span></a></h2>
@@ -501,6 +600,23 @@
         <p class="meta">5 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, modified. Shared alike under the same license.
           <a href="https://sketchfab.com/3d-models/yatoi-hozo-shachi-sen-shiguchi-5f3cc05626b641f19bd42d30a976db3d">Original on Sketchfab</a>.</p>
+      </section>
+      <section class="joint" id="yatoi-hozo-shikuchi">
+        <header>
+          <h2><a href="#yatoi-hozo-shikuchi">Yatoi-hozo-shikuchi<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">雇い枘仕口</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-yatoi-hozo-shikuchi" data-src="models/yatoi-hozo-shikuchi.glb"
+              alt="Yatoi-hozo-shikuchi assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-yatoi-hozo-shikuchi">Replay</button>
+        </div>
+        <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified.
+          <a href="https://github.com/ixday/carpentry">Original on Sketchfab</a>.</p>
       </section>
       <section class="joint" id="yose-ari-hozo-shikuchi">
         <header>
@@ -527,6 +643,9 @@
         baked paper-sunrise look and given an assembly animation. The animations were checked
         for timbers passing through each other, and some meshes were corrected where the
         author's pose was not the true closed joint.</p>
+      <p>Four joints with no licensed source model &mdash; 台持ち継ぎ, 雇い枘仕口,
+        三方差し仕口 and 二方差し仕口 &mdash; are authored for this collection from the
+        reference sheet 柱（軸組）の納まり and released CC BY 4.0.</p>
       <h2>References</h2>
       <ul>
         <li><a href="https://projects.mcah.columbia.edu/jaanus/node/3413">JAANUS, kanawa tsugi 金輪継</a></li>
@@ -605,6 +724,87 @@
     addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
     mobile.addEventListener('change', () => setMenu(false));
     addEventListener('scroll', () => document.getElementById('hint')?.remove(), { once: true, passive: true, capture: true });
+
+    // Full-text search over the index: uFuzzy pre-filters the query against one
+    // haystack string per joint, ranks the hits and the list is reordered to the
+    // ranking. The options are uFuzzy's documented `unicode: true` set, so the
+    // Japanese names are searchable as well as the romanised ones.
+    {
+      const input = document.getElementById('search');
+      const status = document.getElementById('search-status');
+      const list = document.getElementById('joint-list');
+      const nav = list.closest('nav');
+      const rows = [...list.children].map(li => {
+        const a = li.querySelector('a');
+        const jp = li.querySelector('.jp');
+        return {
+          li, a,
+          hay: [a.querySelector('.name').textContent.trim(),
+                jp ? jp.textContent.trim() : '',
+                a.hash.slice(1)].join(' '),
+        };
+      });
+      const hay = rows.map(r => r.hay);
+      const uf = new uFuzzy({
+        unicode: true,
+        interSplit: "[^\\p{L}\\d']+",
+        intraSplit: "\\p{Ll}\\p{Lu}",
+        intraBound: "\\p{L}\\d|\\d\\p{L}|\\p{Ll}\\p{Lu}",
+        intraChars: "[\\p{L}\\d']",
+        intraContr: "'\\p{L}{1,2}\\b",
+        intraMode: 1,
+      });
+
+      const reset = () => {
+        rows.forEach(r => list.append(r.li));
+        rows.forEach(r => { r.li.hidden = false; });
+        nav.scrollTop = 0;
+        status.hidden = true;
+        status.textContent = '';
+      };
+
+      const search = () => {
+        const q = input.value.trim();
+        if (!q) return reset();
+        const idxs = uf.filter(hay, q);
+        let hits = [];
+        if (idxs && idxs.length) {
+          const info = uf.info(idxs, hay, q);
+          const order = info ? uf.sort(info, hay, q) : idxs;
+          const idx = info ? info.idx : idxs;
+          hits = order.map(i => rows[idx[i]]);
+        }
+        hits.forEach(r => { r.li.hidden = false; list.append(r.li); });
+        const found = new Set(hits);
+        rows.forEach(r => { if (!found.has(r)) r.li.hidden = true; });
+        nav.scrollTop = 0;
+        status.hidden = false;
+        status.textContent = hits.length
+          ? `${hits.length} of ${rows.length} joints`
+          : `No joints match “${q}”`;
+      };
+
+      input.addEventListener('input', search);
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && input.value) {
+          e.preventDefault();
+          e.stopPropagation();       // clear the query, do not close the menu
+          input.value = '';
+          reset();
+        } else if (e.key === 'Enter') {
+          const first = rows.find(r => !r.li.hidden);
+          if (!first) return;
+          e.preventDefault();
+          first.a.click();           // follows the anchor, closes the mobile menu
+        }
+      });
+      addEventListener('keydown', e => {
+        if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+        if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+        e.preventDefault();
+        input.focus();
+      });
+    }
 
     // One page = the visible height of the scroller, measured here (not 100dvh)
     // and again only when the window really changes (rotation, resize).

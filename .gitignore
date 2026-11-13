@@ -2,3 +2,6 @@
 *.ppm
 __pycache__/
 *.pyc
+
+# Sketchfab capture buffers: large, reproducible from tools/sketchfab_capture.mjs
+tools/caps/

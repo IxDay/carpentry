@@ -3,7 +3,9 @@
 Capture, import, bake, check and publish tools for the Japanese joint models.
 
 Everything is Python 3.9+ with the standard library only, except the optional
-Sketchfab capture (Node 22+ and Google Chrome, no extra npm packages).
+Sketchfab capture (Node 22+ and Google Chrome, no extra npm packages) and the
+search library the generated page loads, which is pinned and vendored under
+`vendor/`.
 
 ## Source format
 
@@ -187,6 +189,36 @@ settings are sized for 120 mm timbers; the Osaka-jo Otemon splice was 18 mm
 across, which blurred its bake and made collision checks far too coarse to see
 the timbers passing through each other.
 
+### `author_joint.py` — model joints that have no source
+
+```sh
+python3 author_joint.py                 # rewrite every authored source
+python3 author_joint.py daimochi-tsugi  # just one, by id
+```
+
+The Sketchfab collection is all splices; the column-and-beam (`shikuchi`)
+families on the reference sheet have no licensed model, so four joints are built
+here (three `shikuchi` plus one splice). Each joint is defined in the closed pose
+as a list of axis-aligned
+boxes to add minus a list of boxes to cut — that is enough for square tenons,
+mortises, housings, corner notches and round pegs. The boundary is extracted on
+the exact box grid (no voxels) by grouping boundary cells per (axis, plane,
+direction), greedily merging them into rectangles, and then splitting every edge
+at any vertex that lies on it so the shared edges match exactly. The result is
+the same welded, flat-normal, per-face polygon form `import_joint.py` produces.
+
+Each joint passes an explode map giving, per piece, the vector it is drawn away
+from the closed joint by; the script stores the moved geometry and the opposite
+translation as `assemble`. Keys get an axial clearance plus a lateral offset so `bake.py` can
+withdraw them along their own axis and then move them aside without cutting
+through the timber. Coordinates are metres, on the same 120 mm timber scale as
+the imported models, so the standard bake flags apply.
+
+`compile_solid` only handles boxes, so sloped and curved faces (the `kama` and
+dovetail families) still have to be authored by hand or added as face lists.
+The geometry is original, not derived from a Sketchfab model; the sources credit
+the project and the reference sheet, and are released CC BY 4.0.
+
 ### `build_site.py` — the GitHub Pages site
 
 ```sh
@@ -202,13 +234,24 @@ scrolling, a `<model-viewer>` that plays the `assemble` clip and the Japanese
 name in light gray under the romanised one. Up / Down arrow keys step through the
 joints. Below 56 rem the index becomes a slide-in menu (button at the top left)
 and every joint is a full-screen page: swipe up / down for the next / previous
-joint (scroll snapping), drag sideways to rotate, with an `n / 16` counter and
+joint (scroll snapping), drag sideways to rotate, with an `n / <count>` counter and
 the credits along the bottom. Models load only near the viewport and only once
 scrolling has settled (never mid-swipe): each stage is an empty box of its final
 size with a spinner, the adjacent models are fetched at rest, and a model fades
-in when it is ready. Plain static files, stdlib only. Regenerate and commit
-`docs/` after changing a joint; publish with Pages set to the default branch,
-`/docs` folder.
+in when it is ready.
+
+The top of the index (and so the top of the phone menu) has a full-text search
+box. It searches each joint's romanised name, Japanese name and id with
+[`@leeoniya/ufuzzy`](https://github.com/leeoniya/uFuzzy) (MIT, vendored under
+`vendor/` and copied into `docs/`): the query is filtered against one haystack
+string per joint, ranked, and the list reordered to the ranking. The library's
+`unicode: true` regexps are switched on so `金輪` and `腰掛け` match as well as
+`kanawa`. Typing a single error still matches (`sanpo` finds Sampo, `kama` finds
+Nimai-kama), no match shows a live-region message, Enter follows the first hit,
+Escape clears the query, and `/` focuses the box from anywhere.
+
+Plain static files, stdlib only. Regenerate and commit `docs/` after changing a
+joint; publish with Pages set to the default branch, `/docs` folder.
 
 ### `viewer.py` — the same page, locally
 
@@ -220,5 +263,9 @@ python3 viewer.py --port 9000
 ## Legal / scope
 
 The models are reproduced under their own Creative Commons licenses (CC BY 4.0,
-except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). See
+except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The four
+authored joints (`daimochi-tsugi`, `yatoi-hozo-shikuchi`, `sampo-sashi-shikuchi`,
+`niho-sashi-shikuchi`) are original geometry released CC BY 4.0. The site's
+search box uses MIT-licensed `@leeoniya/uFuzzy`, copied unmodified from npm; its
+notice is in `vendor/ufuzzy.LICENSE`. See
 [`../joints/README.md`](../joints/README.md) for the per-model credit.
