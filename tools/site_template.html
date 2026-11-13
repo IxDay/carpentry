@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Japanese joinery</title>
+  <meta name="description" content="Sixteen Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble and come apart.">
+  <meta property="og:title" content="Japanese joinery">
+  <meta property="og:description" content="Sixteen Japanese timber joints as interactive 3D models that assemble and come apart.">
+  <meta property="og:image" content="posters/{{OG_IMAGE}}.png">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+  <style>
+    :root {
+      --paper: #efe5d6;
+      --card: #f6eee1;
+      --ink: #2f2a24;
+      --jp: #9a9388;
+      --muted: #6f675c;
+      --line: #d9ccb8;
+      --accent: #b9472d;
+      --sun: #e0a37d;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --paper: #1c1916;
+        --card: #25211d;
+        --ink: #efe6d6;
+        --jp: #8d857a;
+        --muted: #a39a8c;
+        --line: #38322b;
+        --accent: #e0765a;
+        --sun: #7a3b2a;
+      }
+    }
+    :root[data-theme="dark"] {
+      --paper: #1c1916;
+      --card: #25211d;
+      --ink: #efe6d6;
+      --jp: #8d857a;
+      --muted: #a39a8c;
+      --line: #38322b;
+      --accent: #e0765a;
+      --sun: #7a3b2a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 1.5rem; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.55 system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+    }
+    a { color: inherit; }
+    .layout {
+      display: grid;
+      grid-template-columns: 17rem minmax(0, 1fr);
+      gap: 0 3rem;
+      max-width: 78rem;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    nav.index {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      max-height: 100vh;
+      overflow-y: auto;
+      padding: 2rem 0;
+    }
+    nav.index h1 { font: 600 1.05rem/1.3 Georgia, "Iowan Old Style", serif; margin: 0 0 .25rem; letter-spacing: .01em; }
+    nav.index p { margin: 0 0 1.25rem; color: var(--muted); font-size: .85rem; }
+    nav.index ol { list-style: none; margin: 0; padding: 0; }
+    nav.index a {
+      display: block;
+      padding: .4rem .6rem;
+      border-left: 2px solid var(--line);
+      text-decoration: none;
+      line-height: 1.3;
+    }
+    nav.index a:hover, nav.index a.active { border-left-color: var(--accent); background: var(--card); }
+    nav.index .name { display: block; font-size: .9rem; }
+    nav.index .jp { display: block; font-size: .75rem; color: var(--jp); }
+    main { padding: 2rem 0 4rem; min-width: 0; counter-reset: joint; }
+    section.joint { padding: 0 0 3.5rem; counter-increment: joint; }
+    section.joint + section.joint { padding-top: 1rem; }
+    section.joint header { margin-bottom: .9rem; }
+    section.joint h2 { font: 600 1.6rem/1.2 Georgia, "Iowan Old Style", serif; margin: 0; }
+    section.joint h2 a { text-decoration: none; }
+    section.joint h2 a .hash { margin-left: .4rem; color: var(--jp); opacity: 0; transition: opacity .15s; font-weight: 400; }
+    section.joint h2 a:hover .hash, section.joint h2 a:focus-visible .hash { opacity: 1; }
+    section.joint .jp { margin: .15rem 0 0; font-size: 1.05rem; color: var(--jp); letter-spacing: .06em; }
+    .stage {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 72% 34%, var(--sun) 0 21%, transparent 21.4%),
+        var(--card);
+    }
+    .stage model-viewer {
+      display: block; width: 100%; height: min(62vh, 34rem); background: transparent;
+      opacity: 0; transition: opacity .5s ease;
+    }
+    .stage.ready model-viewer { opacity: 1; }
+    .spinner {
+      position: absolute; top: 50%; left: 50%; width: 2.2rem; height: 2.2rem; margin: -1.1rem 0 0 -1.1rem;
+      border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%;
+      animation: spin .9s linear infinite; transition: opacity .3s ease; pointer-events: none;
+    }
+    .stage.ready .spinner { opacity: 0; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .stage model-viewer { transition: none; }
+      .spinner { animation-duration: 3s; }
+    }
+    .stage button {
+      position: absolute;
+      right: .75rem;
+      bottom: .75rem;
+      font: inherit;
+      font-size: .8rem;
+      padding: .3rem .8rem;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .stage button:hover { border-color: var(--accent); }
+    .meta { margin: .6rem 0 0; font-size: .8rem; color: var(--muted); }
+    .meta a { color: var(--muted); }
+    footer { grid-column: 2; padding: 0 0 4rem; font-size: .85rem; color: var(--muted); border-top: 1px solid var(--line); }
+    footer h2 { font: 600 1rem/1.3 Georgia, serif; color: var(--ink); margin: 1.5rem 0 .5rem; }
+    footer ul { padding-left: 1.1rem; margin: 0; }
+    footer li { margin-bottom: .35rem; }
+    .menu-toggle, .menu-close, .backdrop, .hint { display: none; }
+    /* Small screens: the index becomes a slide-in drawer and every joint is one
+       full-screen page; swiping up / down goes to the next / previous joint
+       (scroll snapping) while a horizontal drag still rotates the model. */
+    @media (max-width: 56rem) {
+      /* The document does not scroll: .layout is a fixed full-screen scroller, so
+         the browser toolbar never collapses and the page height (--page-h,
+         measured in the script) cannot change in the middle of a swipe. */
+      html, body { height: 100%; overflow: hidden; }
+      .layout {
+        display: block; position: fixed; inset: 0; max-width: none; padding: 0;
+        overflow-x: hidden; overflow-y: auto; overscroll-behavior: none;
+        scroll-snap-type: y mandatory; scroll-behavior: smooth;
+      }
+      body.menu-open .layout { overflow: hidden; }
+      @media (prefers-reduced-motion: reduce) { .layout { scroll-behavior: auto; } }
+      nav.index {
+        position: fixed; z-index: 30; top: 0; bottom: 0; left: 0;
+        width: min(82vw, 20rem); max-height: none; padding: 1.5rem 1rem;
+        background: var(--paper); border-right: 1px solid var(--line);
+        transform: translateX(-102%); visibility: hidden;
+        transition: transform .25s ease, visibility 0s .25s;
+      }
+      body.menu-open nav.index { transform: none; visibility: visible; transition: transform .25s ease; }
+      body.menu-open .menu-toggle, body.menu-open .hint { visibility: hidden; }
+      .menu-close {
+        display: grid; place-items: center; position: absolute; top: .5rem; right: .5rem;
+        width: 2.5rem; height: 2.5rem; padding: 0; font: inherit; font-size: 1.6rem; line-height: 1;
+        color: var(--ink); background: none; border: 0; cursor: pointer;
+      }
+      nav.index a { padding: .55rem .7rem; }
+      .backdrop {
+        display: block; position: fixed; inset: 0; z-index: 20;
+        background: rgba(0, 0, 0, .4); opacity: 0; pointer-events: none; transition: opacity .25s;
+      }
+      body.menu-open .backdrop { opacity: 1; pointer-events: auto; }
+      .menu-toggle {
+        display: grid; place-items: center; position: fixed; z-index: 15;
+        top: max(.6rem, env(safe-area-inset-top)); left: .6rem; width: 2.75rem; height: 2.75rem;
+        padding: 0; font: inherit; font-size: 1.3rem; line-height: 1;
+        color: var(--ink); background: var(--paper); border: 1px solid var(--line);
+        border-radius: 50%; cursor: pointer;
+      }
+      main { padding: 0; }
+      section.joint, section.joint + section.joint {
+        position: relative; height: var(--page-h, 100vh); padding: 0; overflow: hidden;
+        scroll-snap-align: start; scroll-snap-stop: always;
+      }
+      .stage { position: absolute; inset: 0; border: 0; border-radius: 0; }
+      .stage model-viewer { height: 100%; }
+      section.joint header {
+        position: absolute; z-index: 5; top: 0; left: 0; right: 0; margin: 0;
+        padding: max(.7rem, env(safe-area-inset-top)) 4.5rem 2rem 4.2rem;
+        background: linear-gradient(var(--paper) 40%, transparent);
+        pointer-events: none;
+      }
+      section.joint header a { pointer-events: auto; }
+      section.joint h2 { font-size: 1.2rem; }
+      section.joint h2 a .hash { display: none; }
+      section.joint .jp { font-size: .9rem; }
+      section.joint header::after {
+        content: counter(joint) " / {{COUNT}}";
+        position: absolute; right: 1rem; top: max(1rem, calc(env(safe-area-inset-top) + .4rem));
+        font-size: .75rem; color: var(--muted); letter-spacing: .04em;
+      }
+      .stage button { bottom: calc(3.4rem + env(safe-area-inset-bottom)); }
+      .meta {
+        position: absolute; z-index: 5; left: 0; right: 0; bottom: 0; margin: 0;
+        padding: 1.6rem 1rem calc(.6rem + env(safe-area-inset-bottom));
+        font-size: .7rem; line-height: 1.4;
+        background: linear-gradient(transparent, var(--paper) 55%);
+      }
+      .hint {
+        display: block; position: fixed; z-index: 10; left: 50%; transform: translateX(-50%);
+        top: calc(max(.7rem, env(safe-area-inset-top)) + 4.6rem);
+        padding: .3rem .8rem; font-size: .75rem; color: var(--muted);
+        background: var(--paper); border: 1px solid var(--line); border-radius: 999px;
+        pointer-events: none; white-space: nowrap;
+      }
+      footer { grid-column: auto; padding: 1.5rem 1rem 3rem; scroll-snap-align: start; }
+    }
+  </style>
+</head>
+<body>
+  <button class="menu-toggle" type="button" aria-label="Joints menu" aria-controls="index" aria-expanded="false">&#9776;</button>
+  <div class="hint" id="hint">Swipe up for the next joint</div>
+  <div class="layout">
+    <div class="backdrop"></div>
+    <nav class="index" id="index" aria-label="Joints">
+      <button class="menu-close" type="button" aria-label="Close the menu">&times;</button>
+      <h1>Japanese joinery</h1>
+      <p>{{COUNT}} joints that assemble and come apart.</p>
+      <ol>
+{{NAV}}
+      </ol>
+    </nav>
+    <main>
+{{SECTIONS}}
+    </main>
+    <footer>
+{{FOOTER}}
+    </footer>
+  </div>
+  <script>
+    const viewers = document.querySelectorAll('model-viewer');
+    const links = new Map([...document.querySelectorAll('nav.index a')].map(a => [a.hash.slice(1), a]));
+
+    // Keep at most a few WebGL contexts alive: load a model near the viewport,
+    // drop it once it is far away. Parsing a GLB and creating or destroying a WebGL
+    // context is heavy, so none of it happens while the page is moving: the stage is
+    // an empty box of its final size with a spinner, and the work starts once the
+    // scrolling has settled. The model then fades in.
+    const near = new Set();
+    let settleTimer;
+    const stageOf = v => v.closest('.stage');
+    const show = v => requestAnimationFrame(() => requestAnimationFrame(() => stageOf(v).classList.add('ready')));
+    viewers.forEach(v => {
+      v.addEventListener('load', () => show(v));
+      v.addEventListener('error', () => stageOf(v).classList.remove('ready'));
+    });
+    const applyLoads = () => {
+      viewers.forEach(v => {
+        if (near.has(v)) {
+          if (!v.getAttribute('src')) v.setAttribute('src', v.dataset.src);
+        } else if (v.getAttribute('src')) {
+          v.removeAttribute('src');
+          stageOf(v).classList.remove('ready');
+        }
+      });
+    };
+    const settle = () => { clearTimeout(settleTimer); settleTimer = setTimeout(applyLoads, 200); };
+    const loader = new IntersectionObserver(entries => {
+      for (const e of entries) (e.isIntersecting ? near.add(e.target) : near.delete(e.target));
+      settle();
+    }, { rootMargin: '700px 0px' });
+    viewers.forEach(v => loader.observe(v));
+    addEventListener('scroll', settle, { capture: true, passive: true });
+
+    // Highlight the joint being read; on small screens (one joint per page)
+    // keep the URL on the joint in view while swiping.
+    const mobile = matchMedia('(max-width: 56rem)');
+    const layoutEl = document.querySelector('.layout');
+    const scrolled = () => (mobile.matches ? layoutEl.scrollTop : scrollY) > 0;
+    const active = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          links.forEach(a => a.classList.remove('active'));
+          links.get(e.target.id)?.classList.add('active');
+          if (mobile.matches && (scrolled() || location.hash)) history.replaceState(null, '', '#' + e.target.id);
+        }
+      }
+    }, { rootMargin: '-35% 0px -55% 0px' });
+
+    // Slide-in menu on small screens.
+    const toggle = document.querySelector('.menu-toggle');
+    const setMenu = open => {
+      document.body.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+    toggle.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+    document.querySelector('.backdrop').addEventListener('click', () => setMenu(false));
+    document.querySelector('.menu-close').addEventListener('click', () => setMenu(false));
+    document.querySelector('nav.index').addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+    addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+    mobile.addEventListener('change', () => setMenu(false));
+    addEventListener('scroll', () => document.getElementById('hint')?.remove(), { once: true, passive: true, capture: true });
+
+    // One page = the visible height of the scroller, measured here (not 100dvh)
+    // and again only when the window really changes (rotation, resize).
+    const pages = [...document.querySelectorAll('section.joint')];
+    const fit = () => {
+      if (!mobile.matches) { document.documentElement.style.removeProperty('--page-h'); return; }
+      const at = pages.findIndex(s => s.getBoundingClientRect().top > -layoutEl.clientHeight / 2);
+      document.documentElement.style.setProperty('--page-h', layoutEl.clientHeight + 'px');
+      if (at >= 0) pages[at].scrollIntoView({ behavior: 'instant', block: 'start' });
+    };
+    fit();
+    addEventListener('resize', fit);
+    mobile.addEventListener('change', fit);
+    document.querySelectorAll('section.joint').forEach(s => active.observe(s));
+
+    // Up / Down step through the joints (also while a model has the focus).
+    const sections = [...document.querySelectorAll('section.joint')];
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let cursor = -1, lastStep = 0;
+    const current = () => {
+      let at = -1;
+      sections.forEach((s, i) => { if (s.getBoundingClientRect().top <= innerHeight * 0.35) at = i; });
+      return at;
+    };
+    addEventListener('keydown', e => {
+      if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+      // while a smooth scroll is still running, count from where it is heading
+      const from = performance.now() - lastStep < 900 ? cursor : current();
+      const to = Math.max(0, Math.min(sections.length - 1, from + (e.key === 'ArrowDown' ? 1 : -1)));
+      if (to === from) return;   // past either end: let the page scroll normally
+      e.preventDefault();
+      e.stopPropagation();
+      cursor = to;
+      lastStep = performance.now();
+      sections[to].scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      history.replaceState(null, '', '#' + sections[to].id);
+    }, true);
+
+    document.querySelectorAll('button[data-replay]').forEach(b => b.addEventListener('click', () => {
+      const v = document.getElementById(b.dataset.replay);
+      v.currentTime = 0;
+      v.play();
+    }));
+  </script>
+</body>
+</html>
