@@ -8,7 +8,7 @@ Seventeen models are by [thejoinery](https://sketchfab.com/thejoinery) on
 Sketchfab (CC BY 4.0, one CC BY-SA 4.0). They were read from the public viewer,
 split into timbers, re-lit with a baked paper-sunrise look, given an `assemble`
 animation, and corrected where the author's pose was not the true closed joint.
-Nine joints with no licensed source model (eight column-and-beam `shikuchi`, one
+Ten joints with no licensed source model (nine column-and-beam `shikuchi`, one
 splice) are authored in this repository from the reference sheet, using
 `tools/author_joint.py`. Per-model links, attribution, the change list and the
 references used are in [`joints/README.md`](joints/README.md).
@@ -87,7 +87,7 @@ python3 validate.py ../joints
 python3 build_site.py --repo-url https://github.com/IxDay/carpentry
 ```
 
-The `author_joint.py` line only touches the nine authored sources; the imported
+The `author_joint.py` line only touches the ten authored sources; the imported
 ones come from captures. `--no-animation` drops the `assemble` clip. Importing a
 new Sketchfab model and checking an animation for timbers passing through each
 other are described in [`tools/README.md`](tools/README.md).
@@ -97,6 +97,6 @@ other are described in [`tools/README.md`](tools/README.md).
 The CC BY 4.0 models may be reused with attribution; each GLB's
 `asset.copyright` and `joints/sources/<id>.json` carry it. `yatoi-hozo-shachi-sen-shiguchi`
 is CC BY-SA 4.0: its baked GLB and pieces are a derivative and are distributed
-under the same license. The nine authored joints (one splice and eight
+under the same license. The ten authored joints (one splice and nine
 column-and-beam `shikuchi`, listed in [`joints/README.md`](joints/README.md)) are
 original geometry, released CC BY 4.0.

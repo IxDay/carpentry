@@ -51,7 +51,7 @@ systematic.
 | 下小根ホゾ・鼻栓打ち | **have** | `shitakone-hozo-hana-sen` |
 | 上小根ホゾ・割り楔打ち | **have** | `uwakone-hozo-wari-kusabi` |
 | 上小根ホゾ・打ち抜き込み栓打ち | **have** | `uwakone-hozo-uchi-nuki-komisen` |
-| 長ホゾ差し・込み栓打ち | **missing** | — |
+| 長ホゾ差し・込み栓打ち | **have** | `naga-hozo-sashi-komisen-uchi` |
 | 片鎌ホゾ差し | **missing** | `nimai-kama-tsugi` is a splice, not this |
 | 四方差し | **missing** | `shihou-ari-tsugi` is a splice, different joint |
 | 落し鎧 | **missing** | `otoshi-ari-hozo-shikuchi` is 落し蟻, not 鎧 |
@@ -63,8 +63,8 @@ Counting the five `小根ホゾ` variants separately, the sheet lists twelve
 and only in its 車知栓 form) to three: 雇いホゾ (now both forms), 三方差し and
 二方差し. It also added the one splice family we were missing. The second batch
 covers the whole `小根ホゾ` cluster, taking `shikuchi` coverage to eight of the
-twelve. Still missing: `長ホゾ差し`, `片鎌ホゾ差し`, `四方差し`, `落し鎧`,
-`下げ鎌` and `傾ぎ大入れ`.
+twelve; the third adds the long through tenon, so nine of the twelve. Still
+missing: `片鎌ホゾ差し`, `四方差し`, `落し鎧`, `下げ鎌` and `傾ぎ大入れ`.
 
 ## Source availability
 
@@ -141,14 +141,26 @@ timbers. It probes vertices, edge midpoints and triangle centroids, and also
 tests coplanar face pairs, so a 10 mm intrusion is caught in any of x, y or z.
 All 26 sources pass.
 
+## Third batch — done
+
+| Asset | Japanese | Source | Pieces |
+|---|---|---|---|
+| `naga-hozo-sashi-komisen-uchi` | 長ホゾ差し込み栓打ち | authored, CC BY 4.0 | 3 |
+
+Taking the collection from 26 to **27**, and `shikuchi` coverage to nine of the
+twelve entries. Pure box work: the untiered tenon runs clean through the post
+and stands 45 mm proud, and a tapered `込み栓` pierces post and tenon across the
+tenon's width. The closed pose passes `check_sources.py`; bake, preview and
+`validate.py` are run with the same flags as the rest of the set.
+
 ## Next
 
 Most of the remaining queue is still axis-aligned box work, but the `kama` hooks
 and dovetail flanks need `author_joint.py` extended beyond boxes and lofts
 (sloped quads) or hand-authored face lists:
 
-1. **長ホゾ差し・込み栓打ち**, then **片鎌ホゾ差し** — high-recognition joints,
-   cheap to author (the first is box work; the second needs the sloped hook).
+1. **片鎌ホゾ差し** — a column-base joint with a one-sided undercut hook; needs
+   the sloped-profile extension.
 2. **落し鎧, 下げ鎌（大入れ）, 傾ぎ大入れ, 四方差し** — housed/dovetail seats,
    the most `approach` work.
 3. **追掛け大栓継ぎ（持ち出し継ぎ）** — a variant of the splice we already have.

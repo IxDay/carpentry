@@ -488,6 +488,35 @@ UWA_KOMISEN = joint(
     "and cut off flush with both faces, so the joint cannot be pulled apart."
 )
 
+
+# ---------------------------------------------------------------------------
+# 長ホゾ差し込み栓打ち: an untiered long tenon runs right through the post and
+# stands proud; a tapered komisen pierces both post and tenon from the side.
+NAGA = joint(
+    "naga-hozo-sashi-komisen-uchi", "Naga-hozo-sashi-komisen-uchi",
+    "長ホゾ差し込み栓打ち",
+    [
+        piece("part-a", "Post", [POST_BOX],
+              [[(-0.06, 0.06), (0.42, 0.50), (-0.045, 0.045)],
+               [(-0.010, 0.010), (0.450, 0.470), (-0.06, 0.06)]]),
+        piece("part-b", "Beam",
+              [[(-0.40, -0.06), (0.40, 0.52), (-0.06, 0.06)],
+               [(-0.06, 0.105), (0.42, 0.50), (-0.045, 0.045)]],
+              [[(-0.010, 0.010), (0.450, 0.470), (-0.045, 0.045)]]),
+        piece("key", "Komisen", [],
+              extra=loft(2, -0.0599, 0.0599,
+                         [(-0.0099, 0.4501), (0.0099, 0.4501),
+                          (0.0099, 0.4699), (-0.0099, 0.4699)],
+                         [(-0.0095, 0.4505), (0.0095, 0.4505),
+                          (0.0095, 0.4695), (-0.0095, 0.4695)])),
+    ],
+    {"part-a": [0.25, 0.0, 0.0], "key": [0.0, 0.0, 0.16]},
+    "The long tenon passes clean through the post and stands 45 mm proud, so "
+    "the joint reads as a true through-tenon. A tapered 込み栓 is driven "
+    "sideways through post and tenon and cut off flush with both cheeks."
+)
+
+
 def mirror_x(j):
     """Mirror a joint through the x=0 plane.
 
@@ -510,6 +539,7 @@ def mirror_x(j):
 
 JOINTS += [mirror_x(j) for j in (TASUKI, SHITA_WARI, HANA_SEN,
                                  UWA_WARI, UWA_KOMISEN)]
+JOINTS += [NAGA]
 
 
 def main(argv):
