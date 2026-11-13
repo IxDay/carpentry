@@ -1,11 +1,11 @@
 # joints
 
-Twenty-one Japanese timber joints (継ぎ手 / 仕口) in a pastel paper-sunrise
+Twenty-six Japanese timber joints (継ぎ手 / 仕口) in a pastel paper-sunrise
 style. Seventeen are from the [thejoinery](https://sketchfab.com/thejoinery)
-collection on Sketchfab, rebuilt and baked; four column-and-beam (`shikuchi`)
-joints with no licensed source model are authored in this repository from the
-reference sheet 柱（軸組）の納まり, with
-[`tools/author_joint.py`](../tools/author_joint.py). There is **no garden or
+collection on Sketchfab, rebuilt and baked; the other nine, with no licensed
+source model, are authored in this repository from the reference sheet
+柱（軸組）の納まり, with [`tools/author_joint.py`](../tools/author_joint.py)
+(eight column-and-beam `shikuchi` joints, one splice). There is **no garden or
 ground plane**: the timbers float against the paper backdrop, which keeps the
 focus on the cut geometry.
 
@@ -41,7 +41,12 @@ Names are romanised; `part-a`/`part-b` are the two main timbers, `key`,
 | [`otoshi-ari-hozo-shikuchi`](https://sketchfab.com/3d-models/otoshi-ari-hozo-shikuchi-269f0b5a914e437ba10c0aed445711df) | 落し蟻枘仕口 | CC BY 4.0 | 3 |
 | [`sampo-sashi-shikuchi`](../tools/author_joint.py) | 三方差し仕口 | CC BY 4.0 (authored) | 3 |
 | [`shihou-ari-tsugi`](https://sketchfab.com/3d-models/shihou-ari-tsugi-c1d6168a3b4e49a983c3ba815e0b4437) | 四方蟻継ぎ | CC BY 4.0 | 2 |
+| [`shitakone-hozo-hana-sen`](../tools/author_joint.py) | 下小根ホゾ鼻栓打ち | CC BY 4.0 (authored) | 3 |
+| [`shitakone-hozo-tasuki-gake`](../tools/author_joint.py) | 下小根ホゾ（襷掛付） | CC BY 4.0 (authored) | 2 |
+| [`shitakone-hozo-wari-kusabi`](../tools/author_joint.py) | 下小根ホゾ割り楔打ち | CC BY 4.0 (authored) | 4 |
 | [`suitsuki-sashi-shikuchi`](https://sketchfab.com/3d-models/suitsuki-sashi-shikuchi-2edef5371cb34374b9b6046e435603b6) | 吸付差し仕口 | CC BY 4.0 | 2 |
+| [`uwakone-hozo-uchi-nuki-komisen`](../tools/author_joint.py) | 上小根ホゾ打ち抜き込み栓打ち | CC BY 4.0 (authored) | 3 |
+| [`uwakone-hozo-wari-kusabi`](../tools/author_joint.py) | 上小根ホゾ割り楔打ち | CC BY 4.0 (authored) | 4 |
 | [`yatoi-hozo-shachi-sen-shiguchi`](https://sketchfab.com/3d-models/yatoi-hozo-shachi-sen-shiguchi-5f3cc05626b641f19bd42d30a976db3d) | 雇い枘車知栓仕口 | **CC BY-SA 4.0** | 5 |
 | [`yatoi-hozo-shikuchi`](../tools/author_joint.py) | 雇い枘仕口 | CC BY 4.0 (authored) | 3 |
 | [`yose-ari-hozo-shikuchi`](https://sketchfab.com/3d-models/yose-ari-hozo-shikuchi-3e2f52c247a84a7f9a4caaaefefa4744) | 寄せ蟻枘仕口 | CC BY 4.0 | 2 |
@@ -50,7 +55,7 @@ The seventeen Sketchfab models are by **thejoinery**
 (<https://sketchfab.com/thejoinery>). Every `sources/<id>.json` repeats the
 title, author, canonical URL, license and the change list in its `source`
 object, and the same credit is embedded in each GLB's `asset.copyright`. The
-four authored joints carry the project as author and credit the reference sheet
+nine authored joints carry the project as author and credit the reference sheet
 they were drawn from.
 
 ## Changes from the source models
@@ -99,18 +104,29 @@ The Sketchfab models are authored in millimetres and exploded. For each one:
 The author's exploded arrangement is kept in the static GLB. The `assemble`
 offsets in each source close the joint for the animation below.
 
-The four authored joints (`daimochi-tsugi`, `yatoi-hozo-shikuchi`,
-`sampo-sashi-shikuchi`, `niho-sashi-shikuchi`) are different in kind: they are
-modelled to the reference sheet already **closed**, then exploded for the
-animation, rather than captured exploded and closed in place. `author_joint.py`
-builds each timber from axis-aligned boxes minus the mortises and housings, welds
-the boundary, and records the reverse of the exploded offsets as `assemble`. They
-share the same timbers, scale, normals, bake and animation as the imported set,
-and are checked the same way (closed pose watertight and manifold, zero volumetric
-overlap between timbers, every mating face in contact). `daimochi-tsugi` is a
-splice; the other three are `shikuchi` (loose-tenon, three-face and two-face
-`差し`) and were added because the reference sheet is almost entirely
-column-and-beam work while the imported collection is almost entirely splices.
+The nine authored joints (`daimochi-tsugi`, `yatoi-hozo-shikuchi`,
+`sampo-sashi-shikuchi`, `niho-sashi-shikuchi`, and the five `小根ホゾ` variants)
+are different in kind: they are modelled to the reference sheet already
+**closed**, then exploded for the animation, rather than captured exploded and
+closed in place. `author_joint.py` builds each timber from axis-aligned boxes
+minus the mortises and housings, welds the boundary, and records the reverse of
+the exploded offsets as `assemble`. Tapered wedges and pegs, which box CSG cannot
+express, are lofted between two parallel sections. They share the same timbers,
+scale, normals, bake and animation as the imported set, and are checked the same
+way (`tools/check_sources.py`: closed pose watertight and manifold, consistent
+winding, zero volumetric overlap between timbers, every mating face in contact).
+`daimochi-tsugi` is a splice; the other eight are `shikuchi` (loose tenon,
+two-/three-/four-face `差し`, and the `小根ホゾ` two-tier tenon family) and were
+added because the reference sheet is almost entirely column-and-beam work while
+the imported collection is almost entirely splices.
+
+In the `小根ホゾ` family the full-section 大根 sits at the beam's shoulder and,
+past the vertical step (腰), the narrower 小根 runs on into the post. The 下
+variants keep the small root's nose flush with the tenon underside; the 上
+variants put it at the top, so the 腰 sits low. `襷掛付` forks the small root
+around a vertical bridge left in the post; the other four are through joints,
+locked by a split kerf and two wedges, a tapered nose peg, or a square `込み栓`
+driven through the post's cheeks.
 
 ## Assemble animation
 
@@ -160,11 +176,11 @@ The capture JSON comes from `tools/sketchfab_capture.mjs`; see
 [`tools/README.md`](../tools/README.md). Use `--no-animation` to bake without
 the `assemble` clip, or `--fps` to change its sample rate.
 
-The four authored joints have no capture step; regenerate their sources from the
+The nine authored joints have no capture step; regenerate their sources from the
 joint definitions, then bake and preview the same way:
 
 ```sh
-python3 author_joint.py                 # rewrites all four sources
+python3 author_joint.py                 # rewrites all nine sources
 python3 author_joint.py daimochi-tsugi  # or one
 ```
 
@@ -213,11 +229,14 @@ together, where the key goes):
 - Sketchfab model by thejoinery (no animation) —
   <https://sketchfab.com/3d-models/kanawa-tsugi-713b9b3a98344094a008535738348791>.
 
-Used to author the four joints with no source model (shapes, proportions, which
+Used to author the nine joints with no source model (shapes, proportions, which
 face each mortise opens on, where the key goes):
 
 - `joints.jpg`, `joints-2.jpg` — reference sheets of `継ぎ手` and `仕口`
   (column-and-beam `納まり`), included at the repository root.
+- JAANUS, *Japanese Architecture and Art Net Users System* —
+  <https://www.aisf.or.jp/~jaanus/>: terminology for the `大根` / `小根` tiers,
+  the `腰` step and the housed through-tenon.
 - thejoinery, <https://thejoinery.jp/> — the source collection the imported
   models come from, and the visual reference for the authored ones.
 

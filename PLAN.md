@@ -46,11 +46,11 @@ systematic.
 | 雇いホゾ | **have** | `yatoi-hozo-shikuchi` (plain form) + `yatoi-hozo-shachi-sen-shiguchi` |
 | 三方差し（T字） | **have** | `sampo-sashi-shikuchi` |
 | 二方差し（L字） | **have** | `niho-sashi-shikuchi` |
-| 下小根ホゾ（襷掛付） | **missing** | — |
-| 下小根ホゾ・割り楔打ち | **missing** | — |
-| 下小根ホゾ・鼻栓打ち | **missing** | — |
-| 上小根ホゾ・割り楔打ち | **missing** | — |
-| 上小根ホゾ・打ち抜き込み栓打ち | **missing** | — |
+| 下小根ホゾ（襷掛付） | **have** | `shitakone-hozo-tasuki-gake` |
+| 下小根ホゾ・割り楔打ち | **have** | `shitakone-hozo-wari-kusabi` |
+| 下小根ホゾ・鼻栓打ち | **have** | `shitakone-hozo-hana-sen` |
+| 上小根ホゾ・割り楔打ち | **have** | `uwakone-hozo-wari-kusabi` |
+| 上小根ホゾ・打ち抜き込み栓打ち | **have** | `uwakone-hozo-uchi-nuki-komisen` |
 | 長ホゾ差し・込み栓打ち | **missing** | — |
 | 片鎌ホゾ差し | **missing** | `nimai-kama-tsugi` is a splice, not this |
 | 四方差し | **missing** | `shihou-ari-tsugi` is a splice, different joint |
@@ -59,10 +59,11 @@ systematic.
 | 傾ぎ大入れ | **missing** | — |
 
 Counting the five `小根ホゾ` variants separately, the sheet lists twelve
-`shikuchi` entries. The first batch takes coverage from one of them (雇いホゾ,
+`shikuchi` entries. The first batch took coverage from one of them (雇いホゾ,
 and only in its 車知栓 form) to three: 雇いホゾ (now both forms), 三方差し and
-二方差し. It also adds the one splice family we were missing. Still missing:
-the `小根ホゾ` cluster, `長ホゾ差し`, `片鎌ホゾ差し`, `四方差し`, `落し鎧`,
+二方差し. It also added the one splice family we were missing. The second batch
+covers the whole `小根ホゾ` cluster, taking `shikuchi` coverage to eight of the
+twelve. Still missing: `長ホゾ差し`, `片鎌ホゾ差し`, `四方差し`, `落し鎧`,
 `下げ鎌` and `傾ぎ大入れ`.
 
 ## Source availability
@@ -88,7 +89,7 @@ the `小根ホゾ` cluster, `長ホゾ差し`, `片鎌ホゾ差し`, `四方差�
    family, three configurations; reuses the loose-tenon handling from
    `yatoi-hozo-shachi-sen-shiguchi`.
 4. **下小根ホゾ / 上小根ホゾ family** — five labelled variants (差し, 割り楔,
-   鼻栓, 打ち抜き込み栓); the densest uncovered cluster.
+   鼻栓, 打ち抜き込み栓); the densest uncovered cluster. **Done** (second batch).
 5. **長ホゾ差し・込み栓打ち**, then **片鎌ホゾ差し** — high-recognition joints,
    cheap to author.
 6. **落し鎧, 下げ鎌（大入れ）, 傾ぎ大入れ, 四方差し** — housed/dovetail seats,
@@ -117,19 +118,40 @@ All five were checked for a watertight manifold boundary with consistent winding
 coincident mating faces and zero volumetric overlap between timbers, then baked,
 previewed, and `tools/validate.py ../joints` passes.
 
+## Second batch — done
+
+| Asset | Japanese | Source | Pieces |
+|---|---|---|---|
+| `shitakone-hozo-tasuki-gake` | 下小根ホゾ（襷掛付） | authored, CC BY 4.0 | 2 |
+| `shitakone-hozo-wari-kusabi` | 下小根ホゾ割り楔打ち | authored, CC BY 4.0 | 4 |
+| `shitakone-hozo-hana-sen` | 下小根ホゾ鼻栓打ち | authored, CC BY 4.0 | 3 |
+| `uwakone-hozo-wari-kusabi` | 上小根ホゾ割り楔打ち | authored, CC BY 4.0 | 4 |
+| `uwakone-hozo-uchi-nuki-komisen` | 上小根ホゾ打ち抜き込み栓打ち | authored, CC BY 4.0 | 3 |
+
+Five more assets, taking the collection from 21 to **26**. The family needed two
+additions to `author_joint.py`: a `loft()` primitive for the tapered wedges and
+pegs (two parallel sections joined by planar quads), and `mirror_x()`, because
+the site camera looks from +x/+z and the `小根ホゾ` tenon has to face it.
+
+The closed pose is verified by the new
+[`tools/check_sources.py`](tools/check_sources.py), which checks the source plus
+`assemble` (not just the baked GLBs): every edge used twice in opposite
+directions, every face wound with its normal, and no volumetric overlap between
+timbers. It probes vertices, edge midpoints and triangle centroids, and also
+tests coplanar face pairs, so a 10 mm intrusion is caught in any of x, y or z.
+All 26 sources pass.
+
 ## Next
 
-The remaining queue is unchanged. Most of it is still axis-aligned box work, but
-the `kama` hooks and dovetail flanks need `author_joint.py` extended beyond boxes
+Most of the remaining queue is still axis-aligned box work, but the `kama` hooks
+and dovetail flanks need `author_joint.py` extended beyond boxes and lofts
 (sloped quads) or hand-authored face lists:
 
-1. **下小根ホゾ / 上小根ホゾ family** — five labelled variants (差し, 割り楔,
-   鼻栓, 打ち抜き込み栓); the densest uncovered cluster.
-2. **長ホゾ差し・込み栓打ち**, then **片鎌ホゾ差し** — high-recognition joints,
-   cheap to author.
-3. **落し鎧, 下げ鎌（大入れ）, 傾ぎ大入れ, 四方差し** — housed/dovetail seats,
+1. **長ホゾ差し・込み栓打ち**, then **片鎌ホゾ差し** — high-recognition joints,
+   cheap to author (the first is box work; the second needs the sloped hook).
+2. **落し鎧, 下げ鎌（大入れ）, 傾ぎ大入れ, 四方差し** — housed/dovetail seats,
    the most `approach` work.
-4. **追掛け大栓継ぎ（持ち出し継ぎ）** — a variant of the splice we already have.
+3. **追掛け大栓継ぎ（持ち出し継ぎ）** — a variant of the splice we already have.
 
 For each: author or capture the geometry, verify the closed pose, add `approach`
 where a seat is sloped or a dovetail has to drop before sliding, then bake,

@@ -4,9 +4,11 @@
 The Sketchfab collector only covers the splice families; the column-and-beam
 (`shikuchi`) joints on the reference sheet have to be modelled here. Each one is
 built as a union of axis-aligned boxes minus a set of box-shaped cuts, which is
-enough for square tenons, mortises, housings and pegs. The boundary is extracted
-on the exact box grid (no voxels) and coplanar cells are merged back into
-rectangles, the same face shape `import_joint.py` produces.
+enough for square tenons, mortises, housings and pegs. Box CSG cannot taper, so
+driven wedges and pegs are lofted prisms: two parallel sections joined by planar
+quads. The box boundary is extracted on the exact grid (no voxels) and coplanar
+cells are merged back into rectangles, the same face shape `import_joint.py`
+produces.
 
     python3 tools/author_joint.py                 # all authored joints
     python3 tools/author_joint.py daimochi-tsugi  # one by id
@@ -21,6 +23,7 @@ The geometry is original, not derived from a Sketchfab model: the sources credit
 the project and are released CC BY 4.0.
 """
 import json
+import math
 import os
 import sys
 
@@ -137,9 +140,52 @@ def weld_edges(faces):
     return out
 
 
-def piece(pid, name, add, cut=()):
+def loft(axis, a, b, sec_a, sec_b, color=COLOR):
+    """Closed prism between two parallel cross-sections, for tapers.
+
+    `axis` is the extrusion axis; `a`, `b` the two positions along it. Each
+    section is a list of `(u, v)` points in the two remaining axes (u = axis+1,
+    v = axis+2, both modulo 3), running counter-clockwise seen from +axis, and
+    the two sections must have the same number of points. The two caps plus one
+    quad per side make a closed, outward-wound shell.
+    """
+    u, v = (axis + 1) % 3, (axis + 2) % 3
+
+    def pt(pos, s):
+        p = [0.0, 0.0, 0.0]
+        p[axis], p[u], p[v] = pos, s[0], s[1]
+        return p
+
+    A = [pt(a, s) for s in sec_a]
+    B = [pt(b, s) for s in sec_b]
+    n = len(sec_a)
+
+    def normal(pts):
+        nx = ny = nz = 0.0
+        for i in range(len(pts)):
+            p, q = pts[i], pts[(i + 1) % len(pts)]
+            nx += (p[1] - q[1]) * (p[2] + q[2])
+            ny += (p[2] - q[2]) * (p[0] + q[0])
+            nz += (p[0] - q[0]) * (p[1] + q[1])
+        L = math.sqrt(nx * nx + ny * ny + nz * nz) or 1.0
+        return [nx / L, ny / L, nz / L]
+
+    faces = []
+    for pts in (A[::-1], B):
+        faces.append({"points": [list(p) for p in pts],
+                      "normal": normal(pts), "color": color})
+    for i in range(n):
+        j = (i + 1) % n
+        pts = [A[i], A[j], B[j], B[i]]
+        faces.append({"points": [list(p) for p in pts],
+                      "normal": normal(pts), "color": color})
+    return faces
+
+
+def piece(pid, name, add, cut=(), extra=()):
+    faces = compile_solid(add, cut) + list(extra)
     return {"id": pid, "name": name, "kind": "joint",
-            "solids": [{"faces": compile_solid(add, cut)}]}
+            "solids": [{"faces": weld_edges(faces)}]}
 
 
 def shift(piece_def, delta):
@@ -271,6 +317,199 @@ NIHO = joint(
 )
 
 JOINTS = [DAIMOCHI, YATOI, SAMPO, NIHO]
+
+
+# ---------------------------------------------------------------------------
+# 小根ホゾ: the tenon is cut in two tiers. The full-section 大根 (large root) sits
+# at the beam's shoulder; past the vertical step (腰) the narrower 小根 (small
+# root) runs on into the post. In the 下 (lower) variants the nose is flush with
+# the tenon's underside, in the 上 (upper) variants with its top.
+KONE_END = -0.06            # post's near face = beam's shoulder
+KONE_WAIST = -0.02          # 腰, where the big root ends
+KONE_Y0, KONE_Y1 = 0.44, 0.52
+KONE_TIER = 0.04
+KONE_BIG_Z = 0.04
+KONE_NOSE_Z = 0.032
+BODY_Y0, BODY_Y1 = 0.42, 0.54
+POST_BOX = [(-0.06, 0.06), (0.0, 0.72), (-0.06, 0.06)]
+
+
+def big_root():
+    return [(KONE_END, KONE_WAIST), (KONE_Y0, KONE_Y1),
+            (-KONE_BIG_Z, KONE_BIG_Z)]
+
+
+def nose(x1, y0, y1, z=KONE_NOSE_Z):
+    return [(KONE_WAIST, x1), (y0, y1), (-z, z)]
+
+
+def beam(add, cut=(), extra=()):
+    body = [(-0.40, KONE_END), (BODY_Y0, BODY_Y1), (-0.06, 0.06)]
+    return piece("part-b", "Beam", [body] + add, cut, extra)
+
+
+def split_wedge(x0, x1, yc, z0, z1):
+    """One of two tapered wedges in a horizontal kerf, thin end inboard."""
+    def sec(h):
+        return [(yc - h, z0), (yc + h, z0), (yc + h, z1), (yc - h, z1)]
+    return loft(0, x0, x1, sec(0.0020), sec(0.0039))
+
+
+def kerf(yc):
+    return [(0.03, 0.09), (yc - 0.004, yc + 0.004),
+            (-KONE_NOSE_Z, KONE_NOSE_Z)]
+
+
+# 下小根ホゾ（襷掛付）: blind, and the small root is forked into two prongs that
+# straddle a vertical 襷 bridge left standing in the post.
+TASUKI = joint(
+    "shitakone-hozo-tasuki-gake", "Shitakone-hozo-tasuki-gake",
+    "下小根ホゾ（襷掛付）",
+    [
+        piece("part-a", "Post", [POST_BOX],
+              [[(KONE_END, KONE_WAIST), (KONE_Y0, KONE_Y1),
+                (-KONE_BIG_Z, KONE_BIG_Z)],
+               [(KONE_WAIST, 0.03), (KONE_Y0, KONE_Y0 + KONE_TIER),
+                (-KONE_NOSE_Z, -0.008)],
+               [(KONE_WAIST, 0.03), (KONE_Y0, KONE_Y0 + KONE_TIER),
+                (0.008, KONE_NOSE_Z)]]),
+        beam([big_root(),
+              [(KONE_WAIST, 0.03), (KONE_Y0, KONE_Y0 + KONE_TIER),
+               (-KONE_NOSE_Z, -0.008)],
+              [(KONE_WAIST, 0.03), (KONE_Y0, KONE_Y0 + KONE_TIER),
+               (0.008, KONE_NOSE_Z)]]),
+    ],
+    {"part-a": [0.30, 0.0, 0.0]},
+    "The tenon is blind, so nothing shows on the post's far face. Its small "
+    "root is forked into two prongs and the post keeps a vertical 襷 bridge "
+    "between the two mortise pockets, so the joint resists sideways pull as "
+    "well as withdrawal."
+)
+
+# 下小根ホゾ割り楔打ち: through, the small root protruding 30 mm, split by a
+# horizontal kerf and spread by two wedges driven in from the far face.
+SHITA_WARI = joint(
+    "shitakone-hozo-wari-kusabi", "Shitakone-hozo-wari-kusabi",
+    "下小根ホゾ割り楔打ち",
+    [
+        piece("part-a", "Post", [POST_BOX],
+              [[(KONE_END, KONE_WAIST), (KONE_Y0, KONE_Y1),
+                (-KONE_BIG_Z, KONE_BIG_Z)],
+               [(KONE_WAIST, 0.06), (KONE_Y0, KONE_Y0 + KONE_TIER),
+                (-KONE_NOSE_Z, KONE_NOSE_Z)]]),
+        beam([big_root(), nose(0.09, KONE_Y0, KONE_Y0 + KONE_TIER)],
+             [kerf(0.461)]),
+        piece("wedge-l", "Wedge", [], extra=split_wedge(0.035, 0.09, 0.461,
+                                                        -0.030, -0.002)),
+        piece("wedge-r", "Wedge", [], extra=split_wedge(0.035, 0.09, 0.461,
+                                                        0.002, 0.030)),
+    ],
+    {"part-a": [0.30, 0.0, 0.0],
+     "wedge-l": [0.10, 0.0, -0.055], "wedge-r": [0.10, 0.0, 0.055]},
+    "The lower small root passes through the post and stands 30 mm proud. Two "
+    "wedges driven into its horizontal kerf from the far face lift the upper "
+    "half against the 腰, so the tenon cannot work loose."
+)
+
+# 下小根ホゾ鼻栓打ち: through, the protruding nose locked by a tapered vertical
+# peg driven down through it just behind the post.
+HANA_SEN = joint(
+    "shitakone-hozo-hana-sen", "Shitakone-hozo-hana-sen", "下小根ホゾ鼻栓打ち",
+    [
+        piece("part-a", "Post", [POST_BOX],
+              [[(KONE_END, KONE_WAIST), (KONE_Y0, KONE_Y1),
+                (-KONE_BIG_Z, KONE_BIG_Z)],
+               [(KONE_WAIST, 0.06), (KONE_Y0, KONE_Y0 + KONE_TIER),
+                (-KONE_NOSE_Z, KONE_NOSE_Z)]]),
+        beam([big_root(), nose(0.09, KONE_Y0, KONE_Y0 + KONE_TIER)],
+             [[(0.061, 0.074), (KONE_Y0, KONE_Y0 + KONE_TIER),
+               (-0.0065, 0.0065)]]),
+        piece("peg", "Nose Peg", [],
+              extra=loft(1, 0.425, 0.515,
+                         [(-0.0055, 0.0620), (0.0055, 0.0620),
+                          (0.0055, 0.0730), (-0.0055, 0.0730)],
+                         [(-0.0060, 0.0615), (0.0060, 0.0615),
+                          (0.0060, 0.0735), (-0.0060, 0.0735)])),
+    ],
+    {"part-a": [0.30, 0.0, 0.0], "peg": [0.0, 0.14, 0.0]},
+    "The lower small root protrudes through the post and a tapered 鼻栓 is "
+    "driven down through its nose, hard against the post's far face, so the "
+    "tenon is blocked from withdrawing."
+)
+
+# 上小根ホゾ割り楔打ち: the same wedged through joint with the small tier on top.
+UWA_WARI = joint(
+    "uwakone-hozo-wari-kusabi", "Uwakone-hozo-wari-kusabi",
+    "上小根ホゾ割り楔打ち",
+    [
+        piece("part-a", "Post", [POST_BOX],
+              [[(KONE_END, KONE_WAIST), (KONE_Y0, KONE_Y1),
+                (-KONE_BIG_Z, KONE_BIG_Z)],
+               [(KONE_WAIST, 0.06), (KONE_Y0 + KONE_TIER, KONE_Y1),
+                (-KONE_NOSE_Z, KONE_NOSE_Z)]]),
+        beam([big_root(), nose(0.09, KONE_Y0 + KONE_TIER, KONE_Y1)],
+             [kerf(0.500)]),
+        piece("wedge-l", "Wedge", [], extra=split_wedge(0.035, 0.09, 0.500,
+                                                        -0.030, -0.002)),
+        piece("wedge-r", "Wedge", [], extra=split_wedge(0.035, 0.09, 0.500,
+                                                        0.002, 0.030)),
+    ],
+    {"part-a": [0.30, 0.0, 0.0],
+     "wedge-l": [0.10, 0.0, -0.055], "wedge-r": [0.10, 0.0, 0.055]},
+    "The upper small root passes through the post, so the 腰 sits low and the "
+    "full-section big root bears in the shallow housing below it. The kerf is "
+    "spread by two wedges driven in from the far face."
+)
+
+# 上小根ホゾ打ち抜き込み栓打ち: through, locked by a horizontal komisen driven
+# right through the post's cheeks and the big root, cut flush on both faces.
+UWA_KOMISEN = joint(
+    "uwakone-hozo-uchi-nuki-komisen", "Uwakone-hozo-uchi-nuki-komisen",
+    "上小根ホゾ打ち抜き込み栓打ち",
+    [
+        piece("part-a", "Post", [POST_BOX],
+              [[(KONE_END, KONE_WAIST), (KONE_Y0, KONE_Y1),
+                (-KONE_BIG_Z, KONE_BIG_Z)],
+               [(KONE_WAIST, 0.06), (KONE_Y0 + KONE_TIER, KONE_Y1),
+                (-KONE_NOSE_Z, KONE_NOSE_Z)],
+               [(-0.05, -0.03), (0.45, 0.47), (-0.06, 0.06)]]),
+        beam([big_root(), nose(0.09, KONE_Y0 + KONE_TIER, KONE_Y1)],
+             [[(-0.05, -0.03), (0.45, 0.47), (-KONE_BIG_Z, KONE_BIG_Z)]]),
+        piece("key", "Komisen", [],
+              extra=loft(2, -0.0599, 0.0599,
+                         [(-0.0499, 0.4501), (-0.0301, 0.4501),
+                          (-0.0301, 0.4699), (-0.0499, 0.4699)],
+                         [(-0.0490, 0.4510), (-0.0310, 0.4510),
+                          (-0.0310, 0.4690), (-0.0490, 0.4690)])),
+    ],
+    {"part-a": [0.30, 0.0, 0.0], "key": [0.0, 0.0, 0.20]},
+    "The upper small root passes through the post and carries the 腰; a square "
+    "込み栓 is driven horizontally through the post's cheeks and the big root "
+    "and cut off flush with both faces, so the joint cannot be pulled apart."
+)
+
+def mirror_x(j):
+    """Mirror a joint through the x=0 plane.
+
+    The site's camera sits at `38deg 64deg`, i.e. off +x/+z, so a beam run in
+    from -x would show its back to the viewer and hide the mortise mouth. The
+    tenon family is modelled with the beam on -x for readable coordinates and
+    flipped here, which also keeps every face outward-wound.
+    """
+    out = json.loads(json.dumps(j))
+    for p in out["pieces"]:
+        for s in p["solids"]:
+            for f in s["faces"]:
+                f["points"] = [[round(-q[0], 9), q[1], q[2]]
+                               for q in f["points"]][::-1]
+                f["normal"] = [-f["normal"][0], f["normal"][1], f["normal"][2]]
+    out["assemble"] = {pid: [round(-v[0], 9), v[1], v[2]]
+                       for pid, v in out["assemble"].items()}
+    return out
+
+
+JOINTS += [mirror_x(j) for j in (TASUKI, SHITA_WARI, HANA_SEN,
+                                 UWA_WARI, UWA_KOMISEN)]
 
 
 def main(argv):

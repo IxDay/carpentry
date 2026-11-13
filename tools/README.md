@@ -153,6 +153,29 @@ Verifies GLB magic/version/chunk lengths, accessor bounds against the `BIN`
 chunk, unit face normals, `COLOR_0` in `[0, 1]`, index range, and that every node
 has a mesh.
 
+### `check_sources.py` — check the closed pose before baking
+
+```sh
+python3 check_sources.py                 # every joints/sources/*.json
+python3 check_sources.py daimochi-tsugi  # by id or path
+```
+
+`validate.py` checks the baked GLBs; this checks the geometry they came from.
+Each source stores its pieces in the exploded pose, so the tool shifts them by
+`assemble` and then verifies, for every piece:
+
+- every edge is used by exactly two faces, in opposite directions (closed, and
+  consistently wound), with T-junctions split first so an imported capture's
+  extra vertices do not read as holes;
+- every face's stored normal agrees with its point order;
+- no two timbers share volume. Probing uses vertices, edge midpoints and
+  triangle centroids; points that lie on the other piece's surface are ignored,
+  so mating faces may touch. A second test looks for two faces in the same plane
+  whose footprints overlap with one piece's interior on the wrong side, which
+  catches interpenetration whose vertices all sit on the other surface. Samples
+  within 2 mm of a face edge are skipped and patches thinner than 0.5 mm are
+  ignored, so capture noise and a knife-edge contact do not fail.
+
 ### `mate_faces.py` — make mating faces meet exactly
 
 ```sh
@@ -197,8 +220,8 @@ python3 author_joint.py daimochi-tsugi  # just one, by id
 ```
 
 The Sketchfab collection is all splices; the column-and-beam (`shikuchi`)
-families on the reference sheet have no licensed model, so four joints are built
-here (three `shikuchi` plus one splice). Each joint is defined in the closed pose
+families on the reference sheet have no licensed model, so nine joints are built
+here (eight `shikuchi` plus one splice). Each joint is defined in the closed pose
 as a list of axis-aligned
 boxes to add minus a list of boxes to cut — that is enough for square tenons,
 mortises, housings, corner notches and round pegs. The boundary is extracted on
@@ -207,6 +230,13 @@ direction), greedily merging them into rectangles, and then splitting every edge
 at any vertex that lies on it so the shared edges match exactly. The result is
 the same welded, flat-normal, per-face polygon form `import_joint.py` produces.
 
+Box CSG cannot taper, so driven wedges and pegs are built with `loft()` instead:
+two parallel cross-sections (the same point count, counter-clockwise seen from
++axis) joined by planar side quads. `mirror_x()` flips a whole joint through
+x = 0, reversing each face and flipping the normals and `assemble` x; the `小根
+ホゾ` family is modelled on the readable side and mirrored so its mortise mouth
+faces the site camera at `38deg 64deg`.
+
 Each joint passes an explode map giving, per piece, the vector it is drawn away
 from the closed joint by; the script stores the moved geometry and the opposite
 translation as `assemble`. Keys get an axial clearance plus a lateral offset so `bake.py` can
@@ -214,10 +244,11 @@ withdraw them along their own axis and then move them aside without cutting
 through the timber. Coordinates are metres, on the same 120 mm timber scale as
 the imported models, so the standard bake flags apply.
 
-`compile_solid` only handles boxes, so sloped and curved faces (the `kama` and
-dovetail families) still have to be authored by hand or added as face lists.
-The geometry is original, not derived from a Sketchfab model; the sources credit
-the project and the reference sheet, and are released CC BY 4.0.
+`compile_solid` only handles boxes, and `loft()` only straight tapers, so sloped
+and curved faces (the `kama` and dovetail families) still have to be authored by
+hand or added as face lists. The geometry is original, not derived from a
+Sketchfab model; the sources credit the project and the reference sheet, and are
+released CC BY 4.0. After regenerating, run `check_sources.py` before baking.
 
 ### `build_site.py` — the GitHub Pages site
 
@@ -263,9 +294,9 @@ python3 viewer.py --port 9000
 ## Legal / scope
 
 The models are reproduced under their own Creative Commons licenses (CC BY 4.0,
-except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The four
-authored joints (`daimochi-tsugi`, `yatoi-hozo-shikuchi`, `sampo-sashi-shikuchi`,
-`niho-sashi-shikuchi`) are original geometry released CC BY 4.0. The site's
+except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The nine
+authored joints (listed in [`../joints/README.md`](../joints/README.md)) are
+original geometry released CC BY 4.0. The site's
 search box uses MIT-licensed `@leeoniya/uFuzzy`, copied unmodified from npm; its
 notice is in `vendor/ufuzzy.LICENSE`. See
 [`../joints/README.md`](../joints/README.md) for the per-model credit.
