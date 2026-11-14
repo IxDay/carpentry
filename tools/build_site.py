@@ -94,6 +94,10 @@ def section(j):
     s = j["source"]
     sa = "SA" in s["license"]
     note = " Shared alike under the same license." if sa else ""
+    # The authored joints link to the repository, not to a Sketchfab original.
+    origin = (' <a href="%s">Original on Sketchfab</a>.' % esc(s["url"])
+              if "sketchfab.com" in s["url"] else
+              ' <a href="%s">Source in this repository</a>.' % esc(s["url"]))
     return """      <section class="joint" id="{slug}">
         <header>
           <h2><a href="#{slug}">{title}<span class="hash" aria-hidden="true">#</span></a></h2>
@@ -108,13 +112,12 @@ def section(j):
           <button type="button" data-replay="viewer-{slug}">Replay</button>
         </div>
         <p class="meta">{pieces} pieces &middot; model by <a href="{author_url}">{author}</a>,
-          <a href="{license_url}">{license}</a>, modified.{note}
-          <a href="{url}">Original on Sketchfab</a>.</p>
+          <a href="{license_url}">{license}</a>, modified.{note}{origin}</p>
       </section>""".format(
         slug=j["slug"], title=esc(j["title"]), jp=esc(j["jp"]), pieces=j["pieces"],
         author=esc(s["author"]), author_url=esc(s["authorUrl"]),
         license=esc(s["license"]), license_url=esc(s["licenseUrl"]),
-        url=esc(s["url"]), note=note)
+        origin=origin, note=note)
 
 
 def footer(repo_url):

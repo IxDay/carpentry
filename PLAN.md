@@ -55,7 +55,7 @@ systematic.
 | 片鎌ホゾ差し | **have** | `kata-kama-hozo-sashi` |
 | 四方差し | **missing** | `shihou-ari-tsugi` is a splice, different joint |
 | 落し鎧 | **missing** | `otoshi-ari-hozo-shikuchi` is 落し蟻, not 鎧 |
-| 下げ鎌（大入れ） | **missing** | — |
+| 下げ鎌（大入れ） | **have** | `sage-kama-oire` |
 | 傾ぎ大入れ | **missing** | — |
 
 Counting the five `小根ホゾ` variants separately, the sheet lists fourteen
@@ -64,8 +64,8 @@ and only in its 車知栓 form) to three: 雇いホゾ (now both forms), 三方�
 二方差し. It also added the one splice family we were missing. The second batch
 covers the whole `小根ホゾ` cluster, taking `shikuchi` coverage to eight of the
 fourteen; the third adds the long through tenon and the fourth a one-sided kama,
-so ten of the fourteen. Four families remain: `四方差し`, `落し鎧`, `下げ鎌`
-and `傾ぎ大入れ`.
+so ten of the fourteen; the fifth adds the dropped kama, so eleven. Three
+families remain: `四方差し`, `落し鎧` and `傾ぎ大入れ`.
 
 ## Source availability
 
@@ -93,8 +93,10 @@ and `傾ぎ大入れ`.
    鼻栓, 打ち抜き込み栓); the densest uncovered cluster. **Done** (second batch).
 5. **長ホゾ差し・込み栓打ち**, then **片鎌ホゾ差し** — high-recognition joints,
    cheap to author.
-6. **落し鎧, 下げ鎌（大入れ）, 傾ぎ大入れ, 四方差し** — housed/dovetail seats,
-   the most `approach` work.
+6. **下げ鎌（大入れ）** — a 貫 end with a dropped hook and wedge; needs a lofted
+   wedge but no sloped cuts. **Done** (fifth batch).
+7. **落し鎧, 傾ぎ大入れ, 四方差し** — housed/dovetail seats, the most
+   `approach` work.
 
 ## First batch — done
 
@@ -167,13 +169,27 @@ the sill, the hook running in under the sill's lip. The hook is kept square: the
 tightening slope of the reference's 鎌 is omitted because the box CSG cannot cut
 or add a sloped face, and a staircase would show in the baked edge strips.
 
+## Fifth batch — done
+
+| Asset | Japanese | Source | Pieces |
+|---|---|---|---|
+| `sage-kama-oire` | 下げ鎌（大入れ） | authored, CC BY 4.0 | 3 |
+
+Taking the collection from 28 to **29** and `shikuchi` coverage to eleven of the
+fourteen entries. The 貫 is a wide, thin plank: its end carries a 鎌 hook on the
+underside, and the mortise is one hook deeper than the nuki, so the nuki is
+offered up raised, run home and dropped, leaving the hook behind the post's far
+face. A wedge over the projecting nose seats it. The nuki is housed at its full
+45 mm thickness with no shoulder (`大入れ`); the mortise runs right through the
+post, leaving a 15 mm cheek either side. The wedge is the only lofted piece.
+
 ## Next
 
 Most of the remaining queue is still axis-aligned box work, but the dovetail
 flanks and the sloped seats need `author_joint.py` extended beyond boxes and
 lofts (sloped quads) or hand-authored face lists:
 
-1. **落し鎧, 下げ鎌（大入れ）, 傾ぎ大入れ, 四方差し** — housed/dovetail seats,
+1. **落し鎧, 傾ぎ大入れ, 四方差し** — housed/dovetail seats,
    the most `approach` work.
 
 For each: author or capture the geometry, verify the closed pose, add `approach`

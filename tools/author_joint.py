@@ -555,6 +555,48 @@ KATA_KAMA = joint(
 )
 
 
+# ---------------------------------------------------------------------------
+# 下げ鎌（大入れ）: the end of a 貫 is cut with a 鎌 hook on its underside and
+# dropped into the post's mortise. The mortise is one hook deeper than the nuki,
+# so the nuki goes in raised and level; when it is lowered the hook falls behind
+# the post's far face and bears on it, and a wedge over the nose locks it down.
+
+SAGE_Y0 = 0.50              # mortise floor = nuki underside
+SAGE_BODY = 0.045           # nuki thickness
+SAGE_HOOK = 0.015           # 引っ掛かり, depth of the kama below the nuki
+SAGE_GAP = 0.015            # wedge space above the nuki
+SAGE_Y1 = SAGE_Y0 + SAGE_BODY
+SAGE_CEIL = SAGE_Y1 + SAGE_GAP
+SAGE_Z = 0.045              # half the nuki's width; 15 mm cheeks remain
+SAGE_NOSE = 0.13            # nuki end, 70 mm past the post's far face
+SAGE_WEDGE = [(-0.04, SAGE_Y1), (0.11, SAGE_Y1),
+              (0.11, SAGE_CEIL - 0.0075), (0.05, SAGE_CEIL),
+              (-0.04, SAGE_CEIL)]
+SAGE_KAMA = joint(
+    "sage-kama-oire", "Sage-kama-oire", "下げ鎌（大入れ）",
+    [
+        piece("part-a", "Post",
+              [[(-0.06, 0.06), (0.0, 0.72), (-0.06, 0.06)]],
+              [[(-0.06, 0.06), (SAGE_Y0, SAGE_CEIL), (-SAGE_Z, SAGE_Z)]]),
+        piece("part-b", "Nuki",
+              [[(-0.26, SAGE_NOSE), (SAGE_Y0, SAGE_Y1),
+                (-SAGE_Z, SAGE_Z)],
+               [(0.06, SAGE_NOSE), (SAGE_Y0 - SAGE_HOOK, SAGE_Y0),
+                (-SAGE_Z, SAGE_Z)]]),
+        piece("wedge", "Wedge", [],
+              extra=loft(2, -SAGE_Z, SAGE_Z, SAGE_WEDGE, SAGE_WEDGE)),
+    ],
+    {"part-b": [-0.24, 0.26, 0.0], "wedge": [0.16, 0.18, 0.0]},
+    "The nuki's end is cut with a 鎌 hook on its underside. The mortise is one "
+    "hook deeper than the nuki, so the nuki is offered up raised, run home and "
+    "then dropped: the hook falls behind the post's far face and bears on it, "
+    "so the nuki cannot be pulled back out. A wedge driven in over the nose "
+    "seats the nuki on the mortise floor and keeps the hook tight. The nuki is "
+    "housed at its full section with no shoulder — 大入れ — and the mortise "
+    "runs right through the post, leaving a narrow cheek either side."
+)
+
+
 def mirror_x(j):
     """Mirror a joint through the x=0 plane.
 
@@ -577,7 +619,7 @@ def mirror_x(j):
 
 JOINTS += [mirror_x(j) for j in (TASUKI, SHITA_WARI, HANA_SEN,
                                  UWA_WARI, UWA_KOMISEN)]
-JOINTS += [NAGA, KATA_KAMA]
+JOINTS += [NAGA, KATA_KAMA, SAGE_KAMA]
 
 
 def main(argv):
