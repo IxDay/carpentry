@@ -58,14 +58,14 @@ systematic.
 | 下げ鎌（大入れ） | **missing** | — |
 | 傾ぎ大入れ | **missing** | — |
 
-Counting the five `小根ホゾ` variants separately, the sheet lists twelve
+Counting the five `小根ホゾ` variants separately, the sheet lists fourteen
 `shikuchi` entries. The first batch took coverage from one of them (雇いホゾ,
 and only in its 車知栓 form) to three: 雇いホゾ (now both forms), 三方差し and
 二方差し. It also added the one splice family we were missing. The second batch
 covers the whole `小根ホゾ` cluster, taking `shikuchi` coverage to eight of the
-twelve; the third adds the long through tenon and the fourth a one-sided kama,
-so ten of the twelve. Still missing: `四方差し`, `落し鎧`, `下げ鎌` and
-`傾ぎ大入れ`.
+fourteen; the third adds the long through tenon and the fourth a one-sided kama,
+so ten of the fourteen. Four families remain: `四方差し`, `落し鎧`, `下げ鎌`
+and `傾ぎ大入れ`.
 
 ## Source availability
 
@@ -149,7 +149,7 @@ All 26 sources pass.
 | `naga-hozo-sashi-komisen-uchi` | 長ホゾ差し込み栓打ち | authored, CC BY 4.0 | 3 |
 
 Taking the collection from 26 to **27**, and `shikuchi` coverage to nine of the
-twelve entries. Pure box work: the untiered tenon runs clean through the post
+fourteen entries. Pure box work: the untiered tenon runs clean through the post
 and stands 45 mm proud, and a tapered `込み栓` pierces post and tenon across the
 tenon's width. The closed pose passes `check_sources.py`; bake, preview and
 `validate.py` are run with the same flags as the rest of the set.
@@ -161,7 +161,7 @@ tenon's width. The closed pose passes `check_sources.py`; bake, preview and
 | `kata-kama-hozo-sashi` | 片鎌ホゾ差し | authored, CC BY 4.0 | 2 |
 
 Taking the collection from 27 to **28** and `shikuchi` coverage to ten of the
-twelve entries. The post's tenon carries a hook on one lower edge only; the
+fourteen entries. The post's tenon carries a hook on one lower edge only; the
 sill's mortise is a slot open at the sill's end, so the post is slid in along
 the sill, the hook running in under the sill's lip. The hook is kept square: the
 tightening slope of the reference's 鎌 is omitted because the box CSG cannot cut
