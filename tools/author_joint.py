@@ -597,6 +597,84 @@ SAGE_KAMA = joint(
 )
 
 
+# ---------------------------------------------------------------------------
+# 四方差し: four beams meet one post at a single level. Two through-tenons at the
+# same height would occupy the same core of the post, so each beam's 竿 is cut at
+# its own level within the beam's depth: the two x beams stack in the lower half,
+# the two z beams in the upper half. Each tenon runs through the post and 30 mm
+# into the opposite beam's end, so the four beams tie one another, and a tapered
+# plate komisen dropped through each pair from the post's top face pins the lot.
+SQ_POST_TOP = 0.60
+SQ_BEAM_W = 0.045           # half the beam's width, 90 wide
+SQ_TENON_W = 0.03           # half the tenon's width, 60 wide
+SQ_NOSE = 0.09              # tenon end, 30 mm inside the opposite beam
+SQ_KEY_T = 0.015            # half the key's thickness, 30 deep
+
+
+def sq_key(axis, tip, head, s0, s1):
+    """Tapered plate komisen, full-size at `head` and eased 1.5 mm at `tip`.
+
+    Sections are `(u, v)` rectangles in the two axes other than `axis`
+    (`u = axis + 1`, `v = axis + 2`, both modulo 3), as `loft()` takes them.
+    The key is driven tip-first, so the leading section is the smaller one and
+    it wedges as it seats.
+    """
+    (u0, v0), (u1, v1) = s0, s1
+    big = [(u0, v0), (u1, v0), (u1, v1), (u0, v1)]
+    small = [(u0 + 0.0015, v0 + 0.0015), (u1 - 0.0015, v0 + 0.0015),
+             (u1 - 0.0015, v1 - 0.0015), (u0 + 0.0015, v1 - 0.0015)]
+    return loft(axis, tip, head, small, big)
+
+
+SQ_SHIHOU = joint(
+    "shihou-sashi-shikuchi", "Shihou-sashi-shikuchi", "四方差し",
+    [
+        piece("part-a", "Post",
+              [[(-0.06, 0.06), (0.30, SQ_POST_TOP), (-0.06, 0.06)]],
+              [[(-0.06, 0.06), (0.40, 0.44), (-SQ_TENON_W, SQ_TENON_W)],
+               [(-0.06, 0.06), (0.44, 0.48), (-SQ_TENON_W, SQ_TENON_W)],
+               [(-SQ_TENON_W, SQ_TENON_W), (0.48, 0.52), (-0.06, 0.06)],
+               [(-SQ_TENON_W, SQ_TENON_W), (0.52, 0.56), (-0.06, 0.06)],
+               [(0.030, 0.054), (0.379, 0.612), (-SQ_KEY_T, SQ_KEY_T)],
+               [(-SQ_KEY_T, SQ_KEY_T), (0.459, 0.612), (0.030, 0.054)]]),
+        piece("part-b", "Beam -x",
+              [[(-0.40, -0.06), (0.40, 0.56), (-SQ_BEAM_W, SQ_BEAM_W)],
+               [(-0.06, SQ_NOSE), (0.40, 0.44), (-SQ_TENON_W, SQ_TENON_W)]],
+              [[(-SQ_NOSE, -0.06), (0.44, 0.48), (-SQ_TENON_W, SQ_TENON_W)],
+               [(0.030, 0.054), (0.40, 0.44), (-SQ_KEY_T, SQ_KEY_T)]]),
+        piece("part-c", "Beam +x",
+              [[(0.06, 0.40), (0.40, 0.56), (-SQ_BEAM_W, SQ_BEAM_W)],
+               [(-SQ_NOSE, 0.06), (0.44, 0.48), (-SQ_TENON_W, SQ_TENON_W)]],
+              [[(0.06, SQ_NOSE), (0.40, 0.44), (-SQ_TENON_W, SQ_TENON_W)],
+               [(0.030, 0.054), (0.44, 0.48), (-SQ_KEY_T, SQ_KEY_T)]]),
+        piece("part-d", "Beam -z",
+              [[(-SQ_BEAM_W, SQ_BEAM_W), (0.40, 0.56), (-0.40, -0.06)],
+               [(-SQ_TENON_W, SQ_TENON_W), (0.48, 0.52), (-0.06, SQ_NOSE)]],
+              [[(-SQ_TENON_W, SQ_TENON_W), (0.52, 0.56), (-SQ_NOSE, -0.06)],
+               [(-SQ_KEY_T, SQ_KEY_T), (0.48, 0.52), (0.030, 0.054)]]),
+        piece("part-e", "Beam +z",
+              [[(-SQ_BEAM_W, SQ_BEAM_W), (0.40, 0.56), (0.06, 0.40)],
+               [(-SQ_TENON_W, SQ_TENON_W), (0.52, 0.56), (-SQ_NOSE, 0.06)]],
+              [[(-SQ_TENON_W, SQ_TENON_W), (0.48, 0.52), (0.06, SQ_NOSE)],
+               [(-SQ_KEY_T, SQ_KEY_T), (0.52, 0.56), (0.030, 0.054)]]),
+        piece("key-x", "Komisen", [], extra=sq_key(
+            1, 0.392, 0.612, (-SQ_KEY_T, 0.030), (SQ_KEY_T, 0.054))),
+        piece("key-z", "Komisen", [], extra=sq_key(
+            1, 0.472, 0.612, (0.030, -SQ_KEY_T), (0.054, SQ_KEY_T))),
+    ],
+    {"part-b": [-0.32, 0.0, 0.0], "part-c": [0.32, 0.0, 0.0],
+     "part-d": [0.0, 0.0, -0.32], "part-e": [0.0, 0.0, 0.32],
+     "key-x": [0.0, 0.30, 0.0], "key-z": [0.0, 0.30, 0.0]},
+    "Four 床梁 frame into one post at a single level. Two through-tenons cannot "
+    "share a core, so each beam's 竿 is cut at its own level within the beam's "
+    "depth: the two x beams stack in the lower half, the two z beams in the "
+    "upper half. Each tenon passes clean through the post and 30 mm into the "
+    "end of the beam opposite, so the four beams tie one another, and a plate "
+    "komisen dropped through each pair of tenons from the post's top face, "
+    "standing a little proud, pins the lot."
+)
+
+
 def mirror_x(j):
     """Mirror a joint through the x=0 plane.
 
@@ -619,7 +697,7 @@ def mirror_x(j):
 
 JOINTS += [mirror_x(j) for j in (TASUKI, SHITA_WARI, HANA_SEN,
                                  UWA_WARI, UWA_KOMISEN)]
-JOINTS += [NAGA, KATA_KAMA, SAGE_KAMA]
+JOINTS += [NAGA, KATA_KAMA, SAGE_KAMA, SQ_SHIHOU]
 
 
 def main(argv):

@@ -216,7 +216,7 @@
       section.joint h2 a .hash { display: none; }
       section.joint .jp { font-size: .9rem; }
       section.joint header::after {
-        content: counter(joint) " / 29";
+        content: counter(joint) " / 30";
         position: absolute; right: 1rem; top: max(1rem, calc(env(safe-area-inset-top) + .4rem));
         font-size: .75rem; color: var(--muted); letter-spacing: .04em;
       }
@@ -246,7 +246,7 @@
     <nav class="index" id="index" aria-label="Joints">
       <button class="menu-close" type="button" aria-label="Close the menu">&times;</button>
       <h1>Japanese joinery</h1>
-      <p>29 joints that assemble and come apart.</p>
+      <p>30 joints that assemble and come apart.</p>
       <div class="search">
         <input id="search" type="search" placeholder="Search joints" autocomplete="off"
             spellcheck="false" aria-label="Search joints" aria-controls="joint-list"
@@ -274,6 +274,7 @@
         <li><a href="#sage-kama-oire"><span class="name">Sage-kama-oire</span><span class="jp" lang="ja">下げ鎌（大入れ）</span></a></li>
         <li><a href="#sampo-sashi-shikuchi"><span class="name">Sampo-sashi-shikuchi</span><span class="jp" lang="ja">三方差し仕口</span></a></li>
         <li><a href="#shihou-ari-tsugi"><span class="name">Shihou-ari-tsugi</span><span class="jp" lang="ja">四方蟻継ぎ</span></a></li>
+        <li><a href="#shihou-sashi-shikuchi"><span class="name">Shihou-sashi-shikuchi</span><span class="jp" lang="ja">四方差し</span></a></li>
         <li><a href="#shitakone-hozo-hana-sen"><span class="name">Shitakone-hozo-hana-sen</span><span class="jp" lang="ja">下小根ホゾ鼻栓打ち</span></a></li>
         <li><a href="#shitakone-hozo-tasuki-gake"><span class="name">Shitakone-hozo-tasuki-gake</span><span class="jp" lang="ja">下小根ホゾ（襷掛付）</span></a></li>
         <li><a href="#shitakone-hozo-wari-kusabi"><span class="name">Shitakone-hozo-wari-kusabi</span><span class="jp" lang="ja">下小根ホゾ割り楔打ち</span></a></li>
@@ -605,6 +606,22 @@
         </div>
         <p class="meta">2 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/shihou-ari-tsugi-c1d6168a3b4e49a983c3ba815e0b4437">Original on Sketchfab</a>.</p>
+      </section>
+      <section class="joint" id="shihou-sashi-shikuchi">
+        <header>
+          <h2><a href="#shihou-sashi-shikuchi">Shihou-sashi-shikuchi<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">四方差し</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-shihou-sashi-shikuchi" data-src="models/shihou-sashi-shikuchi.glb"
+              alt="Shihou-sashi-shikuchi assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-shihou-sashi-shikuchi">Replay</button>
+        </div>
+        <p class="meta">7 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
       <section class="joint" id="shitakone-hozo-hana-sen">
         <header>

@@ -220,8 +220,8 @@ python3 author_joint.py daimochi-tsugi  # just one, by id
 ```
 
 The Sketchfab collection is all splices; the column-and-beam (`shikuchi`)
-families on the reference sheet have no licensed model, so twelve joints are built
-here (eleven `shikuchi` plus one splice). Each joint is defined in the closed pose
+families on the reference sheet have no licensed model, so thirteen joints are built
+here (twelve `shikuchi` plus one splice). Each joint is defined in the closed pose
 as a list of axis-aligned
 boxes to add minus a list of boxes to cut — that is enough for square tenons,
 mortises, housings, corner notches and round pegs. The boundary is extracted on
@@ -294,7 +294,7 @@ python3 viewer.py --port 9000
 ## Legal / scope
 
 The models are reproduced under their own Creative Commons licenses (CC BY 4.0,
-except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The twelve
+except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The thirteen
 authored joints (listed in [`../joints/README.md`](../joints/README.md)) are
 original geometry released CC BY 4.0. The site's
 search box uses MIT-licensed `@leeoniya/uFuzzy`, copied unmodified from npm; its

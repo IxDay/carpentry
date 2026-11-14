@@ -53,8 +53,8 @@ systematic.
 | 上小根ホゾ・打ち抜き込み栓打ち | **have** | `uwakone-hozo-uchi-nuki-komisen` |
 | 長ホゾ差し・込み栓打ち | **have** | `naga-hozo-sashi-komisen-uchi` |
 | 片鎌ホゾ差し | **have** | `kata-kama-hozo-sashi` |
-| 四方差し | **missing** | `shihou-ari-tsugi` is a splice, different joint |
-| 落し鎧 | **missing** | `otoshi-ari-hozo-shikuchi` is 落し蟻, not 鎧 |
+| 四方差し | **have** | `shihou-sashi-shikuchi` |
+| 落し蟻 | **have** | `otoshi-ari-hozo-shikuchi` (beam form; the sheet shows the column-base form) |
 | 下げ鎌（大入れ） | **have** | `sage-kama-oire` |
 | 傾ぎ大入れ | **missing** | — |
 
@@ -64,8 +64,14 @@ and only in its 車知栓 form) to three: 雇いホゾ (now both forms), 三方�
 二方差し. It also added the one splice family we were missing. The second batch
 covers the whole `小根ホゾ` cluster, taking `shikuchi` coverage to eight of the
 fourteen; the third adds the long through tenon and the fourth a one-sided kama,
-so ten of the fourteen; the fifth adds the dropped kama, so eleven. Three
-families remain: `四方差し`, `落し鎧` and `傾ぎ大入れ`.
+so ten of the fourteen; the fifth adds the dropped kama and the sixth the
+four-way 差し, so twelve. One family remains: `傾ぎ大入れ`.
+
+An earlier draft of this table listed a `落し鎧` family and marked it missing.
+The left-hand label on the sheet is `落し蟻` (the drawn tenon is a single
+trapezoid dropped into the post, not a crenellated 鎧), and no joint called
+`落し鎧` is attested in the Japanese sources consulted; the `落し蟻` row is that
+same label.
 
 ## Source availability
 
@@ -95,8 +101,11 @@ families remain: `四方差し`, `落し鎧` and `傾ぎ大入れ`.
    cheap to author.
 6. **下げ鎌（大入れ）** — a 貫 end with a dropped hook and wedge; needs a lofted
    wedge but no sloped cuts. **Done** (fifth batch).
-7. **落し鎧, 傾ぎ大入れ, 四方差し** — housed/dovetail seats, the most
-   `approach` work.
+7. **四方差し** — four beams into one post, staggered through-tenons and plate
+   komisen; all box work, but the tenons have to be stacked to avoid collisions.
+   **Done** (sixth batch).
+8. **傾ぎ大入れ** — sloped seat; the only family left, and the only one that
+   still needs sloped faces in `author_joint.py`.
 
 ## First batch — done
 
@@ -183,14 +192,26 @@ face. A wedge over the projecting nose seats it. The nuki is housed at its full
 45 mm thickness with no shoulder (`大入れ`); the mortise runs right through the
 post, leaving a 15 mm cheek either side. The wedge is the only lofted piece.
 
+## Sixth batch
+
+| Asset | Japanese | Source | Pieces |
+|---|---|---|---|
+| `shihou-sashi-shikuchi` | 四方差し | authored, CC BY 4.0 | 7 |
+
+This took the collection from 29 to **30** and `shikuchi` coverage to twelve of
+the fourteen entries. A 120-square post takes 90 × 160 beams from all four sides
+at one level. Two through-tenons at the same height would occupy the same core of
+the post, so each beam's 竿 sits at its own level within the beam's depth
+(four 60 × 40 tenons stacked through the 160 depth), passes through the post and
+30 mm into the opposite beam's end, and is drawn by a tapered plate komisen
+dropped through the pair from the post's top face. Nothing needs cutting at a
+slope; the only lofted pieces are the two tapered keys.
+
 ## Next
 
-Most of the remaining queue is still axis-aligned box work, but the dovetail
-flanks and the sloped seats need `author_joint.py` extended beyond boxes and
-lofts (sloped quads) or hand-authored face lists:
-
-1. **落し鎧, 傾ぎ大入れ, 四方差し** — housed/dovetail seats,
-   the most `approach` work.
+Only `傾ぎ大入れ` is left. It needs `author_joint.py` extended beyond boxes and
+lofts (sloped quads) or hand-authored face lists: a sloped seat, so the beam
+drops onto the post and then slides down the incline as the joint tightens.
 
 For each: author or capture the geometry, verify the closed pose, add `approach`
 where a seat is sloped or a dovetail has to drop before sliding, then bake,
