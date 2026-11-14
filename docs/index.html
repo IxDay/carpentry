@@ -216,7 +216,7 @@
       section.joint h2 a .hash { display: none; }
       section.joint .jp { font-size: .9rem; }
       section.joint header::after {
-        content: counter(joint) " / 27";
+        content: counter(joint) " / 28";
         position: absolute; right: 1rem; top: max(1rem, calc(env(safe-area-inset-top) + .4rem));
         font-size: .75rem; color: var(--muted); letter-spacing: .04em;
       }
@@ -246,7 +246,7 @@
     <nav class="index" id="index" aria-label="Joints">
       <button class="menu-close" type="button" aria-label="Close the menu">&times;</button>
       <h1>Japanese joinery</h1>
-      <p>27 joints that assemble and come apart.</p>
+      <p>28 joints that assemble and come apart.</p>
       <div class="search">
         <input id="search" type="search" placeholder="Search joints" autocomplete="off"
             spellcheck="false" aria-label="Search joints" aria-controls="joint-list"
@@ -260,6 +260,7 @@
         <li><a href="#kakeawase-komisen-tsugi"><span class="name">Kakeawase-komisen-tsugi</span><span class="jp" lang="ja">掛け合わせ込み栓継ぎ</span></a></li>
         <li><a href="#kakushi-kanawa-tsugi"><span class="name">Kakushi-kanawa-tsugi</span><span class="jp" lang="ja">隠し金輪継ぎ</span></a></li>
         <li><a href="#kanawa-tsugi"><span class="name">Kanawa-tsugi</span><span class="jp" lang="ja">金輪継ぎ</span></a></li>
+        <li><a href="#kata-kama-hozo-sashi"><span class="name">Kata-kama-hozo-sashi</span><span class="jp" lang="ja">片鎌ホゾ差し</span></a></li>
         <li><a href="#komisen-inro-tsugi"><span class="name">Komisen-inro-tsugi</span><span class="jp" lang="ja">込み栓入れ枘継ぎ</span></a></li>
         <li><a href="#koshikake-ari-tsugi"><span class="name">Koshikake-ari-tsugi</span><span class="jp" lang="ja">腰掛け蟻継ぎ</span></a></li>
         <li><a href="#meji-tsukikake-awase-tsugi"><span class="name">Meji-tsukikake-awase-tsugi</span><span class="jp" lang="ja">目地突掛け合わせ継ぎ</span></a></li>
@@ -385,6 +386,23 @@
         <p class="meta">3 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified.
           <a href="https://sketchfab.com/3d-models/kanawa-tsugi-713b9b3a98344094a008535738348791">Original on Sketchfab</a>.</p>
+      </section>
+      <section class="joint" id="kata-kama-hozo-sashi">
+        <header>
+          <h2><a href="#kata-kama-hozo-sashi">Kata-kama-hozo-sashi<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">片鎌ホゾ差し</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-kata-kama-hozo-sashi" data-src="models/kata-kama-hozo-sashi.glb"
+              alt="Kata-kama-hozo-sashi assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-kata-kama-hozo-sashi">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified.
+          <a href="https://github.com/ixday/carpentry">Original on Sketchfab</a>.</p>
       </section>
       <section class="joint" id="komisen-inro-tsugi">
         <header>

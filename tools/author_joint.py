@@ -517,6 +517,44 @@ NAGA = joint(
 )
 
 
+# ---------------------------------------------------------------------------
+# 片鎌ホゾ差し: a post foot with a one-sided hook (鎌) on its tenon. The sill's
+# mortise is open at its end, so the post slides in along the sill; the hook
+# travels under the sill's lip and then cannot be lifted out, which is what the
+# single-sided kama is for.
+KAMA_SILL_Y0, KAMA_SILL_Y1 = 0.0, 0.12
+KAMA_SLOT_END = 0.16          # open end of the sill's slot
+KAMA_SLOT_X0 = -0.031         # blind end, 1 mm clear of the tenon
+KAMA_FLOOR = 0.039            # 1 mm below the tenon's underside
+KAMA_TENON_Z = 0.030
+KAMA_HOOK_Z = 0.050
+KAMA_HOOK_Y = 0.056
+KATA_KAMA = joint(
+    "kata-kama-hozo-sashi", "Kata-kama-hozo-sashi", "片鎌ホゾ差し",
+    [
+        piece("part-a", "Sill",
+              [[(-0.45, KAMA_SLOT_END), (KAMA_SILL_Y0, KAMA_SILL_Y1),
+                (-0.06, 0.06)]],
+              [[(KAMA_SLOT_X0, KAMA_SLOT_END), (KAMA_FLOOR, KAMA_SILL_Y1),
+                (-0.031, 0.031)],
+               [(KAMA_SLOT_X0, KAMA_SLOT_END), (KAMA_FLOOR, 0.057),
+                (KAMA_TENON_Z, 0.057)]]),
+        piece("part-b", "Post",
+              [[(-0.06, 0.06), (KAMA_SILL_Y1, 0.80), (-0.06, 0.06)],
+               [(-0.03, 0.03), (KAMA_FLOOR + 0.001, KAMA_SILL_Y1),
+                (-KAMA_TENON_Z, KAMA_TENON_Z)],
+               [(-0.03, 0.03), (KAMA_FLOOR + 0.001, KAMA_HOOK_Y),
+                (KAMA_TENON_Z, KAMA_HOOK_Z)]]),
+    ],
+    {"part-b": [0.26, 0.14, 0.0]},
+    "The tenon carries a 鎌 hook along one lower edge only. The sill's mortise "
+    "is a slot open at the sill's end, so the post is slid in along the sill: "
+    "the hook runs under the sill's lip and the post can no longer be lifted "
+    "out, while the square face of the hook bears on the lip under uplift. The "
+    "post's shoulder seats on the sill and its tenon clears the mortise floor."
+)
+
+
 def mirror_x(j):
     """Mirror a joint through the x=0 plane.
 
@@ -539,7 +577,7 @@ def mirror_x(j):
 
 JOINTS += [mirror_x(j) for j in (TASUKI, SHITA_WARI, HANA_SEN,
                                  UWA_WARI, UWA_KOMISEN)]
-JOINTS += [NAGA]
+JOINTS += [NAGA, KATA_KAMA]
 
 
 def main(argv):

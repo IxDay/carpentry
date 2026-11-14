@@ -52,7 +52,7 @@ systematic.
 | 上小根ホゾ・割り楔打ち | **have** | `uwakone-hozo-wari-kusabi` |
 | 上小根ホゾ・打ち抜き込み栓打ち | **have** | `uwakone-hozo-uchi-nuki-komisen` |
 | 長ホゾ差し・込み栓打ち | **have** | `naga-hozo-sashi-komisen-uchi` |
-| 片鎌ホゾ差し | **missing** | `nimai-kama-tsugi` is a splice, not this |
+| 片鎌ホゾ差し | **have** | `kata-kama-hozo-sashi` |
 | 四方差し | **missing** | `shihou-ari-tsugi` is a splice, different joint |
 | 落し鎧 | **missing** | `otoshi-ari-hozo-shikuchi` is 落し蟻, not 鎧 |
 | 下げ鎌（大入れ） | **missing** | — |
@@ -63,8 +63,9 @@ Counting the five `小根ホゾ` variants separately, the sheet lists twelve
 and only in its 車知栓 form) to three: 雇いホゾ (now both forms), 三方差し and
 二方差し. It also added the one splice family we were missing. The second batch
 covers the whole `小根ホゾ` cluster, taking `shikuchi` coverage to eight of the
-twelve; the third adds the long through tenon, so nine of the twelve. Still
-missing: `片鎌ホゾ差し`, `四方差し`, `落し鎧`, `下げ鎌` and `傾ぎ大入れ`.
+twelve; the third adds the long through tenon and the fourth a one-sided kama,
+so ten of the twelve. Still missing: `四方差し`, `落し鎧`, `下げ鎌` and
+`傾ぎ大入れ`.
 
 ## Source availability
 
@@ -153,17 +154,27 @@ and stands 45 mm proud, and a tapered `込み栓` pierces post and tenon across 
 tenon's width. The closed pose passes `check_sources.py`; bake, preview and
 `validate.py` are run with the same flags as the rest of the set.
 
+## Fourth batch — done
+
+| Asset | Japanese | Source | Pieces |
+|---|---|---|---|
+| `kata-kama-hozo-sashi` | 片鎌ホゾ差し | authored, CC BY 4.0 | 2 |
+
+Taking the collection from 27 to **28** and `shikuchi` coverage to ten of the
+twelve entries. The post's tenon carries a hook on one lower edge only; the
+sill's mortise is a slot open at the sill's end, so the post is slid in along
+the sill, the hook running in under the sill's lip. The hook is kept square: the
+tightening slope of the reference's 鎌 is omitted because the box CSG cannot cut
+or add a sloped face, and a staircase would show in the baked edge strips.
+
 ## Next
 
-Most of the remaining queue is still axis-aligned box work, but the `kama` hooks
-and dovetail flanks need `author_joint.py` extended beyond boxes and lofts
-(sloped quads) or hand-authored face lists:
+Most of the remaining queue is still axis-aligned box work, but the dovetail
+flanks and the sloped seats need `author_joint.py` extended beyond boxes and
+lofts (sloped quads) or hand-authored face lists:
 
-1. **片鎌ホゾ差し** — a column-base joint with a one-sided undercut hook; needs
-   the sloped-profile extension.
-2. **落し鎧, 下げ鎌（大入れ）, 傾ぎ大入れ, 四方差し** — housed/dovetail seats,
+1. **落し鎧, 下げ鎌（大入れ）, 傾ぎ大入れ, 四方差し** — housed/dovetail seats,
    the most `approach` work.
-3. **追掛け大栓継ぎ（持ち出し継ぎ）** — a variant of the splice we already have.
 
 For each: author or capture the geometry, verify the closed pose, add `approach`
 where a seat is sloped or a dovetail has to drop before sliding, then bake,
