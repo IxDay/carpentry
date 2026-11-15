@@ -120,9 +120,20 @@ def section(j):
         origin=origin, note=note)
 
 
-def footer(repo_url):
+def footer(repo_url, joints=()):
     refs = "\n".join('        <li><a href="%s">%s</a></li>' % (esc(u), esc(t)) for t, u in REFERENCES)
-    repo = ('\n      <p>Source and tooling: <a href="%s">%s</a>.</p>' % (esc(repo_url), esc(repo_url))
+    authored = [j for j in joints if "sketchfab.com" not in j["source"]["url"]]
+    words = ("zero one two three four five six seven eight nine ten eleven twelve "
+             "thirteen fourteen fifteen sixteen seventeen eighteen nineteen").split()
+    count = words[len(authored)] if len(authored) < len(words) else str(len(authored))
+    authored_line = (
+        "      <p>%s joints with no licensed source model &mdash; every "
+        "column-and-beam <i>shikuchi</i> on the reference sheet and 台持ち継ぎ "
+        "&mdash; are authored for this collection from 柱（軸組）の納まり and "
+        "released CC BY 4.0.</p>" % count.capitalize()) if authored else ""
+    repo = ('\n      <p>Source and tooling: <a href="%s">%s</a>. Per-joint notes '
+            'and references: <a href="%s/joints/README.md">joints/README.md</a>.</p>'
+            % (esc(repo_url), esc(repo_url), esc(repo_url.rstrip("/")))
             if repo_url else "")
     return """      <h2>About</h2>
       <p>Models by <a href="https://sketchfab.com/thejoinery">thejoinery</a> (CC BY 4.0, one
@@ -130,13 +141,11 @@ def footer(repo_url):
         baked paper-sunrise look and given an assembly animation. The animations were checked
         for timbers passing through each other, and some meshes were corrected where the
         author's pose was not the true closed joint.</p>
-      <p>Four joints with no licensed source model &mdash; 台持ち継ぎ, 雇い枘仕口,
-        三方差し仕口 and 二方差し仕口 &mdash; are authored for this collection from the
-        reference sheet 柱（軸組）の納まり and released CC BY 4.0.</p>
+%s
       <h2>References</h2>
       <ul>
 %s
-      </ul>%s""" % (refs, repo)
+      </ul>%s""" % (authored_line, refs, repo)
 
 
 def copy_if_changed(src, dst):
@@ -181,7 +190,7 @@ def build(joints_dir, out, repo_url):
         page = fh.read()
     page = (page.replace("{{NAV}}", "\n".join(nav_item(j) for j in joints))
                 .replace("{{SECTIONS}}", "\n".join(section(j) for j in joints))
-                .replace("{{FOOTER}}", footer(repo_url))
+                .replace("{{FOOTER}}", footer(repo_url, joints))
                 .replace("{{COUNT}}", str(len(joints)))
                 .replace("{{OG_IMAGE}}", joints[0]["slug"]))
     with open(os.path.join(out, "index.html"), "w") as fh:
