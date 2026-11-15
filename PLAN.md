@@ -41,7 +41,7 @@ systematic.
 | Reference family | Status | Nearest asset we own |
 |---|---|---|
 | 追掛け大栓継ぎ | have | `okkake-daisen-tsugi` |
-| 追掛け大栓継ぎ（持ち出し継ぎ） | missing | variant of the above |
+| 追掛け大栓継ぎ（持ち出し継ぎ） | **have** | `okkake-daisen-tsugi-mochidashi` (the 持ち出し form) |
 | 台持ち継ぎ（真継ぎ） | **have** | `daimochi-tsugi` |
 | 雇いホゾ | **have** | `yatoi-hozo-shikuchi` (plain form) + `yatoi-hozo-shachi-sen-shiguchi` |
 | 三方差し（T字） | **have** | `sampo-sashi-shikuchi` |
@@ -66,8 +66,10 @@ covers the whole `小根ホゾ` cluster, taking `shikuchi` coverage to eight of 
 fourteen; the third adds the long through tenon and the fourth a one-sided kama,
 so ten of the fourteen; the fifth adds the dropped kama, the sixth the
 four-way 差し and the seventh the slanted housing, so thirteen authored. With
-`落し蟻` already in the imported set, every family on the sheet now has a model
-— though that one is the beam form rather than the column-base form drawn.
+`落し蟻` already in the imported set and the eighth batch adding the 持ち出し
+form of the 追掛け splice, every family and every printed name on the sheet now
+has a model — though `落し蟻` is the beam form rather than the column-base form
+drawn, and the 持ち出し closed form is an interpretation (see below).
 
 An earlier draft of this table listed a `落し鎧` family and marked it missing.
 The left-hand label on the sheet is `落し蟻` (the drawn tenon is a single
@@ -110,6 +112,9 @@ same label.
    lower end runs in under the post's overhanging cheek and cannot lift. Both
    timbers are prisms with a slanted cross-section, which `loft()` already
    provides. **Done** (seventh batch).
+9. **追掛け大栓継ぎ（持ち出し継ぎ）** — the half-lap family with the tenons left
+   long, so their noses are carried out of the surface; two 大栓 through the
+   lap. All box work. **Done** (eighth batch).
 
 ## First batch — done
 
@@ -222,16 +227,37 @@ This took the collection from 30 to **31** and completed the sheet: all fourteen
 beam form). A horizontal member is let full-section into the post's face, but
 the seam is cut at a slope instead of square: the beam's end runs 40 mm deeper
 at the bottom, in under the post's overhanging cheek, so the load bears on the
-slope and the beam cannot be lifted out. The two timbers are prisms whose cross-section is a slanted polygon, so
-this needed no new CSG — `loft()` with identical sections already makes a
-constant-section prism. The beam is withdrawn straight along its own axis;
-there is no key.
+slope and the beam cannot be lifted out. The two timbers are prisms whose
+cross-section is a slanted polygon, so this needed no new CSG — `loft()` with
+identical sections already makes a constant-section prism. The beam is drawn
+straight out along its own axis; there is no key.
+
+## Eighth batch
+
+| Asset | Japanese | Source | Pieces |
+|---|---|---|---|
+| `okkake-daisen-tsugi-mochidashi` | 追掛け大栓継ぎ（持ち出し継ぎ） | authored, CC BY 4.0 | 4 |
+
+This took the collection from 31 to **32** and closed the last row on the sheet.
+The sheet prints both names against one drawing — the prepared end of a 胴差,
+with the two keys lifted out — so the closed form is an interpretation rather
+than a copy. It is the 追掛け half-lap: a 280 mm overlap, half the section deep,
+the upper half belonging to one timber and the lower half to the other. Each
+tenon is carried out past the other's shoulder (the `持ち出し` of the name), so
+its nose stands 20 mm proud of the finished surface in a shallow rebate cut for
+it, and the two noses come out on opposite faces. Two 50 × 40 `大栓` are driven
+down through the lap, each through both tenons, their heads left proud on top.
+The second timber is the first turned half round about the joint's axis, so the
+pair needs one part, not two.
 
 ## Next
 
-Nothing on the reference sheet is missing. The open ends are the 追掛け大栓継ぎ
-持ち出し継ぎ variant (a longer, shouldered form of `okkake-daisen-tsugi`) and
-more splices, which are the strong part of the imported set already.
+Nothing on the reference sheet is missing, and every `shikuchi` family now has
+its own model rather than a near neighbour. The imported set is strong in
+splices and thinner in column work, which is why the sheet was the right place
+to grow: fifteen of the thirty-two are authored from it. Further work would be new
+families rather than variations — a 蟻継ぎ cluster, or the 包み込み貫 that the
+down-kama research turned up — since the sheet's own list is exhausted.
 
 For any new joint: author or capture the geometry, verify the closed pose, add
 `approach` where a seat is sloped or a dovetail has to drop before sliding, then

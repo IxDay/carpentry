@@ -128,9 +128,9 @@ def footer(repo_url, joints=()):
     count = words[len(authored)] if len(authored) < len(words) else str(len(authored))
     authored_line = (
         "      <p>%s joints with no licensed source model &mdash; every "
-        "column-and-beam <i>shikuchi</i> on the reference sheet and 台持ち継ぎ "
-        "&mdash; are authored for this collection from 柱（軸組）の納まり and "
-        "released CC BY 4.0.</p>" % count.capitalize()) if authored else ""
+        "family on the reference sheet, splices included &mdash; are authored "
+        "for this collection from 柱（軸組）の納まり and released CC BY "
+        "4.0.</p>" % count.capitalize()) if authored else ""
     repo = ('\n      <p>Source and tooling: <a href="%s">%s</a>. Per-joint notes '
             'and references: <a href="%s/joints/README.md">joints/README.md</a>.</p>'
             % (esc(repo_url), esc(repo_url), esc(repo_url.rstrip("/")))

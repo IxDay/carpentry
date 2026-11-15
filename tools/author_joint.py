@@ -711,6 +711,68 @@ KATAGI = joint(
 )
 
 
+# ---------------------------------------------------------------------------
+# 追掛け大栓継ぎ（持ち出し継ぎ）: a long half-lap splice in which each timber's
+# tenon is carried out past the other's shoulder, so its nose stands 20 mm
+# proud of the finished surface and seats in a shallow recess. Two 大栓 are
+# driven down through the lap, each passing through both tenons.
+OK_BEAM = 0.06              # half the timber's section
+OK_END = 0.36               # the far end of each timber
+OK_LAP = 0.14               # half the overlap
+OK_NOSE = 0.04              # how far the nose runs past the shoulder
+OK_PROUD = 0.02             # how far it stands proud of the surface
+OK_PEG_X = 0.025            # half the 大栓's width, 50 wide
+OK_PEG_C = 0.06             # centre of each 大栓 from the lap's centre
+OK_PEG_D = 0.02             # half its thickness along the member
+OK_PEG_TOP = 0.075          # its head, 15 mm proud of the top face
+
+OKKAKE_MOCHI = joint(
+    "okkake-daisen-tsugi-mochidashi",
+    "Okkake-daisen-tsugi (mochidashi)", "追掛け大栓継ぎ（持ち出し継ぎ）",
+    [
+        # A runs from -z, its tenon is the upper half of the lap and its nose
+        # comes out on top of B. The bottom recess at its own lap end is the
+        # seat for B's nose.
+        piece("part-a", "Part A",
+              [[(-OK_BEAM, OK_BEAM), (-OK_BEAM, OK_BEAM), (-OK_END, -OK_LAP)],
+               [(-OK_BEAM, OK_BEAM), (0.0, OK_BEAM), (-OK_LAP, OK_LAP)],
+               [(-OK_BEAM, OK_BEAM), (OK_PROUD, OK_BEAM + OK_PROUD),
+                (OK_LAP, OK_LAP + OK_NOSE)]],
+              [[(-OK_BEAM, OK_BEAM), (-OK_BEAM - 0.01, -OK_PROUD),
+                (-OK_LAP - OK_NOSE, -OK_LAP)],
+               [(-OK_PEG_X, OK_PEG_X), (-OK_BEAM - 0.01, OK_BEAM + 0.02),
+                (-OK_PEG_C - OK_PEG_D, -OK_PEG_C + OK_PEG_D)],
+               [(-OK_PEG_X, OK_PEG_X), (-OK_BEAM - 0.01, OK_BEAM + 0.02),
+                (OK_PEG_C - OK_PEG_D, OK_PEG_C + OK_PEG_D)]]),
+        # B is the same timber turned half round about x: lower tenon, nose
+        # underneath A.
+        piece("part-b", "Part B",
+              [[(-OK_BEAM, OK_BEAM), (-OK_BEAM, OK_BEAM), (OK_LAP, OK_END)],
+               [(-OK_BEAM, OK_BEAM), (-OK_BEAM, 0.0), (-OK_LAP, OK_LAP)],
+               [(-OK_BEAM, OK_BEAM), (-OK_BEAM - OK_PROUD, -OK_PROUD),
+                (-OK_LAP - OK_NOSE, -OK_LAP)]],
+              [[(-OK_BEAM, OK_BEAM), (OK_PROUD, OK_BEAM + 0.01),
+                (OK_LAP, OK_LAP + OK_NOSE)],
+               [(-OK_PEG_X, OK_PEG_X), (-OK_BEAM - 0.02, OK_BEAM + 0.01),
+                (-OK_PEG_C - OK_PEG_D, -OK_PEG_C + OK_PEG_D)],
+               [(-OK_PEG_X, OK_PEG_X), (-OK_BEAM - 0.02, OK_BEAM + 0.01),
+                (OK_PEG_C - OK_PEG_D, OK_PEG_C + OK_PEG_D)]]),
+        piece("osen-a", "Osen", [[(-OK_PEG_X, OK_PEG_X),
+                                 (-OK_BEAM, OK_PEG_TOP),
+                                 (-OK_PEG_C - OK_PEG_D, -OK_PEG_C + OK_PEG_D)]]),
+        piece("osen-b", "Osen", [[(-OK_PEG_X, OK_PEG_X),
+                                 (-OK_BEAM, OK_PEG_TOP),
+                                 (OK_PEG_C - OK_PEG_D, OK_PEG_C + OK_PEG_D)]]),
+    ],
+    {"part-b": [0.0, 0.0, 0.26], "osen-a": [0.0, 0.20, 0.0],
+     "osen-b": [0.0, 0.20, 0.0]},
+    "A long half-lap splice in which each tenon runs past the other timber's "
+    "shoulder: its nose is carried out 20 mm proud of the surface into a "
+    "shallow rebate, and two 大栓 driven down through the lap pin the two "
+    "halves together."
+)
+
+
 def mirror_x(j):
     """Mirror a joint through the x=0 plane.
 
@@ -733,7 +795,8 @@ def mirror_x(j):
 
 JOINTS += [mirror_x(j) for j in (TASUKI, SHITA_WARI, HANA_SEN,
                                  UWA_WARI, UWA_KOMISEN)]
-JOINTS += [NAGA, KATA_KAMA, SAGE_KAMA, SQ_SHIHOU, KATAGI]
+JOINTS += [NAGA, KATA_KAMA, SAGE_KAMA, SQ_SHIHOU, KATAGI,
+           OKKAKE_MOCHI]
 
 
 def main(argv):
