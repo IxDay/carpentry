@@ -675,6 +675,42 @@ SQ_SHIHOU = joint(
 )
 
 
+# ---------------------------------------------------------------------------
+# 傾ぎ大入れ: a horizontal member housed full-section into the post's face, but
+# with the seam cut at a slope instead of square. The beam's end runs deeper at
+# the bottom, in under the post's overhanging cheek, so the post carries the
+# whole load in bearing on the slope and the beam cannot lift out. The beam is
+# withdrawn straight along its own axis; no key is needed.
+KATAGI_TOP, KATAGI_BOT = 0.44, 0.32
+KATAGI_FACE = -0.06         # the post's -x face, where the seam is cut
+KATAGI_DEEP = -0.02         # how far the heel runs into the post
+
+# Cross-sections in the x-y plane, extruded along z: the rebate is cut straight
+# across the post's width, and the beam's slanted end spans its full width.
+# Both are counter-clockwise; the post's starts at a vertex the bake's fan can
+# see the whole of (the rebate would trap a fan started elsewhere).
+KATAGI_POST = [(0.06, 0.0), (0.06, 0.72), (-0.06, 0.72),
+               (-0.06, KATAGI_TOP), (KATAGI_DEEP, KATAGI_BOT),
+               (-0.06, KATAGI_BOT), (-0.06, 0.0)]
+KATAGI_BEAM = [(-0.64, KATAGI_BOT), (KATAGI_DEEP, KATAGI_BOT),
+               (KATAGI_FACE, KATAGI_TOP), (-0.64, KATAGI_TOP)]
+
+KATAGI = joint(
+    "katagi-ooire", "Katagi-ooire", "傾ぎ大入れ",
+    [
+        piece("part-a", "Post", [], extra=loft(
+            2, -0.06, 0.06, KATAGI_POST, KATAGI_POST)),
+        piece("part-b", "Beam", [], extra=loft(
+            2, -0.06, 0.06, KATAGI_BEAM, KATAGI_BEAM)),
+    ],
+    {"part-b": [-0.30, 0.0, 0.0]},
+    "A full-section housing with the seam cut at a slope rather than square: "
+    "the beam's end runs 40 mm deeper at the bottom, under the post's "
+    "overhanging cheek, so the load bears on the slope and the beam cannot be "
+    "lifted out."
+)
+
+
 def mirror_x(j):
     """Mirror a joint through the x=0 plane.
 
@@ -697,7 +733,7 @@ def mirror_x(j):
 
 JOINTS += [mirror_x(j) for j in (TASUKI, SHITA_WARI, HANA_SEN,
                                  UWA_WARI, UWA_KOMISEN)]
-JOINTS += [NAGA, KATA_KAMA, SAGE_KAMA, SQ_SHIHOU]
+JOINTS += [NAGA, KATA_KAMA, SAGE_KAMA, SQ_SHIHOU, KATAGI]
 
 
 def main(argv):

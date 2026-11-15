@@ -220,8 +220,8 @@ python3 author_joint.py daimochi-tsugi  # just one, by id
 ```
 
 The Sketchfab collection is all splices; the column-and-beam (`shikuchi`)
-families on the reference sheet have no licensed model, so thirteen joints are built
-here (twelve `shikuchi` plus one splice). Each joint is defined in the closed pose
+families on the reference sheet have no licensed model, so fourteen joints are built
+here (thirteen `shikuchi` plus one splice). Each joint is defined in the closed pose
 as a list of axis-aligned
 boxes to add minus a list of boxes to cut — that is enough for square tenons,
 mortises, housings, corner notches and round pegs. The boundary is extracted on
@@ -232,7 +232,10 @@ the same welded, flat-normal, per-face polygon form `import_joint.py` produces.
 
 Box CSG cannot taper, so driven wedges and pegs are built with `loft()` instead:
 two parallel cross-sections (the same point count, counter-clockwise seen from
-+axis) joined by planar side quads. `mirror_x()` flips a whole joint through
++axis) joined by planar side quads. Two identical sections give a constant
+prism, which is how a rebate or an end face can be cut at a slope without any
+polygon clipping: the slanted outline lives in the section (`katagi-ooire` is a
+post and a beam shaped that way). `mirror_x()` flips a whole joint through
 x = 0, reversing each face and flipping the normals and `assemble` x; the `小根
 ホゾ` family is modelled on the readable side and mirrored so its mortise mouth
 faces the site camera at `38deg 64deg`.
@@ -244,9 +247,10 @@ withdraw them along their own axis and then move them aside without cutting
 through the timber. Coordinates are metres, on the same 120 mm timber scale as
 the imported models, so the standard bake flags apply.
 
-`compile_solid` only handles boxes, and `loft()` only straight tapers, so a
-sloped hook face or a dovetail flank still has to be approximated by hand or
-added as a face list; the `片鎌` hook is kept square so it stays box work. The geometry is original, not derived from a
+`compile_solid` only handles boxes, and `loft()` joins two straight sections,
+so a face that twists (a compound slope) still has to be approximated by hand or
+added as a face list; the `片鎌` hook is kept square so it stays box work. The
+geometry is original, not derived from a
 Sketchfab model; the sources credit the project and the reference sheet, and are
 released CC BY 4.0. After regenerating, run `check_sources.py` before baking.
 
@@ -294,7 +298,7 @@ python3 viewer.py --port 9000
 ## Legal / scope
 
 The models are reproduced under their own Creative Commons licenses (CC BY 4.0,
-except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The thirteen
+except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The fourteen
 authored joints (listed in [`../joints/README.md`](../joints/README.md)) are
 original geometry released CC BY 4.0. The site's
 search box uses MIT-licensed `@leeoniya/uFuzzy`, copied unmodified from npm; its

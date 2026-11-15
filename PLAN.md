@@ -56,7 +56,7 @@ systematic.
 | 四方差し | **have** | `shihou-sashi-shikuchi` |
 | 落し蟻 | **have** | `otoshi-ari-hozo-shikuchi` (beam form; the sheet shows the column-base form) |
 | 下げ鎌（大入れ） | **have** | `sage-kama-oire` |
-| 傾ぎ大入れ | **missing** | — |
+| 傾ぎ大入れ | **have** | `katagi-ooire` |
 
 Counting the five `小根ホゾ` variants separately, the sheet lists fourteen
 `shikuchi` entries. The first batch took coverage from one of them (雇いホゾ,
@@ -64,8 +64,10 @@ and only in its 車知栓 form) to three: 雇いホゾ (now both forms), 三方�
 二方差し. It also added the one splice family we were missing. The second batch
 covers the whole `小根ホゾ` cluster, taking `shikuchi` coverage to eight of the
 fourteen; the third adds the long through tenon and the fourth a one-sided kama,
-so ten of the fourteen; the fifth adds the dropped kama and the sixth the
-four-way 差し, so twelve. One family remains: `傾ぎ大入れ`.
+so ten of the fourteen; the fifth adds the dropped kama, the sixth the
+four-way 差し and the seventh the slanted housing, so thirteen authored. With
+`落し蟻` already in the imported set, every family on the sheet now has a model
+— though that one is the beam form rather than the column-base form drawn.
 
 An earlier draft of this table listed a `落し鎧` family and marked it missing.
 The left-hand label on the sheet is `落し蟻` (the drawn tenon is a single
@@ -104,8 +106,10 @@ same label.
 7. **四方差し** — four beams into one post, staggered through-tenons and plate
    komisen; all box work, but the tenons have to be stacked to avoid collisions.
    **Done** (sixth batch).
-8. **傾ぎ大入れ** — sloped seat; the only family left, and the only one that
-   still needs sloped faces in `author_joint.py`.
+8. **傾ぎ大入れ** — a full-section housing with a slanted seam, so the beam's
+   lower end runs in under the post's overhanging cheek and cannot lift. Both
+   timbers are prisms with a slanted cross-section, which `loft()` already
+   provides. **Done** (seventh batch).
 
 ## First batch — done
 
@@ -207,12 +211,28 @@ the post, so each beam's 竿 sits at its own level within the beam's depth
 dropped through the pair from the post's top face. Nothing needs cutting at a
 slope; the only lofted pieces are the two tapered keys.
 
+## Seventh batch
+
+| Asset | Japanese | Source | Pieces |
+|---|---|---|---|
+| `katagi-ooire` | 傾ぎ大入れ | authored, CC BY 4.0 | 2 |
+
+This took the collection from 30 to **31** and completed the sheet: all fourteen
+`shikuchi` families now have a model (thirteen authored, `落し蟻` imported in its
+beam form). A horizontal member is let full-section into the post's face, but
+the seam is cut at a slope instead of square: the beam's end runs 40 mm deeper
+at the bottom, in under the post's overhanging cheek, so the load bears on the
+slope and the beam cannot be lifted out. The two timbers are prisms whose cross-section is a slanted polygon, so
+this needed no new CSG — `loft()` with identical sections already makes a
+constant-section prism. The beam is withdrawn straight along its own axis;
+there is no key.
+
 ## Next
 
-Only `傾ぎ大入れ` is left. It needs `author_joint.py` extended beyond boxes and
-lofts (sloped quads) or hand-authored face lists: a sloped seat, so the beam
-drops onto the post and then slides down the incline as the joint tightens.
+Nothing on the reference sheet is missing. The open ends are the 追掛け大栓継ぎ
+持ち出し継ぎ variant (a longer, shouldered form of `okkake-daisen-tsugi`) and
+more splices, which are the strong part of the imported set already.
 
-For each: author or capture the geometry, verify the closed pose, add `approach`
-where a seat is sloped or a dovetail has to drop before sliding, then bake,
-preview, validate and rebuild `docs/`.
+For any new joint: author or capture the geometry, verify the closed pose, add
+`approach` where a seat is sloped or a dovetail has to drop before sliding, then
+bake, preview, validate and rebuild `docs/`.

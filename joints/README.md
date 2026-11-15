@@ -1,11 +1,11 @@
 # joints
 
-Thirty Japanese timber joints (継ぎ手 / 仕口) in a pastel paper-sunrise
+Thirty-one Japanese timber joints (継ぎ手 / 仕口) in a pastel paper-sunrise
 style. Seventeen are from the [thejoinery](https://sketchfab.com/thejoinery)
-collection on Sketchfab, rebuilt and baked; the other thirteen, with no licensed
+collection on Sketchfab, rebuilt and baked; the other fourteen, with no licensed
 source model, are authored in this repository from the reference sheet
 柱（軸組）の納まり, with [`tools/author_joint.py`](../tools/author_joint.py)
-(twelve column-and-beam `shikuchi` joints, one splice). There is **no garden or
+(thirteen column-and-beam `shikuchi` joints, one splice). There is **no garden or
 ground plane**: the timbers float against the paper backdrop, which keeps the
 focus on the cut geometry.
 
@@ -31,6 +31,7 @@ Names are romanised; `part-a`/`part-b` are the two main timbers, `key`,
 | [`kakushi-kanawa-tsugi`](https://sketchfab.com/3d-models/kakushi-kanawa-tsugi-d3dbb63c57554cf1852724d510cb63e2) | 隠し金輪継ぎ | CC BY 4.0 | 4 |
 | [`kanawa-tsugi`](https://sketchfab.com/3d-models/kanawa-tsugi-713b9b3a98344094a008535738348791) | 金輪継ぎ | CC BY 4.0 | 3 |
 | [`kata-kama-hozo-sashi`](../tools/author_joint.py) | 片鎌ホゾ差し | CC BY 4.0 (authored) | 2 |
+| [`katagi-ooire`](../tools/author_joint.py) | 傾ぎ大入れ | CC BY 4.0 (authored) | 2 |
 | [`komisen-inro-tsugi`](https://sketchfab.com/3d-models/komisen-inro-tsugi-ee2d1506029e41068772c19fae51df96) | 込み栓入れ枘継ぎ | CC BY 4.0 | 3 |
 | [`koshikake-ari-tsugi`](https://sketchfab.com/3d-models/koshikake-ari-tsugi-6a06924b8c5243c0beee65e5535d1820) | 腰掛け蟻継ぎ | CC BY 4.0 | 2 |
 | [`meji-tsukikake-awase-tsugi`](https://sketchfab.com/3d-models/meji-tsukikake-awase-tsugi-64cc903d315b40d6a5f8f6086befa1fd) | 目地突掛け合わせ継ぎ | CC BY 4.0 | 2 |
@@ -59,8 +60,8 @@ The seventeen Sketchfab models are by **thejoinery**
 (<https://sketchfab.com/thejoinery>). Every `sources/<id>.json` repeats the
 title, author, canonical URL, license and the change list in its `source`
 object, and the same credit is embedded in each GLB's `asset.copyright`. The
-thirteen authored joints carry the project as author and credit the reference sheet
-they were drawn from.
+fourteen authored joints carry the project as author and credit the reference
+sheet they were drawn from.
 
 ## Changes from the source models
 
@@ -108,10 +109,10 @@ The Sketchfab models are authored in millimetres and exploded. For each one:
 The author's exploded arrangement is kept in the static GLB. The `assemble`
 offsets in each source close the joint for the animation below.
 
-The thirteen authored joints (`daimochi-tsugi`, `yatoi-hozo-shikuchi`,
+The fourteen authored joints (`daimochi-tsugi`, `yatoi-hozo-shikuchi`,
 `sampo-sashi-shikuchi`, `niho-sashi-shikuchi`,
 `naga-hozo-sashi-komisen-uchi`, `kata-kama-hozo-sashi`, `sage-kama-oire`,
-`shihou-sashi-shikuchi`, and the five `小根ホゾ` variants)
+`shihou-sashi-shikuchi`, `katagi-ooire`, and the five `小根ホゾ` variants)
 are different in kind: they are modelled to the reference sheet already
 **closed**, then exploded for the animation, rather than captured exploded and
 closed in place. `author_joint.py` builds each timber from axis-aligned boxes
@@ -121,9 +122,9 @@ express, are lofted between two parallel sections. They share the same timbers,
 scale, normals, bake and animation as the imported set, and are checked the same
 way (`tools/check_sources.py`: closed pose watertight and manifold, consistent
 winding, zero volumetric overlap between timbers, every mating face in contact).
-`daimochi-tsugi` is a splice; the other twelve are `shikuchi` (loose tenon,
+`daimochi-tsugi` is a splice; the other thirteen are `shikuchi` (loose tenon,
 two-/three-/four-way `差し`, the `小根ホゾ` two-tier tenon family, the long
-through tenon, the one-sided kama and the 下げ鎌) and were
+through tenon, the one-sided kama, the 下げ鎌 and the slanted housing) and were
 added because the reference sheet is almost entirely column-and-beam work while
 the imported collection is almost entirely splices.
 
@@ -155,6 +156,15 @@ the upper half, and each long tenon passes through the post and 30 mm into the
 end of the beam opposite, so the four members tie one another. One tapered
 plate `込み栓` drops through each pair from the post's top face and stands a
 little proud, ready to be trimmed flush.
+
+`katagi-ooire` is the fully housed joint with the seam cut at a slope instead
+of square. The beam is let into the post's face at full section, but its end
+runs 40 mm deeper at the bottom, into a matching triangular rebate, so the lower
+end sits in under the post's overhanging cheek and the upper end is flush. The
+whole load bears on the sloped face and the beam cannot be lifted out; it is
+withdrawn straight along its own axis, and no key is needed. Both timbers are
+constant-section prisms (`loft()` with identical top and bottom sections) whose
+outline carries the slope, so nothing had to be cut at an angle.
 
 ## Assemble animation
 
@@ -204,11 +214,11 @@ The capture JSON comes from `tools/sketchfab_capture.mjs`; see
 [`tools/README.md`](../tools/README.md). Use `--no-animation` to bake without
 the `assemble` clip, or `--fps` to change its sample rate.
 
-The thirteen authored joints have no capture step; regenerate their sources from the
+The fourteen authored joints have no capture step; regenerate their sources from the
 joint definitions, then bake and preview the same way:
 
 ```sh
-python3 author_joint.py                 # rewrites all thirteen sources
+python3 author_joint.py                 # rewrites all fourteen sources
 python3 author_joint.py daimochi-tsugi  # or one
 ```
 
@@ -257,7 +267,7 @@ together, where the key goes):
 - Sketchfab model by thejoinery (no animation) —
   <https://sketchfab.com/3d-models/kanawa-tsugi-713b9b3a98344094a008535738348791>.
 
-Used to author the thirteen joints with no source model (shapes, proportions, which
+Used to author the fourteen joints with no source model (shapes, proportions, which
 face each mortise opens on, where the key goes):
 
 - `joints.jpg`, `joints-2.jpg` — reference sheets of `継ぎ手` and `仕口`
@@ -277,6 +287,16 @@ face each mortise opens on, where the key goes):
   tenoned into one post from all four faces; the tenons pass through the post
   to fix the member opposite, and the red member in the figure is the
   `車知栓`.
+- 建築用語集, *傾き大入れ* — <http://kenchikuyogo.com/?page_id=3357>: a
+  post-and-beam joint that carries the whole load into the post by cutting the
+  beam at a slant and hooking its lower part onto the post, rather than relying
+  on the tenon's cross-section alone.
+- 建築用語.net, *傾ぎ大入れ* — <https://architectjiten.net/ag14/ag14_270.html>:
+  a wooden `仕口` between post and 胴差, 窓台 or 敷桁 in which the seam between
+  the two members is slanted rather than square.
+- 建築用語集, *追(大)入れ* — <http://kenchikuyogo.com/?page_id=1619>: the housed
+  joint the slanted form is cut from; the member is sprung into a shallow
+  recess and wedged so the joint does not open.
 - 福田 敏幸, *柱と梁の組み方で「四方差し」とは* —
   <https://ameblo.jp/kominka-kenhokunagasaki/entry-12313908760.html>: opposite
   members joined with long tenons one above the other and tied with
