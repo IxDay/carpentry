@@ -1,13 +1,15 @@
 # joints
 
-Thirty-two Japanese timber joints (継ぎ手 / 仕口) in a pastel paper-sunrise
+Thirty-four Japanese timber joints (継ぎ手 / 仕口) in a pastel paper-sunrise
 style. Seventeen are from the [thejoinery](https://sketchfab.com/thejoinery)
-collection on Sketchfab, rebuilt and baked; the other fifteen, with no licensed
-source model, are authored in this repository from the reference sheet
-柱（軸組）の納まり, with [`tools/author_joint.py`](../tools/author_joint.py)
-(fourteen column-and-beam `shikuchi` joints, one splice). There is **no garden or
-ground plane**: the timbers float against the paper backdrop, which keeps the
-focus on the cut geometry.
+collection on Sketchfab, rebuilt and baked; the other seventeen, with no licensed
+source model, are authored in this repository. Fifteen of those are drawn from
+the reference sheet 柱（軸組）の納まり and two from published descriptions of
+joints the sheet does not show, with
+[`tools/author_joint.py`](../tools/author_joint.py) (fourteen column-and-beam
+`shikuchi` joints, three splices). The site keeps the two off-sheet joints in a
+second tab. There is **no garden or ground plane**: the timbers float against
+the paper backdrop, which keeps the focus on the cut geometry.
 
 ## Layout
 
@@ -25,6 +27,7 @@ Names are romanised; `part-a`/`part-b` are the two main timbers, `key`,
 | Asset | Japanese | License | Pieces |
 |---|---|---|---|
 | [`daimochi-tsugi`](../tools/author_joint.py) | 台持ち継ぎ | CC BY 4.0 (authored) | 3 |
+| [`doutsuki-ari-tsugi`](../tools/author_joint.py) | 胴付き蟻継ぎ | CC BY 4.0 (authored) | 2 |
 | [`hako-sen-tsugi`](https://sketchfab.com/3d-models/hako-sen-tsugi-881723f8c6794db5a9dbe9dc2fb3a69b) | 箱栓継ぎ | CC BY 4.0 | 4 |
 | [`hira-isuka-tsugi`](https://sketchfab.com/3d-models/hira-isuka-tsugi-bd6b1bea223144868199fee6a28baf5c) | 平居木継ぎ | CC BY 4.0 | 2 |
 | [`kakeawase-komisen-tsugi`](https://sketchfab.com/3d-models/kakeawase-komisen-tsugi-ac403983452d4524a7e23350c2ace36c) | 掛け合わせ込み栓継ぎ | CC BY 4.0 | 3 |
@@ -51,6 +54,7 @@ Names are romanised; `part-a`/`part-b` are the two main timbers, `key`,
 | [`shitakone-hozo-tasuki-gake`](../tools/author_joint.py) | 下小根ホゾ（襷掛付） | CC BY 4.0 (authored) | 2 |
 | [`shitakone-hozo-wari-kusabi`](../tools/author_joint.py) | 下小根ホゾ割り楔打ち | CC BY 4.0 (authored) | 4 |
 | [`suitsuki-sashi-shikuchi`](https://sketchfab.com/3d-models/suitsuki-sashi-shikuchi-2edef5371cb34374b9b6046e435603b6) | 吸付差し仕口 | CC BY 4.0 | 2 |
+| [`tsutsumikomi-nuki`](../tools/author_joint.py) | 包み込み貫 | CC BY 4.0 (authored) | 3 |
 | [`uwakone-hozo-uchi-nuki-komisen`](../tools/author_joint.py) | 上小根ホゾ打ち抜き込み栓打ち | CC BY 4.0 (authored) | 3 |
 | [`uwakone-hozo-wari-kusabi`](../tools/author_joint.py) | 上小根ホゾ割り楔打ち | CC BY 4.0 (authored) | 4 |
 | [`yatoi-hozo-shachi-sen-shiguchi`](https://sketchfab.com/3d-models/yatoi-hozo-shachi-sen-shiguchi-5f3cc05626b641f19bd42d30a976db3d) | 雇い枘車知栓仕口 | **CC BY-SA 4.0** | 5 |
@@ -61,8 +65,10 @@ The seventeen Sketchfab models are by **thejoinery**
 (<https://sketchfab.com/thejoinery>). Every `sources/<id>.json` repeats the
 title, author, canonical URL, license and the change list in its `source`
 object, and the same credit is embedded in each GLB's `asset.copyright`. The
-fifteen authored joints carry the project as author and credit the reference
-sheet they were drawn from.
+seventeen authored joints carry the project as author; fifteen credit the
+reference sheet they were drawn from, and the two off-sheet joints
+(`doutsuki-ari-tsugi`, `tsutsumikomi-nuki`) credit the published descriptions
+they were drawn from.
 
 ## Changes from the source models
 
@@ -110,11 +116,11 @@ The Sketchfab models are authored in millimetres and exploded. For each one:
 The author's exploded arrangement is kept in the static GLB. The `assemble`
 offsets in each source close the joint for the animation below.
 
-The fifteen authored joints (`daimochi-tsugi`, `yatoi-hozo-shikuchi`,
+The seventeen authored joints (`daimochi-tsugi`, `yatoi-hozo-shikuchi`,
 `sampo-sashi-shikuchi`, `niho-sashi-shikuchi`,
 `naga-hozo-sashi-komisen-uchi`, `kata-kama-hozo-sashi`, `sage-kama-oire`,
 `shihou-sashi-shikuchi`, `katagi-ooire`, `okkake-daisen-tsugi-mochidashi`,
-and the five `小根ホゾ` variants)
+`doutsuki-ari-tsugi`, `tsutsumikomi-nuki`, and the five `小根ホゾ` variants)
 are different in kind: they are modelled to the reference sheet already
 **closed**, then exploded for the animation, rather than captured exploded and
 closed in place. `author_joint.py` builds each timber from axis-aligned boxes
@@ -124,12 +130,12 @@ express, are lofted between two parallel sections. They share the same timbers,
 scale, normals, bake and animation as the imported set, and are checked the same
 way (`tools/check_sources.py`: closed pose watertight and manifold, consistent
 winding, zero volumetric overlap between timbers, every mating face in contact).
-`daimochi-tsugi` and `okkake-daisen-tsugi-mochidashi` are splices; the other
-fourteen are `shikuchi` (loose tenon,
+`daimochi-tsugi`, `okkake-daisen-tsugi-mochidashi` and `doutsuki-ari-tsugi`
+are splices; the other fourteen are `shikuchi` (loose tenon,
 two-/three-/four-way `差し`, the `小根ホゾ` two-tier tenon family, the long
-through tenon, the one-sided kama, the 下げ鎌 and the slanted housing) and were
-added because the reference sheet is almost entirely column-and-beam work while
-the imported collection is almost entirely splices.
+through tenon, the one-sided kama, the 下げ鎌, the slanted housing and the
+包み込み貫) and were added because the reference sheet is almost entirely
+column-and-beam work while the imported collection is almost entirely splices.
 
 In the `小根ホゾ` family the full-section 大根 sits at the beam's shoulder and,
 past the vertical step (腰), the narrower 小根 runs on into the post. The 下
@@ -183,6 +189,25 @@ sheet prints both names for this one drawing and shows only the prepared end,
 so the closed form here is an interpretation: the projecting tenon is what
 `持ち出し` names, and the noses are the visible result.
 
+`doutsuki-ari-tsugi` is the first of the two joints the reference sheets do not
+show. It is a dovetail cut in **plan** rather than in elevation: the 120 mm
+timber's full depth carries a tenon that is 60 mm wide at the shoulders and
+100 mm at the nose, so once the socket timber is lowered over it the two cannot
+be pulled apart along their length. The socket is open at the top and bottom, so
+the joint closes with a straight vertical drop and the shoulders meet at the
+seam. It is the 蟻継ぎ family's plan-cut counterpart to the imported
+`koshikake-ari-tsugi` and `shihou-ari-tsugi`, which cut their dovetails in
+elevation.
+
+`tsutsumikomi-nuki` is the second. The nuki runs 90 mm into the 120 mm post and
+its last 15 mm is rebated 15 mm up from the underside; the post keeps a 15 mm
+shelf under that rebate and a 30 mm wall beyond the end, so the end is wrapped
+rather than merely housed. Assembly needs three moves: offer the nuki up 15 mm,
+run it home over the shelf, then lower it onto the shelf, and drive a wedge into
+the 15 mm gap above its back at the mouth. The `approach` path in the source
+records those moves, so the animation shows the end being caught rather than
+sliding straight in.
+
 ## Assemble animation
 
 Each joint GLB carries one glTF animation named `assemble` (24 fps, ~6 s,
@@ -202,8 +227,9 @@ Withdrawing a key on the straight diagonal to its exploded place would drag it
 through the surrounding timber, so the axial slide is a separate step. A source may also carry an `approach`
 vector (kanawa-tsugi): that timber is first slid back along the pitch to the
 mated pose, then lifted straight up; assembly runs the other way, and the key
-is driven in last. The sloping joint line is why the slide is both z and y.
-That is
+is driven in last. The sloping joint line is why the slide is both z and y. A
+list of vectors gives a whole path instead (`tsutsumikomi-nuki` is offered up
+15 mm, slid home over the post's shelf and lowered onto it). That is
 what makes the lock readable: in `kanawa-tsugi` the upper half drops vertically
 and only then does the horizontal key enter; in `okkake-daisen-tsugi` both
 vertical keys lift/drop clear before the beams slide apart.
@@ -231,11 +257,11 @@ The capture JSON comes from `tools/sketchfab_capture.mjs`; see
 [`tools/README.md`](../tools/README.md). Use `--no-animation` to bake without
 the `assemble` clip, or `--fps` to change its sample rate.
 
-The fifteen authored joints have no capture step; regenerate their sources from the
+The seventeen authored joints have no capture step; regenerate their sources from the
 joint definitions, then bake and preview the same way:
 
 ```sh
-python3 author_joint.py                 # rewrites all fifteen sources
+python3 author_joint.py                 # rewrites all seventeen sources
 python3 author_joint.py daimochi-tsugi  # or one
 ```
 
@@ -284,7 +310,7 @@ together, where the key goes):
 - Sketchfab model by thejoinery (no animation) —
   <https://sketchfab.com/3d-models/kanawa-tsugi-713b9b3a98344094a008535738348791>.
 
-Used to author the fifteen joints with no source model (shapes, proportions, which
+Used to author the seventeen joints with no source model (shapes, proportions, which
 face each mortise opens on, where the key goes):
 
 - `joints.jpg`, `joints-2.jpg` — reference sheets of `継ぎ手` and `仕口`
@@ -305,8 +331,21 @@ face each mortise opens on, where the key goes):
   that fixes the hook depth.
 - Irie & Shimaya, *伝統的木造構法における下げ鎌および包み込み貫の耐力・剛性評価式に関する検討*,
   AIJ Technology Report 20(44), 2014, fig. 1 —
-  <https://www.jstage.jst.go.jp/article/aijt/20/44/20_95/_pdf/-char/ja>: a
-  through `貫` with a down-hook at the far end and the wedge above the tenon.
+  <https://www.jstage.jst.go.jp/article/aijt/20/44/20_95/_pdf/-char/ja>
+  (doi:10.3130/aijt.20.95): a through `貫` with a down-hook at the far end and
+  the wedge above the tenon; the 包み込み貫 test series J5-1–J5-7, a 120 post,
+  15–60 mm nuki and 90 mm insertion.
+- 伝統的構法データベース, datasheet 18 包み込み貫（曲げ） —
+  <http://www.denmoku-db.jp/publics/index/46/>: the test drawings and
+  load–deformation curves behind the AIJ paper, including the 15 mm rebate on
+  the nuki's underside and the 30 mm post wall beyond its end.
+- 宮本 慎宏, *伝統的木造建築物の柱貫接合部の構造性能評価に関する研究*,
+  平成29年度 建築分野 No.7, 香川大学, fig. 2 — the T-type specimen with a
+  105 mm post and nuki, 90 mm insertion, and the (a) 包み込み貫 / (b) 下げ鎌
+  elevations used to fix the rebate, shelf and wedge.
+- 建築用語.net, *蟻継ぎ* — <https://architectjiten.net/ag14/ag14_061.html>: a
+  splice with a dovetail (蟻) cut on one member's end and a matching socket in
+  the other; the flared tenon resists being pulled straight apart.
 - 建築用語集, *四方差し* — <http://kenchikuyogo.com/?page_id=5746>: members
   tenoned into one post from all four faces; the tenons pass through the post
   to fix the member opposite, and the red member in the figure is the

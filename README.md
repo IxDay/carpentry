@@ -1,6 +1,6 @@
 # Japanese joinery
 
-Thirty-two Japanese timber joints (継ぎ手 and 仕口) as interactive 3D models that
+Thirty-four Japanese timber joints (継ぎ手 and 仕口) as interactive 3D models that
 assemble and come apart, with the tools that rebuild them and the site that shows
 them: **<https://ixday.github.io/carpentry/>**.
 
@@ -8,10 +8,12 @@ Seventeen models are by [thejoinery](https://sketchfab.com/thejoinery) on
 Sketchfab (CC BY 4.0, one CC BY-SA 4.0). They were read from the public viewer,
 split into timbers, re-lit with a baked paper-sunrise look, given an `assemble`
 animation, and corrected where the author's pose was not the true closed joint.
-Fifteen joints with no licensed source model (fourteen column-and-beam
-`shikuchi`, two splices) are authored in this repository from the reference
-sheet, using `tools/author_joint.py`. Per-model links, attribution, the change
-list and the references used are in [`joints/README.md`](joints/README.md).
+Seventeen joints with no licensed source model (fourteen column-and-beam
+`shikuchi`, three splices) are authored in this repository, using
+`tools/author_joint.py`: fifteen from the reference sheet and two from published
+descriptions of joints the sheet does not show. Per-model links, attribution,
+the change list and the references used are in
+[`joints/README.md`](joints/README.md).
 
 ## Layout
 
@@ -87,7 +89,7 @@ python3 validate.py ../joints
 python3 build_site.py --repo-url https://github.com/IxDay/carpentry
 ```
 
-The `author_joint.py` line only touches the fifteen authored sources; the imported
+The `author_joint.py` line only touches the seventeen authored sources; the imported
 ones come from captures. `--no-animation` drops the `assemble` clip. Importing a
 new Sketchfab model and checking an animation for timbers passing through each
 other are described in [`tools/README.md`](tools/README.md).
@@ -97,6 +99,6 @@ other are described in [`tools/README.md`](tools/README.md).
 The CC BY 4.0 models may be reused with attribution; each GLB's
 `asset.copyright` and `joints/sources/<id>.json` carry it. `yatoi-hozo-shachi-sen-shiguchi`
 is CC BY-SA 4.0: its baked GLB and pieces are a derivative and are distributed
-under the same license. The fifteen authored joints (two splices and fourteen
+under the same license. The seventeen authored joints (three splices and fourteen
 column-and-beam `shikuchi`, listed in [`joints/README.md`](joints/README.md)) are
 original geometry, released CC BY 4.0.

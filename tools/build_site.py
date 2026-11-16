@@ -24,6 +24,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 TEMPLATE = os.path.join(HERE, "site_template.html")
 
+TABS = [
+    ("sheet", "On the sheets",
+     "Every family printed on the two reference sheets."),
+    ("extra", "Off the sheets",
+     "Joints the reference sheets do not show, authored for this collection."),
+]
+DEFAULT_TAB = TABS[0][0]
+
 REFERENCES = [
     ("JAANUS, kanawa tsugi 金輪継",
      "https://projects.mcah.columbia.edu/jaanus/node/3413"),
@@ -58,6 +66,7 @@ def esc(text):
 
 def load_joints(joints_dir):
     src_dir = os.path.join(joints_dir, "sources")
+    known = {tid for tid, _, _ in TABS}
     joints = []
     for name in sorted(os.listdir(src_dir)):
         if not name.endswith(".json"):
@@ -72,25 +81,58 @@ def load_joints(joints_dir):
         if not os.path.exists(glb):
             print("skipping %s: no GLB" % slug, file=sys.stderr)
             continue
+        tab = lv.get("tab", DEFAULT_TAB)
+        if tab not in known:
+            print("note: %s has unknown tab %r, using %r" % (slug, tab, DEFAULT_TAB),
+                  file=sys.stderr)
+            tab = DEFAULT_TAB
         joints.append({
             "slug": slug,
             "title": lv["title"],
             "jp": lv["jp"],
+            "tab": tab,
             "pieces": len(lv["pieces"]),
             "source": lv["source"],
             "glb": glb,
             "poster": os.path.join(joints_dir, "previews", "sunset_%s.png" % slug),
         })
+    order = {tid: i for i, (tid, _, _) in enumerate(TABS)}
+    joints.sort(key=lambda j: (order[j["tab"]], j["slug"]))
     return joints
 
 
-def nav_item(j):
-    return ('        <li><a href="#%s"><span class="name">%s</span>'
+def tab_counts(joints):
+    counts = {}
+    for j in joints:
+        counts[j["tab"]] = counts.get(j["tab"], 0) + 1
+    return counts
+
+
+def nav_item(j, counts):
+    hidden = "" if j["tab"] == DEFAULT_TAB else " hidden"
+    return ('        <li data-tab="%s"%s><a href="#%s"><span class="name">%s</span>'
             '<span class="jp" lang="ja">%s</span></a></li>'
-            % (j["slug"], esc(j["title"]), esc(j["jp"])))
+            % (j["tab"], hidden, j["slug"], esc(j["title"]), esc(j["jp"])))
 
 
-def section(j):
+def tab_bar(joints):
+    counts = tab_counts(joints)
+    out = []
+    first = True
+    for tid, label, note in TABS:
+        if not counts.get(tid):
+            continue
+        out.append(
+            '        <button type="button" role="tab" id="tab-%s" data-tab="%s"'
+            ' data-note="%s" aria-selected="%s" tabindex="%s" aria-controls="joint-list">'
+            '%s <span class="count">%d</span></button>'
+            % (tid, tid, esc(note), "true" if first else "false",
+               "0" if first else "-1", esc(label), counts[tid]))
+        first = False
+    return "\n".join(out)
+
+
+def section(j, counts):
     s = j["source"]
     sa = "SA" in s["license"]
     note = " Shared alike under the same license." if sa else ""
@@ -98,7 +140,8 @@ def section(j):
     origin = (' <a href="%s">Original on Sketchfab</a>.' % esc(s["url"])
               if "sketchfab.com" in s["url"] else
               ' <a href="%s">Source in this repository</a>.' % esc(s["url"]))
-    return """      <section class="joint" id="{slug}">
+    hidden = "" if j["tab"] == DEFAULT_TAB else " hidden"
+    return """      <section class="joint" id="{slug}" data-tab="{tab}" data-tab-count="{count}"{hidden}>
         <header>
           <h2><a href="#{slug}">{title}<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">{jp}</p>
@@ -115,6 +158,7 @@ def section(j):
           <a href="{license_url}">{license}</a>, modified.{note}{origin}</p>
       </section>""".format(
         slug=j["slug"], title=esc(j["title"]), jp=esc(j["jp"]), pieces=j["pieces"],
+        tab=j["tab"], count=counts[j["tab"]], hidden=hidden,
         author=esc(s["author"]), author_url=esc(s["authorUrl"]),
         license=esc(s["license"]), license_url=esc(s["licenseUrl"]),
         origin=origin, note=note)
@@ -122,15 +166,33 @@ def section(j):
 
 def footer(repo_url, joints=()):
     refs = "\n".join('        <li><a href="%s">%s</a></li>' % (esc(u), esc(t)) for t, u in REFERENCES)
-    authored = [j for j in joints if "sketchfab.com" not in j["source"]["url"]]
     words = ("zero one two three four five six seven eight nine ten eleven twelve "
              "thirteen fourteen fifteen sixteen seventeen eighteen nineteen").split()
-    count = words[len(authored)] if len(authored) < len(words) else str(len(authored))
-    authored_line = (
-        "      <p>%s joints with no licensed source model &mdash; every "
-        "family on the reference sheet, splices included &mdash; are authored "
-        "for this collection from 柱（軸組）の納まり and released CC BY "
-        "4.0.</p>" % count.capitalize()) if authored else ""
+
+    def number(n):
+        return words[n] if n < len(words) else str(n)
+
+    authored = [j for j in joints if "sketchfab.com" not in j["source"]["url"]]
+    sheet = [j for j in authored if j.get("tab", DEFAULT_TAB) == DEFAULT_TAB]
+    extra = [j for j in authored if j.get("tab", DEFAULT_TAB) != DEFAULT_TAB]
+    authored_line = ""
+    if sheet:
+        authored_line = (
+            "      <p>%s joints with no licensed source model &mdash; every "
+            "family on the reference sheets, splices included &mdash; are authored "
+            "for this collection from 柱（軸組）の納まり and released CC BY "
+            "4.0.</p>" % number(len(sheet)).capitalize())
+    if extra:
+        if repo_url:
+            cited = ('<a href="%s/joints/README.md">joints/README.md</a>'
+                     % esc(repo_url.rstrip("/")))
+        else:
+            cited = "joints/README.md"
+        authored_line += (
+            "\n      <p>%s more, in the <em>Off the sheets</em> tab, go beyond the "
+            "sheets: a dovetail splice and a 包み込み貫 tie, authored from the "
+            "sources cited in %s.</p>"
+            % (number(len(extra)).capitalize(), cited))
     repo = ('\n      <p>Source and tooling: <a href="%s">%s</a>. Per-joint notes '
             'and references: <a href="%s/joints/README.md">joints/README.md</a>.</p>'
             % (esc(repo_url), esc(repo_url), esc(repo_url.rstrip("/")))
@@ -188,8 +250,10 @@ def build(joints_dir, out, repo_url):
 
     with open(TEMPLATE) as fh:
         page = fh.read()
-    page = (page.replace("{{NAV}}", "\n".join(nav_item(j) for j in joints))
-                .replace("{{SECTIONS}}", "\n".join(section(j) for j in joints))
+    counts = tab_counts(joints)
+    page = (page.replace("{{TABS}}", tab_bar(joints))
+                .replace("{{NAV}}", "\n".join(nav_item(j, counts) for j in joints))
+                .replace("{{SECTIONS}}", "\n".join(section(j, counts) for j in joints))
                 .replace("{{FOOTER}}", footer(repo_url, joints))
                 .replace("{{COUNT}}", str(len(joints)))
                 .replace("{{OG_IMAGE}}", joints[0]["slug"]))

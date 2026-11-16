@@ -4,10 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Japanese joinery</title>
-  <meta name="description" content="Twenty-one Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble and come apart.">
+  <meta name="description" content="{{COUNT}} Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble and come apart.">
   <meta property="og:title" content="Japanese joinery">
-  <meta property="og:description" content="Twenty-one Japanese timber joints as interactive 3D models that assemble and come apart.">
+  <meta property="og:description" content="{{COUNT}} Japanese timber joints as interactive 3D models that assemble and come apart.">
   <meta property="og:image" content="posters/{{OG_IMAGE}}.png">
+  <noscript>
+    <style>
+      /* Without the script every joint stays visible; the tabs do nothing. */
+      nav.index .tabs, nav.index .tab-note { display: none; }
+      nav.index li[hidden], section.joint[hidden] { display: revert; }
+    </style>
+  </noscript>
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
   <script src="vendor/ufuzzy.min.js"></script>
   <style>
@@ -71,6 +78,21 @@
     }
     nav.index h1 { font: 600 1.05rem/1.3 Georgia, "Iowan Old Style", serif; margin: 0 0 .25rem; letter-spacing: .01em; }
     nav.index p { margin: 0 0 1.25rem; color: var(--muted); font-size: .85rem; }
+    nav.index .tabs { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .4rem; }
+    nav.index .tabs button {
+      flex: 1 1 0; min-width: 0;
+      font: inherit; font-size: .78rem; line-height: 1.25;
+      padding: .4rem .5rem;
+      color: var(--muted); background: none;
+      border: 1px solid var(--line); border-radius: 999px;
+      cursor: pointer; text-align: center;
+    }
+    nav.index .tabs button:hover { border-color: var(--accent); }
+    nav.index .tabs button[aria-selected="true"] {
+      color: var(--ink); background: var(--card); border-color: var(--accent);
+    }
+    nav.index .tabs .count { color: var(--jp); font-variant-numeric: tabular-nums; }
+    nav.index .tab-note { margin: 0 0 .9rem; font-size: .78rem; line-height: 1.35; }
     nav.index .search { margin: 0 0 .9rem; }
     nav.index .search input {
       display: block; width: 100%;
@@ -216,7 +238,7 @@
       section.joint h2 a .hash { display: none; }
       section.joint .jp { font-size: .9rem; }
       section.joint header::after {
-        content: counter(joint) " / {{COUNT}}";
+        content: counter(joint) " / " attr(data-tab-count);
         position: absolute; right: 1rem; top: max(1rem, calc(env(safe-area-inset-top) + .4rem));
         font-size: .75rem; color: var(--muted); letter-spacing: .04em;
       }
@@ -247,6 +269,10 @@
       <button class="menu-close" type="button" aria-label="Close the menu">&times;</button>
       <h1>Japanese joinery</h1>
       <p>{{COUNT}} joints that assemble and come apart.</p>
+      <div class="tabs" role="tablist" aria-label="Which joints">
+{{TABS}}
+      </div>
+      <p class="tab-note" id="tab-note"></p>
       <div class="search">
         <input id="search" type="search" placeholder="Search joints" autocomplete="off"
             spellcheck="false" aria-label="Search joints" aria-controls="joint-list"
@@ -267,6 +293,79 @@
   <script>
     const viewers = document.querySelectorAll('model-viewer');
     const links = new Map([...document.querySelectorAll('nav.index a')].map(a => [a.hash.slice(1), a]));
+    const sections = [...document.querySelectorAll('section.joint')];
+    const navList = document.getElementById('joint-list');
+    const tabButtons = [...document.querySelectorAll('.tabs button')];
+    const tabNote = document.getElementById('tab-note');
+    const searchInput = document.getElementById('search');
+    const searchStatus = document.getElementById('search-status');
+    let tab = (tabButtons.find(b => b.getAttribute('aria-selected') === 'true') || tabButtons[0] || {}).dataset?.tab || 'sheet';
+    let cursor = -1, lastStep = 0;
+
+    // One list per tab: the index items and the sections carry data-tab, and the
+    // tab bar switches both. A hash pointing at a joint in the other tab selects
+    // that tab first, which is why the server leaves the first tab visible.
+    const rows = [...navList.children].map(li => {
+      const a = li.querySelector('a');
+      const jp = li.querySelector('.jp');
+      return {
+        li, a, tab: li.dataset.tab,
+        hay: [a.querySelector('.name').textContent.trim(),
+              jp ? jp.textContent.trim() : '',
+              a.hash.slice(1)].join(' '),
+      };
+    });
+    const uf = new uFuzzy({
+      unicode: true,
+      interSplit: "[^\\p{L}\\d']+",
+      intraSplit: "\\p{Ll}\\p{Lu}",
+      intraBound: "\\p{L}\\d|\\d\\p{L}|\\p{Ll}\\p{Lu}",
+      intraChars: "[\\p{L}\\d']",
+      intraContr: "'\\p{L}{1,2}\\b",
+      intraMode: 1,
+    });
+
+    const resetNav = () => {
+      rows.forEach(r => { r.li.hidden = r.tab !== tab; navList.append(r.li); });
+      navList.closest('nav').scrollTop = 0;
+      searchStatus.hidden = true;
+      searchStatus.textContent = '';
+    };
+
+    const applyTab = (next, { scroll = false } = {}) => {
+      if (!tabButtons.some(b => b.dataset.tab === next)) return;
+      tab = next;
+      tabButtons.forEach(b => {
+        const on = b.dataset.tab === tab;
+        b.setAttribute('aria-selected', String(on));
+        b.tabIndex = on ? 0 : -1;
+      });
+      const button = tabButtons.find(b => b.dataset.tab === tab);
+      tabNote.textContent = button ? button.dataset.note : '';
+      sections.forEach(s => { s.hidden = s.dataset.tab !== tab; });
+      links.forEach(a => a.classList.remove('active'));
+      searchInput.value = '';
+      cursor = -1;
+      lastStep = 0;
+      resetNav();
+      if (scroll) {
+        const first = sections.find(s => s.dataset.tab === tab);
+        if (first) first.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }
+    };
+
+    tabButtons.forEach(b => b.addEventListener('click', () => applyTab(b.dataset.tab, { scroll: true })));
+    document.querySelector('.tabs').addEventListener('keydown', e => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const at = tabButtons.indexOf(document.activeElement);
+      if (at < 0) return;
+      e.preventDefault();
+      const step = e.key === 'ArrowRight' ? 1 : -1;
+      const next = tabButtons[(at + step + tabButtons.length) % tabButtons.length];
+      next.focus();
+      applyTab(next.dataset.tab, { scroll: true });
+    });
+    applyTab(tab);
 
     // Keep at most a few WebGL contexts alive: load a model near the viewport,
     // drop it once it is far away. Parsing a GLB and creating or destroying a WebGL
@@ -328,72 +427,41 @@
     mobile.addEventListener('change', () => setMenu(false));
     addEventListener('scroll', () => document.getElementById('hint')?.remove(), { once: true, passive: true, capture: true });
 
-    // Full-text search over the index: uFuzzy pre-filters the query against one
-    // haystack string per joint, ranks the hits and the list is reordered to the
-    // ranking. The options are uFuzzy's documented `unicode: true` set, so the
+    // Full-text search over the active tab: uFuzzy pre-filters the query against
+    // one haystack string per joint, ranks the hits and the list is reordered to
+    // the ranking. The options are uFuzzy's documented `unicode: true` set, so the
     // Japanese names are searchable as well as the romanised ones.
     {
-      const input = document.getElementById('search');
-      const status = document.getElementById('search-status');
-      const list = document.getElementById('joint-list');
-      const nav = list.closest('nav');
-      const rows = [...list.children].map(li => {
-        const a = li.querySelector('a');
-        const jp = li.querySelector('.jp');
-        return {
-          li, a,
-          hay: [a.querySelector('.name').textContent.trim(),
-                jp ? jp.textContent.trim() : '',
-                a.hash.slice(1)].join(' '),
-        };
-      });
-      const hay = rows.map(r => r.hay);
-      const uf = new uFuzzy({
-        unicode: true,
-        interSplit: "[^\\p{L}\\d']+",
-        intraSplit: "\\p{Ll}\\p{Lu}",
-        intraBound: "\\p{L}\\d|\\d\\p{L}|\\p{Ll}\\p{Lu}",
-        intraChars: "[\\p{L}\\d']",
-        intraContr: "'\\p{L}{1,2}\\b",
-        intraMode: 1,
-      });
-
-      const reset = () => {
-        rows.forEach(r => list.append(r.li));
-        rows.forEach(r => { r.li.hidden = false; });
-        nav.scrollTop = 0;
-        status.hidden = true;
-        status.textContent = '';
-      };
-
       const search = () => {
-        const q = input.value.trim();
-        if (!q) return reset();
-        const idxs = uf.filter(hay, q);
+        const q = searchInput.value.trim();
+        if (!q) return resetNav();
+        const pool = rows.filter(r => r.tab === tab);
+        const poolHay = pool.map(r => r.hay);
+        const idxs = uf.filter(poolHay, q);
         let hits = [];
         if (idxs && idxs.length) {
-          const info = uf.info(idxs, hay, q);
-          const order = info ? uf.sort(info, hay, q) : idxs;
+          const info = uf.info(idxs, poolHay, q);
+          const order = info ? uf.sort(info, poolHay, q) : idxs;
           const idx = info ? info.idx : idxs;
-          hits = order.map(i => rows[idx[i]]);
+          hits = order.map(i => pool[idx[i]]);
         }
-        hits.forEach(r => { r.li.hidden = false; list.append(r.li); });
         const found = new Set(hits);
-        rows.forEach(r => { if (!found.has(r)) r.li.hidden = true; });
-        nav.scrollTop = 0;
-        status.hidden = false;
-        status.textContent = hits.length
-          ? `${hits.length} of ${rows.length} joints`
-          : `No joints match “${q}”`;
+        rows.forEach(r => { r.li.hidden = r.tab !== tab || !found.has(r); });
+        hits.forEach(r => { r.li.hidden = false; navList.append(r.li); });
+        navList.closest('nav').scrollTop = 0;
+        searchStatus.hidden = false;
+        searchStatus.textContent = hits.length
+          ? `${hits.length} of ${pool.length} joints in this tab`
+          : `No joints match “${q}” in this tab`;
       };
 
-      input.addEventListener('input', search);
-      input.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && input.value) {
+      searchInput.addEventListener('input', search);
+      searchInput.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && searchInput.value) {
           e.preventDefault();
           e.stopPropagation();       // clear the query, do not close the menu
-          input.value = '';
-          reset();
+          searchInput.value = '';
+          resetNav();
         } else if (e.key === 'Enter') {
           const first = rows.find(r => !r.li.hidden);
           if (!first) return;
@@ -405,15 +473,16 @@
         if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
         if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
         e.preventDefault();
-        input.focus();
+        searchInput.focus();
       });
     }
 
     // One page = the visible height of the scroller, measured here (not 100dvh)
     // and again only when the window really changes (rotation, resize).
-    const pages = [...document.querySelectorAll('section.joint')];
+    const visiblePages = () => sections.filter(s => !s.hidden);
     const fit = () => {
       if (!mobile.matches) { document.documentElement.style.removeProperty('--page-h'); return; }
+      const pages = visiblePages();
       const at = pages.findIndex(s => s.getBoundingClientRect().top > -layoutEl.clientHeight / 2);
       document.documentElement.style.setProperty('--page-h', layoutEl.clientHeight + 'px');
       if (at >= 0) pages[at].scrollIntoView({ behavior: 'instant', block: 'start' });
@@ -421,31 +490,32 @@
     fit();
     addEventListener('resize', fit);
     mobile.addEventListener('change', fit);
-    document.querySelectorAll('section.joint').forEach(s => active.observe(s));
+    sections.forEach(s => active.observe(s));
 
-    // Up / Down step through the joints (also while a model has the focus).
-    const sections = [...document.querySelectorAll('section.joint')];
+    // Up / Down step through the joints in the active tab (also while a model has
+    // the focus).
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let cursor = -1, lastStep = 0;
     const current = () => {
+      const pages = visiblePages();
       let at = -1;
-      sections.forEach((s, i) => { if (s.getBoundingClientRect().top <= innerHeight * 0.35) at = i; });
+      pages.forEach((s, i) => { if (s.getBoundingClientRect().top <= innerHeight * 0.35) at = i; });
       return at;
     };
     addEventListener('keydown', e => {
       if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
       if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
       if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+      const pages = visiblePages();
       // while a smooth scroll is still running, count from where it is heading
       const from = performance.now() - lastStep < 900 ? cursor : current();
-      const to = Math.max(0, Math.min(sections.length - 1, from + (e.key === 'ArrowDown' ? 1 : -1)));
+      const to = Math.max(0, Math.min(pages.length - 1, from + (e.key === 'ArrowDown' ? 1 : -1)));
       if (to === from) return;   // past either end: let the page scroll normally
       e.preventDefault();
       e.stopPropagation();
       cursor = to;
       lastStep = performance.now();
-      sections[to].scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-      history.replaceState(null, '', '#' + sections[to].id);
+      pages[to].scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      history.replaceState(null, '', '#' + pages[to].id);
     }, true);
 
     document.querySelectorAll('button[data-replay]').forEach(b => b.addEventListener('click', () => {
@@ -453,6 +523,22 @@
       v.currentTime = 0;
       v.play();
     }));
+
+    // A link into the other tab (or a reload on one of its joints) selects that
+    // tab before scrolling to the joint.
+    const showFromHash = () => {
+      const id = location.hash.slice(1);
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (!el || !el.classList.contains('joint')) return;
+      if (el.dataset.tab !== tab) applyTab(el.dataset.tab);
+      fit();
+      requestAnimationFrame(() => {
+        if (!el.hidden) el.scrollIntoView({ behavior: 'instant', block: 'start' });
+      });
+    };
+    addEventListener('hashchange', showFromHash);
+    showFromHash();
   </script>
 </body>
 </html>

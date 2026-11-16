@@ -23,6 +23,7 @@ order in which to add the missing families.
 | `meji-tsukikake-awase-tsugi` | 目地突掛け合わせ継ぎ | 2 |
 | `miyajima-tsugi` | 宮島継ぎ | 3 |
 | `osaka-jo-otemon-hikae-bashira-tsugi` | 大阪城大手門控え柱継ぎ | 2 |
+| `doutsuki-ari-tsugi` | 胴付き蟻継ぎ | 2 |
 
 ### Column/beam joints (`shikuchi`)
 
@@ -31,6 +32,7 @@ order in which to add the missing families.
 | `yatoi-hozo-shachi-sen-shiguchi` | 雇い枘車知栓仕口 | 5 |
 | `yose-ari-hozo-shikuchi` | 寄せ蟻枘仕口 | 2 |
 | `otoshi-ari-hozo-shikuchi` | 落し蟻枘仕口 | 3 |
+| `tsutsumikomi-nuki` | 包み込み貫 | 3 |
 
 The splice set is strong. The `shikuchi` set is thin, while the reference sheet
 is almost entirely column-and-beam framing joints — the coverage gap is
@@ -250,15 +252,44 @@ down through the lap, each through both tenons, their heads left proud on top.
 The second timber is the first turned half round about the joint's axis, so the
 pair needs one part, not two.
 
+## Ninth batch — off the sheets
+
+| Asset | Japanese | Source | Pieces |
+|---|---|---|---|
+| `doutsuki-ari-tsugi` | 胴付き蟻継ぎ | authored, CC BY 4.0 | 2 |
+| `tsutsumikomi-nuki` | 包み込み貫 | authored, CC BY 4.0 | 3 |
+
+The first two joints neither reference sheet shows, taking the collection from
+32 to **34**. They are also the first to use the site's second tab, **Off the
+sheets**, so the sheet's 32 stay together and the new work is easy to find.
+
+`doutsuki-ari-tsugi` is the 蟻継ぎ family cut in **plan**: the full 120 mm depth
+carries a tenon 60 mm wide at the shoulders and 100 mm at the nose, and the
+socket is open top and bottom, so the joint closes with a straight vertical
+drop. The imported `koshikake-ari-tsugi` and `shihou-ari-tsugi` cut their
+dovetails in elevation; this is the other orientation.
+
+`tsutsumikomi-nuki` comes from the AIJ 2014 下げ鎌/包み込み貫 paper and the
+drafting in 宮本's 2017 report: a 30 × 120 nuki run 90 mm into a 120 post, its
+last 15 mm rebated 15 mm up from the underside, with a 15 mm shelf under the
+rebate, a 30 mm wall beyond the end, and a wedge in the 15 mm gap above its
+back. The source's `approach` is the first list-valued one: the nuki is offered
+up 15 mm, slid home over the shelf, then lowered onto it, and the bake walks
+that path in both directions.
+
 ## Next
 
-Nothing on the reference sheet is missing, and every `shikuchi` family now has
-its own model rather than a near neighbour. The imported set is strong in
-splices and thinner in column work, which is why the sheet was the right place
-to grow: fifteen of the thirty-two are authored from it. Further work would be new
-families rather than variations — a 蟻継ぎ cluster, or the 包み込み貫 that the
-down-kama research turned up — since the sheet's own list is exhausted.
+Nothing on either reference sheet is missing, and every `shikuchi` family now
+has its own model rather than a near neighbour. The sheet was the right place to
+grow first: fifteen of the thirty-four are authored from it, and the imported
+set is strong in splices but thinner in column work. The off-sheet tab is now
+open for families the sheets do not print, described in the literature rather
+than drawn there. Candidates found while researching this batch are the
+remaining 蟻継ぎ variants and the other 柱貫 joints (通し貫 and the various
+kama forms); each needs a source that fixes the insertion depth and the locking
+detail before it is authored.
 
 For any new joint: author or capture the geometry, verify the closed pose, add
 `approach` where a seat is sloped or a dovetail has to drop before sliding, then
-bake, preview, validate and rebuild `docs/`.
+bake, preview, validate and rebuild `docs/`. Off-sheet work should state which
+published description it was drawn from in the credit and `modifications`.

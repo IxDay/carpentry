@@ -913,8 +913,10 @@ def assemble_animation(lv, fps=24):
     shear them through the surrounding timber.
 
     ``approach`` optionally gives a timber a final slide: the vector, relative
-    to its closed pose, where it waits before sliding home (kanawa-tsugi's
-    upper half drops in clear of the hooks, then slides along the pitch).
+    to the closed pose, where it waits before sliding home (kanawa-tsugi's
+    upper half drops in clear of the hooks, then slides along the pitch). A
+    list of vectors gives a whole path of such poses, visited in order; the
+    tsutsumikomi-nuki needs three legs to enter its wrapped mortise.
     """
     offsets = lv.get("assemble") or {}
     approach = lv.get("approach") or {}
@@ -991,27 +993,56 @@ def assemble_animation(lv, fps=24):
                     v = list(off)
                 keys.append((t, v))
         elif pid in approach:
-            pre = [off[i] + approach[pid][i] for i in range(3)]
-            b_mid = b_out0 + 0.4 * (b_out1 - b_out0)
-            b_in_mid = b_in0 + 0.6 * (b_in1 - b_in0)
-            keys = []
-            for i in range(steps + 1):
-                t = i / float(fps)
-                if t <= b_out0:
-                    v = list(off)
-                elif t < b_mid:
-                    v = mix(off, pre, ease(t, b_out0, b_mid))
-                elif t < b_out1:
-                    v = mix(pre, home, ease(t, b_mid, b_out1))
-                elif t < b_in0:
-                    v = list(home)
-                elif t < b_in_mid:
-                    v = mix(home, pre, ease(t, b_in0, b_in_mid))
-                elif t < b_in1:
-                    v = mix(pre, off, ease(t, b_in_mid, b_in1))
-                else:
-                    v = list(off)
-                keys.append((t, v))
+            spec = approach[pid]
+            if spec and isinstance(spec[0], (list, tuple)):
+                # A path of poses from the closed joint outwards: the timber
+                # passes through each in turn, so a joint that must be offered
+                # up at height and then slid home only needs one track.
+                poses = ([off] +
+                         [[off[i] + w[i] for i in range(3)] for w in spec] +
+                         [home])
+
+                def along(u):
+                    n = len(poses) - 1
+                    k = min(n - 1, int(u * n))
+                    return mix(poses[k], poses[k + 1], smooth(u * n - k))
+
+                keys = []
+                for i in range(steps + 1):
+                    t = i / float(fps)
+                    if t <= b_out0:
+                        v = list(off)
+                    elif t < b_out1:
+                        v = along((t - b_out0) / (b_out1 - b_out0))
+                    elif t < b_in0:
+                        v = list(home)
+                    elif t < b_in1:
+                        v = along(1.0 - (t - b_in0) / (b_in1 - b_in0))
+                    else:
+                        v = list(off)
+                    keys.append((t, v))
+            else:
+                pre = [off[i] + spec[i] for i in range(3)]
+                b_mid = b_out0 + 0.4 * (b_out1 - b_out0)
+                b_in_mid = b_in0 + 0.6 * (b_in1 - b_in0)
+                keys = []
+                for i in range(steps + 1):
+                    t = i / float(fps)
+                    if t <= b_out0:
+                        v = list(off)
+                    elif t < b_mid:
+                        v = mix(off, pre, ease(t, b_out0, b_mid))
+                    elif t < b_out1:
+                        v = mix(pre, home, ease(t, b_mid, b_out1))
+                    elif t < b_in0:
+                        v = list(home)
+                    elif t < b_in_mid:
+                        v = mix(home, pre, ease(t, b_in0, b_in_mid))
+                    elif t < b_in1:
+                        v = mix(pre, off, ease(t, b_in_mid, b_in1))
+                    else:
+                        v = list(off)
+                    keys.append((t, v))
         else:
             keys = []
             for i in range(steps + 1):

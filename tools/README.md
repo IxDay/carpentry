@@ -16,7 +16,7 @@ A joint is described by `joints/sources/<id>.json`, a one-element list:
 | `id`, `title`, `jp` | slug, romanised name, Japanese name |
 | `pieces[].solids[].faces[]` | each face: `points`, `normal`, `color`, optional `grid` (forces its barycentric resolution so ear-clipped triangles of one concave face share edge samples). Coordinates are the **author's exploded pose**, in metres |
 | `assemble` | `{piece: [x, y, z]}`, the translation that takes each timber from the exploded pose to the **closed** joint |
-| `approach` | optional `{piece: [x, y, z]}`, a waiting stage: that timber first slides to `closed + approach` before leaving along the straight line (kanawa's slide along the pitch, a dovetail's slide along its groove) |
+| `approach` | optional `{piece: [x, y, z]}` waiting stage: that timber first slides to `closed + approach` before leaving along the straight line (kanawa's slide along the pitch, a dovetail's slide along its groove). A list of vectors is a path instead, visited in order (`tsutsumikomi-nuki`: raised, slid home, lowered) |
 | `rescaled` | the factor `rescale_joint.py` applied, if any |
 | `source` | author, URL, license, change list and credit text embedded in each GLB |
 
@@ -124,7 +124,9 @@ named `assemble`: closed → exploded → closed, sampled as node translations w
 linear interpolation. Keys and pegs (pieces much smaller than the main timber)
 are first withdrawn along their own long axis and only then moved aside; the
 timbers move after the keys are clear, and assembly runs the reverse order. A
-timber with an `approach` first slides to its waiting pose before leaving. This
+timber with an `approach` first slides to its waiting pose before leaving; a
+list of poses is walked in order, so a firmly wrapped joint is offered up,
+slid home and lowered. This
 keeps the keys out of the surrounding timber and makes the locking action
 legible. The GLB writer is `export.py`.
 
@@ -220,8 +222,10 @@ python3 author_joint.py daimochi-tsugi  # just one, by id
 ```
 
 The Sketchfab collection is all splices; the column-and-beam (`shikuchi`)
-families on the reference sheet have no licensed model, so fifteen joints are
-built here (fourteen `shikuchi` plus two splices). Each joint is defined in the
+families on the reference sheet have no licensed model, so seventeen joints are
+built here: fifteen from the sheet (thirteen `shikuchi` plus two splices) and
+two off-sheet joints from published descriptions (the plan-cut `胴付き蟻継ぎ`
+and the wrapped-nuki `包み込み貫`). Each joint is defined in the
 closed pose as a list of axis-aligned boxes to add minus a list of boxes to
 cut — that is enough for square tenons, mortises, housings, corner notches and
 round pegs. The boundary is extracted on the exact box grid (no voxels) by
@@ -252,7 +256,10 @@ so a face that twists (a compound slope) still has to be approximated by hand or
 added as a face list; the `片鎌` hook is kept square so it stays box work. The
 geometry is original, not derived from a
 Sketchfab model; the sources credit the project and the reference sheet, and are
-released CC BY 4.0. After regenerating, run `check_sources.py` before baking.
+released CC BY 4.0. The two off-sheet joints instead credit "published
+descriptions of the joint", carry `tab: "extra"` so the site shows them in its
+second tab, and may give `approach` as a whole path (`tsutsumikomi-nuki`). After
+regenerating, run `check_sources.py` before baking.
 
 ### `build_site.py` — the GitHub Pages site
 
@@ -266,8 +273,12 @@ Reads `joints/sources/*.json` (title, Japanese name, credit), copies every
 `joints/<id>.glb` and its sunset preview, and writes `docs/index.html` from
 `site_template.html`: one section per joint with a `#<id>` anchor, smooth
 scrolling, a `<model-viewer>` that plays the `assemble` clip and the Japanese
-name in light gray under the romanised one. Up / Down arrow keys step through the
-joints. Below 56 rem the index becomes a slide-in menu (button at the top left)
+name in light gray under the romanised one. Sources with `tab: "extra"` (joints
+neither sheet shows) appear under a second tab, **Off the sheets**, so the
+reference-sheet set stays a clean 32; the tab bar switches both the index and the
+sections, and a hash pointing at an off-sheet joint selects its tab first. Up /
+Down arrow keys step through the joints of the active tab. Below 56 rem the index
+becomes a slide-in menu (button at the top left)
 and every joint is a full-screen page: swipe up / down for the next / previous
 joint (scroll snapping), drag sideways to rotate, with an `n / <count>` counter and
 the credits along the bottom. Models load only near the viewport and only once
@@ -283,7 +294,9 @@ string per joint, ranked, and the list reordered to the ranking. The library's
 `unicode: true` regexps are switched on so `金輪` and `腰掛け` match as well as
 `kanawa`. Typing a single error still matches (`sanpo` finds Sampo, `kama` finds
 Nimai-kama), no match shows a live-region message, Enter follows the first hit,
-Escape clears the query, and `/` focuses the box from anywhere.
+Escape clears the query, and `/` focuses the box from anywhere. The search pool
+and the arrow-key order are the joints of the active tab, so an Off-the-sheets
+query cannot surface a sheet joint and vice versa.
 
 Plain static files, stdlib only. Regenerate and commit `docs/` after changing a
 joint; publish with Pages set to the default branch, `/docs` folder.
@@ -298,7 +311,7 @@ python3 viewer.py --port 9000
 ## Legal / scope
 
 The models are reproduced under their own Creative Commons licenses (CC BY 4.0,
-except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The fifteen
+except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The seventeen
 authored joints (listed in [`../joints/README.md`](../joints/README.md)) are
 original geometry released CC BY 4.0. The site's
 search box uses MIT-licensed `@leeoniya/uFuzzy`, copied unmodified from npm; its

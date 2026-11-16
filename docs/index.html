@@ -4,10 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Japanese joinery</title>
-  <meta name="description" content="Twenty-one Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble and come apart.">
+  <meta name="description" content="34 Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble and come apart.">
   <meta property="og:title" content="Japanese joinery">
-  <meta property="og:description" content="Twenty-one Japanese timber joints as interactive 3D models that assemble and come apart.">
+  <meta property="og:description" content="34 Japanese timber joints as interactive 3D models that assemble and come apart.">
   <meta property="og:image" content="posters/daimochi-tsugi.png">
+  <noscript>
+    <style>
+      /* Without the script every joint stays visible; the tabs do nothing. */
+      nav.index .tabs, nav.index .tab-note { display: none; }
+      nav.index li[hidden], section.joint[hidden] { display: revert; }
+    </style>
+  </noscript>
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
   <script src="vendor/ufuzzy.min.js"></script>
   <style>
@@ -71,6 +78,21 @@
     }
     nav.index h1 { font: 600 1.05rem/1.3 Georgia, "Iowan Old Style", serif; margin: 0 0 .25rem; letter-spacing: .01em; }
     nav.index p { margin: 0 0 1.25rem; color: var(--muted); font-size: .85rem; }
+    nav.index .tabs { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .4rem; }
+    nav.index .tabs button {
+      flex: 1 1 0; min-width: 0;
+      font: inherit; font-size: .78rem; line-height: 1.25;
+      padding: .4rem .5rem;
+      color: var(--muted); background: none;
+      border: 1px solid var(--line); border-radius: 999px;
+      cursor: pointer; text-align: center;
+    }
+    nav.index .tabs button:hover { border-color: var(--accent); }
+    nav.index .tabs button[aria-selected="true"] {
+      color: var(--ink); background: var(--card); border-color: var(--accent);
+    }
+    nav.index .tabs .count { color: var(--jp); font-variant-numeric: tabular-nums; }
+    nav.index .tab-note { margin: 0 0 .9rem; font-size: .78rem; line-height: 1.35; }
     nav.index .search { margin: 0 0 .9rem; }
     nav.index .search input {
       display: block; width: 100%;
@@ -216,7 +238,7 @@
       section.joint h2 a .hash { display: none; }
       section.joint .jp { font-size: .9rem; }
       section.joint header::after {
-        content: counter(joint) " / 32";
+        content: counter(joint) " / " attr(data-tab-count);
         position: absolute; right: 1rem; top: max(1rem, calc(env(safe-area-inset-top) + .4rem));
         font-size: .75rem; color: var(--muted); letter-spacing: .04em;
       }
@@ -246,7 +268,12 @@
     <nav class="index" id="index" aria-label="Joints">
       <button class="menu-close" type="button" aria-label="Close the menu">&times;</button>
       <h1>Japanese joinery</h1>
-      <p>32 joints that assemble and come apart.</p>
+      <p>34 joints that assemble and come apart.</p>
+      <div class="tabs" role="tablist" aria-label="Which joints">
+        <button type="button" role="tab" id="tab-sheet" data-tab="sheet" data-note="Every family printed on the two reference sheets." aria-selected="true" tabindex="0" aria-controls="joint-list">On the sheets <span class="count">32</span></button>
+        <button type="button" role="tab" id="tab-extra" data-tab="extra" data-note="Joints the reference sheets do not show, authored for this collection." aria-selected="false" tabindex="-1" aria-controls="joint-list">Off the sheets <span class="count">2</span></button>
+      </div>
+      <p class="tab-note" id="tab-note"></p>
       <div class="search">
         <input id="search" type="search" placeholder="Search joints" autocomplete="off"
             spellcheck="false" aria-label="Search joints" aria-controls="joint-list"
@@ -254,42 +281,44 @@
         <p class="status" id="search-status" role="status" aria-live="polite" hidden></p>
       </div>
       <ol id="joint-list">
-        <li><a href="#daimochi-tsugi"><span class="name">Daimochi-tsugi</span><span class="jp" lang="ja">台持ち継ぎ</span></a></li>
-        <li><a href="#hako-sen-tsugi"><span class="name">Hako-sen-tsugi</span><span class="jp" lang="ja">箱栓継ぎ</span></a></li>
-        <li><a href="#hira-isuka-tsugi"><span class="name">Hira-isuka-tsugi</span><span class="jp" lang="ja">平居木継ぎ</span></a></li>
-        <li><a href="#kakeawase-komisen-tsugi"><span class="name">Kakeawase-komisen-tsugi</span><span class="jp" lang="ja">掛け合わせ込み栓継ぎ</span></a></li>
-        <li><a href="#kakushi-kanawa-tsugi"><span class="name">Kakushi-kanawa-tsugi</span><span class="jp" lang="ja">隠し金輪継ぎ</span></a></li>
-        <li><a href="#kanawa-tsugi"><span class="name">Kanawa-tsugi</span><span class="jp" lang="ja">金輪継ぎ</span></a></li>
-        <li><a href="#kata-kama-hozo-sashi"><span class="name">Kata-kama-hozo-sashi</span><span class="jp" lang="ja">片鎌ホゾ差し</span></a></li>
-        <li><a href="#katagi-ooire"><span class="name">Katagi-ooire</span><span class="jp" lang="ja">傾ぎ大入れ</span></a></li>
-        <li><a href="#komisen-inro-tsugi"><span class="name">Komisen-inro-tsugi</span><span class="jp" lang="ja">込み栓入れ枘継ぎ</span></a></li>
-        <li><a href="#koshikake-ari-tsugi"><span class="name">Koshikake-ari-tsugi</span><span class="jp" lang="ja">腰掛け蟻継ぎ</span></a></li>
-        <li><a href="#meji-tsukikake-awase-tsugi"><span class="name">Meji-tsukikake-awase-tsugi</span><span class="jp" lang="ja">目地突掛け合わせ継ぎ</span></a></li>
-        <li><a href="#miyajima-tsugi"><span class="name">Miyajima-tsugi</span><span class="jp" lang="ja">宮島継ぎ</span></a></li>
-        <li><a href="#naga-hozo-sashi-komisen-uchi"><span class="name">Naga-hozo-sashi-komisen-uchi</span><span class="jp" lang="ja">長ホゾ差し込み栓打ち</span></a></li>
-        <li><a href="#niho-sashi-shikuchi"><span class="name">Niho-sashi-shikuchi</span><span class="jp" lang="ja">二方差し仕口</span></a></li>
-        <li><a href="#nimai-kama-tsugi"><span class="name">Nimai-kama-tsugi</span><span class="jp" lang="ja">二枚鎌継ぎ</span></a></li>
-        <li><a href="#okkake-daisen-tsugi-mochidashi"><span class="name">Okkake-daisen-tsugi (mochidashi)</span><span class="jp" lang="ja">追掛け大栓継ぎ（持ち出し継ぎ）</span></a></li>
-        <li><a href="#okkake-daisen-tsugi"><span class="name">Okkake-daisen-tsugi</span><span class="jp" lang="ja">追掛け大栓継ぎ</span></a></li>
-        <li><a href="#osaka-jo-otemon-hikae-bashira-tsugi"><span class="name">Osaka-jo Otemon Hikae-bashira-tsugi</span><span class="jp" lang="ja">大阪城大手門控え柱継ぎ</span></a></li>
-        <li><a href="#otoshi-ari-hozo-shikuchi"><span class="name">Otoshi-ari-hozo-shikuchi</span><span class="jp" lang="ja">落し蟻枘仕口</span></a></li>
-        <li><a href="#sage-kama-oire"><span class="name">Sage-kama-oire</span><span class="jp" lang="ja">下げ鎌（大入れ）</span></a></li>
-        <li><a href="#sampo-sashi-shikuchi"><span class="name">Sampo-sashi-shikuchi</span><span class="jp" lang="ja">三方差し仕口</span></a></li>
-        <li><a href="#shihou-ari-tsugi"><span class="name">Shihou-ari-tsugi</span><span class="jp" lang="ja">四方蟻継ぎ</span></a></li>
-        <li><a href="#shihou-sashi-shikuchi"><span class="name">Shihou-sashi-shikuchi</span><span class="jp" lang="ja">四方差し</span></a></li>
-        <li><a href="#shitakone-hozo-hana-sen"><span class="name">Shitakone-hozo-hana-sen</span><span class="jp" lang="ja">下小根ホゾ鼻栓打ち</span></a></li>
-        <li><a href="#shitakone-hozo-tasuki-gake"><span class="name">Shitakone-hozo-tasuki-gake</span><span class="jp" lang="ja">下小根ホゾ（襷掛付）</span></a></li>
-        <li><a href="#shitakone-hozo-wari-kusabi"><span class="name">Shitakone-hozo-wari-kusabi</span><span class="jp" lang="ja">下小根ホゾ割り楔打ち</span></a></li>
-        <li><a href="#suitsuki-sashi-shikuchi"><span class="name">Suitsuki-sashi-shikuchi</span><span class="jp" lang="ja">吸付差し仕口</span></a></li>
-        <li><a href="#uwakone-hozo-uchi-nuki-komisen"><span class="name">Uwakone-hozo-uchi-nuki-komisen</span><span class="jp" lang="ja">上小根ホゾ打ち抜き込み栓打ち</span></a></li>
-        <li><a href="#uwakone-hozo-wari-kusabi"><span class="name">Uwakone-hozo-wari-kusabi</span><span class="jp" lang="ja">上小根ホゾ割り楔打ち</span></a></li>
-        <li><a href="#yatoi-hozo-shachi-sen-shiguchi"><span class="name">Yatoi-hozo-shachi-sen-shiguchi</span><span class="jp" lang="ja">雇い枘車知栓仕口</span></a></li>
-        <li><a href="#yatoi-hozo-shikuchi"><span class="name">Yatoi-hozo-shikuchi</span><span class="jp" lang="ja">雇い枘仕口</span></a></li>
-        <li><a href="#yose-ari-hozo-shikuchi"><span class="name">Yose-ari-hozo-shikuchi</span><span class="jp" lang="ja">寄せ蟻枘仕口</span></a></li>
+        <li data-tab="sheet"><a href="#daimochi-tsugi"><span class="name">Daimochi-tsugi</span><span class="jp" lang="ja">台持ち継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#hako-sen-tsugi"><span class="name">Hako-sen-tsugi</span><span class="jp" lang="ja">箱栓継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#hira-isuka-tsugi"><span class="name">Hira-isuka-tsugi</span><span class="jp" lang="ja">平居木継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#kakeawase-komisen-tsugi"><span class="name">Kakeawase-komisen-tsugi</span><span class="jp" lang="ja">掛け合わせ込み栓継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#kakushi-kanawa-tsugi"><span class="name">Kakushi-kanawa-tsugi</span><span class="jp" lang="ja">隠し金輪継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#kanawa-tsugi"><span class="name">Kanawa-tsugi</span><span class="jp" lang="ja">金輪継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#kata-kama-hozo-sashi"><span class="name">Kata-kama-hozo-sashi</span><span class="jp" lang="ja">片鎌ホゾ差し</span></a></li>
+        <li data-tab="sheet"><a href="#katagi-ooire"><span class="name">Katagi-ooire</span><span class="jp" lang="ja">傾ぎ大入れ</span></a></li>
+        <li data-tab="sheet"><a href="#komisen-inro-tsugi"><span class="name">Komisen-inro-tsugi</span><span class="jp" lang="ja">込み栓入れ枘継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#koshikake-ari-tsugi"><span class="name">Koshikake-ari-tsugi</span><span class="jp" lang="ja">腰掛け蟻継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#meji-tsukikake-awase-tsugi"><span class="name">Meji-tsukikake-awase-tsugi</span><span class="jp" lang="ja">目地突掛け合わせ継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#miyajima-tsugi"><span class="name">Miyajima-tsugi</span><span class="jp" lang="ja">宮島継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#naga-hozo-sashi-komisen-uchi"><span class="name">Naga-hozo-sashi-komisen-uchi</span><span class="jp" lang="ja">長ホゾ差し込み栓打ち</span></a></li>
+        <li data-tab="sheet"><a href="#niho-sashi-shikuchi"><span class="name">Niho-sashi-shikuchi</span><span class="jp" lang="ja">二方差し仕口</span></a></li>
+        <li data-tab="sheet"><a href="#nimai-kama-tsugi"><span class="name">Nimai-kama-tsugi</span><span class="jp" lang="ja">二枚鎌継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#okkake-daisen-tsugi"><span class="name">Okkake-daisen-tsugi</span><span class="jp" lang="ja">追掛け大栓継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#okkake-daisen-tsugi-mochidashi"><span class="name">Okkake-daisen-tsugi (mochidashi)</span><span class="jp" lang="ja">追掛け大栓継ぎ（持ち出し継ぎ）</span></a></li>
+        <li data-tab="sheet"><a href="#osaka-jo-otemon-hikae-bashira-tsugi"><span class="name">Osaka-jo Otemon Hikae-bashira-tsugi</span><span class="jp" lang="ja">大阪城大手門控え柱継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#otoshi-ari-hozo-shikuchi"><span class="name">Otoshi-ari-hozo-shikuchi</span><span class="jp" lang="ja">落し蟻枘仕口</span></a></li>
+        <li data-tab="sheet"><a href="#sage-kama-oire"><span class="name">Sage-kama-oire</span><span class="jp" lang="ja">下げ鎌（大入れ）</span></a></li>
+        <li data-tab="sheet"><a href="#sampo-sashi-shikuchi"><span class="name">Sampo-sashi-shikuchi</span><span class="jp" lang="ja">三方差し仕口</span></a></li>
+        <li data-tab="sheet"><a href="#shihou-ari-tsugi"><span class="name">Shihou-ari-tsugi</span><span class="jp" lang="ja">四方蟻継ぎ</span></a></li>
+        <li data-tab="sheet"><a href="#shihou-sashi-shikuchi"><span class="name">Shihou-sashi-shikuchi</span><span class="jp" lang="ja">四方差し</span></a></li>
+        <li data-tab="sheet"><a href="#shitakone-hozo-hana-sen"><span class="name">Shitakone-hozo-hana-sen</span><span class="jp" lang="ja">下小根ホゾ鼻栓打ち</span></a></li>
+        <li data-tab="sheet"><a href="#shitakone-hozo-tasuki-gake"><span class="name">Shitakone-hozo-tasuki-gake</span><span class="jp" lang="ja">下小根ホゾ（襷掛付）</span></a></li>
+        <li data-tab="sheet"><a href="#shitakone-hozo-wari-kusabi"><span class="name">Shitakone-hozo-wari-kusabi</span><span class="jp" lang="ja">下小根ホゾ割り楔打ち</span></a></li>
+        <li data-tab="sheet"><a href="#suitsuki-sashi-shikuchi"><span class="name">Suitsuki-sashi-shikuchi</span><span class="jp" lang="ja">吸付差し仕口</span></a></li>
+        <li data-tab="sheet"><a href="#uwakone-hozo-uchi-nuki-komisen"><span class="name">Uwakone-hozo-uchi-nuki-komisen</span><span class="jp" lang="ja">上小根ホゾ打ち抜き込み栓打ち</span></a></li>
+        <li data-tab="sheet"><a href="#uwakone-hozo-wari-kusabi"><span class="name">Uwakone-hozo-wari-kusabi</span><span class="jp" lang="ja">上小根ホゾ割り楔打ち</span></a></li>
+        <li data-tab="sheet"><a href="#yatoi-hozo-shachi-sen-shiguchi"><span class="name">Yatoi-hozo-shachi-sen-shiguchi</span><span class="jp" lang="ja">雇い枘車知栓仕口</span></a></li>
+        <li data-tab="sheet"><a href="#yatoi-hozo-shikuchi"><span class="name">Yatoi-hozo-shikuchi</span><span class="jp" lang="ja">雇い枘仕口</span></a></li>
+        <li data-tab="sheet"><a href="#yose-ari-hozo-shikuchi"><span class="name">Yose-ari-hozo-shikuchi</span><span class="jp" lang="ja">寄せ蟻枘仕口</span></a></li>
+        <li data-tab="extra" hidden><a href="#doutsuki-ari-tsugi"><span class="name">Doutsuki-ari-tsugi</span><span class="jp" lang="ja">胴付き蟻継ぎ</span></a></li>
+        <li data-tab="extra" hidden><a href="#tsutsumikomi-nuki"><span class="name">Tsutsumikomi-nuki</span><span class="jp" lang="ja">包み込み貫</span></a></li>
       </ol>
     </nav>
     <main>
-      <section class="joint" id="daimochi-tsugi">
+      <section class="joint" id="daimochi-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#daimochi-tsugi">Daimochi-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">台持ち継ぎ</p>
@@ -305,7 +334,7 @@
         <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="hako-sen-tsugi">
+      <section class="joint" id="hako-sen-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#hako-sen-tsugi">Hako-sen-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">箱栓継ぎ</p>
@@ -321,7 +350,7 @@
         <p class="meta">4 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/hako-sen-tsugi-881723f8c6794db5a9dbe9dc2fb3a69b">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="hira-isuka-tsugi">
+      <section class="joint" id="hira-isuka-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#hira-isuka-tsugi">Hira-isuka-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">平居木継ぎ</p>
@@ -337,7 +366,7 @@
         <p class="meta">2 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/hira-isuka-tsugi-bd6b1bea223144868199fee6a28baf5c">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="kakeawase-komisen-tsugi">
+      <section class="joint" id="kakeawase-komisen-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#kakeawase-komisen-tsugi">Kakeawase-komisen-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">掛け合わせ込み栓継ぎ</p>
@@ -353,7 +382,7 @@
         <p class="meta">3 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/kakeawase-komisen-tsugi-ac403983452d4524a7e23350c2ace36c">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="kakushi-kanawa-tsugi">
+      <section class="joint" id="kakushi-kanawa-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#kakushi-kanawa-tsugi">Kakushi-kanawa-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">隠し金輪継ぎ</p>
@@ -369,7 +398,7 @@
         <p class="meta">4 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/kakushi-kanawa-tsugi-d3dbb63c57554cf1852724d510cb63e2">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="kanawa-tsugi">
+      <section class="joint" id="kanawa-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#kanawa-tsugi">Kanawa-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">金輪継ぎ</p>
@@ -385,7 +414,7 @@
         <p class="meta">3 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/kanawa-tsugi-713b9b3a98344094a008535738348791">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="kata-kama-hozo-sashi">
+      <section class="joint" id="kata-kama-hozo-sashi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#kata-kama-hozo-sashi">Kata-kama-hozo-sashi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">片鎌ホゾ差し</p>
@@ -401,7 +430,7 @@
         <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="katagi-ooire">
+      <section class="joint" id="katagi-ooire" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#katagi-ooire">Katagi-ooire<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">傾ぎ大入れ</p>
@@ -417,7 +446,7 @@
         <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="komisen-inro-tsugi">
+      <section class="joint" id="komisen-inro-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#komisen-inro-tsugi">Komisen-inro-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">込み栓入れ枘継ぎ</p>
@@ -433,7 +462,7 @@
         <p class="meta">3 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/komisen-inro-tsugi-ee2d1506029e41068772c19fae51df96">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="koshikake-ari-tsugi">
+      <section class="joint" id="koshikake-ari-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#koshikake-ari-tsugi">Koshikake-ari-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">腰掛け蟻継ぎ</p>
@@ -449,7 +478,7 @@
         <p class="meta">2 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/koshikake-ari-tsugi-6a06924b8c5243c0beee65e5535d1820">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="meji-tsukikake-awase-tsugi">
+      <section class="joint" id="meji-tsukikake-awase-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#meji-tsukikake-awase-tsugi">Meji-tsukikake-awase-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">目地突掛け合わせ継ぎ</p>
@@ -465,7 +494,7 @@
         <p class="meta">2 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/meji-tsukikake-awase-tsugi-64cc903d315b40d6a5f8f6086befa1fd">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="miyajima-tsugi">
+      <section class="joint" id="miyajima-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#miyajima-tsugi">Miyajima-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">宮島継ぎ</p>
@@ -481,7 +510,7 @@
         <p class="meta">3 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/miyajima-tsugi-40104d0e736c4bb0b2a75e2c91db0730">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="naga-hozo-sashi-komisen-uchi">
+      <section class="joint" id="naga-hozo-sashi-komisen-uchi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#naga-hozo-sashi-komisen-uchi">Naga-hozo-sashi-komisen-uchi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">長ホゾ差し込み栓打ち</p>
@@ -497,7 +526,7 @@
         <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="niho-sashi-shikuchi">
+      <section class="joint" id="niho-sashi-shikuchi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#niho-sashi-shikuchi">Niho-sashi-shikuchi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">二方差し仕口</p>
@@ -513,7 +542,7 @@
         <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="nimai-kama-tsugi">
+      <section class="joint" id="nimai-kama-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#nimai-kama-tsugi">Nimai-kama-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">二枚鎌継ぎ</p>
@@ -529,23 +558,7 @@
         <p class="meta">5 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/nimai-kama-tsugi-5aa7e4181c674070a9d0c291c0f129f9">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="okkake-daisen-tsugi-mochidashi">
-        <header>
-          <h2><a href="#okkake-daisen-tsugi-mochidashi">Okkake-daisen-tsugi (mochidashi)<span class="hash" aria-hidden="true">#</span></a></h2>
-          <p class="jp" lang="ja">追掛け大栓継ぎ（持ち出し継ぎ）</p>
-        </header>
-        <div class="stage">
-          <div class="spinner" aria-hidden="true"></div>
-          <model-viewer id="viewer-okkake-daisen-tsugi-mochidashi" data-src="models/okkake-daisen-tsugi-mochidashi.glb"
-              alt="Okkake-daisen-tsugi (mochidashi) assembling" autoplay animation-name="assemble" camera-controls
-              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
-              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
-          <button type="button" data-replay="viewer-okkake-daisen-tsugi-mochidashi">Replay</button>
-        </div>
-        <p class="meta">4 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
-          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
-      </section>
-      <section class="joint" id="okkake-daisen-tsugi">
+      <section class="joint" id="okkake-daisen-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#okkake-daisen-tsugi">Okkake-daisen-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">追掛け大栓継ぎ</p>
@@ -561,7 +574,23 @@
         <p class="meta">4 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/okkake-daisen-tsugi-5b161a4a18ae4054a820d32df2b20ca5">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="osaka-jo-otemon-hikae-bashira-tsugi">
+      <section class="joint" id="okkake-daisen-tsugi-mochidashi" data-tab="sheet" data-tab-count="32">
+        <header>
+          <h2><a href="#okkake-daisen-tsugi-mochidashi">Okkake-daisen-tsugi (mochidashi)<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">追掛け大栓継ぎ（持ち出し継ぎ）</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-okkake-daisen-tsugi-mochidashi" data-src="models/okkake-daisen-tsugi-mochidashi.glb"
+              alt="Okkake-daisen-tsugi (mochidashi) assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-okkake-daisen-tsugi-mochidashi">Replay</button>
+        </div>
+        <p class="meta">4 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="osaka-jo-otemon-hikae-bashira-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#osaka-jo-otemon-hikae-bashira-tsugi">Osaka-jo Otemon Hikae-bashira-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">大阪城大手門控え柱継ぎ</p>
@@ -577,7 +606,7 @@
         <p class="meta">2 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/osaka-jo-otemon-hikae-bashira-tsugi-a1cf8bd826504ef2acc1b34510a06d27">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="otoshi-ari-hozo-shikuchi">
+      <section class="joint" id="otoshi-ari-hozo-shikuchi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#otoshi-ari-hozo-shikuchi">Otoshi-ari-hozo-shikuchi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">落し蟻枘仕口</p>
@@ -593,7 +622,7 @@
         <p class="meta">3 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/otoshi-ari-hozo-shikuchi-269f0b5a914e437ba10c0aed445711df">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="sage-kama-oire">
+      <section class="joint" id="sage-kama-oire" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#sage-kama-oire">Sage-kama-oire<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">下げ鎌（大入れ）</p>
@@ -609,7 +638,7 @@
         <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="sampo-sashi-shikuchi">
+      <section class="joint" id="sampo-sashi-shikuchi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#sampo-sashi-shikuchi">Sampo-sashi-shikuchi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">三方差し仕口</p>
@@ -625,7 +654,7 @@
         <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="shihou-ari-tsugi">
+      <section class="joint" id="shihou-ari-tsugi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#shihou-ari-tsugi">Shihou-ari-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">四方蟻継ぎ</p>
@@ -641,7 +670,7 @@
         <p class="meta">2 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/shihou-ari-tsugi-c1d6168a3b4e49a983c3ba815e0b4437">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="shihou-sashi-shikuchi">
+      <section class="joint" id="shihou-sashi-shikuchi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#shihou-sashi-shikuchi">Shihou-sashi-shikuchi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">四方差し</p>
@@ -657,7 +686,7 @@
         <p class="meta">7 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="shitakone-hozo-hana-sen">
+      <section class="joint" id="shitakone-hozo-hana-sen" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#shitakone-hozo-hana-sen">Shitakone-hozo-hana-sen<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">下小根ホゾ鼻栓打ち</p>
@@ -673,7 +702,7 @@
         <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="shitakone-hozo-tasuki-gake">
+      <section class="joint" id="shitakone-hozo-tasuki-gake" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#shitakone-hozo-tasuki-gake">Shitakone-hozo-tasuki-gake<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">下小根ホゾ（襷掛付）</p>
@@ -689,7 +718,7 @@
         <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="shitakone-hozo-wari-kusabi">
+      <section class="joint" id="shitakone-hozo-wari-kusabi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#shitakone-hozo-wari-kusabi">Shitakone-hozo-wari-kusabi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">下小根ホゾ割り楔打ち</p>
@@ -705,7 +734,7 @@
         <p class="meta">4 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="suitsuki-sashi-shikuchi">
+      <section class="joint" id="suitsuki-sashi-shikuchi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#suitsuki-sashi-shikuchi">Suitsuki-sashi-shikuchi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">吸付差し仕口</p>
@@ -721,7 +750,7 @@
         <p class="meta">2 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/suitsuki-sashi-shikuchi-2edef5371cb34374b9b6046e435603b6">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="uwakone-hozo-uchi-nuki-komisen">
+      <section class="joint" id="uwakone-hozo-uchi-nuki-komisen" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#uwakone-hozo-uchi-nuki-komisen">Uwakone-hozo-uchi-nuki-komisen<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">上小根ホゾ打ち抜き込み栓打ち</p>
@@ -737,7 +766,7 @@
         <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="uwakone-hozo-wari-kusabi">
+      <section class="joint" id="uwakone-hozo-wari-kusabi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#uwakone-hozo-wari-kusabi">Uwakone-hozo-wari-kusabi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">上小根ホゾ割り楔打ち</p>
@@ -753,7 +782,7 @@
         <p class="meta">4 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="yatoi-hozo-shachi-sen-shiguchi">
+      <section class="joint" id="yatoi-hozo-shachi-sen-shiguchi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#yatoi-hozo-shachi-sen-shiguchi">Yatoi-hozo-shachi-sen-shiguchi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">雇い枘車知栓仕口</p>
@@ -769,7 +798,7 @@
         <p class="meta">5 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, modified. Shared alike under the same license. <a href="https://sketchfab.com/3d-models/yatoi-hozo-shachi-sen-shiguchi-5f3cc05626b641f19bd42d30a976db3d">Original on Sketchfab</a>.</p>
       </section>
-      <section class="joint" id="yatoi-hozo-shikuchi">
+      <section class="joint" id="yatoi-hozo-shikuchi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#yatoi-hozo-shikuchi">Yatoi-hozo-shikuchi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">雇い枘仕口</p>
@@ -785,7 +814,7 @@
         <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
-      <section class="joint" id="yose-ari-hozo-shikuchi">
+      <section class="joint" id="yose-ari-hozo-shikuchi" data-tab="sheet" data-tab-count="32">
         <header>
           <h2><a href="#yose-ari-hozo-shikuchi">Yose-ari-hozo-shikuchi<span class="hash" aria-hidden="true">#</span></a></h2>
           <p class="jp" lang="ja">寄せ蟻枘仕口</p>
@@ -801,6 +830,38 @@
         <p class="meta">2 pieces &middot; model by <a href="https://sketchfab.com/thejoinery">thejoinery</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://sketchfab.com/3d-models/yose-ari-hozo-shikuchi-3e2f52c247a84a7f9a4caaaefefa4744">Original on Sketchfab</a>.</p>
       </section>
+      <section class="joint" id="doutsuki-ari-tsugi" data-tab="extra" data-tab-count="2" hidden>
+        <header>
+          <h2><a href="#doutsuki-ari-tsugi">Doutsuki-ari-tsugi<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">胴付き蟻継ぎ</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-doutsuki-ari-tsugi" data-src="models/doutsuki-ari-tsugi.glb"
+              alt="Doutsuki-ari-tsugi assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-doutsuki-ari-tsugi">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="tsutsumikomi-nuki" data-tab="extra" data-tab-count="2" hidden>
+        <header>
+          <h2><a href="#tsutsumikomi-nuki">Tsutsumikomi-nuki<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">包み込み貫</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-tsutsumikomi-nuki" data-src="models/tsutsumikomi-nuki.glb"
+              alt="Tsutsumikomi-nuki assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-tsutsumikomi-nuki">Replay</button>
+        </div>
+        <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
     </main>
     <footer>
       <h2>About</h2>
@@ -809,7 +870,8 @@
         baked paper-sunrise look and given an assembly animation. The animations were checked
         for timbers passing through each other, and some meshes were corrected where the
         author's pose was not the true closed joint.</p>
-      <p>Fifteen joints with no licensed source model &mdash; every family on the reference sheet, splices included &mdash; are authored for this collection from 柱（軸組）の納まり and released CC BY 4.0.</p>
+      <p>Fifteen joints with no licensed source model &mdash; every family on the reference sheets, splices included &mdash; are authored for this collection from 柱（軸組）の納まり and released CC BY 4.0.</p>
+      <p>Two more, in the <em>Off the sheets</em> tab, go beyond the sheets: a dovetail splice and a 包み込み貫 tie, authored from the sources cited in <a href="https://github.com/IxDay/carpentry/joints/README.md">joints/README.md</a>.</p>
       <h2>References</h2>
       <ul>
         <li><a href="https://projects.mcah.columbia.edu/jaanus/node/3413">JAANUS, kanawa tsugi 金輪継</a></li>
@@ -828,6 +890,79 @@
   <script>
     const viewers = document.querySelectorAll('model-viewer');
     const links = new Map([...document.querySelectorAll('nav.index a')].map(a => [a.hash.slice(1), a]));
+    const sections = [...document.querySelectorAll('section.joint')];
+    const navList = document.getElementById('joint-list');
+    const tabButtons = [...document.querySelectorAll('.tabs button')];
+    const tabNote = document.getElementById('tab-note');
+    const searchInput = document.getElementById('search');
+    const searchStatus = document.getElementById('search-status');
+    let tab = (tabButtons.find(b => b.getAttribute('aria-selected') === 'true') || tabButtons[0] || {}).dataset?.tab || 'sheet';
+    let cursor = -1, lastStep = 0;
+
+    // One list per tab: the index items and the sections carry data-tab, and the
+    // tab bar switches both. A hash pointing at a joint in the other tab selects
+    // that tab first, which is why the server leaves the first tab visible.
+    const rows = [...navList.children].map(li => {
+      const a = li.querySelector('a');
+      const jp = li.querySelector('.jp');
+      return {
+        li, a, tab: li.dataset.tab,
+        hay: [a.querySelector('.name').textContent.trim(),
+              jp ? jp.textContent.trim() : '',
+              a.hash.slice(1)].join(' '),
+      };
+    });
+    const uf = new uFuzzy({
+      unicode: true,
+      interSplit: "[^\\p{L}\\d']+",
+      intraSplit: "\\p{Ll}\\p{Lu}",
+      intraBound: "\\p{L}\\d|\\d\\p{L}|\\p{Ll}\\p{Lu}",
+      intraChars: "[\\p{L}\\d']",
+      intraContr: "'\\p{L}{1,2}\\b",
+      intraMode: 1,
+    });
+
+    const resetNav = () => {
+      rows.forEach(r => { r.li.hidden = r.tab !== tab; navList.append(r.li); });
+      navList.closest('nav').scrollTop = 0;
+      searchStatus.hidden = true;
+      searchStatus.textContent = '';
+    };
+
+    const applyTab = (next, { scroll = false } = {}) => {
+      if (!tabButtons.some(b => b.dataset.tab === next)) return;
+      tab = next;
+      tabButtons.forEach(b => {
+        const on = b.dataset.tab === tab;
+        b.setAttribute('aria-selected', String(on));
+        b.tabIndex = on ? 0 : -1;
+      });
+      const button = tabButtons.find(b => b.dataset.tab === tab);
+      tabNote.textContent = button ? button.dataset.note : '';
+      sections.forEach(s => { s.hidden = s.dataset.tab !== tab; });
+      links.forEach(a => a.classList.remove('active'));
+      searchInput.value = '';
+      cursor = -1;
+      lastStep = 0;
+      resetNav();
+      if (scroll) {
+        const first = sections.find(s => s.dataset.tab === tab);
+        if (first) first.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }
+    };
+
+    tabButtons.forEach(b => b.addEventListener('click', () => applyTab(b.dataset.tab, { scroll: true })));
+    document.querySelector('.tabs').addEventListener('keydown', e => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const at = tabButtons.indexOf(document.activeElement);
+      if (at < 0) return;
+      e.preventDefault();
+      const step = e.key === 'ArrowRight' ? 1 : -1;
+      const next = tabButtons[(at + step + tabButtons.length) % tabButtons.length];
+      next.focus();
+      applyTab(next.dataset.tab, { scroll: true });
+    });
+    applyTab(tab);
 
     // Keep at most a few WebGL contexts alive: load a model near the viewport,
     // drop it once it is far away. Parsing a GLB and creating or destroying a WebGL
@@ -889,72 +1024,41 @@
     mobile.addEventListener('change', () => setMenu(false));
     addEventListener('scroll', () => document.getElementById('hint')?.remove(), { once: true, passive: true, capture: true });
 
-    // Full-text search over the index: uFuzzy pre-filters the query against one
-    // haystack string per joint, ranks the hits and the list is reordered to the
-    // ranking. The options are uFuzzy's documented `unicode: true` set, so the
+    // Full-text search over the active tab: uFuzzy pre-filters the query against
+    // one haystack string per joint, ranks the hits and the list is reordered to
+    // the ranking. The options are uFuzzy's documented `unicode: true` set, so the
     // Japanese names are searchable as well as the romanised ones.
     {
-      const input = document.getElementById('search');
-      const status = document.getElementById('search-status');
-      const list = document.getElementById('joint-list');
-      const nav = list.closest('nav');
-      const rows = [...list.children].map(li => {
-        const a = li.querySelector('a');
-        const jp = li.querySelector('.jp');
-        return {
-          li, a,
-          hay: [a.querySelector('.name').textContent.trim(),
-                jp ? jp.textContent.trim() : '',
-                a.hash.slice(1)].join(' '),
-        };
-      });
-      const hay = rows.map(r => r.hay);
-      const uf = new uFuzzy({
-        unicode: true,
-        interSplit: "[^\\p{L}\\d']+",
-        intraSplit: "\\p{Ll}\\p{Lu}",
-        intraBound: "\\p{L}\\d|\\d\\p{L}|\\p{Ll}\\p{Lu}",
-        intraChars: "[\\p{L}\\d']",
-        intraContr: "'\\p{L}{1,2}\\b",
-        intraMode: 1,
-      });
-
-      const reset = () => {
-        rows.forEach(r => list.append(r.li));
-        rows.forEach(r => { r.li.hidden = false; });
-        nav.scrollTop = 0;
-        status.hidden = true;
-        status.textContent = '';
-      };
-
       const search = () => {
-        const q = input.value.trim();
-        if (!q) return reset();
-        const idxs = uf.filter(hay, q);
+        const q = searchInput.value.trim();
+        if (!q) return resetNav();
+        const pool = rows.filter(r => r.tab === tab);
+        const poolHay = pool.map(r => r.hay);
+        const idxs = uf.filter(poolHay, q);
         let hits = [];
         if (idxs && idxs.length) {
-          const info = uf.info(idxs, hay, q);
-          const order = info ? uf.sort(info, hay, q) : idxs;
+          const info = uf.info(idxs, poolHay, q);
+          const order = info ? uf.sort(info, poolHay, q) : idxs;
           const idx = info ? info.idx : idxs;
-          hits = order.map(i => rows[idx[i]]);
+          hits = order.map(i => pool[idx[i]]);
         }
-        hits.forEach(r => { r.li.hidden = false; list.append(r.li); });
         const found = new Set(hits);
-        rows.forEach(r => { if (!found.has(r)) r.li.hidden = true; });
-        nav.scrollTop = 0;
-        status.hidden = false;
-        status.textContent = hits.length
-          ? `${hits.length} of ${rows.length} joints`
-          : `No joints match “${q}”`;
+        rows.forEach(r => { r.li.hidden = r.tab !== tab || !found.has(r); });
+        hits.forEach(r => { r.li.hidden = false; navList.append(r.li); });
+        navList.closest('nav').scrollTop = 0;
+        searchStatus.hidden = false;
+        searchStatus.textContent = hits.length
+          ? `${hits.length} of ${pool.length} joints in this tab`
+          : `No joints match “${q}” in this tab`;
       };
 
-      input.addEventListener('input', search);
-      input.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && input.value) {
+      searchInput.addEventListener('input', search);
+      searchInput.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && searchInput.value) {
           e.preventDefault();
           e.stopPropagation();       // clear the query, do not close the menu
-          input.value = '';
-          reset();
+          searchInput.value = '';
+          resetNav();
         } else if (e.key === 'Enter') {
           const first = rows.find(r => !r.li.hidden);
           if (!first) return;
@@ -966,15 +1070,16 @@
         if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
         if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
         e.preventDefault();
-        input.focus();
+        searchInput.focus();
       });
     }
 
     // One page = the visible height of the scroller, measured here (not 100dvh)
     // and again only when the window really changes (rotation, resize).
-    const pages = [...document.querySelectorAll('section.joint')];
+    const visiblePages = () => sections.filter(s => !s.hidden);
     const fit = () => {
       if (!mobile.matches) { document.documentElement.style.removeProperty('--page-h'); return; }
+      const pages = visiblePages();
       const at = pages.findIndex(s => s.getBoundingClientRect().top > -layoutEl.clientHeight / 2);
       document.documentElement.style.setProperty('--page-h', layoutEl.clientHeight + 'px');
       if (at >= 0) pages[at].scrollIntoView({ behavior: 'instant', block: 'start' });
@@ -982,31 +1087,32 @@
     fit();
     addEventListener('resize', fit);
     mobile.addEventListener('change', fit);
-    document.querySelectorAll('section.joint').forEach(s => active.observe(s));
+    sections.forEach(s => active.observe(s));
 
-    // Up / Down step through the joints (also while a model has the focus).
-    const sections = [...document.querySelectorAll('section.joint')];
+    // Up / Down step through the joints in the active tab (also while a model has
+    // the focus).
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let cursor = -1, lastStep = 0;
     const current = () => {
+      const pages = visiblePages();
       let at = -1;
-      sections.forEach((s, i) => { if (s.getBoundingClientRect().top <= innerHeight * 0.35) at = i; });
+      pages.forEach((s, i) => { if (s.getBoundingClientRect().top <= innerHeight * 0.35) at = i; });
       return at;
     };
     addEventListener('keydown', e => {
       if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
       if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
       if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+      const pages = visiblePages();
       // while a smooth scroll is still running, count from where it is heading
       const from = performance.now() - lastStep < 900 ? cursor : current();
-      const to = Math.max(0, Math.min(sections.length - 1, from + (e.key === 'ArrowDown' ? 1 : -1)));
+      const to = Math.max(0, Math.min(pages.length - 1, from + (e.key === 'ArrowDown' ? 1 : -1)));
       if (to === from) return;   // past either end: let the page scroll normally
       e.preventDefault();
       e.stopPropagation();
       cursor = to;
       lastStep = performance.now();
-      sections[to].scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-      history.replaceState(null, '', '#' + sections[to].id);
+      pages[to].scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      history.replaceState(null, '', '#' + pages[to].id);
     }, true);
 
     document.querySelectorAll('button[data-replay]').forEach(b => b.addEventListener('click', () => {
@@ -1014,6 +1120,22 @@
       v.currentTime = 0;
       v.play();
     }));
+
+    // A link into the other tab (or a reload on one of its joints) selects that
+    // tab before scrolling to the joint.
+    const showFromHash = () => {
+      const id = location.hash.slice(1);
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (!el || !el.classList.contains('joint')) return;
+      if (el.dataset.tab !== tab) applyTab(el.dataset.tab);
+      fit();
+      requestAnimationFrame(() => {
+        if (!el.hidden) el.scrollIntoView({ behavior: 'instant', block: 'start' });
+      });
+    };
+    addEventListener('hashchange', showFromHash);
+    showFromHash();
   </script>
 </body>
 </html>

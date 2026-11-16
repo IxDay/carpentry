@@ -33,6 +33,8 @@ JP = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "joints",
 
 CREDIT = ("Original geometry authored for this collection from the reference "
           "sheet 柱（軸組）の納まり; CC BY 4.0.")
+OFFSHEET_CREDIT = ("Original geometry authored for this collection from the "
+                   "published descriptions of the joint; CC BY 4.0.")
 
 
 def compile_solid(add, cut):
@@ -197,9 +199,10 @@ def shift(piece_def, delta):
     return out
 
 
-def joint(jid, title, jp, pieces, exploded, guidance=""):
+def joint(jid, title, jp, pieces, exploded, guidance="", tab=None,
+          approach=None, credit=None, modifications=None):
     moved = [shift(p, exploded.get(p["id"], [0, 0, 0])) for p in pieces]
-    return {
+    out = {
         "id": jid, "index": -1, "chapter": 0, "number": 0,
         "title": title, "jp": jp, "gloss": "", "guidance": guidance,
         "forReal": "", "fact": "", "scale": 1.0, "gift": "", "mark": "",
@@ -211,16 +214,25 @@ def joint(jid, title, jp, pieces, exploded, guidance=""):
             "url": "https://github.com/ixday/carpentry",
             "license": "CC BY 4.0",
             "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
-            "modifications": "authored from the reference sheet in closed "
+            "modifications": modifications if modifications is not None else
+                             "authored from the reference sheet in closed "
                              "pose, exploded for the assemble animation, sunset "
                              "lighting baked; the baking rig's ground slab is "
                              "omitted",
-            "credit": CREDIT,
+            "credit": credit or CREDIT,
         },
         "assemble": {pid: [round(-c, 9) for c in exploded.get(pid, [0, 0, 0])]
                      for pid in [p["id"] for p in pieces]},
         "pieces": moved,
     }
+    # Joints that neither reference sheet shows sit in the site's second tab.
+    if tab:
+        out["tab"] = tab
+    # Extra poses the assemble animation passes through on its way in, as
+    # offsets from the closed pose (see bake.assemble_animation).
+    if approach:
+        out["approach"] = approach
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -773,6 +785,111 @@ OKKAKE_MOCHI = joint(
 )
 
 
+# ---------------------------------------------------------------------------
+# 胴付き蟻継ぎ: a dovetail splice cut in plan, the tenon running the full height
+# of the section. The dovetail's mouth is 60 mm and its nose 100 mm, so the two
+# timbers cannot pull apart along their length; the shoulders left either side
+# of the mouth carry compression. The socket is open at B's top and bottom, so
+# B is lowered over the standing tenon.
+
+ARI_BEAM = 0.06             # half the 120 mm section
+ARI_END = 0.36              # each timber's length
+ARI_ROOT = 0.03             # half the tenon's width at the seam, 60 mm
+ARI_NOSE = 0.05             # half its width at the nose, 100 mm
+ARI_LEN = 0.14              # tenon length, from the seam
+
+# Sections are (z, x) for an extrusion along y: positive shoelace area, the
+# winding loft() expects.
+ARI_A = [(-ARI_BEAM, -ARI_END), (ARI_BEAM, -ARI_END), (ARI_BEAM, 0.0),
+         (ARI_ROOT, 0.0), (ARI_NOSE, ARI_LEN), (-ARI_NOSE, ARI_LEN),
+         (-ARI_ROOT, 0.0), (-ARI_BEAM, 0.0)]
+ARI_B = [(ARI_BEAM, 0.0), (ARI_BEAM, ARI_END), (-ARI_BEAM, ARI_END),
+         (-ARI_BEAM, 0.0), (-ARI_ROOT, 0.0), (-ARI_NOSE, ARI_LEN),
+         (ARI_NOSE, ARI_LEN), (ARI_ROOT, 0.0)]
+
+DOUTSUKI_ARI = joint(
+    "doutsuki-ari-tsugi", "Doutsuki-ari-tsugi", "胴付き蟻継ぎ",
+    [
+        piece("part-a", "Part A", [],
+              extra=loft(1, -ARI_BEAM, ARI_BEAM, ARI_A, ARI_A)),
+        piece("part-b", "Part B", [],
+              extra=loft(1, -ARI_BEAM, ARI_BEAM, ARI_B, ARI_B)),
+    ],
+    {"part-b": [0.22, 0.24, 0.0]},
+    "A dovetail cut in plan rather than in elevation: the tenon is 60 mm wide "
+    "at the shoulders and 100 mm at the nose, so once B is lowered over it the "
+    "two timbers cannot be pulled apart along their length. The socket runs "
+    "the full 120 mm depth, which is what lets B drop straight down onto the "
+    "tenon while the shoulders at the seam meet.",
+    tab="extra",
+    approach={"part-b": [[0.0, 0.24, 0.0]]},
+    credit=OFFSHEET_CREDIT,
+    modifications="authored from published descriptions of the joint in "
+                  "closed pose, exploded for the assemble animation, sunset "
+                  "lighting baked; the baking rig's ground slab is omitted",
+)
+
+
+# ---------------------------------------------------------------------------
+# 包み込み貫: the nuki runs into a mortise that stops 90 mm into the 120 mm
+# post, and the last 15 mm of its end is rebated 15 mm up from its underside.
+# The post keeps a shelf under that rebate and a 30 mm wall beyond the end, so
+# the end is wrapped: the nuki is offered up 15 mm high, run home over the
+# shelf, then lowered onto it. A wedge driven into the 15 mm gap above the
+# nuki's top face at the mouth holds it down.
+TS_POST = 0.06              # half the 120 mm post
+TS_TOP = 0.72               # post height
+TS_T = 0.015                # half the nuki's 30 mm thickness
+TS_Y0, TS_Y1 = 0.50, 0.62   # the nuki's height
+TS_SLOT_TOP = TS_Y1 + 0.015  # 15 mm of clearance above it for the wedge
+TS_END = 0.03               # insertion depth 90 mm from the near face at -0.06
+TS_STEP = 0.015             # the rebate is 15 mm deep and 15 mm high
+TS_NUKI_END = -0.42         # the free end of the nuki
+
+# Seen along the member, the end's underside steps up 15 mm for its last
+# 15 mm: the body bears on the mortise floor, the end on the shelf.
+TS_NUKI = [(TS_NUKI_END, TS_Y0), (TS_END - TS_STEP, TS_Y0),
+           (TS_END - TS_STEP, TS_Y0 + TS_STEP), (TS_END, TS_Y0 + TS_STEP),
+           (TS_END, TS_Y1), (TS_NUKI_END, TS_Y1)]
+
+TSUTSUMIKOMI = joint(
+    "tsutsumikomi-nuki", "Tsutsumikomi-nuki", "包み込み貫",
+    [
+        # The post is cut by two overlapping mortises: the first runs the full
+        # height of the slot from the mouth to the rebate's inner edge, the
+        # second only from the shelf up, leaving the shelf under the end.
+        piece("part-a", "Post",
+              [[(-TS_POST, TS_POST), (0.0, TS_TOP), (-TS_POST, TS_POST)]],
+              [[(-TS_POST, TS_END - TS_STEP), (TS_Y0, TS_SLOT_TOP),
+                (-TS_T, TS_T)],
+               [(-TS_POST, TS_END), (TS_Y0 + TS_STEP, TS_SLOT_TOP),
+                (-TS_T, TS_T)]]),
+        piece("part-b", "Nuki", [],
+              extra=loft(2, -TS_T, TS_T, TS_NUKI, TS_NUKI)),
+        # The wedge's top bears on the slot's ceiling; only its thick outer
+        # end reaches down to the nuki's back.
+        piece("wedge", "Kusabi", [],
+              extra=loft(0, -0.12, -0.02,
+                         [(TS_Y1, -TS_T), (TS_Y1, TS_T),
+                          (TS_SLOT_TOP, TS_T), (TS_SLOT_TOP, -TS_T)],
+                         [(TS_Y1 + 0.014, -TS_T), (TS_Y1 + 0.014, TS_T),
+                          (TS_SLOT_TOP, TS_T), (TS_SLOT_TOP, -TS_T)])),
+    ],
+    {"part-b": [-0.36, 0.18, 0.0], "wedge": [-0.16, 0.0, 0.0]},
+    "The nuki's end is wrapped by the post. It runs 90 mm into the 120 mm post "
+    "and its last 15 mm is rebated 15 mm up from the underside; the post keeps "
+    "a shelf under that rebate and a 30 mm wall beyond the end. Offer the nuki "
+    "up 15 mm, run it home over the shelf, then lower it onto the shelf so the "
+    "end is caught, and drive the wedge into the gap above its back.",
+    tab="extra",
+    approach={"part-b": [[-0.36, 0.015, 0.0], [0.0, 0.015, 0.0]]},
+    credit=OFFSHEET_CREDIT,
+    modifications="authored from published descriptions of the joint in "
+                  "closed pose, exploded for the assemble animation, sunset "
+                  "lighting baked; the baking rig's ground slab is omitted",
+)
+
+
 def mirror_x(j):
     """Mirror a joint through the x=0 plane.
 
@@ -790,13 +907,21 @@ def mirror_x(j):
                 f["normal"] = [-f["normal"][0], f["normal"][1], f["normal"][2]]
     out["assemble"] = {pid: [round(-v[0], 9), v[1], v[2]]
                        for pid, v in out["assemble"].items()}
+    if out.get("approach"):
+        flipped = {}
+        for pid, spec in out["approach"].items():
+            if spec and isinstance(spec[0], (list, tuple)):
+                flipped[pid] = [[round(-v[0], 9), v[1], v[2]] for v in spec]
+            else:
+                flipped[pid] = [round(-spec[0], 9), spec[1], spec[2]]
+        out["approach"] = flipped
     return out
 
 
 JOINTS += [mirror_x(j) for j in (TASUKI, SHITA_WARI, HANA_SEN,
                                  UWA_WARI, UWA_KOMISEN)]
 JOINTS += [NAGA, KATA_KAMA, SAGE_KAMA, SQ_SHIHOU, KATAGI,
-           OKKAKE_MOCHI]
+           OKKAKE_MOCHI, DOUTSUKI_ARI, mirror_x(TSUTSUMIKOMI)]
 
 
 def main(argv):
