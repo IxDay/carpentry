@@ -339,7 +339,7 @@ counts and the existing two tabs are unchanged.
 
 ### Built
 
-The frame is in `house/`: 272 timbers, 14,818 triangles, a 2.0 MB GLB, and a
+The frame is in `house/`: 272 timbers, 15,530 triangles, a 2.1 MB GLB, and a
 1100×1100 poster. It has the agreed 3 × 2 ken plan, two storeys, a hip roof,
 and real joinery at the connections in the table above. The joint catalog is
 still 34; none of the house connections were promoted, so the two existing tabs

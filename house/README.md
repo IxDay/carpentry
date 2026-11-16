@@ -9,7 +9,7 @@ joint stays visible.
   list with one level, `house`, and 272 timber pieces. There are no `assemble`
   offsets: the frame is static.
 - `house.glb` — one mesh node per timber, flat per-face colours, no animation,
-  14,818 triangles, about 2.0 MB.
+  15,530 triangles, about 2.1 MB.
 - `sunset_house.png` — the poster render of the shipped GLB.
 
 ## Plan and dimensions
@@ -47,20 +47,21 @@ its own lights.
 | Connection | Joint in the model |
 |---|---|
 | post ↔ sill | through tenon, protruding below the sill with a wedge |
-| post ↔ 胴差 / 軒桁 | housed tenon in the post, 55 mm deep, with a small peg |
+| post ↔ 胴差 / 軒桁 | housed tenon in the post, 55 mm deep, with a komisen peg through the post |
 | beam ↔ post | the post is continuous; each bay's beam has a housed tenon at both ends |
 | 貫 ↔ post | 包み込み貫, scaled: a `105 × 120 mm` nuki, a 15 mm housing in the post, and a wedge on the outer face |
-| 筋違 ↔ post / sill / beam | brace let into the post faces, pinned at the foot |
-| 火打梁 ↔ 土台 / 胴差 | diagonal corner tie resting on the sill or girder, with wedge ends |
+| 筋違 ↔ post / sill / beam | brace let into the post faces; its thickness is the housing |
+| 火打梁 ↔ 土台 / 胴差 | diagonal corner tie resting on the sill or girder |
 | 根太 ↔ 大引 | half-lap notch, 30 mm out of each member |
 | 根太 ↔ 土台 | 30 mm housed end |
-| 床束 ↔ 大引 | post under the sleeper, on a stone |
+| 床束 ↔ 大引 | tenon into the sleeper, on a stone |
 | 小屋梁 ↔ 軒桁 | housed tenon into the inner face of the plate |
-| 小屋束 ↔ 小屋梁 | tenon with a wedge; the post is cut into the top of the beam |
+| 小屋束 ↔ 小屋梁 | tenon into the top of the beam |
 | 母屋 ↔ 小屋束 | the post runs 40 mm into the purlin; the purlin is notched over it |
 | 垂木 ↔ 母屋 / 軒桁 / 棟木 | birdsmouth notch at each crossing |
 | 隅木 ↔ 棟木 | the hip butts the ridge end; the ridge is notched for the 真束 |
-| 土台 / 胴差 / 軒桁 corners | half-lapped corner, alternating by wall |
+| 土台 corners | half-lapped, alternating by wall |
+| 胴差 / 軒桁 at posts | housed tenon, as at the other beam ends |
 
 The brace, fire-beam, joist and rafter connections do not appear on the joint
 reference sheets. They are authored in [`tools/author_house.py`](../tools/author_house.py)

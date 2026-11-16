@@ -244,6 +244,10 @@ def housed_beam(h, pid, name, axisname, fixed, a, b, y0, y1, width, group,
                                  fixed + tenon_w / 2)))
             post_housing(h, ix, iz0, "x", d, yc, tenon_h + 2 * CLR,
                          tenon_w + 2 * CLR, G.TENON)
+            # komisen peg through the post, locking the tenon
+            h.extra(pid, wedge_faces(
+                (px - 0.0125, yc - 0.0125, fixed - HALF - 0.008),
+                (px + 0.0125, yc + 0.0125, fixed + HALF + 0.008)))
     else:
         axis(h, pid, name, group, color,
              (fixed - width / 2, y0, a + HALF),
@@ -257,6 +261,9 @@ def housed_beam(h, pid, name, axisname, fixed, a, b, y0, y1, width, group,
                                  pz + d * (HALF + 0.001))))
             post_housing(h, ix0, iz, "z", d, yc, tenon_h + 2 * CLR,
                          tenon_w + 2 * CLR, G.TENON)
+            h.extra(pid, wedge_faces(
+                (fixed - HALF - 0.008, yc - 0.0125, pz - 0.0125),
+                (fixed + HALF + 0.008, yc + 0.0125, pz + 0.0125)))
 
 
 def beam_ring(h, axisname, fixed, y0, y1, width, group, color, name, index):
