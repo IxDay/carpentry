@@ -261,6 +261,25 @@ descriptions of the joint", carry `tab: "extra"` so the site shows them in its
 second tab, and may give `approach` as a whole path (`tsutsumikomi-nuki`). After
 regenerating, run `check_sources.py` before baking.
 
+### `author_house.py` + `house_geom.py` — the house frame
+
+```sh
+python3 author_house.py      # ../house/source.json
+python3 export_house.py      # ../house/house.glb
+```
+
+The house is not a joint specimen: it is a 3 × 2 ken, two-storey frame with a
+hip roof, built from full-length members and cut only where they meet.
+`house_geom.py` holds the plan dimensions, the group palette and the members
+that need their own local frame (braces, hips, common and jack rafters);
+`author_house.py` builds the rest with axis-aligned box CSG from
+`author_joint.compile_solid`, so the source remains plain faces and the GLB
+writer can emit one node per timber. Joints are cut as housings, mortises,
+half-laps and birdsmouths; wedges and pegs are extra faces in the wedge colour.
+The output is static, unlit, unsubdivided and un-occluded on purpose: it stays
+under 2 MB and reads at house scale. The joint catalog is not touched; the
+connection schedule is in [`../house/README.md`](../house/README.md).
+
 ### `build_site.py` — the GitHub Pages site
 
 ```sh

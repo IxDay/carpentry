@@ -306,7 +306,8 @@ def write_png(path, W, H, img):
         f.write(png)
 
 
-def render_sunset(level_id, out, W, H, yaw, pitch, ss=2, glbdir="../joints"):
+def render_sunset(level_id, out, W, H, yaw, pitch, ss=2, glbdir="../joints",
+                  margin=1.10, bottom=0.042):
     """Render a baked GLB exactly as written (Gouraud + supersampling)."""
     path = os.path.join(glbdir, level_id + ".glb")
     if not os.path.exists(path):
@@ -324,9 +325,9 @@ def render_sunset(level_id, out, W, H, yaw, pitch, ss=2, glbdir="../joints"):
     mny, mxy = min(ys), max(ys)
 
     w, h = W * ss, H * ss
-    sc = min(w / (mxx - mnx) * 1.10, h / (mxy - mny) * 1.10)
+    sc = min(w / (mxx - mnx) * margin, h / (mxy - mny) * margin)
     ox = (w - (mxx - mnx) * sc) / 2 - mnx * sc
-    oy = (h - (mxy - mny) * sc) / 2 - mny * sc - 0.042 * h
+    oy = (h - (mxy - mny) * sc) / 2 - mny * sc - bottom * h
 
     def project(v):
         return (v[0] * sc + ox, h - (v[1] * sc + oy), v[2])
@@ -423,6 +424,12 @@ def main():
                     help="supersampling factor for --sunset (default 2)")
     ap.add_argument("--glbdir", default="../joints",
                     help="directory holding baked GLBs for --sunset")
+    ap.add_argument("--margin", type=float, default=1.10,
+                    help="fit margin for --sunset")
+    ap.add_argument("--bottom", type=float, default=0.042,
+                    help="vertical offset (fraction of height) for --sunset")
+    ap.add_argument("--sun-yaw", type=float, default=35.0)
+    ap.add_argument("--sun-pitch", type=float, default=22.0)
     args = ap.parse_args()
 
     global CAT
@@ -432,8 +439,8 @@ def main():
         if args.sunset:
             out = os.path.join(args.outdir, "sunset_%s.png" % lid)
             render_sunset(lid, out, args.size, args.size,
-                          math.radians(35), math.radians(22), args.ss,
-                          args.glbdir)
+                          math.radians(args.sun_yaw), math.radians(args.sun_pitch), args.ss,
+                          args.glbdir, args.margin, args.bottom)
             continue
         out = os.path.join(args.outdir, "prev_%s.ppm" % lid)
         if args.iso:

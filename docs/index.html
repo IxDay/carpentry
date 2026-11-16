@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Japanese joinery</title>
-  <meta name="description" content="34 Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble and come apart.">
+  <meta name="description" content="34 Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble, plus the open frame of a two-storey house.">
   <meta property="og:title" content="Japanese joinery">
-  <meta property="og:description" content="34 Japanese timber joints as interactive 3D models that assemble and come apart.">
+  <meta property="og:description" content="34 Japanese timber joints as interactive 3D models, plus the open frame of a two-storey house.">
   <meta property="og:image" content="posters/daimochi-tsugi.png">
   <noscript>
     <style>
@@ -262,16 +262,17 @@
 </head>
 <body>
   <button class="menu-toggle" type="button" aria-label="Joints menu" aria-controls="index" aria-expanded="false">&#9776;</button>
-  <div class="hint" id="hint">Swipe up for the next joint</div>
+  <div class="hint" id="hint">Swipe up for the next model</div>
   <div class="layout">
     <div class="backdrop"></div>
     <nav class="index" id="index" aria-label="Joints">
       <button class="menu-close" type="button" aria-label="Close the menu">&times;</button>
       <h1>Japanese joinery</h1>
-      <p>34 joints that assemble and come apart.</p>
+      <p>34 joints that assemble and come apart, and one house that stands still.</p>
       <div class="tabs" role="tablist" aria-label="Which joints">
         <button type="button" role="tab" id="tab-sheet" data-tab="sheet" data-note="Every family printed on the two reference sheets." aria-selected="true" tabindex="0" aria-controls="joint-list">On the sheets <span class="count">32</span></button>
         <button type="button" role="tab" id="tab-extra" data-tab="extra" data-note="Joints the reference sheets do not show, authored for this collection." aria-selected="false" tabindex="-1" aria-controls="joint-list">Off the sheets <span class="count">2</span></button>
+        <button type="button" role="tab" id="tab-house" data-tab="house" data-note="The open frame from house.jpg: two storeys, one hip roof, joinery at every connection." aria-selected="false" tabindex="-1" aria-controls="joint-list">The house <span class="count">1</span></button>
       </div>
       <p class="tab-note" id="tab-note"></p>
       <div class="search">
@@ -315,6 +316,7 @@
         <li data-tab="sheet"><a href="#yose-ari-hozo-shikuchi"><span class="name">Yose-ari-hozo-shikuchi</span><span class="jp" lang="ja">寄せ蟻枘仕口</span></a></li>
         <li data-tab="extra" hidden><a href="#doutsuki-ari-tsugi"><span class="name">Doutsuki-ari-tsugi</span><span class="jp" lang="ja">胴付き蟻継ぎ</span></a></li>
         <li data-tab="extra" hidden><a href="#tsutsumikomi-nuki"><span class="name">Tsutsumikomi-nuki</span><span class="jp" lang="ja">包み込み貫</span></a></li>
+        <li data-tab="house" hidden><a href="#house"><span class="name">The house</span><span class="jp" lang="ja">民家</span></a></li>
       </ol>
     </nav>
     <main>
@@ -862,6 +864,22 @@
         <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
+      <section class="joint" id="house" data-tab="house" data-tab-count="1" hidden>
+        <header>
+          <h2><a href="#house">The house<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">民家</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-house" data-src="models/house.glb"
+              alt="The house: an open timber frame" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="35deg 68deg auto" min-field-of-view="18deg"
+              loading="eager"></model-viewer>
+        </div>
+        <p class="meta">272 timbers &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
     </main>
     <footer>
       <h2>About</h2>
@@ -871,7 +889,8 @@
         for timbers passing through each other, and some meshes were corrected where the
         author's pose was not the true closed joint.</p>
       <p>Fifteen joints with no licensed source model &mdash; every family on the reference sheets, splices included &mdash; are authored for this collection from 柱（軸組）の納まり and released CC BY 4.0.</p>
-      <p>Two more, in the <em>Off the sheets</em> tab, go beyond the sheets: a dovetail splice and a 包み込み貫 tie, authored from the sources cited in <a href="https://github.com/IxDay/carpentry/joints/README.md">joints/README.md</a>.</p>
+      <p>Two more, in the <em>Off the sheets</em> tab, go beyond the sheets: a dovetail splice and a 包み込み貫 tie, authored from the sources cited in joints/README.md.</p>
+      <p><em>The house</em> is the open frame of the two-storey house in the reference drawings: 272 timbers, a 3 x 2 ken plan and a hip roof, with tenons, mortises, half-laps and wedges at the connections. Notes and the joint schedule: house/README.md.</p>
       <h2>References</h2>
       <ul>
         <li><a href="https://projects.mcah.columbia.edu/jaanus/node/3413">JAANUS, kanawa tsugi 金輪継</a></li>
@@ -884,7 +903,6 @@
         <li><a href="https://thecarpentryway.blog/2012/12/chasing-transcendence/">The Carpentry Way, Chasing transcendence (basara-tsugi)</a></li>
         <li><a href="https://bigsandwoodworking.com/kanawa-tsugi-joinery-models-part-2">Big&#x27;s Woodworking, kanawa tsugi joinery models, part 2</a></li>
       </ul>
-      <p>Source and tooling: <a href="https://github.com/IxDay/carpentry">https://github.com/IxDay/carpentry</a>. Per-joint notes and references: <a href="https://github.com/IxDay/carpentry/joints/README.md">joints/README.md</a>.</p>
     </footer>
   </div>
   <script>

@@ -277,6 +277,79 @@ back. The source's `approach` is the first list-valued one: the nuki is offered
 up 15 mm, slid home over the shelf, then lowered onto it, and the bake walks
 that path in both directions.
 
+## Project: the house
+
+The two house references show a two-storey Japanese timber house: `house.jpg`
+is a finished cutaway, `house-2.jpg` colour-codes the same frame by
+`軸組`, `小屋組` and `床組`. The chosen scope is the **open structural frame**:
+no wall or roof finishes, so every connection stays visible, and real joinery
+at every structural connection (not a massing model).
+
+### Assumptions
+
+- Footprint **3 bays × 2 bays**, each bay `1.82 m` (one ken), so `5.46 × 3.64 m`
+  on plan. This matches the post counts in `house-2.jpg`: four posts across the
+  long face, three across the short face.
+- Two storeys, `2.70 m` floor-to-floor; `120 mm` posts, sills, beams and
+  principal members; `105 mm` studs and braces; `60 mm` joists and rafters.
+- `450 mm` foundation above grade, sill top at `570 mm`; a hip roof
+  (`寄棟`) with `600 mm` eaves, ridge along the long axis, `隅木` at the four
+  hips. Ridge length is `W - D = 1.82 m`, as in the reference.
+- Members are named and coloured by the `house-2.jpg` groups: axis (terracotta),
+  roof (olive), floor (slate blue), foundation/stone (grey). The palette is
+  muted to sit with the existing paper background.
+- The house is **static** (no `assemble` animation): its point is the frame and
+  the joints, not another assembly clip.
+
+### Joint schedule
+
+| Connection | Joint used |
+|---|---|
+| post ↔ sill | through tenon, wedge under the sill (`長ホゾ差し・込み栓打ち` family) |
+| post ↔ 胴差 / 軒桁 | through tenon + komisen (`長ホゾ` / `上小根` family) |
+| beam ↔ post | housed tenon + wedge; the beam is cut, the through-post stays whole |
+| 貫 ↔ post | wrapped-nuki mortise (scaled `包み込み貫`: 15 mm shelf, 15 mm rebate, wedge) |
+| 筋違 ↔ post/beam | housed brace tenon, pinned with a wedge (new house connection) |
+| 火打梁 ↔ 土台/胴差 | dovetail-ended corner beam (new house connection) |
+| 根太 ↔ 大引 | half-lap notch (new house connection) |
+| 大引 ↔ 土台 | housed notch |
+| 床束 ↔ 大引 | tenon through the sleeper |
+| 小屋梁 ↔ 軒桁/post | dovetail/housed tenon |
+| 小屋束 ↔ 小屋梁 | tenon with wedge |
+| 母屋 ↔ 小屋束 | halved crossing, peg |
+| 垂木 ↔ 母屋/軒桁/棟木 | birdsmouth notch |
+| 隅木 ↔ 棟木 | halved/tenoned ridge seat |
+| 土台 / 胴差 / 軒桁 corners | halved corner lap |
+
+The brace, fire-beam, joist and rafter connections are new. They will live in
+`tools/author_house.py` first, with their cut geometry and a short note in
+`house/README.md`; if a connection proves useful as a specimen it can be
+promoted to the joint catalog later.
+
+### Output and size
+
+`house/source.json` uses the same piece/face schema as the joint sources, but
+carries group colours and no `assemble` offsets. `house/house.glb` is written by
+the existing GLB writer with one mesh node per timber and flat per-face colours,
+no per-face subdivision and no baked AO, so it stays small (aim: under 10 MB).
+If it grows past that, the fallback is `.gltf` + external `.bin`, or a
+Draco-compressed GLB; the source stays the editable deliverable either way.
+The site gets a third tab, **The house**, with one viewer section; the joint
+counts and the existing two tabs are unchanged.
+
+### Built
+
+The frame is in `house/`: 272 timbers, 14,818 triangles, a 2.0 MB GLB, and a
+1100×1100 poster. It has the agreed 3 × 2 ken plan, two storeys, a hip roof,
+and real joinery at the connections in the table above. The joint catalog is
+still 34; none of the house connections were promoted, so the two existing tabs
+and their counts are untouched. The third tab is live in `docs/` and links to
+[`house/README.md`](house/README.md).
+
+The one deviation from the first sketch is the second-floor deck: the upper
+根太 are modelled but the boards are not, so the ground-floor frame stays
+visible through the open middle bay. That is in the house notes.
+
 ## Next
 
 Nothing on either reference sheet is missing, and every `shikuchi` family now

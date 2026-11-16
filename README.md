@@ -1,8 +1,9 @@
 # Japanese joinery
 
 Thirty-four Japanese timber joints (継ぎ手 and 仕口) as interactive 3D models that
-assemble and come apart, with the tools that rebuild them and the site that shows
-them: **<https://ixday.github.io/carpentry/>**.
+assemble and come apart, and the open frame of a two-storey house, with the tools
+that rebuild them and the site that shows them:
+**<https://ixday.github.io/carpentry/>**.
 
 Seventeen models are by [thejoinery](https://sketchfab.com/thejoinery) on
 Sketchfab (CC BY 4.0, one CC BY-SA 4.0). They were read from the public viewer,
@@ -24,6 +25,8 @@ the change list and the references used are in
 - `joints/sources/<id>.json` — the source: faces of every timber (in the
   exploded pose), the closed-pose offsets (`assemble`), an optional `approach`
   stage, and the attribution
+- `house/` — the open frame of the house in `house.jpg`: `source.json`,
+  `house.glb`, a poster and notes; see [`house/README.md`](house/README.md)
 - `docs/` — the generated GitHub Pages site (`tools/build_site.py`)
 - `tools/` — capture, import, bake, check and site tools; see
   [`tools/README.md`](tools/README.md)
@@ -32,11 +35,14 @@ the change list and the references used are in
 - `PLAN.md` — inventory, coverage against the reference sheet, and the queue of
   joints still to add
 
-Every GLB is Y-up and right-handed, with flat per-face normals and an indexed
-`COLOR_0`. The material is `KHR_materials_unlit`: the lighting, cast shadows and
+Every joint GLB is Y-up and right-handed, with flat per-face normals and an
+indexed `COLOR_0`. The material is `KHR_materials_unlit`: the lighting, cast shadows and
 ambient occlusion are baked into the vertex colours, so the look is static and
 viewer-independent. A viewer should not add its own lights, and tone mapping
 (ACES, Filmic) shifts the colours; compare with a Standard/sRGB view transform.
+The house GLB uses the same unlit material and baked colours, but it is static:
+there is no `assemble` clip, and its faces are not subdivided or ambient-occluded
+because the point is the frame at architectural scale, not a close-up specimen.
 
 ## Browsing
 
@@ -47,7 +53,8 @@ python3 tools/viewer.py --open
 Serves the same page that is published on GitHub Pages: one anchored section per
 joint, the assembly animation, the scroll wheel zooms the model, Up / Down step
 between joints, and on a phone the index becomes a slide-in menu with one joint
-per screen. The index has a search box at the top (`/` focuses it): it matches
+per screen. The third tab, **The house**, is the static frame; it orbits but does
+not animate. The index has a search box at the top (`/` focuses it): it matches
 romanised and Japanese names, ranks the hits, and on a phone it filters the
 same slide-in menu.
 
@@ -86,6 +93,8 @@ for f in ../joints/sources/*.json; do
         --glbdir ../joints --outdir ../joints/previews --level "$id"
 done
 python3 validate.py ../joints
+python3 author_house.py                      # the house frame
+python3 export_house.py
 python3 build_site.py --repo-url https://github.com/IxDay/carpentry
 ```
 
@@ -101,4 +110,6 @@ The CC BY 4.0 models may be reused with attribution; each GLB's
 is CC BY-SA 4.0: its baked GLB and pieces are a derivative and are distributed
 under the same license. The seventeen authored joints (three splices and fourteen
 column-and-beam `shikuchi`, listed in [`joints/README.md`](joints/README.md)) are
-original geometry, released CC BY 4.0.
+original geometry, released CC BY 4.0. The house frame in `house/` is likewise
+original geometry, released CC BY 4.0; its reference drawings remain under their
+own terms.
