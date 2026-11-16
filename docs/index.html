@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Japanese joinery</title>
-  <meta name="description" content="34 Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble, plus the open frame of a two-storey house.">
+  <meta name="description" content="34 Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble, plus a two-storey house that unbuilds and rebuilds itself.">
   <meta property="og:title" content="Japanese joinery">
-  <meta property="og:description" content="34 Japanese timber joints as interactive 3D models, plus the open frame of a two-storey house.">
+  <meta property="og:description" content="34 Japanese timber joints as interactive 3D models, plus a two-storey house that unbuilds and rebuilds itself.">
   <meta property="og:image" content="posters/daimochi-tsugi.png">
   <noscript>
     <style>
@@ -268,11 +268,11 @@
     <nav class="index" id="index" aria-label="Joints">
       <button class="menu-close" type="button" aria-label="Close the menu">&times;</button>
       <h1>Japanese joinery</h1>
-      <p>34 joints that assemble and come apart, and one house that stands still.</p>
+      <p>34 joints that assemble and come apart, and one house that takes itself apart and builds itself back.</p>
       <div class="tabs" role="tablist" aria-label="Which joints">
         <button type="button" role="tab" id="tab-sheet" data-tab="sheet" data-note="Every family printed on the two reference sheets." aria-selected="true" tabindex="0" aria-controls="joint-list">On the sheets <span class="count">32</span></button>
         <button type="button" role="tab" id="tab-extra" data-tab="extra" data-note="Joints the reference sheets do not show, authored for this collection." aria-selected="false" tabindex="-1" aria-controls="joint-list">Off the sheets <span class="count">2</span></button>
-        <button type="button" role="tab" id="tab-house" data-tab="house" data-note="The open frame from house.jpg: two storeys, one hip roof, joinery at every connection." aria-selected="false" tabindex="-1" aria-controls="joint-list">The house <span class="count">1</span></button>
+        <button type="button" role="tab" id="tab-house" data-tab="house" data-note="The frame from house.jpg: it takes itself apart and builds itself back, joint by joint." aria-selected="false" tabindex="-1" aria-controls="joint-list">The house <span class="count">1</span></button>
       </div>
       <p class="tab-note" id="tab-note"></p>
       <div class="search">
@@ -872,12 +872,12 @@
         <div class="stage">
           <div class="spinner" aria-hidden="true"></div>
           <model-viewer id="viewer-house" data-src="models/house.glb"
-              alt="The house: an open timber frame" camera-controls
+              alt="The house assembling" autoplay animation-name="assemble" camera-controls
               touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
-              camera-orbit="35deg 68deg auto" min-field-of-view="18deg"
-              loading="eager"></model-viewer>
+              camera-orbit="35deg 68deg auto" min-field-of-view="18deg" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-house">Replay</button>
         </div>
-        <p class="meta">272 timbers &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+        <p class="meta">272 timbers &middot; unbuilds and rebuilds in 27 s &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
     </main>
@@ -890,7 +890,7 @@
         author's pose was not the true closed joint.</p>
       <p>Fifteen joints with no licensed source model &mdash; every family on the reference sheets, splices included &mdash; are authored for this collection from 柱（軸組）の納まり and released CC BY 4.0.</p>
       <p>Two more, in the <em>Off the sheets</em> tab, go beyond the sheets: a dovetail splice and a 包み込み貫 tie, authored from the sources cited in <a href="https://github.com/IxDay/carpentry/joints/README.md">joints/README.md</a>.</p>
-      <p><em>The house</em> is the open frame of the two-storey house in the reference drawings: 272 timbers, a 3 x 2 ken plan and a hip roof, with tenons, mortises, half-laps and wedges at the connections. Notes and the joint schedule: <a href="https://github.com/IxDay/carpentry/house/README.md">house/README.md</a>.</p>
+      <p><em>The house</em> is the open frame of the two-storey house in the reference drawings: 272 timbers, a 3 x 2 ken plan and a hip roof, with tenons, mortises, half-laps and wedges at the connections. It comes apart from the ridge down and goes back together from the foundation up, one timber at a time. Notes and the joint schedule: <a href="https://github.com/IxDay/carpentry/house/README.md">house/README.md</a>.</p>
       <h2>References</h2>
       <ul>
         <li><a href="https://projects.mcah.columbia.edu/jaanus/node/3413">JAANUS, kanawa tsugi 金輪継</a></li>

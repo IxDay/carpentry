@@ -26,7 +26,8 @@ the change list and the references used are in
   exploded pose), the closed-pose offsets (`assemble`), an optional `approach`
   stage, and the attribution
 - `house/` — the open frame of the house in `house.jpg`: `source.json`,
-  `house.glb`, a poster and notes; see [`house/README.md`](house/README.md)
+  `house.glb` with its unbuild/rebuild clip, a poster and notes; see
+  [`house/README.md`](house/README.md)
 - `docs/` — the generated GitHub Pages site (`tools/build_site.py`)
 - `tools/` — capture, import, bake, check and site tools; see
   [`tools/README.md`](tools/README.md)
@@ -40,9 +41,11 @@ indexed `COLOR_0`. The material is `KHR_materials_unlit`: the lighting, cast sha
 ambient occlusion are baked into the vertex colours, so the look is static and
 viewer-independent. A viewer should not add its own lights, and tone mapping
 (ACES, Filmic) shifts the colours; compare with a Standard/sRGB view transform.
-The house GLB uses the same unlit material and baked colours, but it is static:
-there is no `assemble` clip, and its faces are not subdivided or ambient-occluded
-because the point is the frame at architectural scale, not a close-up specimen.
+The house GLB uses the same unlit material and baked colours, and its rest pose
+is the assembled frame. Its one clip, `assemble`, unbuilds the house from the
+ridge down and rebuilds it from the foundation up, one timber at a time, in
+27 seconds. Its faces are not subdivided or ambient-occluded: the point is the
+frame at architectural scale, not a close-up specimen.
 
 ## Browsing
 
@@ -53,8 +56,9 @@ python3 tools/viewer.py --open
 Serves the same page that is published on GitHub Pages: one anchored section per
 joint, the assembly animation, the scroll wheel zooms the model, Up / Down step
 between joints, and on a phone the index becomes a slide-in menu with one joint
-per screen. The third tab, **The house**, is the static frame; it orbits but does
-not animate. The index has a search box at the top (`/` focuses it): it matches
+per screen. The third tab, **The house**, is the frame; its clip takes it apart
+and puts it back together, and **Replay** starts the cycle again. The index has
+a search box at the top (`/` focuses it): it matches
 romanised and Japanese names, ranks the hits, and on a phone it filters the
 same slide-in menu.
 

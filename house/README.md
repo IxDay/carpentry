@@ -6,11 +6,12 @@ there are no walls, floor boards, roof boards or tiles, so every post, beam and
 joint stays visible.
 
 - `source.json` — the frame, in the same face schema as the joint sources. One
-  list with one level, `house`, and 272 timber pieces. There are no `assemble`
-  offsets: the frame is static.
-- `house.glb` — one mesh node per timber, flat per-face colours, no animation,
-  15,530 triangles, about 2.1 MB.
-- `sunset_house.png` — the poster render of the shipped GLB.
+  list with one level, `house`, and 272 timber pieces. The animation offsets are
+  derived at export time, so the source stays the closed pose.
+- `house.glb` — one mesh node per timber, flat per-face colours, 15,530
+  triangles, about 2.25 MB. The rest pose is assembled; the `assemble` clip
+  unbuilds and rebuilds the frame in 27 seconds.
+- `sunset_house.png` — the poster render of the shipped GLB at rest.
 
 ## Plan and dimensions
 
@@ -41,6 +42,25 @@ floor slate blue, foundation and stone grey. They are muted to sit with the
 paper background. Lighting is the same baked directional term as the joint set
 and the GLB is written with `KHR_materials_unlit`, so a viewer should not add
 its own lights.
+
+## Unbuild and rebuild
+
+The clip is a construction sequence, not a single exploded pose. Each of the
+223 moving timbers is held by its own connection, so `tools/house_anim.py`
+derives its track from that joint: a post lifts off its sill tenon, a 貫 slides
+out of its through mortise, a brace withdraws square to the wall, a rafter lifts
+out of its birdsmouths. Only after the short extraction does the member fly to a
+parked pose above and slightly outside the frame. The 49 foundation and stone
+pieces never move.
+
+The house comes apart in reverse construction order - rafters and hips, ridge,
+purlins, roof posts and roof beams, wall plates, upper walls, second-floor
+beams, lower walls, then floor framing - and goes back together in the reverse.
+Stages overlap, with a small deterministic stagger inside each stage so a wall
+does not move as one rigid sheet. The midpoint is the bare foundation. The clip
+starts and ends assembled, so it can loop or be replayed without a jump.
+
+The connection schedule below is what the motions are derived from.
 
 ## Joint schedule
 
@@ -74,7 +94,7 @@ connections is wanted as a specimen later, its cut geometry can be lifted into
 
 ```sh
 python3 tools/author_house.py      # house/source.json
-python3 tools/export_house.py      # house/house.glb
+python3 tools/export_house.py      # house/house.glb, with the clip
 python3 tools/preview.py house/source.json --sunset --level house \
     --size 1100 --ss 1 --glbdir house --outdir house \
     --margin 0.92 --bottom 0.01 --sun-yaw 40 --sun-pitch 27
@@ -84,7 +104,9 @@ python3 tools/build_site.py        # adds the third tab to docs/
 `tools/house_geom.py` holds the dimensions, palette and the members built in a
 local frame (braces, hips, rafters). The rest is axis-aligned box CSG via
 `author_joint.compile_solid`, so the cuts are exact rectangles and the source
-stays editable.
+stays editable. `tools/house_anim.py` derives the per-timber tracks from the
+joint type and the construction stage; `tools/export_house.py` writes them with
+the meshes.
 
 ## What is left out
 

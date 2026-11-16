@@ -18,6 +18,7 @@ import json
 import os
 import re
 import shutil
+import struct
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -30,7 +31,7 @@ TABS = [
     ("extra", "Off the sheets",
      "Joints the reference sheets do not show, authored for this collection."),
     ("house", "The house",
-     "The open frame from house.jpg: two storeys, one hip roof, joinery at every connection."),
+     "The frame from house.jpg: it takes itself apart and builds itself back, joint by joint."),
 ]
 DEFAULT_TAB = TABS[0][0]
 
@@ -103,9 +104,24 @@ def load_joints(joints_dir):
     return joints
 
 
+def glb_animation_seconds(path):
+    """Longest input time in the GLB's clips, read from the JSON chunk."""
+    with open(path, "rb") as fh:
+        data = fh.read()
+    ln = struct.unpack_from("<I", data, 12)[0]
+    js = json.loads(data[20:20 + ln])
+    best = 0.0
+    for anim in js.get("animations") or []:
+        for smp in anim["samplers"]:
+            acc = js["accessors"][smp["input"]]
+            if acc.get("max"):
+                best = max(best, float(acc["max"][0]))
+    return best
+
+
 def load_house(house_dir):
-    """The house is a single static level, not a joint, but the page wants the
-    same record shape so the tab bar, search and hash routing just work."""
+    """The house is a single level, not a joint, but the page wants the same
+    record shape so the tab bar, search and hash routing just work."""
     src = os.path.join(house_dir, "source.json")
     glb = os.path.join(house_dir, "house.glb")
     poster = os.path.join(house_dir, "sunset_house.png")
@@ -124,7 +140,10 @@ def load_house(house_dir):
         "source": lv["source"],
         "glb": glb,
         "poster": poster,
-        "static": True,
+        "camera": "35deg 68deg auto",
+        "min_fov": "18deg",
+        "meta": "%d timbers &middot; unbuilds and rebuilds in %g s"
+                % (len(lv["pieces"]), glb_animation_seconds(glb)),
     }]
 
 
@@ -168,24 +187,18 @@ def section(j, counts):
               if "sketchfab.com" in s["url"] else
               ' <a href="%s">Source in this repository</a>.' % esc(s["url"]))
     hidden = "" if j["tab"] == DEFAULT_TAB else " hidden"
-    if j.get("static"):
-        viewer = ('<model-viewer id="viewer-{slug}" data-src="models/{slug}.glb"\n'
-                  '              alt="{title}: an open timber frame" camera-controls\n'
-                  '              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"\n'
-                  '              camera-orbit="35deg 68deg auto" min-field-of-view="18deg"\n'
-                  '              loading="eager"></model-viewer>'
-                  .format(slug=j["slug"], title=esc(j["title"])))
-        controls = ""
-        pieces = "%d timbers" % j["pieces"]
-    else:
-        viewer = ('<model-viewer id="viewer-{slug}" data-src="models/{slug}.glb"\n'
-                  '              alt="{title} assembling" autoplay animation-name="assemble" camera-controls\n'
-                  '              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"\n'
-                  '              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>'
-                  .format(slug=j["slug"], title=esc(j["title"])))
-        controls = ('\n          <button type="button" data-replay="viewer-%s">Replay</button>'
-                    % j["slug"])
-        pieces = "%d pieces" % j["pieces"]
+    camera = esc(j.get("camera", "38deg 64deg auto"))
+    fov = (' min-field-of-view="%s"' % esc(j["min_fov"])
+           if j.get("min_fov") else "")
+    viewer = ('<model-viewer id="viewer-{slug}" data-src="models/{slug}.glb"\n'
+              '              alt="{title} assembling" autoplay animation-name="assemble" camera-controls\n'
+              '              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"\n'
+              '              camera-orbit="{camera}"{fov} loading="eager"></model-viewer>'
+              .format(slug=j["slug"], title=esc(j["title"]),
+                      camera=camera, fov=fov))
+    controls = ('\n          <button type="button" data-replay="viewer-%s">Replay</button>'
+                % j["slug"])
+    pieces = j.get("meta") or ("%d pieces" % j["pieces"])
     return """      <section class="joint" id="{slug}" data-tab="{tab}" data-tab-count="{count}"{hidden}>
         <header>
           <h2><a href="#{slug}">{title}<span class="hash" aria-hidden="true">#</span></a></h2>
@@ -247,7 +260,9 @@ def footer(repo_url, joints=()):
             "\n      <p><em>The house</em> is the open frame of the two-storey "
             "house in the reference drawings: %d timbers, a 3 x 2 ken plan and a hip "
             "roof, with tenons, mortises, half-laps and wedges at the connections. "
-            "Notes and the joint schedule: %s.</p>" % (house[0]["pieces"], cited))
+            "It comes apart from the ridge down and goes back together from the "
+            "foundation up, one timber at a time. Notes and the joint schedule: "
+            "%s.</p>" % (house[0]["pieces"], cited))
     repo = ('\n      <p>Source and tooling: <a href="%s">%s</a>. Per-joint notes '
             'and references: <a href="%s/joints/README.md">joints/README.md</a>.</p>'
             % (esc(repo_url), esc(repo_url), esc(repo_url.rstrip("/")))

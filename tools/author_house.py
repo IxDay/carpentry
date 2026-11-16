@@ -662,8 +662,8 @@ def write_source(pieces):
         "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
         "modifications": (
             "authored from the reference drawings house.jpg and house-2.jpg; "
-            "open structural frame, no wall or roof finishes; static, sunset "
-            "lighting baked"),
+            "open structural frame, no wall or roof finishes; unbuild/rebuild "
+            "animation derived at export; sunset lighting baked"),
         "credit": ("Original geometry authored for this collection from the "
                    "reference drawings; CC BY 4.0."),
     }
@@ -682,7 +682,6 @@ def write_source(pieces):
         "gift": "",
         "mark": "",
         "masterOf": "",
-        "static": True,
         "source": source,
         "pieces": pieces,
     }

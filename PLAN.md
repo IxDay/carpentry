@@ -298,8 +298,10 @@ at every structural connection (not a massing model).
 - Members are named and coloured by the `house-2.jpg` groups: axis (terracotta),
   roof (olive), floor (slate blue), foundation/stone (grey). The palette is
   muted to sit with the existing paper background.
-- The house is **static** (no `assemble` animation): its point is the frame and
-  the joints, not another assembly clip.
+- The house animates as a **construction sequence**, not a closed-joint loop:
+  a 27 s `assemble` clip unbuilds it from the ridge down and rebuilds it from
+  the foundation up, one timber at a time. Each move is derived from the joint
+  that holds the timber, so the frame's connections drive the animation.
 
 ### Joint schedule
 
@@ -329,9 +331,11 @@ promoted to the joint catalog later.
 ### Output and size
 
 `house/source.json` uses the same piece/face schema as the joint sources, but
-carries group colours and no `assemble` offsets. `house/house.glb` is written by
+carries group colours and stays in the closed pose; the animation offsets are
+derived at export time in `tools/house_anim.py`. `house/house.glb` is written by
 the existing GLB writer with one mesh node per timber and flat per-face colours,
-no per-face subdivision and no baked AO, so it stays small (aim: under 10 MB).
+no per-face subdivision and no baked AO, so it stays small (2.25 MB with the
+clip; aim: under 10 MB).
 If it grows past that, the fallback is `.gltf` + external `.bin`, or a
 Draco-compressed GLB; the source stays the editable deliverable either way.
 The site gets a third tab, **The house**, with one viewer section; the joint
@@ -339,9 +343,12 @@ counts and the existing two tabs are unchanged.
 
 ### Built
 
-The frame is in `house/`: 272 timbers, 15,530 triangles, a 2.1 MB GLB, and a
+The frame is in `house/`: 272 timbers, 15,530 triangles, a 2.25 MB GLB, and a
 1100×1100 poster. It has the agreed 3 × 2 ken plan, two storeys, a hip roof,
-and real joinery at the connections in the table above. The joint catalog is
+and real joinery at the connections in the table above. The GLB carries a 27 s
+`assemble` clip that takes the frame apart and puts it back together, driven by
+the joint each timber is held by: 223 moving timbers in twelve stages, with the
+49 foundation and stone pieces static. The joint catalog is
 still 34; none of the house connections were promoted, so the two existing tabs
 and their counts are untouched. The third tab is live in `docs/` and links to
 [`house/README.md`](house/README.md).
