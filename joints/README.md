@@ -353,6 +353,73 @@ together, where the key goes):
 - Sketchfab model by thejoinery (no animation) —
   <https://sketchfab.com/3d-models/kanawa-tsugi-713b9b3a98344094a008535738348791>.
 
+## Contact / mortise accuracy pass
+
+`tools/check_sources.py` already rejects overlapping or non-manifold solids, but
+it allows mating faces to touch, so a joint whose pieces floated 0.4–2.5 mm
+apart still passed. `tools/check_contact.py` was added to measure
+surface-to-surface distance in the closed pose and report disconnected piece
+groups. Nine specimens failed it: `brace-into-post`, `hip-over-plate`,
+`jack-rafter-at-hip`, `jack-rafter-over-plate`, `purlin-under-hip`,
+`rafter-at-hip`, `rafter-over-plate`, `rafter-over-purlin` and
+`shitakone-hozo-hana-sen`. They were rebuilt so every piece now contacts its
+neighbour: the brace bears on the bottom of its post housing, the hip/rafter
+end cuts meet their neighbours exactly, the birdsmouth seats sit on the purlin
+and plate tops, and the nose peg fills its mortise and bears on the post face.
+All 53 sources now have one connected piece graph in the closed pose.
+
+Research used for the dimensions and for deciding which connections need a
+recess (rather than only a bearing face):
+
+- Flat35 2025 specification sample, §§5.1.2–5.1.3 and 5.9.1–5.9.8 —
+  <https://www.inoueshoin.co.jp/e-flat35/sample/sample.html>: 120 mm standard
+  sill, 90 mm sleepers, 30×90 mm braces; housed/dovetailed sill corners and
+  sleeper joints; joists simply bear at 45–60 mm but use a housing or
+  `渡りあご` at 90 mm+; `火打ちばり` uses `かたぎ大入れ`, not face bearing.
+- 中央工学校, 火打 — <https://chuoko.ac.jp/2021/01/15/35016/>: the fire beam
+  is laid out with a 1:1:√2 triangle and cut with `傾ぎ大入れ` so it carries
+  force through a one-sided housing in the sill.
+- 下山眞司, 土台・大引・床束 joints —
+  <https://ameblo.jp/archi1217ss-7/entry-12926333294.html> and 梁と小梁・根太 —
+  <https://ameblo.jp/archi1217ss-7/entry-12926333763.html>: housed sill and
+  sleeper joints, the `渡りあご` alternative, and the size rules behind the
+  floor-detail sections.
+- JAANUS, `taruki` / `munagi` / `moya` / `sumigi` —
+  <http://www.aisf.or.jp/~jaanus/deta/t/taruki.htm>,
+  <http://www.aisf.or.jp/~jaanus/deta/m/munagi.htm>,
+  <http://www.aisf.or.jp/~jaanus/deta/m/moya.htm>,
+  <http://www.aisf.or.jp/~jaanus/deta/s/sumigi.htm>: roof-member load paths;
+  the hip is larger than a common rafter and receives jack-rafter and purlin
+  ends.
+- 展開図ラボ, 垂木欠き / 鳥口 — <https://tenkaizulab.com/column/taruki-kaki/>
+  and <https://tenkaizulab.com/articles/taruki-nagasa/>: for a 4寸 (0.4) slope
+  the rafter's `座` (seat) is about 50 mm for a 20 mm `立水` (plumb cheek), and
+  the beam-top notch depth is `(beam width / 2) × slope`. The roof details were
+  changed from the earlier 100 mm seat with a 1 mm reveal to a 50 mm seat and
+  20 mm cheek, with the seat now flush on the 120 mm purlin/plate top.
+- 展開図ラボ, 隅木の計算 — <https://tenkaizulab.com/articles/sumigi-keisan/>
+  and 配付垂木 — <https://tenkaizulab.com/articles/haitsuke-taruki/>: hip
+  slope is roof slope / √2; jack rafters stop against the hip's side face and
+  are cut to that face rather than crossing it.
+- thejoinery STEP archive, e.g.
+  <https://thejoinery.jp/item.php?id=97749> (kanawa),
+  <https://thejoinery.jp/item.php?id=74935> (okkake),
+  <https://thejoinery.jp/item.php?id=86159> (koshikake-ari),
+  <https://thejoinery.jp/item.php?id=47329> (hira-isuka),
+  <https://thejoinery.jp/item.php?id=85252> (shihou-ari): exact dovetail drafts
+  (about 1/8), 15 mm jaws, two 17 mm pegs at L/4, and 45° V-scarf geometry.
+  The imported specimens are captures of these families; their closed poses
+  were already corrected by `mate_faces.py`, and the contact pass confirms the
+  corrections still leave every timber joined.
+
+Bearing-only connections that deliberately have **no** mortise are documented
+as such in their guidance: `floor-post-on-stone` (post bears on the dressed
+stone), `rafter-at-ridge` and `rafter-at-hip` / `jack-rafter-at-hip` (square
+plumb or side cuts), and `purlin-under-hip` / `hip-over-plate` (load paths
+through bearing surfaces; the exact housing is drawing-specific). The
+`fire-beam-tie` no longer belongs to that list: its ends now drop into 30 mm
+`大入れ` housings in the two sill tops.
+
 Used to author the seventeen joints with no source model (shapes, proportions, which
 face each mortise opens on, where the key goes):
 

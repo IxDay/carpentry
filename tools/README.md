@@ -178,6 +178,30 @@ Each source stores its pieces in the exploded pose, so the tool shifts them by
   within 2 mm of a face edge are skipped and patches thinner than 0.5 mm are
   ignored, so capture noise and a knife-edge contact do not fail.
 
+### `check_contact.py` — check that pieces actually join
+
+```sh
+python3 check_contact.py                 # every joints/sources/*.json
+python3 check_contact.py daimochi-tsugi  # by id or path
+python3 check_contact.py --json          # machine-readable report
+```
+
+`check_sources.py` proves the solids are manifold and do not overlap, but an
+"exactly touching" allowance means a joint whose pieces float a millimetre
+apart still passes. This tool measures surface-to-surface distance between
+every pair of pieces in the closed pose (a vectorised closest-point-on-triangle
+kernel over vertices, edge midpoints and centroids), builds the piece adjacency
+graph and reports any disconnected groups. It also prints how much of one
+piece's surface sits inside the other's bounding box, a cheap interlock/mortise
+proxy: a pair with contact but no bounding-box interlock is a bearing contact,
+not a housed joint.
+
+A pair is *contact* at 0.1 mm, *near* up to 2 mm and a *gap* beyond that. The
+script uses NumPy (already needed by the bake tools) and needs SciPy or trimesh
+neither. Run it alongside `check_sources.py` after any geometry edit; a joint
+with no disconnected pieces is the minimum bar, not proof that every intended
+mortise is present.
+
 ### `mate_faces.py` — make mating faces meet exactly
 
 ```sh

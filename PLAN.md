@@ -409,3 +409,14 @@ For any new joint: author or capture the geometry, verify the closed pose, add
 `approach` where a seat is sloped or a dovetail has to drop before sliding, then
 bake, preview, validate and rebuild `docs/`. Off-sheet work should state which
 published description it was drawn from in the credit and `modifications`.
+
+The collision pass added `tools/check_contact.py` as the second closed-pose gate:
+`check_sources.py` proves there is no overlap, `check_contact.py` proves each
+timber actually touches the frame. Nine joints had 0.4–2.5 mm gaps from
+deliberate display clearances or slight misalignment; those are now closed, and
+the fire-beam tie gained the `大入れ` housings that the housing manuals call
+for. The roof details also use the researched 4寸 birdsmouth proportion (50 mm
+seat, 20 mm cheek) instead of the earlier 100 mm seat. Remaining known
+approximations are the square-cut hip/jack-rafter ends (real work scribes them
+to the side face) and the square kama hook; references and the bearing-only
+joints are listed in `joints/README.md`.

@@ -296,8 +296,8 @@ SILL_CORNER = detail(
 # -- 2. brace into post -----------------------------------------------------
 POST = 0.12
 BRACE_W, BRACE_H = 0.09, 0.105
-# The brace is 105 mm deep through the wall and sits 1 mm clear of the post
-# face, inside a shallow housing cut into that face.
+# The brace is 105 mm deep through the wall. Its inner face bears on the
+# bottom of the 10 mm housing cut into the post face (x = 0.050).
 BRACE_POST = detail(
     "brace-into-post", "Brace into post", "筋違",
     [
@@ -305,7 +305,7 @@ BRACE_POST = detail(
              (-0.06, -0.45, -0.06), (0.06, 0.55, 0.06),
              cuts=[G.box((0.050, -0.42, -0.08), (0.0605, -0.24, 0.08))]),
         oriented("part-b", "Brace", G.COLORS["brace"],
-                 (0.1135, -0.35, 0.0), (0.1135, 0.40, 0.75),
+                 (0.1025, -0.35, 0.0), (0.1025, 0.40, 0.75),
                  BRACE_W, BRACE_H, up=(1.0, 0.0, 0.0)),
     ],
     {"part-b": [0.36, 0.0, 0.0]},
@@ -317,19 +317,53 @@ BRACE_POST = detail(
 
 
 # -- 3. fire-beam tie -------------------------------------------------------
+# The 火打梁 is not just laid on the sills: the traditional detail is a
+# かたぎ大入れ, a 30 mm deep housing cut into the top of each sill for a
+# matching foot on the diagonal tie (see the Flat35 / carpentry-school details
+# referenced in joints/README.md).  The feet are 60 x 40 mm tenons in the
+# member's local frame; the sill housings are square pockets large enough to
+# clear the 45-degree plan footprint.
+FIRE_P0 = (-0.46, 0.105, 0.0)
+FIRE_P1 = (0.0, 0.105, -0.46)
+FIRE_L = math.sqrt(sum((FIRE_P1[i] - FIRE_P0[i]) ** 2 for i in range(3)))
+FIRE_FOOT = 0.04
+FIRE_DROP = 0.03
+
+def _sill_with_housing(lo, hi, corner_cut, housing):
+    p = G.axis_piece("sill", "sill", "detail", G.COLORS["sill"], lo, hi,
+                     cuts=[corner_cut, housing])
+    return p["solids"]
+
+
 FIRE_PIECES = corner_plates(G.COLORS["sill"])
+# housing in the x sill, under the tie's near foot
+FIRE_PIECES[0]["solids"] = _sill_with_housing(
+    (-0.75, -HALF, -HALF), (0.15, HALF, HALF),
+    G.box((-HALF, 0.0, -HALF), (HALF, HALF, HALF)),
+    G.box((-0.49, HALF - FIRE_DROP - EPS, -0.055),
+          (-0.42, HALF + EPS, 0.025)))
+# housing in the z sill, under the tie's far foot
+FIRE_PIECES[1]["solids"] = _sill_with_housing(
+    (-HALF, -HALF, -0.75), (HALF, HALF, 0.15),
+    G.box((-HALF, -HALF, -HALF), (HALF, 0.0, HALF)),
+    G.box((-0.025, HALF - FIRE_DROP - EPS, -0.49),
+          (0.025, HALF + EPS, -0.42)))
 FIRE_PIECES.append(
-    oriented("part-c", "Fire beam", G.COLORS["beam"],
-             (-0.46, 0.105, 0.0), (0.0, 0.105, -0.46),
-             0.09, 0.09, up=(0.0, 1.0, 0.0)))
+    G.oriented_piece("part-c", "Fire beam", "detail", G.COLORS["beam"],
+                     FIRE_P0, FIRE_P1, 0.09, 0.09,
+                     adds=[((0.0, FIRE_FOOT), (-0.03, 0.03),
+                            (-0.045 - FIRE_DROP, -0.045)),
+                           ((FIRE_L - FIRE_FOOT, FIRE_L), (-0.03, 0.03),
+                            (-0.045 - FIRE_DROP, -0.045))],
+                     up=(0.0, 1.0, 0.0)))
 
 FIRE_BEAM = detail(
     "fire-beam-tie", "Fire-beam tie", "火打梁",
     FIRE_PIECES,
     {"part-c": [0.0, 0.38, 0.0]},
-    "A 火打梁 ties the two sills across the corner. It is a short 90 mm "
-    "diagonal member resting on both sills at sill-top level, with no cut "
-    "into either: the corner is braced in plan.",
+    "A 火打梁 ties the two 土台 sills across the corner. Each end carries a "
+    "60 x 40 mm foot 30 mm deep in a matching かたぎ大入れ housing cut into "
+    "the sill top, so the diagonal tie is held in plan as well as in bearing.",
     yaw=-45.0
 )
 
@@ -467,7 +501,7 @@ PURLIN_HIP = detail(
         axis("part-a", "Purlin", G.COLORS["purlin"],
              (-0.75, 0.0, -0.06), (0.75, 0.12, 0.06)),
         oriented("part-b", "Hip rafter", G.COLORS["rafter"],
-                 (-0.30, -0.083, -0.56), (0.70, 0.417, 0.44),
+                 (-0.30, -0.0805, -0.56), (0.70, 0.4195, 0.44),
                  0.09, 0.105, up=(0.0, 1.0, 0.0)),
     ],
     {"part-b": [0.18, 0.36, 0.18]},
@@ -501,7 +535,7 @@ RIDGE_HIP = detail(
 HIP_PLATE_PIECES = corner_plates(G.COLORS["beam"])
 HIP_PLATE_PIECES.append(
     oriented("part-c", "Hip rafter", G.COLORS["rafter"],
-             (0.0, 0.105, 0.0), (0.70, 0.455, 0.70),
+             (0.0, 0.10070, 0.0), (0.70, 0.45070, 0.70),
              0.09, 0.105, up=(0.0, 1.0, 0.0)))
 
 HIP_PLATE = detail(
@@ -537,7 +571,7 @@ RAFTER_RIDGE = detail(
 # -- 15. rafter at hip ------------------------------------------------------
 HIP_LINE = ((-0.60, -0.10, -0.60), (0.60, 0.50, 0.60))
 HIP_SIDE = G.norm(G.cross((0.0, 1.0, 0.0), G.sub(HIP_LINE[1], HIP_LINE[0])))
-HIP_POINT = [HIP_LINE[0][k] + (0.045 + 0.001) * HIP_SIDE[k] for k in range(3)]
+HIP_POINT = [HIP_LINE[0][k] + 0.045 * HIP_SIDE[k] for k in range(3)]
 
 RAFTER_HIP = detail(
     "rafter-at-hip", "Rafter at hip", "垂木と隅木",
@@ -564,13 +598,14 @@ RAFTER_PURLIN = detail(
         axis("part-a", "Purlin", G.COLORS["purlin"],
              (-0.75, 0.0, -0.06), (0.75, 0.12, 0.06)),
         seated_rafter("part-b", "Rafter", G.COLORS["rafter"],
-                      (0.0, -0.15, -0.75), (0.0, 0.45, 0.75),
-                      0.045, 0.09, 0.121, -0.08, 0.02),
+                      (0.0, -0.1342, -0.75), (0.0, 0.4658, 0.75),
+                      0.045, 0.09, 0.120, -0.06, -0.01),
     ],
     {"part-b": [0.0, 0.38, 0.0]},
-    "A 鳥口 birdsmouth seats the 垂木 rafter over the 母屋 purlin. The notch "
-    "leaves a horizontal 30 mm seat on the purlin top and a vertical cheek "
-    "against its side, so the rafter cannot slide down the slope.",
+    "A 鳥口 birdsmouth seats the 垂木 rafter over the 母屋 purlin. At this "
+    "4寸 (0.4) roof slope the notch has a 50 mm horizontal seat on the purlin "
+    "top and a 20 mm plumb cheek at its lower end, the usual 立水 : 座 = 2 : 5 "
+    "proportion, so the rafter cannot slide down the slope.",
     yaw=90.0
 )
 
@@ -582,13 +617,13 @@ RAFTER_PLATE = detail(
         axis("part-a", "Plate", G.COLORS["beam"],
              (-0.75, 0.0, -0.06), (0.75, 0.12, 0.06)),
         seated_rafter("part-b", "Rafter", G.COLORS["rafter"],
-                      (0.0, -0.15, -0.75), (0.0, 0.45, 0.75),
-                      0.045, 0.09, 0.121, -0.08, 0.02),
+                      (0.0, -0.1342, -0.75), (0.0, 0.4658, 0.75),
+                      0.045, 0.09, 0.120, -0.06, -0.01),
     ],
     {"part-b": [0.0, 0.38, 0.0]},
     "The 垂木 rafter is notched over the 軒桁 plate at the eave with the same "
-    "鳥口 birdsmouth: a horizontal seat and a vertical cheek, with the rafter "
-    "running on past the plate to the eave edge.",
+    "4寸 birdsmouth: a 50 mm horizontal seat and a 20 mm plumb cheek, with the "
+    "rafter running on past the plate to the eave edge.",
     yaw=90.0
 )
 
@@ -619,8 +654,8 @@ JACK_PLATE = detail(
         axis("part-a", "Plate", G.COLORS["beam"],
              (-0.75, 0.0, -0.06), (0.75, 0.12, 0.06)),
         seated_rafter("part-b", "Jack rafter", G.COLORS["rafter"],
-                      (0.0, -0.15, -0.75), (0.0, 0.30, 0.52),
-                      0.045, 0.09, 0.121, -0.08, 0.02),
+                      (0.0, -0.1342, -0.75), (0.0, 0.3738, 0.52),
+                      0.045, 0.09, 0.120, -0.06, -0.01),
     ],
     {"part-b": [0.0, 0.38, 0.0]},
     "At the hipped end a 短垂木 jack rafter is notched over the 軒桁 plate with "
