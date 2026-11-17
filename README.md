@@ -26,8 +26,8 @@ the change list and the references used are in
   exploded pose), the closed-pose offsets (`assemble`), an optional `approach`
   stage, and the attribution
 - `house/` — the open frame of the house in `house.jpg`: `source.json`,
-  `house.glb` with its unbuild/rebuild clip, a poster and notes; see
-  [`house/README.md`](house/README.md)
+  `house.glb` with its unbuild/rebuild clip, `connections.json` with every joint
+  instance, a poster and notes; see [`house/README.md`](house/README.md)
 - `docs/` — the generated GitHub Pages site (`tools/build_site.py`)
 - `tools/` — capture, import, bake, check and site tools; see
   [`tools/README.md`](tools/README.md)
@@ -56,8 +56,13 @@ python3 tools/viewer.py --open
 Serves the same page that is published on GitHub Pages: one anchored section per
 joint, the assembly animation, the scroll wheel zooms the model, Up / Down step
 between joints, and on a phone the index becomes a slide-in menu with one joint
-per screen. The third tab, **The house**, is the frame; its clip takes it apart
-and puts it back together, and **Replay** starts the cycle again. The index has
+per screen. The third tab, **The house**, is the frame, rendered by a small
+three.js viewer that is imported only when the tab is opened. It starts
+assembled, **Play / Pause** runs the 27 s clip, and hovering a timber outlines
+it and marks its connections; hovering a marker ghosts the rest of the frame
+and names the joint with a link to the catalog or the house schedule. Click or
+tap to pin, **Browse** for the index of all 494 connections, and **Solid / Roof
+/ Upper / Frame** to peel the frame back. The index has
 a search box at the top (`/` focuses it): it matches
 romanised and Japanese names, ranks the hits, and on a phone it filters the
 same slide-in menu.
@@ -99,6 +104,7 @@ done
 python3 validate.py ../joints
 python3 author_house.py                      # the house frame
 python3 export_house.py
+python3 house_links.py                       # house/connections.json
 python3 build_site.py --repo-url https://github.com/IxDay/carpentry
 ```
 
@@ -116,4 +122,5 @@ under the same license. The seventeen authored joints (three splices and fourtee
 column-and-beam `shikuchi`, listed in [`joints/README.md`](joints/README.md)) are
 original geometry, released CC BY 4.0. The house frame in `house/` is likewise
 original geometry, released CC BY 4.0; its reference drawings remain under their
-own terms.
+own terms. The house viewer uses three.js r160 (MIT), vendored unmodified with
+its notice under `tools/vendor/three/`.

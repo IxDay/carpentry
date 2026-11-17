@@ -140,10 +140,9 @@ def load_house(house_dir):
         "source": lv["source"],
         "glb": glb,
         "poster": poster,
-        "camera": "35deg 68deg auto",
-        "min_fov": "18deg",
-        "meta": "%d timbers &middot; unbuilds and rebuilds in %g s"
-                % (len(lv["pieces"]), glb_animation_seconds(glb)),
+        "meta": ("%d timbers &middot; hover a timber for its joints &middot; "
+                 "unbuilds and rebuilds in %g s"
+                 % (len(lv["pieces"]), glb_animation_seconds(glb))),
     }]
 
 
@@ -178,7 +177,7 @@ def tab_bar(joints):
     return "\n".join(out)
 
 
-def section(j, counts):
+def section(j, counts, repo_url=""):
     s = j["source"]
     sa = "SA" in s["license"]
     note = " Shared alike under the same license." if sa else ""
@@ -187,17 +186,28 @@ def section(j, counts):
               if "sketchfab.com" in s["url"] else
               ' <a href="%s">Source in this repository</a>.' % esc(s["url"]))
     hidden = "" if j["tab"] == DEFAULT_TAB else " hidden"
-    camera = esc(j.get("camera", "38deg 64deg auto"))
-    fov = (' min-field-of-view="%s"' % esc(j["min_fov"])
-           if j.get("min_fov") else "")
-    viewer = ('<model-viewer id="viewer-{slug}" data-src="models/{slug}.glb"\n'
-              '              alt="{title} assembling" autoplay animation-name="assemble" camera-controls\n'
-              '              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"\n'
-              '              camera-orbit="{camera}"{fov} loading="eager"></model-viewer>'
-              .format(slug=j["slug"], title=esc(j["title"]),
-                      camera=camera, fov=fov))
-    controls = ('\n          <button type="button" data-replay="viewer-%s">Replay</button>'
-                % j["slug"])
+    if j["tab"] == "house":
+        # The house has its own three.js viewer so a joint marker can be hovered
+        # inside the frame; the 34 specimens keep <model-viewer>.
+        viewer = ('<house-viewer id="viewer-{slug}"\n'
+                  '              data-src="models/{slug}.glb"\n'
+                  '              data-meta="models/house-connections.json"\n'
+                  '              data-poster="posters/{slug}.png"\n'
+                  '              data-repo-url="{repo}"></house-viewer>'
+                  .format(slug=j["slug"], repo=esc(repo_url)))
+        controls = ""
+    else:
+        camera = esc(j.get("camera", "38deg 64deg auto"))
+        fov = (' min-field-of-view="%s"' % esc(j["min_fov"])
+               if j.get("min_fov") else "")
+        viewer = ('<model-viewer id="viewer-{slug}" data-src="models/{slug}.glb"\n'
+                  '              alt="{title} assembling" autoplay animation-name="assemble" camera-controls\n'
+                  '              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"\n'
+                  '              camera-orbit="{camera}"{fov} loading="eager"></model-viewer>'
+                  .format(slug=j["slug"], title=esc(j["title"]),
+                          camera=camera, fov=fov))
+        controls = ('\n          <button type="button" data-replay="viewer-%s">Replay</button>'
+                    % j["slug"])
     pieces = j.get("meta") or ("%d pieces" % j["pieces"])
     return """      <section class="joint" id="{slug}" data-tab="{tab}" data-tab-count="{count}"{hidden}>
         <header>
@@ -261,8 +271,11 @@ def footer(repo_url, joints=()):
             "house in the reference drawings: %d timbers, a 3 x 2 ken plan and a hip "
             "roof, with tenons, mortises, half-laps and wedges at the connections. "
             "It comes apart from the ridge down and goes back together from the "
-            "foundation up, one timber at a time. Notes and the joint schedule: "
-            "%s.</p>" % (house[0]["pieces"], cited))
+            "foundation up, one timber at a time. Its tab uses a three.js viewer "
+            "(vendored, MIT) with connection-level hover: a timber marks its "
+            "joints, a joint names the connection and links to the catalog or "
+            "the schedule, and Browse indexes all 494. Notes and the joint "
+            "schedule: %s.</p>" % (house[0]["pieces"], cited))
     repo = ('\n      <p>Source and tooling: <a href="%s">%s</a>. Per-joint notes '
             'and references: <a href="%s/joints/README.md">joints/README.md</a>.</p>'
             % (esc(repo_url), esc(repo_url), esc(repo_url.rstrip("/")))
@@ -289,25 +302,54 @@ def copy_if_changed(src, dst):
 
 
 def copy_vendor(out):
-    """Copy the pinned third-party scripts the page loads (see vendor/README.md)."""
+    """Copy the pinned third-party files the page loads (see vendor/README.md).
+
+    The tree is recursive so the three.js module and its addons keep their
+    import-map paths (`vendor/three/...`). README files stay in the repository.
+    """
     src = os.path.join(HERE, "vendor")
     dst = os.path.join(out, "vendor")
     os.makedirs(dst, exist_ok=True)
-    wanted = {name for name in os.listdir(src)
-              if name != "README.md" and os.path.isfile(os.path.join(src, name))}
-    for name in sorted(wanted):
-        copy_if_changed(os.path.join(src, name), os.path.join(dst, name))
-    for name in os.listdir(dst):
-        if name not in wanted:
-            os.remove(os.path.join(dst, name))
+    wanted = set()
+    for root, _, files in os.walk(src):
+        for name in files:
+            if name == "README.md":
+                continue
+            rel = os.path.relpath(os.path.join(root, name), src)
+            wanted.add(rel)
+    for rel in sorted(wanted):
+        target = os.path.join(dst, rel)
+        os.makedirs(os.path.dirname(target), exist_ok=True)
+        copy_if_changed(os.path.join(src, rel), target)
+    for root, dirs, files in os.walk(dst, topdown=False):
+        for name in files:
+            rel = os.path.relpath(os.path.join(root, name), dst)
+            if rel not in wanted:
+                os.remove(os.path.join(root, name))
+        for name in dirs:
+            path = os.path.join(root, name)
+            if not os.listdir(path):
+                os.rmdir(path)
 
 
 def build(joints_dir, out, repo_url):
     joints = load_joints(joints_dir)
-    joints += load_house(os.path.join(os.path.dirname(os.path.abspath(joints_dir)), "house"))
+    house_dir = os.path.join(os.path.dirname(os.path.abspath(joints_dir)), "house")
+    joints += load_house(house_dir)
     for sub in ("models", "posters"):
         os.makedirs(os.path.join(out, sub), exist_ok=True)
     copy_vendor(out)
+    viewsrc = os.path.join(HERE, "house_viewer.js")
+    copy_if_changed(viewsrc, os.path.join(out, "house-viewer.js"))
+    meta = os.path.join(house_dir, "connections.json")
+    meta_out = os.path.join(out, "models", "house-connections.json")
+    if os.path.exists(meta):
+        copy_if_changed(meta, meta_out)
+    else:
+        print("no house/connections.json; run tools/house_links.py",
+              file=sys.stderr)
+        if os.path.exists(meta_out):
+            os.remove(meta_out)
     keep = set()
     for j in joints:
         copy_if_changed(j["glb"], os.path.join(out, "models", j["slug"] + ".glb"))
@@ -324,7 +366,8 @@ def build(joints_dir, out, repo_url):
     counts = tab_counts(joints)
     page = (page.replace("{{TABS}}", tab_bar(joints))
                 .replace("{{NAV}}", "\n".join(nav_item(j, counts) for j in joints))
-                .replace("{{SECTIONS}}", "\n".join(section(j, counts) for j in joints))
+                .replace("{{SECTIONS}}", "\n".join(section(j, counts, repo_url)
+                                                   for j in joints))
                 .replace("{{FOOTER}}", footer(repo_url, joints))
                 .replace("{{COUNT}}", str(len([j for j in joints
                                                if j.get("tab") != "house"])))

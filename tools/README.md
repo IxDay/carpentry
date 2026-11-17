@@ -286,6 +286,42 @@ un-occluded on purpose: it stays around 2.25 MB and reads at house scale. The
 joint catalog is not touched; the connection schedule is in
 [`../house/README.md`](../house/README.md).
 
+### `house_links.py` — connection metadata for the viewer
+
+```sh
+python3 house_links.py       # ../house/connections.json
+```
+
+The GLB is one mesh per timber, so a joint has no mesh of its own. This tool
+records every connection as an explicit instance: the member IDs it joins, a
+point at the joint in the assembled pose, and the member a marker should follow
+while the clip moves. It walks the same loops as `author_house.py` — sills,
+posts, beams, 貫, braces, floor framing, roof beams, posts, purlins, rafters —
+and asserts each ID against the authored frame, so a renamed or removed timber
+fails instead of producing a marker in mid-air. Nothing is inferred from
+bounding-box proximity.
+
+The result is 272 pieces and 494 connections in 27 families, plus the catalog
+links: exact matches (`貫 ↔ post` → `tsutsumikomi-nuki`), related specimens
+(`post ↔ sill` → `shitakone-hozo-wari-kusabi`, roof tenons → `yatoi-hozo-shikuchi`,
+beam tenons → `naga-hozo-sashi-komisen-uchi`) and house-only details with no
+catalog entry. The 29 foundation and ground pieces have no connection and are
+recorded as such.
+
+### `house_viewer.js` — the interactive house
+
+This is the custom element the house tab loads, published as
+`docs/house-viewer.js` and imported only when the tab is first opened. It reads
+the GLB and `connections.json`, raycasts the timbers, and draws screen-space
+marker sprites at the connection points. Hovering a timber outlines it and marks
+its joints; hovering a marker ghosts every other timber and shows the joint's
+name, description and catalog/schedule link. A click or tap pins it, and the
+accessible **Browse** panel indexes all 494 connections by family with a filter.
+The four peel stops ghost the roof, the upper storey or the masonry. Play/Pause,
+replay, `currentTime`, Space, R and Escape are wired to the same clip as the
+`<model-viewer>` specimens, and a WebGL or fetch failure falls back to the
+poster and a GLB download.
+
 ### `build_site.py` — the GitHub Pages site
 
 ```sh
@@ -300,10 +336,12 @@ Reads `joints/sources/*.json` (title, Japanese name, credit), copies every
 scrolling, a `<model-viewer>` that plays the `assemble` clip and the Japanese
 name in light gray under the romanised one. Sources with `tab: "extra"` (joints
 neither sheet shows) appear under a second tab, **Off the sheets**, so the
-reference-sheet set stays a clean 32; the tab bar switches both the index and the
-sections, and a hash pointing at an off-sheet joint selects its tab first. Up /
-Down arrow keys step through the joints of the active tab. Below 56 rem the index
-becomes a slide-in menu (button at the top left)
+reference-sheet set stays a clean 32; the house gets a third tab with a
+`<house-viewer>` (the custom element above) instead of `<model-viewer>`, plus
+`models/house-connections.json`. The tab bar switches both the index and the
+sections, and a hash pointing at an off-sheet or house section selects its tab
+first. Up / Down arrow keys step through the joints of the active tab. Below
+56 rem the index becomes a slide-in menu (button at the top left)
 and every joint is a full-screen page: swipe up / down for the next / previous
 joint (scroll snapping), drag sideways to rotate, with an `n / <count>` counter and
 the credits along the bottom. Models load only near the viewport and only once
@@ -340,5 +378,8 @@ except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The seventeen
 authored joints (listed in [`../joints/README.md`](../joints/README.md)) are
 original geometry released CC BY 4.0. The site's
 search box uses MIT-licensed `@leeoniya/uFuzzy`, copied unmodified from npm; its
-notice is in `vendor/ufuzzy.LICENSE`. See
+notice is in `vendor/ufuzzy.LICENSE`. The house viewer uses MIT-licensed
+three.js r160, likewise copied unmodified; its notice is in
+`vendor/three/LICENSE` and the vendored files and checksums are listed in
+[`vendor/README.md`](vendor/README.md). See
 [`../joints/README.md`](../joints/README.md) for the per-model credit.

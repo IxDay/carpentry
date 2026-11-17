@@ -309,16 +309,16 @@ at every structural connection (not a massing model).
 |---|---|
 | post ↔ sill | through tenon, wedge under the sill (`長ホゾ差し・込み栓打ち` family) |
 | post ↔ 胴差 / 軒桁 | through tenon + komisen (`長ホゾ` / `上小根` family) |
-| beam ↔ post | housed tenon + wedge; the beam is cut, the through-post stays whole |
+| beam ↔ post | housed tenon + komisen peg; the beam is cut, the through-post stays whole |
 | 貫 ↔ post | wrapped-nuki mortise (scaled `包み込み貫`: 15 mm shelf, 15 mm rebate, wedge) |
-| 筋違 ↔ post/beam | housed brace tenon, pinned with a wedge (new house connection) |
-| 火打梁 ↔ 土台/胴差 | dovetail-ended corner beam (new house connection) |
+| 筋違 ↔ post/beam | brace let into the post faces, its thickness the housing; no peg (new house connection) |
+| 火打梁 ↔ 土台/胴差 | diagonal corner tie resting on the sill or girder (new house connection) |
 | 根太 ↔ 大引 | half-lap notch (new house connection) |
 | 大引 ↔ 土台 | housed notch |
 | 床束 ↔ 大引 | tenon through the sleeper |
-| 小屋梁 ↔ 軒桁/post | dovetail/housed tenon |
-| 小屋束 ↔ 小屋梁 | tenon with wedge |
-| 母屋 ↔ 小屋束 | halved crossing, peg |
+| 小屋梁 ↔ 軒桁/post | housed tenon into the inner face of the plate |
+| 小屋束 ↔ 小屋梁 | tenon into the top of the beam |
+| 母屋 ↔ 小屋束 | the post runs into the purlin; the purlin is notched over it |
 | 垂木 ↔ 母屋/軒桁/棟木 | birdsmouth notch |
 | 隅木 ↔ 棟木 | halved/tenoned ridge seat |
 | 土台 / 胴差 / 軒桁 corners | halved corner lap |
@@ -352,6 +352,19 @@ the joint each timber is held by: 223 moving timbers in twelve stages, with the
 still 34; none of the house connections were promoted, so the two existing tabs
 and their counts are untouched. The third tab is live in `docs/` and links to
 [`house/README.md`](house/README.md).
+
+The house tab is now a connection-level viewer rather than a bare
+`<model-viewer>`. The GLB is unchanged: `tools/house_links.py` derives
+`house/connections.json` from the authored members and joint loops — 494
+instances in 27 families, asserted against the frame — and a custom three.js
+element (`tools/house_viewer.js`, imported only when the tab opens) raycasts the
+timbers, marks their joints, ghosts everything else on a marker hover, and links
+each connection to the catalog (exact or related) or to the house schedule.
+Click/tap pins a connection, **Browse** is the accessible 494-entry index, and
+**Solid / Roof / Upper / Frame** peel the frame back. It starts assembled;
+Play/Pause and replay run the same 27 s clip. The 34 joint specimens stay on
+`<model-viewer>`, and three.js r160 is vendored (MIT) with its notice under
+`tools/vendor/three/`.
 
 The one deviation from the first sketch is the second-floor deck: the upper
 根太 are modelled but the boards are not, so the ground-floor frame stays

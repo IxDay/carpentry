@@ -15,6 +15,14 @@
       nav.index li[hidden], section.joint[hidden] { display: revert; }
     </style>
   </noscript>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three/three.module.min.js",
+        "three/addons/": "./vendor/three/addons/"
+      }
+    }
+  </script>
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
   <script src="vendor/ufuzzy.min.js"></script>
   <style>
@@ -143,6 +151,21 @@
       opacity: 0; transition: opacity .5s ease;
     }
     .stage.ready model-viewer { opacity: 1; }
+    /* The house is a three.js custom element. It fades in when its module has
+       loaded the GLB and the connection metadata; the stage spinner covers the
+       gap, and an import or WebGL failure reveals the viewer's own fallback. */
+    .stage house-viewer {
+      display: block; width: 100%; height: min(62vh, 34rem);
+      opacity: 0; transition: opacity .5s ease;
+    }
+    .stage.ready house-viewer, .stage.error house-viewer { opacity: 1; }
+    .stage.error .spinner { display: none; }
+    .stage .viewer-fallback {
+      position: absolute; inset: 0; display: grid; place-content: center;
+      gap: .4rem; padding: 2rem; text-align: center;
+      color: var(--muted); font-size: .9rem;
+    }
+    .stage .viewer-fallback a { color: var(--accent); }
     .spinner {
       position: absolute; top: 50%; left: 50%; width: 2.2rem; height: 2.2rem; margin: -1.1rem 0 0 -1.1rem;
       border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%;
@@ -151,7 +174,7 @@
     .stage.ready .spinner { opacity: 0; }
     @keyframes spin { to { transform: rotate(360deg); } }
     @media (prefers-reduced-motion: reduce) {
-      .stage model-viewer { transition: none; }
+      .stage model-viewer, .stage house-viewer { transition: none; }
       .spinner { animation-duration: 3s; }
     }
     .stage button {
@@ -226,7 +249,7 @@
         scroll-snap-align: start; scroll-snap-stop: always;
       }
       .stage { position: absolute; inset: 0; border: 0; border-radius: 0; }
-      .stage model-viewer { height: 100%; }
+      .stage model-viewer, .stage house-viewer { height: 100%; }
       section.joint header {
         position: absolute; z-index: 5; top: 0; left: 0; right: 0; margin: 0;
         padding: max(.7rem, env(safe-area-inset-top)) 4.5rem 2rem 4.2rem;
@@ -292,6 +315,24 @@
   </div>
   <script>
     const viewers = document.querySelectorAll('model-viewer');
+    // The house module is large, so it is imported only when the house tab is
+    // first opened. Until then <house-viewer> is an inert unknown element.
+    const houseViewer = document.querySelector('house-viewer');
+    let houseViewerRequested = false;
+    function ensureHouseViewer() {
+      if (houseViewerRequested || !houseViewer) return;
+      houseViewerRequested = true;
+      import('./house-viewer.js').catch(error => {
+        console.error(error);
+        const stage = houseViewer.closest('.stage');
+        stage?.classList.add('error');
+        const note = document.createElement('p');
+        note.className = 'viewer-fallback';
+        note.innerHTML = 'The interactive house could not load. '
+          + '<a href="models/house.glb">Download the house GLB</a>.';
+        stage?.append(note);
+      });
+    }
     const links = new Map([...document.querySelectorAll('nav.index a')].map(a => [a.hash.slice(1), a]));
     const sections = [...document.querySelectorAll('section.joint')];
     const navList = document.getElementById('joint-list');
@@ -348,6 +389,7 @@
       cursor = -1;
       lastStep = 0;
       resetNav();
+      if (tab === 'house') ensureHouseViewer();
       if (scroll) {
         const first = sections.find(s => s.dataset.tab === tab);
         if (first) first.scrollIntoView({ behavior: 'instant', block: 'start' });
@@ -380,6 +422,10 @@
       v.addEventListener('load', () => show(v));
       v.addEventListener('error', () => stageOf(v).classList.remove('ready'));
     });
+    if (houseViewer) {
+      houseViewer.addEventListener('load', () => show(houseViewer));
+      houseViewer.addEventListener('error', () => stageOf(houseViewer).classList.remove('ready'));
+    }
     const applyLoads = () => {
       viewers.forEach(v => {
         if (near.has(v)) {
@@ -471,7 +517,9 @@
       });
       addEventListener('keydown', e => {
         if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
-        if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+        // composedPath sees the real target inside <house-viewer>'s shadow tree.
+        const target = e.composedPath()[0];
+        if (target.closest && target.closest('input, textarea, select, [contenteditable]')) return;
         e.preventDefault();
         searchInput.focus();
       });
@@ -504,7 +552,8 @@
     addEventListener('keydown', e => {
       if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
       if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
-      if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+      const target = e.composedPath()[0];
+      if (target.closest && target.closest('input, textarea, select, [contenteditable]')) return;
       const pages = visiblePages();
       // while a smooth scroll is still running, count from where it is heading
       const from = performance.now() - lastStep < 900 ? cursor : current();

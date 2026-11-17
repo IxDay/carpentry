@@ -1,0 +1,12461 @@
+{
+ "version": 1,
+ "generatedBy": "tools/house_links.py",
+ "note": "Explicit connection instances derived from the members and joinery authored in tools/author_house.py. Points are in the assembled pose, metres, Y up.",
+ "house": {
+  "title": "The house",
+  "jp": "\u6c11\u5bb6",
+  "pieces": 272,
+  "connections": 494,
+  "groups": {
+   "axis": "axis frame",
+   "roof": "roof frame",
+   "floor": "floor framing",
+   "base": "foundation and stone"
+  },
+  "levels": {
+   "F1": 3.27,
+   "wallTop": 6.3585
+  }
+ },
+ "kinds": {
+  "sill-corner": {
+   "title": "Sill corner",
+   "description": "The two \u571f\u53f0 sill members are halved across each other, alternating which wall keeps the top half.",
+   "count": 4
+  },
+  "post-sill": {
+   "title": "Post on sill",
+   "description": "A through tenon on the post passes down through the sill and is wedged below it.",
+   "catalog": {
+    "slug": "shitakone-hozo-wari-kusabi",
+    "title": "Shitakone-hozo-wari-kusabi",
+    "jp": "\u4e0b\u5c0f\u6839\u30db\u30be\u5272\u308a\u6954\u6253\u3061"
+   },
+   "match": "related",
+   "count": 16
+  },
+  "post-beam": {
+   "title": "Beam into post",
+   "description": "A housed tenon at the end of the beam is pinned through the post with a komisen peg.",
+   "catalog": {
+    "slug": "naga-hozo-sashi-komisen-uchi",
+    "title": "Naga-hozo-sashi-komisen-uchi",
+    "jp": "\u9577\u30db\u30be\u5dee\u3057\u8fbc\u307f\u6813\u6253\u3061"
+   },
+   "match": "related",
+   "count": 46
+  },
+  "nuki-post": {
+   "title": "\u8cab into post",
+   "description": "The \u5305\u307f\u8fbc\u307f\u8cab is housed into the post and wedged on the outer face; the post keeps a shelf under the nuki's rebated end.",
+   "catalog": {
+    "slug": "tsutsumikomi-nuki",
+    "title": "Tsutsumikomi-nuki",
+    "jp": "\u5305\u307f\u8fbc\u307f\u8cab"
+   },
+   "match": "exact",
+   "count": 80
+  },
+  "nuki-stud": {
+   "title": "\u8cab through stud",
+   "description": "The nuki passes through a slot in the stud, interrupting the stud rather than the nuki.",
+   "catalog": {
+    "slug": "tsutsumikomi-nuki",
+    "title": "Tsutsumikomi-nuki",
+    "jp": "\u5305\u307f\u8fbc\u307f\u8cab"
+   },
+   "match": "related",
+   "count": 40
+  },
+  "brace": {
+   "title": "Brace into post",
+   "description": "The \u7b4b\u9055 brace is let into the post face; its own thickness forms the housing and no peg is used.",
+   "count": 24
+  },
+  "fire-beam": {
+   "title": "\u706b\u6253\u6881 tie",
+   "description": "A diagonal \u706b\u6253\u6881 ties the two sill or girder members across the corner, resting on both.",
+   "count": 8
+  },
+  "joist-sleeper": {
+   "title": "Joist half-lap",
+   "description": "The \u6839\u592a joist and the \u5927\u5f15 sleeper are halved 30 mm each where they cross.",
+   "count": 60
+  },
+  "joist-sill": {
+   "title": "Joist into sill",
+   "description": "The joist end is housed 30 mm into the sill.",
+   "count": 24
+  },
+  "floorpost-sleeper": {
+   "title": "\u5e8a\u675f into sleeper",
+   "description": "The short \u5e8a\u675f floor post tenons up into the \u5927\u5f15 sleeper.",
+   "count": 20
+  },
+  "floorpost-stone": {
+   "title": "\u5e8a\u675f on stone",
+   "description": "The \u5e8a\u675f floor post bears on its foundation stone.",
+   "count": 20
+  },
+  "sleeper-sill": {
+   "title": "Sleeper into sill",
+   "description": "The \u5927\u5f15 sleeper end is housed into the end sill.",
+   "count": 8
+  },
+  "upperjoist-beam": {
+   "title": "Upper joist half-lap",
+   "description": "The upper \u6839\u592a is halved over the spine beam.",
+   "count": 6
+  },
+  "upperjoist-girder": {
+   "title": "Upper joist into girder",
+   "description": "The upper joist end is housed into the \u80f4\u5dee girder.",
+   "count": 12
+  },
+  "roofbeam-plate": {
+   "title": "\u5c0f\u5c4b\u6881 into plate",
+   "description": "The roof beam tenons into the inner face of the \u8ed2\u6841 plate.",
+   "catalog": {
+    "slug": "yatoi-hozo-shikuchi",
+    "title": "Yatoi-hozo-shikuchi",
+    "jp": "\u96c7\u3044\u6798\u4ed5\u53e3"
+   },
+   "match": "related",
+   "count": 6
+  },
+  "roofpost-beam": {
+   "title": "Roof post on beam",
+   "description": "The \u5c0f\u5c4b\u675f or \u771f\u675f tenons down into the top of the roof beam.",
+   "catalog": {
+    "slug": "yatoi-hozo-shikuchi",
+    "title": "Yatoi-hozo-shikuchi",
+    "jp": "\u96c7\u3044\u6798\u4ed5\u53e3"
+   },
+   "match": "related",
+   "count": 7
+  },
+  "roofpost-purlin": {
+   "title": "\u6bcd\u5c4b over roof post",
+   "description": "The purlin is notched over the tenoned top of the roof post.",
+   "catalog": {
+    "slug": "yatoi-hozo-shikuchi",
+    "title": "Yatoi-hozo-shikuchi",
+    "jp": "\u96c7\u3044\u6798\u4ed5\u53e3"
+   },
+   "match": "related",
+   "count": 6
+  },
+  "roofpost-ridge": {
+   "title": "\u771f\u675f into ridge",
+   "description": "The king post tenons into the ridge, which is notched over it.",
+   "catalog": {
+    "slug": "yatoi-hozo-shikuchi",
+    "title": "Yatoi-hozo-shikuchi",
+    "jp": "\u96c7\u3044\u6798\u4ed5\u53e3"
+   },
+   "match": "related",
+   "count": 1
+  },
+  "purlin-hip": {
+   "title": "Purlin under hip",
+   "description": "The \u6bcd\u5c4b purlin end carries the \u9685\u6728 hip rafter where their lines cross.",
+   "count": 4
+  },
+  "ridge-hip": {
+   "title": "Hip into ridge",
+   "description": "The \u9685\u6728 hip rafter butts the end of the ridge.",
+   "count": 4
+  },
+  "hip-plate": {
+   "title": "Hip over plate",
+   "description": "The hip rafter passes over the corner where the two \u8ed2\u6841 plates meet.",
+   "count": 4
+  },
+  "rafter-ridge": {
+   "title": "Rafter at ridge",
+   "description": "The common rafter butts the ridge at the top of the slope.",
+   "count": 10
+  },
+  "rafter-hip": {
+   "title": "Rafter at hip",
+   "description": "The common rafter is cut square against the hip rafter.",
+   "count": 16
+  },
+  "rafter-purlin": {
+   "title": "Rafter over purlin",
+   "description": "A birdsmouth notch seats the rafter over the \u6bcd\u5c4b purlin.",
+   "count": 14
+  },
+  "rafter-plate": {
+   "title": "Rafter over plate",
+   "description": "A birdsmouth notch seats the rafter over the \u8ed2\u6841 plate.",
+   "count": 22
+  },
+  "jack-hip": {
+   "title": "Jack rafter at hip",
+   "description": "The jack rafter is cut square against the hip rafter.",
+   "count": 18
+  },
+  "jack-plate": {
+   "title": "Jack rafter over plate",
+   "description": "The jack rafter is notched over the \u8ed2\u6841 plate at the hipped end.",
+   "count": 14
+  }
+ },
+ "pieces": {
+  "base-plinth": {
+   "name": "Plinth",
+   "group": "base",
+   "center": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "size": [
+    6.36,
+    0.04,
+    4.54
+   ],
+   "connections": []
+  },
+  "base-foot-x-b": {
+   "name": "Strip footing",
+   "group": "base",
+   "center": [
+    0.0,
+    0.235,
+    -1.82
+   ],
+   "size": [
+    5.64,
+    0.43,
+    0.18
+   ],
+   "connections": []
+  },
+  "base-foot-x-f": {
+   "name": "Strip footing",
+   "group": "base",
+   "center": [
+    0.0,
+    0.235,
+    1.82
+   ],
+   "size": [
+    5.64,
+    0.43,
+    0.18
+   ],
+   "connections": []
+  },
+  "base-foot-z-l": {
+   "name": "Strip footing",
+   "group": "base",
+   "center": [
+    -2.73,
+    0.235,
+    0.0
+   ],
+   "size": [
+    0.18,
+    0.43,
+    3.46
+   ],
+   "connections": []
+  },
+  "base-foot-z-r": {
+   "name": "Strip footing",
+   "group": "base",
+   "center": [
+    2.73,
+    0.235,
+    0.0
+   ],
+   "size": [
+    0.18,
+    0.43,
+    3.46
+   ],
+   "connections": []
+  },
+  "base-pad-0--91": {
+   "name": "Pad footing",
+   "group": "base",
+   "center": [
+    -2.73,
+    0.06,
+    -0.91
+   ],
+   "size": [
+    0.36,
+    0.08,
+    0.36
+   ],
+   "connections": []
+  },
+  "stone-0--91": {
+   "name": "Foundation stone",
+   "group": "base",
+   "center": [
+    -2.73,
+    0.125,
+    -0.91
+   ],
+   "size": [
+    0.24,
+    0.05,
+    0.24
+   ],
+   "connections": []
+  },
+  "base-pad-0-0": {
+   "name": "Pad footing",
+   "group": "base",
+   "center": [
+    -2.73,
+    0.06,
+    0.0
+   ],
+   "size": [
+    0.36,
+    0.08,
+    0.36
+   ],
+   "connections": []
+  },
+  "stone-0-0": {
+   "name": "Foundation stone",
+   "group": "base",
+   "center": [
+    -2.73,
+    0.125,
+    0.0
+   ],
+   "size": [
+    0.24,
+    0.05,
+    0.24
+   ],
+   "connections": []
+  },
+  "base-pad-0-91": {
+   "name": "Pad footing",
+   "group": "base",
+   "center": [
+    -2.73,
+    0.06,
+    0.91
+   ],
+   "size": [
+    0.36,
+    0.08,
+    0.36
+   ],
+   "connections": []
+  },
+  "stone-0-91": {
+   "name": "Foundation stone",
+   "group": "base",
+   "center": [
+    -2.73,
+    0.125,
+    0.91
+   ],
+   "size": [
+    0.24,
+    0.05,
+    0.24
+   ],
+   "connections": []
+  },
+  "base-pad-1--91": {
+   "name": "Pad footing",
+   "group": "base",
+   "center": [
+    -0.91,
+    0.06,
+    -0.91
+   ],
+   "size": [
+    0.36,
+    0.08,
+    0.36
+   ],
+   "connections": []
+  },
+  "stone-1--91": {
+   "name": "Foundation stone",
+   "group": "base",
+   "center": [
+    -0.91,
+    0.125,
+    -0.91
+   ],
+   "size": [
+    0.24,
+    0.05,
+    0.24
+   ],
+   "connections": []
+  },
+  "base-pad-1-0": {
+   "name": "Pad footing",
+   "group": "base",
+   "center": [
+    -0.91,
+    0.06,
+    0.0
+   ],
+   "size": [
+    0.36,
+    0.08,
+    0.36
+   ],
+   "connections": []
+  },
+  "stone-1-0": {
+   "name": "Foundation stone",
+   "group": "base",
+   "center": [
+    -0.91,
+    0.125,
+    0.0
+   ],
+   "size": [
+    0.24,
+    0.05,
+    0.24
+   ],
+   "connections": []
+  },
+  "base-pad-1-91": {
+   "name": "Pad footing",
+   "group": "base",
+   "center": [
+    -0.91,
+    0.06,
+    0.91
+   ],
+   "size": [
+    0.36,
+    0.08,
+    0.36
+   ],
+   "connections": []
+  },
+  "stone-1-91": {
+   "name": "Foundation stone",
+   "group": "base",
+   "center": [
+    -0.91,
+    0.125,
+    0.91
+   ],
+   "size": [
+    0.24,
+    0.05,
+    0.24
+   ],
+   "connections": []
+  },
+  "base-pad-2--91": {
+   "name": "Pad footing",
+   "group": "base",
+   "center": [
+    0.91,
+    0.06,
+    -0.91
+   ],
+   "size": [
+    0.36,
+    0.08,
+    0.36
+   ],
+   "connections": []
+  },
+  "stone-2--91": {
+   "name": "Foundation stone",
+   "group": "base",
+   "center": [
+    0.91,
+    0.125,
+    -0.91
+   ],
+   "size": [
+    0.24,
+    0.05,
+    0.24
+   ],
+   "connections": []
+  },
+  "base-pad-2-0": {
+   "name": "Pad footing",
+   "group": "base",
+   "center": [
+    0.91,
+    0.06,
+    0.0
+   ],
+   "size": [
+    0.36,
+    0.08,
+    0.36
+   ],
+   "connections": []
+  },
+  "stone-2-0": {
+   "name": "Foundation stone",
+   "group": "base",
+   "center": [
+    0.91,
+    0.125,
+    0.0
+   ],
+   "size": [
+    0.24,
+    0.05,
+    0.24
+   ],
+   "connections": []
+  },
+  "base-pad-2-91": {
+   "name": "Pad footing",
+   "group": "base",
+   "center": [
+    0.91,
+    0.06,
+    0.91
+   ],
+   "size": [
+    0.36,
+    0.08,
+    0.36
+   ],
+   "connections": []
+  },
+  "stone-2-91": {
+   "name": "Foundation stone",
+   "group": "base",
+   "center": [
+    0.91,
+    0.125,
+    0.91
+   ],
+   "size": [
+    0.24,
+    0.05,
+    0.24
+   ],
+   "connections": []
+  },
+  "base-pad-3--91": {
+   "name": "Pad footing",
+   "group": "base",
+   "center": [
+    2.73,
+    0.06,
+    -0.91
+   ],
+   "size": [
+    0.36,
+    0.08,
+    0.36
+   ],
+   "connections": []
+  },
+  "stone-3--91": {
+   "name": "Foundation stone",
+   "group": "base",
+   "center": [
+    2.73,
+    0.125,
+    -0.91
+   ],
+   "size": [
+    0.24,
+    0.05,
+    0.24
+   ],
+   "connections": []
+  },
+  "base-pad-3-0": {
+   "name": "Pad footing",
+   "group": "base",
+   "center": [
+    2.73,
+    0.06,
+    0.0
+   ],
+   "size": [
+    0.36,
+    0.08,
+    0.36
+   ],
+   "connections": []
+  },
+  "stone-3-0": {
+   "name": "Foundation stone",
+   "group": "base",
+   "center": [
+    2.73,
+    0.125,
+    0.0
+   ],
+   "size": [
+    0.24,
+    0.05,
+    0.24
+   ],
+   "connections": []
+  },
+  "base-pad-3-91": {
+   "name": "Pad footing",
+   "group": "base",
+   "center": [
+    2.73,
+    0.06,
+    0.91
+   ],
+   "size": [
+    0.36,
+    0.08,
+    0.36
+   ],
+   "connections": []
+  },
+  "stone-3-91": {
+   "name": "Foundation stone",
+   "group": "base",
+   "center": [
+    2.73,
+    0.125,
+    0.91
+   ],
+   "size": [
+    0.24,
+    0.05,
+    0.24
+   ],
+   "connections": []
+  },
+  "sill-x-b": {
+   "name": "Sill",
+   "group": "axis",
+   "center": [
+    0.0,
+    0.51,
+    -1.82
+   ],
+   "size": [
+    5.46,
+    0.12,
+    0.12
+   ],
+   "connections": [
+    "c0001",
+    "c0003",
+    "c0005",
+    "c0010",
+    "c0013",
+    "c0016",
+    "c0211",
+    "c0215",
+    "c0279",
+    "c0281",
+    "c0283",
+    "c0285",
+    "c0287",
+    "c0289",
+    "c0291",
+    "c0293",
+    "c0295",
+    "c0297",
+    "c0299",
+    "c0301"
+   ]
+  },
+  "sill-x-f": {
+   "name": "Sill",
+   "group": "axis",
+   "center": [
+    0.0,
+    0.51,
+    1.82
+   ],
+   "size": [
+    5.46,
+    0.12,
+    0.12
+   ],
+   "connections": [
+    "c0002",
+    "c0004",
+    "c0008",
+    "c0012",
+    "c0015",
+    "c0019",
+    "c0212",
+    "c0216",
+    "c0280",
+    "c0282",
+    "c0284",
+    "c0286",
+    "c0288",
+    "c0290",
+    "c0292",
+    "c0294",
+    "c0296",
+    "c0298",
+    "c0300",
+    "c0302"
+   ]
+  },
+  "sill-z-l": {
+   "name": "Sill",
+   "group": "axis",
+   "center": [
+    -2.73,
+    0.51,
+    0.0
+   ],
+   "size": [
+    0.12,
+    0.12,
+    3.64
+   ],
+   "connections": [
+    "c0001",
+    "c0002",
+    "c0006",
+    "c0007",
+    "c0009",
+    "c0211",
+    "c0212",
+    "c0343",
+    "c0344",
+    "c0345",
+    "c0346"
+   ]
+  },
+  "sill-z-r": {
+   "name": "Sill",
+   "group": "axis",
+   "center": [
+    2.73,
+    0.51,
+    0.0
+   ],
+   "size": [
+    0.12,
+    0.12,
+    3.64
+   ],
+   "connections": [
+    "c0003",
+    "c0004",
+    "c0017",
+    "c0018",
+    "c0020",
+    "c0215",
+    "c0216",
+    "c0347",
+    "c0348",
+    "c0349",
+    "c0350"
+   ]
+  },
+  "sill-x-centre": {
+   "name": "Centre sill",
+   "group": "floor",
+   "center": [
+    0.0,
+    0.465,
+    0.0
+   ],
+   "size": [
+    5.46,
+    0.09,
+    0.12
+   ],
+   "connections": [
+    "c0011",
+    "c0014",
+    "c0221",
+    "c0226",
+    "c0231",
+    "c0236",
+    "c0241",
+    "c0246",
+    "c0251",
+    "c0256",
+    "c0261",
+    "c0266",
+    "c0271",
+    "c0276"
+   ]
+  },
+  "post-0-0": {
+   "name": "Post",
+   "group": "axis",
+   "center": [
+    -2.73,
+    3.3943,
+    -1.82
+   ],
+   "size": [
+    0.12,
+    5.9285,
+    0.12
+   ],
+   "connections": [
+    "c0005",
+    "c0006",
+    "c0022",
+    "c0023",
+    "c0028",
+    "c0029",
+    "c0067",
+    "c0069",
+    "c0073",
+    "c0075",
+    "c0079",
+    "c0081",
+    "c0085",
+    "c0087",
+    "c0187",
+    "c0191",
+    "c0193"
+   ]
+  },
+  "post-0-1": {
+   "name": "Post",
+   "group": "axis",
+   "center": [
+    -2.73,
+    1.85,
+    0.0
+   ],
+   "size": [
+    0.12,
+    2.84,
+    0.12
+   ],
+   "connections": [
+    "c0007",
+    "c0021",
+    "c0024",
+    "c0025",
+    "c0030",
+    "c0031",
+    "c0070",
+    "c0071",
+    "c0076",
+    "c0077",
+    "c0082",
+    "c0083",
+    "c0088",
+    "c0089",
+    "c0188",
+    "c0189"
+   ]
+  },
+  "post-0-2": {
+   "name": "Post",
+   "group": "axis",
+   "center": [
+    -2.73,
+    3.3943,
+    1.82
+   ],
+   "size": [
+    0.12,
+    5.9285,
+    0.12
+   ],
+   "connections": [
+    "c0008",
+    "c0009",
+    "c0026",
+    "c0027",
+    "c0032",
+    "c0033",
+    "c0068",
+    "c0072",
+    "c0074",
+    "c0078",
+    "c0080",
+    "c0084",
+    "c0086",
+    "c0090",
+    "c0190",
+    "c0192",
+    "c0194"
+   ]
+  },
+  "post-1-0": {
+   "name": "Post",
+   "group": "axis",
+   "center": [
+    -0.91,
+    3.3943,
+    -1.82
+   ],
+   "size": [
+    0.12,
+    5.9285,
+    0.12
+   ],
+   "connections": [
+    "c0010",
+    "c0036",
+    "c0037",
+    "c0040",
+    "c0041",
+    "c0091",
+    "c0092",
+    "c0095",
+    "c0096",
+    "c0099",
+    "c0100",
+    "c0103",
+    "c0104",
+    "c0195",
+    "c0197"
+   ]
+  },
+  "post-1-1": {
+   "name": "Post",
+   "group": "axis",
+   "center": [
+    -0.91,
+    1.85,
+    0.0
+   ],
+   "size": [
+    0.12,
+    2.84,
+    0.12
+   ],
+   "connections": [
+    "c0011",
+    "c0034",
+    "c0035"
+   ]
+  },
+  "post-1-2": {
+   "name": "Post",
+   "group": "axis",
+   "center": [
+    -0.91,
+    3.3943,
+    1.82
+   ],
+   "size": [
+    0.12,
+    5.9285,
+    0.12
+   ],
+   "connections": [
+    "c0012",
+    "c0038",
+    "c0039",
+    "c0042",
+    "c0043",
+    "c0093",
+    "c0094",
+    "c0097",
+    "c0098",
+    "c0101",
+    "c0102",
+    "c0105",
+    "c0106",
+    "c0196",
+    "c0198"
+   ]
+  },
+  "post-2-0": {
+   "name": "Post",
+   "group": "axis",
+   "center": [
+    0.91,
+    3.3943,
+    -1.82
+   ],
+   "size": [
+    0.12,
+    5.9285,
+    0.12
+   ],
+   "connections": [
+    "c0013",
+    "c0046",
+    "c0047",
+    "c0050",
+    "c0051",
+    "c0107",
+    "c0108",
+    "c0111",
+    "c0112",
+    "c0115",
+    "c0116",
+    "c0119",
+    "c0120",
+    "c0199",
+    "c0201"
+   ]
+  },
+  "post-2-1": {
+   "name": "Post",
+   "group": "axis",
+   "center": [
+    0.91,
+    1.85,
+    0.0
+   ],
+   "size": [
+    0.12,
+    2.84,
+    0.12
+   ],
+   "connections": [
+    "c0014",
+    "c0044",
+    "c0045"
+   ]
+  },
+  "post-2-2": {
+   "name": "Post",
+   "group": "axis",
+   "center": [
+    0.91,
+    3.3943,
+    1.82
+   ],
+   "size": [
+    0.12,
+    5.9285,
+    0.12
+   ],
+   "connections": [
+    "c0015",
+    "c0048",
+    "c0049",
+    "c0052",
+    "c0053",
+    "c0109",
+    "c0110",
+    "c0113",
+    "c0114",
+    "c0117",
+    "c0118",
+    "c0121",
+    "c0122",
+    "c0200",
+    "c0202"
+   ]
+  },
+  "post-3-0": {
+   "name": "Post",
+   "group": "axis",
+   "center": [
+    2.73,
+    3.3943,
+    -1.82
+   ],
+   "size": [
+    0.12,
+    5.9285,
+    0.12
+   ],
+   "connections": [
+    "c0016",
+    "c0017",
+    "c0055",
+    "c0056",
+    "c0061",
+    "c0062",
+    "c0123",
+    "c0125",
+    "c0129",
+    "c0131",
+    "c0135",
+    "c0137",
+    "c0141",
+    "c0143",
+    "c0203",
+    "c0205",
+    "c0207"
+   ]
+  },
+  "post-3-1": {
+   "name": "Post",
+   "group": "axis",
+   "center": [
+    2.73,
+    1.85,
+    0.0
+   ],
+   "size": [
+    0.12,
+    2.84,
+    0.12
+   ],
+   "connections": [
+    "c0018",
+    "c0054",
+    "c0057",
+    "c0058",
+    "c0063",
+    "c0064",
+    "c0126",
+    "c0127",
+    "c0132",
+    "c0133",
+    "c0138",
+    "c0139",
+    "c0144",
+    "c0145",
+    "c0208",
+    "c0209"
+   ]
+  },
+  "post-3-2": {
+   "name": "Post",
+   "group": "axis",
+   "center": [
+    2.73,
+    3.3943,
+    1.82
+   ],
+   "size": [
+    0.12,
+    5.9285,
+    0.12
+   ],
+   "connections": [
+    "c0019",
+    "c0020",
+    "c0059",
+    "c0060",
+    "c0065",
+    "c0066",
+    "c0124",
+    "c0128",
+    "c0130",
+    "c0134",
+    "c0136",
+    "c0140",
+    "c0142",
+    "c0146",
+    "c0204",
+    "c0206",
+    "c0210"
+   ]
+  },
+  "stud-b-0": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    -1.82,
+    1.83,
+    -1.82
+   ],
+   "size": [
+    0.105,
+    2.52,
+    0.105
+   ],
+   "connections": [
+    "c0155",
+    "c0157"
+   ]
+  },
+  "stud-b-0-up": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    -1.82,
+    4.7243,
+    -1.82
+   ],
+   "size": [
+    0.105,
+    2.9085,
+    0.105
+   ],
+   "connections": [
+    "c0159",
+    "c0161"
+   ]
+  },
+  "stud-b-1": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    0.0,
+    1.83,
+    -1.82
+   ],
+   "size": [
+    0.105,
+    2.52,
+    0.105
+   ],
+   "connections": [
+    "c0163",
+    "c0165"
+   ]
+  },
+  "stud-b-1-up": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    0.0,
+    4.7243,
+    -1.82
+   ],
+   "size": [
+    0.105,
+    2.9085,
+    0.105
+   ],
+   "connections": [
+    "c0167",
+    "c0169"
+   ]
+  },
+  "stud-b-2": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    1.82,
+    1.83,
+    -1.82
+   ],
+   "size": [
+    0.105,
+    2.52,
+    0.105
+   ],
+   "connections": [
+    "c0171",
+    "c0173"
+   ]
+  },
+  "stud-b-2-up": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    1.82,
+    4.7243,
+    -1.82
+   ],
+   "size": [
+    0.105,
+    2.9085,
+    0.105
+   ],
+   "connections": [
+    "c0175",
+    "c0177"
+   ]
+  },
+  "stud-f-0": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    -1.82,
+    1.83,
+    1.82
+   ],
+   "size": [
+    0.105,
+    2.52,
+    0.105
+   ],
+   "connections": [
+    "c0156",
+    "c0158"
+   ]
+  },
+  "stud-f-0-up": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    -1.82,
+    4.7243,
+    1.82
+   ],
+   "size": [
+    0.105,
+    2.9085,
+    0.105
+   ],
+   "connections": [
+    "c0160",
+    "c0162"
+   ]
+  },
+  "stud-f-1": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    0.0,
+    1.83,
+    1.82
+   ],
+   "size": [
+    0.105,
+    2.52,
+    0.105
+   ],
+   "connections": [
+    "c0164",
+    "c0166"
+   ]
+  },
+  "stud-f-1-up": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    0.0,
+    4.7243,
+    1.82
+   ],
+   "size": [
+    0.105,
+    2.9085,
+    0.105
+   ],
+   "connections": [
+    "c0168",
+    "c0170"
+   ]
+  },
+  "stud-f-2": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    1.82,
+    1.83,
+    1.82
+   ],
+   "size": [
+    0.105,
+    2.52,
+    0.105
+   ],
+   "connections": [
+    "c0172",
+    "c0174"
+   ]
+  },
+  "stud-f-2-up": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    1.82,
+    4.7243,
+    1.82
+   ],
+   "size": [
+    0.105,
+    2.9085,
+    0.105
+   ],
+   "connections": [
+    "c0176",
+    "c0178"
+   ]
+  },
+  "stud-l-0": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    -2.73,
+    1.83,
+    -0.91
+   ],
+   "size": [
+    0.105,
+    2.52,
+    0.105
+   ],
+   "connections": [
+    "c0147",
+    "c0149"
+   ]
+  },
+  "stud-l-0-up": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    -2.73,
+    4.7243,
+    -0.91
+   ],
+   "size": [
+    0.105,
+    2.9085,
+    0.105
+   ],
+   "connections": [
+    "c0151",
+    "c0153"
+   ]
+  },
+  "stud-l-1": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    -2.73,
+    1.83,
+    0.91
+   ],
+   "size": [
+    0.105,
+    2.52,
+    0.105
+   ],
+   "connections": [
+    "c0148",
+    "c0150"
+   ]
+  },
+  "stud-l-1-up": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    -2.73,
+    4.7243,
+    0.91
+   ],
+   "size": [
+    0.105,
+    2.9085,
+    0.105
+   ],
+   "connections": [
+    "c0152",
+    "c0154"
+   ]
+  },
+  "stud-r-0": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    2.73,
+    1.83,
+    -0.91
+   ],
+   "size": [
+    0.105,
+    2.52,
+    0.105
+   ],
+   "connections": [
+    "c0179",
+    "c0181"
+   ]
+  },
+  "stud-r-0-up": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    2.73,
+    4.7243,
+    -0.91
+   ],
+   "size": [
+    0.105,
+    2.9085,
+    0.105
+   ],
+   "connections": [
+    "c0183",
+    "c0185"
+   ]
+  },
+  "stud-r-1": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    2.73,
+    1.83,
+    0.91
+   ],
+   "size": [
+    0.105,
+    2.52,
+    0.105
+   ],
+   "connections": [
+    "c0180",
+    "c0182"
+   ]
+  },
+  "stud-r-1-up": {
+   "name": "Stud",
+   "group": "axis",
+   "center": [
+    2.73,
+    4.7243,
+    0.91
+   ],
+   "size": [
+    0.105,
+    2.9085,
+    0.105
+   ],
+   "connections": [
+    "c0184",
+    "c0186"
+   ]
+  },
+  "floor-post--182--140": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    -1.82,
+    0.31,
+    -1.4
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0303",
+    "c0323"
+   ]
+  },
+  "floor-stone--182--140": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    -1.82,
+    0.085,
+    -1.4
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0323"
+   ]
+  },
+  "floor-post--182--91": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    -1.82,
+    0.31,
+    -0.91
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0304",
+    "c0324"
+   ]
+  },
+  "floor-stone--182--91": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    -1.82,
+    0.085,
+    -0.91
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0324"
+   ]
+  },
+  "floor-post--182-91": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    -1.82,
+    0.31,
+    0.91
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0305",
+    "c0325"
+   ]
+  },
+  "floor-stone--182-91": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    -1.82,
+    0.085,
+    0.91
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0325"
+   ]
+  },
+  "floor-post--182-140": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    -1.82,
+    0.31,
+    1.4
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0306",
+    "c0326"
+   ]
+  },
+  "floor-stone--182-140": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    -1.82,
+    0.085,
+    1.4
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0326"
+   ]
+  },
+  "floor-post--91--140": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    -0.91,
+    0.31,
+    -1.4
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0307",
+    "c0327"
+   ]
+  },
+  "floor-stone--91--140": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    -0.91,
+    0.085,
+    -1.4
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0327"
+   ]
+  },
+  "floor-post--91--91": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    -0.91,
+    0.31,
+    -0.91
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0308",
+    "c0328"
+   ]
+  },
+  "floor-stone--91--91": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    -0.91,
+    0.085,
+    -0.91
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0328"
+   ]
+  },
+  "floor-post--91-91": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    -0.91,
+    0.31,
+    0.91
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0309",
+    "c0329"
+   ]
+  },
+  "floor-stone--91-91": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    -0.91,
+    0.085,
+    0.91
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0329"
+   ]
+  },
+  "floor-post--91-140": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    -0.91,
+    0.31,
+    1.4
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0310",
+    "c0330"
+   ]
+  },
+  "floor-stone--91-140": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    -0.91,
+    0.085,
+    1.4
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0330"
+   ]
+  },
+  "floor-post-0--140": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    0.0,
+    0.31,
+    -1.4
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0311",
+    "c0331"
+   ]
+  },
+  "floor-stone-0--140": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    0.0,
+    0.085,
+    -1.4
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0331"
+   ]
+  },
+  "floor-post-0--91": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    0.0,
+    0.31,
+    -0.91
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0312",
+    "c0332"
+   ]
+  },
+  "floor-stone-0--91": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    0.0,
+    0.085,
+    -0.91
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0332"
+   ]
+  },
+  "floor-post-0-91": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    0.0,
+    0.31,
+    0.91
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0313",
+    "c0333"
+   ]
+  },
+  "floor-stone-0-91": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    0.0,
+    0.085,
+    0.91
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0333"
+   ]
+  },
+  "floor-post-0-140": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    0.0,
+    0.31,
+    1.4
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0314",
+    "c0334"
+   ]
+  },
+  "floor-stone-0-140": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    0.0,
+    0.085,
+    1.4
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0334"
+   ]
+  },
+  "floor-post-91--140": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    0.91,
+    0.31,
+    -1.4
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0315",
+    "c0335"
+   ]
+  },
+  "floor-stone-91--140": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    0.91,
+    0.085,
+    -1.4
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0335"
+   ]
+  },
+  "floor-post-91--91": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    0.91,
+    0.31,
+    -0.91
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0316",
+    "c0336"
+   ]
+  },
+  "floor-stone-91--91": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    0.91,
+    0.085,
+    -0.91
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0336"
+   ]
+  },
+  "floor-post-91-91": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    0.91,
+    0.31,
+    0.91
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0317",
+    "c0337"
+   ]
+  },
+  "floor-stone-91-91": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    0.91,
+    0.085,
+    0.91
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0337"
+   ]
+  },
+  "floor-post-91-140": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    0.91,
+    0.31,
+    1.4
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0318",
+    "c0338"
+   ]
+  },
+  "floor-stone-91-140": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    0.91,
+    0.085,
+    1.4
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0338"
+   ]
+  },
+  "floor-post-182--140": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    1.82,
+    0.31,
+    -1.4
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0319",
+    "c0339"
+   ]
+  },
+  "floor-stone-182--140": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    1.82,
+    0.085,
+    -1.4
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0339"
+   ]
+  },
+  "floor-post-182--91": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    1.82,
+    0.31,
+    -0.91
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0320",
+    "c0340"
+   ]
+  },
+  "floor-stone-182--91": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    1.82,
+    0.085,
+    -0.91
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0340"
+   ]
+  },
+  "floor-post-182-91": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    1.82,
+    0.31,
+    0.91
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0321",
+    "c0341"
+   ]
+  },
+  "floor-stone-182-91": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    1.82,
+    0.085,
+    0.91
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0341"
+   ]
+  },
+  "floor-post-182-140": {
+   "name": "Floor post",
+   "group": "floor",
+   "center": [
+    1.82,
+    0.31,
+    1.4
+   ],
+   "size": [
+    0.09,
+    0.32,
+    0.09
+   ],
+   "connections": [
+    "c0322",
+    "c0342"
+   ]
+  },
+  "floor-stone-182-140": {
+   "name": "Floor stone",
+   "group": "base",
+   "center": [
+    1.82,
+    0.085,
+    1.4
+   ],
+   "size": [
+    0.18,
+    0.13,
+    0.18
+   ],
+   "connections": [
+    "c0342"
+   ]
+  },
+  "sleeper--140": {
+   "name": "Sleeper",
+   "group": "floor",
+   "center": [
+    0.015,
+    0.465,
+    -1.4
+   ],
+   "size": [
+    5.37,
+    0.09,
+    0.09
+   ],
+   "connections": [
+    "c0219",
+    "c0224",
+    "c0229",
+    "c0234",
+    "c0239",
+    "c0244",
+    "c0249",
+    "c0254",
+    "c0259",
+    "c0264",
+    "c0269",
+    "c0274",
+    "c0303",
+    "c0307",
+    "c0311",
+    "c0315",
+    "c0319",
+    "c0343",
+    "c0347"
+   ]
+  },
+  "sleeper--91": {
+   "name": "Sleeper",
+   "group": "floor",
+   "center": [
+    0.015,
+    0.465,
+    -0.91
+   ],
+   "size": [
+    5.37,
+    0.09,
+    0.09
+   ],
+   "connections": [
+    "c0220",
+    "c0225",
+    "c0230",
+    "c0235",
+    "c0240",
+    "c0245",
+    "c0250",
+    "c0255",
+    "c0260",
+    "c0265",
+    "c0270",
+    "c0275",
+    "c0304",
+    "c0308",
+    "c0312",
+    "c0316",
+    "c0320",
+    "c0344",
+    "c0348"
+   ]
+  },
+  "sleeper-91": {
+   "name": "Sleeper",
+   "group": "floor",
+   "center": [
+    0.015,
+    0.465,
+    0.91
+   ],
+   "size": [
+    5.37,
+    0.09,
+    0.09
+   ],
+   "connections": [
+    "c0222",
+    "c0227",
+    "c0232",
+    "c0237",
+    "c0242",
+    "c0247",
+    "c0252",
+    "c0257",
+    "c0262",
+    "c0267",
+    "c0272",
+    "c0277",
+    "c0305",
+    "c0309",
+    "c0313",
+    "c0317",
+    "c0321",
+    "c0345",
+    "c0349"
+   ]
+  },
+  "sleeper-140": {
+   "name": "Sleeper",
+   "group": "floor",
+   "center": [
+    0.015,
+    0.465,
+    1.4
+   ],
+   "size": [
+    5.37,
+    0.09,
+    0.09
+   ],
+   "connections": [
+    "c0223",
+    "c0228",
+    "c0233",
+    "c0238",
+    "c0243",
+    "c0248",
+    "c0253",
+    "c0258",
+    "c0263",
+    "c0268",
+    "c0273",
+    "c0278",
+    "c0306",
+    "c0310",
+    "c0314",
+    "c0318",
+    "c0322",
+    "c0346",
+    "c0350"
+   ]
+  },
+  "joist-00": {
+   "name": "Joist",
+   "group": "floor",
+   "center": [
+    -2.5025,
+    0.525,
+    0.0
+   ],
+   "size": [
+    0.06,
+    0.09,
+    3.52
+   ],
+   "connections": [
+    "c0219",
+    "c0220",
+    "c0221",
+    "c0222",
+    "c0223",
+    "c0279",
+    "c0280"
+   ]
+  },
+  "joist-01": {
+   "name": "Joist",
+   "group": "floor",
+   "center": [
+    -2.0475,
+    0.525,
+    0.0
+   ],
+   "size": [
+    0.06,
+    0.09,
+    3.52
+   ],
+   "connections": [
+    "c0224",
+    "c0225",
+    "c0226",
+    "c0227",
+    "c0228",
+    "c0281",
+    "c0282"
+   ]
+  },
+  "joist-02": {
+   "name": "Joist",
+   "group": "floor",
+   "center": [
+    -1.5925,
+    0.525,
+    0.0
+   ],
+   "size": [
+    0.06,
+    0.09,
+    3.52
+   ],
+   "connections": [
+    "c0229",
+    "c0230",
+    "c0231",
+    "c0232",
+    "c0233",
+    "c0283",
+    "c0284"
+   ]
+  },
+  "joist-03": {
+   "name": "Joist",
+   "group": "floor",
+   "center": [
+    -1.1375,
+    0.525,
+    0.0
+   ],
+   "size": [
+    0.06,
+    0.09,
+    3.52
+   ],
+   "connections": [
+    "c0234",
+    "c0235",
+    "c0236",
+    "c0237",
+    "c0238",
+    "c0285",
+    "c0286"
+   ]
+  },
+  "joist-04": {
+   "name": "Joist",
+   "group": "floor",
+   "center": [
+    -0.6825,
+    0.525,
+    0.0
+   ],
+   "size": [
+    0.06,
+    0.09,
+    3.52
+   ],
+   "connections": [
+    "c0239",
+    "c0240",
+    "c0241",
+    "c0242",
+    "c0243",
+    "c0287",
+    "c0288"
+   ]
+  },
+  "joist-05": {
+   "name": "Joist",
+   "group": "floor",
+   "center": [
+    -0.2275,
+    0.525,
+    0.0
+   ],
+   "size": [
+    0.06,
+    0.09,
+    3.52
+   ],
+   "connections": [
+    "c0244",
+    "c0245",
+    "c0246",
+    "c0247",
+    "c0248",
+    "c0289",
+    "c0290"
+   ]
+  },
+  "joist-06": {
+   "name": "Joist",
+   "group": "floor",
+   "center": [
+    0.2275,
+    0.525,
+    0.0
+   ],
+   "size": [
+    0.06,
+    0.09,
+    3.52
+   ],
+   "connections": [
+    "c0249",
+    "c0250",
+    "c0251",
+    "c0252",
+    "c0253",
+    "c0291",
+    "c0292"
+   ]
+  },
+  "joist-07": {
+   "name": "Joist",
+   "group": "floor",
+   "center": [
+    0.6825,
+    0.525,
+    0.0
+   ],
+   "size": [
+    0.06,
+    0.09,
+    3.52
+   ],
+   "connections": [
+    "c0254",
+    "c0255",
+    "c0256",
+    "c0257",
+    "c0258",
+    "c0293",
+    "c0294"
+   ]
+  },
+  "joist-08": {
+   "name": "Joist",
+   "group": "floor",
+   "center": [
+    1.1375,
+    0.525,
+    0.0
+   ],
+   "size": [
+    0.06,
+    0.09,
+    3.52
+   ],
+   "connections": [
+    "c0259",
+    "c0260",
+    "c0261",
+    "c0262",
+    "c0263",
+    "c0295",
+    "c0296"
+   ]
+  },
+  "joist-09": {
+   "name": "Joist",
+   "group": "floor",
+   "center": [
+    1.5925,
+    0.525,
+    0.0
+   ],
+   "size": [
+    0.06,
+    0.09,
+    3.52
+   ],
+   "connections": [
+    "c0264",
+    "c0265",
+    "c0266",
+    "c0267",
+    "c0268",
+    "c0297",
+    "c0298"
+   ]
+  },
+  "joist-10": {
+   "name": "Joist",
+   "group": "floor",
+   "center": [
+    2.0475,
+    0.525,
+    0.0
+   ],
+   "size": [
+    0.06,
+    0.09,
+    3.52
+   ],
+   "connections": [
+    "c0269",
+    "c0270",
+    "c0271",
+    "c0272",
+    "c0273",
+    "c0299",
+    "c0300"
+   ]
+  },
+  "joist-11": {
+   "name": "Joist",
+   "group": "floor",
+   "center": [
+    2.5025,
+    0.525,
+    0.0
+   ],
+   "size": [
+    0.06,
+    0.09,
+    3.52
+   ],
+   "connections": [
+    "c0274",
+    "c0275",
+    "c0276",
+    "c0277",
+    "c0278",
+    "c0301",
+    "c0302"
+   ]
+  },
+  "brace-f-b-0": {
+   "name": "Brace",
+   "group": "axis",
+   "center": [
+    -1.82,
+    1.83,
+    -1.84
+   ],
+   "size": [
+    1.654,
+    2.3313,
+    0.105
+   ],
+   "connections": [
+    "c0191",
+    "c0195"
+   ]
+  },
+  "brace-f-b-1": {
+   "name": "Brace",
+   "group": "axis",
+   "center": [
+    1.82,
+    1.83,
+    -1.84
+   ],
+   "size": [
+    1.654,
+    2.3313,
+    0.105
+   ],
+   "connections": [
+    "c0199",
+    "c0203"
+   ]
+  },
+  "brace-f-f-0": {
+   "name": "Brace",
+   "group": "axis",
+   "center": [
+    -1.82,
+    1.83,
+    1.84
+   ],
+   "size": [
+    1.654,
+    2.3313,
+    0.105
+   ],
+   "connections": [
+    "c0192",
+    "c0196"
+   ]
+  },
+  "brace-f-f-1": {
+   "name": "Brace",
+   "group": "axis",
+   "center": [
+    1.82,
+    1.83,
+    1.84
+   ],
+   "size": [
+    1.654,
+    2.3313,
+    0.105
+   ],
+   "connections": [
+    "c0200",
+    "c0204"
+   ]
+  },
+  "brace-u-b-0": {
+   "name": "Brace",
+   "group": "axis",
+   "center": [
+    -1.82,
+    4.7243,
+    -1.84
+   ],
+   "size": [
+    1.6574,
+    2.7144,
+    0.105
+   ],
+   "connections": [
+    "c0193",
+    "c0197"
+   ]
+  },
+  "brace-u-b-1": {
+   "name": "Brace",
+   "group": "axis",
+   "center": [
+    1.82,
+    4.7243,
+    -1.84
+   ],
+   "size": [
+    1.6574,
+    2.7144,
+    0.105
+   ],
+   "connections": [
+    "c0201",
+    "c0205"
+   ]
+  },
+  "brace-u-f-0": {
+   "name": "Brace",
+   "group": "axis",
+   "center": [
+    -1.82,
+    4.7243,
+    1.84
+   ],
+   "size": [
+    1.6574,
+    2.7144,
+    0.105
+   ],
+   "connections": [
+    "c0194",
+    "c0198"
+   ]
+  },
+  "brace-u-f-1": {
+   "name": "Brace",
+   "group": "axis",
+   "center": [
+    1.82,
+    4.7243,
+    1.84
+   ],
+   "size": [
+    1.6574,
+    2.7144,
+    0.105
+   ],
+   "connections": [
+    "c0202",
+    "c0206"
+   ]
+  },
+  "brace-end-l-0": {
+   "name": "Brace",
+   "group": "axis",
+   "center": [
+    -2.75,
+    1.83,
+    -0.91
+   ],
+   "size": [
+    0.105,
+    2.3313,
+    1.654
+   ],
+   "connections": [
+    "c0187",
+    "c0188"
+   ]
+  },
+  "brace-end-l-1": {
+   "name": "Brace",
+   "group": "axis",
+   "center": [
+    -2.75,
+    4.7243,
+    0.91
+   ],
+   "size": [
+    0.105,
+    2.7144,
+    1.6574
+   ],
+   "connections": [
+    "c0189",
+    "c0190"
+   ]
+  },
+  "brace-end-r-0": {
+   "name": "Brace",
+   "group": "axis",
+   "center": [
+    2.75,
+    1.83,
+    -0.91
+   ],
+   "size": [
+    0.105,
+    2.3313,
+    1.654
+   ],
+   "connections": [
+    "c0207",
+    "c0208"
+   ]
+  },
+  "brace-end-r-1": {
+   "name": "Brace",
+   "group": "axis",
+   "center": [
+    2.75,
+    4.7243,
+    0.91
+   ],
+   "size": [
+    0.105,
+    2.7144,
+    1.6574
+   ],
+   "connections": [
+    "c0209",
+    "c0210"
+   ]
+  },
+  "fire-0-lb": {
+   "name": "Fire beam",
+   "group": "axis",
+   "center": [
+    -2.41,
+    0.615,
+    -1.5
+   ],
+   "size": [
+    0.5836,
+    0.09,
+    0.5836
+   ],
+   "connections": [
+    "c0211"
+   ]
+  },
+  "fire-0-lf": {
+   "name": "Fire beam",
+   "group": "axis",
+   "center": [
+    -2.41,
+    0.615,
+    1.5
+   ],
+   "size": [
+    0.5836,
+    0.09,
+    0.5836
+   ],
+   "connections": [
+    "c0212"
+   ]
+  },
+  "fire-0-rb": {
+   "name": "Fire beam",
+   "group": "axis",
+   "center": [
+    2.41,
+    0.615,
+    -1.5
+   ],
+   "size": [
+    0.5836,
+    0.09,
+    0.5836
+   ],
+   "connections": [
+    "c0215"
+   ]
+  },
+  "fire-0-rf": {
+   "name": "Fire beam",
+   "group": "axis",
+   "center": [
+    2.41,
+    0.615,
+    1.5
+   ],
+   "size": [
+    0.5836,
+    0.09,
+    0.5836
+   ],
+   "connections": [
+    "c0216"
+   ]
+  },
+  "fire-1-lb": {
+   "name": "Fire beam",
+   "group": "axis",
+   "center": [
+    -2.41,
+    3.315,
+    -1.5
+   ],
+   "size": [
+    0.5836,
+    0.09,
+    0.5836
+   ],
+   "connections": [
+    "c0213"
+   ]
+  },
+  "fire-1-lf": {
+   "name": "Fire beam",
+   "group": "axis",
+   "center": [
+    -2.41,
+    3.315,
+    1.5
+   ],
+   "size": [
+    0.5836,
+    0.09,
+    0.5836
+   ],
+   "connections": [
+    "c0214"
+   ]
+  },
+  "fire-1-rb": {
+   "name": "Fire beam",
+   "group": "axis",
+   "center": [
+    2.41,
+    3.315,
+    -1.5
+   ],
+   "size": [
+    0.5836,
+    0.09,
+    0.5836
+   ],
+   "connections": [
+    "c0217"
+   ]
+  },
+  "fire-1-rf": {
+   "name": "Fire beam",
+   "group": "axis",
+   "center": [
+    2.41,
+    3.315,
+    1.5
+   ],
+   "size": [
+    0.5836,
+    0.09,
+    0.5836
+   ],
+   "connections": [
+    "c0218"
+   ]
+  },
+  "beam-x-0-309-0": {
+   "name": "Gird",
+   "group": "axis",
+   "center": [
+    -1.82,
+    3.18,
+    -1.82
+   ],
+   "size": [
+    1.845,
+    0.18,
+    0.136
+   ],
+   "connections": [
+    "c0022",
+    "c0036",
+    "c0213",
+    "c0357",
+    "c0359"
+   ]
+  },
+  "beam-x-0-309-1": {
+   "name": "Gird",
+   "group": "axis",
+   "center": [
+    0.0,
+    3.18,
+    -1.82
+   ],
+   "size": [
+    1.845,
+    0.18,
+    0.136
+   ],
+   "connections": [
+    "c0037",
+    "c0046",
+    "c0361",
+    "c0363"
+   ]
+  },
+  "beam-x-0-309-2": {
+   "name": "Gird",
+   "group": "axis",
+   "center": [
+    1.82,
+    3.18,
+    -1.82
+   ],
+   "size": [
+    1.845,
+    0.18,
+    0.136
+   ],
+   "connections": [
+    "c0047",
+    "c0055",
+    "c0217",
+    "c0365",
+    "c0367"
+   ]
+  },
+  "beam-x-2-309-0": {
+   "name": "Gird",
+   "group": "axis",
+   "center": [
+    -1.82,
+    3.18,
+    1.82
+   ],
+   "size": [
+    1.845,
+    0.18,
+    0.136
+   ],
+   "connections": [
+    "c0026",
+    "c0038",
+    "c0214",
+    "c0358",
+    "c0360"
+   ]
+  },
+  "beam-x-2-309-1": {
+   "name": "Gird",
+   "group": "axis",
+   "center": [
+    0.0,
+    3.18,
+    1.82
+   ],
+   "size": [
+    1.845,
+    0.18,
+    0.136
+   ],
+   "connections": [
+    "c0039",
+    "c0048",
+    "c0362",
+    "c0364"
+   ]
+  },
+  "beam-x-2-309-2": {
+   "name": "Gird",
+   "group": "axis",
+   "center": [
+    1.82,
+    3.18,
+    1.82
+   ],
+   "size": [
+    1.845,
+    0.18,
+    0.136
+   ],
+   "connections": [
+    "c0049",
+    "c0059",
+    "c0218",
+    "c0366",
+    "c0368"
+   ]
+  },
+  "beam-z-0-309-0": {
+   "name": "Gird",
+   "group": "axis",
+   "center": [
+    -2.73,
+    3.18,
+    -0.91
+   ],
+   "size": [
+    0.136,
+    0.18,
+    1.845
+   ],
+   "connections": [
+    "c0023",
+    "c0024",
+    "c0213"
+   ]
+  },
+  "beam-z-0-309-1": {
+   "name": "Gird",
+   "group": "axis",
+   "center": [
+    -2.73,
+    3.18,
+    0.91
+   ],
+   "size": [
+    0.136,
+    0.18,
+    1.845
+   ],
+   "connections": [
+    "c0025",
+    "c0027",
+    "c0214"
+   ]
+  },
+  "beam-z-3-309-0": {
+   "name": "Gird",
+   "group": "axis",
+   "center": [
+    2.73,
+    3.18,
+    -0.91
+   ],
+   "size": [
+    0.136,
+    0.18,
+    1.845
+   ],
+   "connections": [
+    "c0056",
+    "c0057",
+    "c0217"
+   ]
+  },
+  "beam-z-3-309-1": {
+   "name": "Gird",
+   "group": "axis",
+   "center": [
+    2.73,
+    3.18,
+    0.91
+   ],
+   "size": [
+    0.136,
+    0.18,
+    1.845
+   ],
+   "connections": [
+    "c0058",
+    "c0060",
+    "c0218"
+   ]
+  },
+  "beam-x-1-303-0": {
+   "name": "Floor beam",
+   "group": "floor",
+   "center": [
+    -1.82,
+    3.15,
+    0.0
+   ],
+   "size": [
+    1.845,
+    0.24,
+    0.136
+   ],
+   "connections": [
+    "c0021",
+    "c0034",
+    "c0351",
+    "c0352"
+   ]
+  },
+  "beam-x-1-303-1": {
+   "name": "Floor beam",
+   "group": "floor",
+   "center": [
+    0.0,
+    3.15,
+    0.0
+   ],
+   "size": [
+    1.845,
+    0.24,
+    0.136
+   ],
+   "connections": [
+    "c0035",
+    "c0044",
+    "c0353",
+    "c0354"
+   ]
+  },
+  "beam-x-1-303-2": {
+   "name": "Floor beam",
+   "group": "floor",
+   "center": [
+    1.82,
+    3.15,
+    0.0
+   ],
+   "size": [
+    1.845,
+    0.24,
+    0.136
+   ],
+   "connections": [
+    "c0045",
+    "c0054",
+    "c0355",
+    "c0356"
+   ]
+  },
+  "beam-x-0-618-0": {
+   "name": "Plate",
+   "group": "axis",
+   "center": [
+    -1.82,
+    6.2685,
+    -1.82
+   ],
+   "size": [
+    1.845,
+    0.18,
+    0.136
+   ],
+   "connections": [
+    "c0028",
+    "c0040",
+    "c0369",
+    "c0397",
+    "c0441",
+    "c0443",
+    "c0445",
+    "c0447"
+   ]
+  },
+  "beam-x-0-618-1": {
+   "name": "Plate",
+   "group": "axis",
+   "center": [
+    0.0,
+    6.2685,
+    -1.82
+   ],
+   "size": [
+    1.845,
+    0.18,
+    0.136
+   ],
+   "connections": [
+    "c0041",
+    "c0050",
+    "c0371",
+    "c0449",
+    "c0451",
+    "c0453",
+    "c0455"
+   ]
+  },
+  "beam-x-0-618-2": {
+   "name": "Plate",
+   "group": "axis",
+   "center": [
+    1.82,
+    6.2685,
+    -1.82
+   ],
+   "size": [
+    1.845,
+    0.18,
+    0.136
+   ],
+   "connections": [
+    "c0051",
+    "c0061",
+    "c0373",
+    "c0399",
+    "c0457",
+    "c0459",
+    "c0461"
+   ]
+  },
+  "beam-x-2-618-0": {
+   "name": "Plate",
+   "group": "axis",
+   "center": [
+    -1.82,
+    6.2685,
+    1.82
+   ],
+   "size": [
+    1.845,
+    0.18,
+    0.136
+   ],
+   "connections": [
+    "c0032",
+    "c0042",
+    "c0370",
+    "c0398",
+    "c0442",
+    "c0444",
+    "c0446",
+    "c0448"
+   ]
+  },
+  "beam-x-2-618-1": {
+   "name": "Plate",
+   "group": "axis",
+   "center": [
+    0.0,
+    6.2685,
+    1.82
+   ],
+   "size": [
+    1.845,
+    0.18,
+    0.136
+   ],
+   "connections": [
+    "c0043",
+    "c0052",
+    "c0372",
+    "c0450",
+    "c0452",
+    "c0454",
+    "c0456"
+   ]
+  },
+  "beam-x-2-618-2": {
+   "name": "Plate",
+   "group": "axis",
+   "center": [
+    1.82,
+    6.2685,
+    1.82
+   ],
+   "size": [
+    1.845,
+    0.18,
+    0.136
+   ],
+   "connections": [
+    "c0053",
+    "c0065",
+    "c0374",
+    "c0400",
+    "c0458",
+    "c0460",
+    "c0462"
+   ]
+  },
+  "beam-z-0-618-0": {
+   "name": "Plate",
+   "group": "axis",
+   "center": [
+    -2.73,
+    6.2685,
+    -0.91
+   ],
+   "size": [
+    0.136,
+    0.18,
+    1.845
+   ],
+   "connections": [
+    "c0029",
+    "c0030",
+    "c0397",
+    "c0481",
+    "c0482",
+    "c0483"
+   ]
+  },
+  "beam-z-0-618-1": {
+   "name": "Plate",
+   "group": "axis",
+   "center": [
+    -2.73,
+    6.2685,
+    0.91
+   ],
+   "size": [
+    0.136,
+    0.18,
+    1.845
+   ],
+   "connections": [
+    "c0031",
+    "c0033",
+    "c0398",
+    "c0484",
+    "c0485",
+    "c0486",
+    "c0487"
+   ]
+  },
+  "beam-z-3-618-0": {
+   "name": "Plate",
+   "group": "axis",
+   "center": [
+    2.73,
+    6.2685,
+    -0.91
+   ],
+   "size": [
+    0.136,
+    0.18,
+    1.845
+   ],
+   "connections": [
+    "c0062",
+    "c0063",
+    "c0399",
+    "c0488",
+    "c0489",
+    "c0490"
+   ]
+  },
+  "beam-z-3-618-1": {
+   "name": "Plate",
+   "group": "axis",
+   "center": [
+    2.73,
+    6.2685,
+    0.91
+   ],
+   "size": [
+    0.136,
+    0.18,
+    1.845
+   ],
+   "connections": [
+    "c0064",
+    "c0066",
+    "c0400",
+    "c0491",
+    "c0492",
+    "c0493",
+    "c0494"
+   ]
+  },
+  "joist-up-00": {
+   "name": "Upper joist",
+   "group": "floor",
+   "center": [
+    -2.275,
+    3.21,
+    0.015
+   ],
+   "size": [
+    0.06,
+    0.12,
+    3.55
+   ],
+   "connections": [
+    "c0351",
+    "c0357",
+    "c0358"
+   ]
+  },
+  "joist-up-01": {
+   "name": "Upper joist",
+   "group": "floor",
+   "center": [
+    -1.365,
+    3.21,
+    0.015
+   ],
+   "size": [
+    0.06,
+    0.12,
+    3.55
+   ],
+   "connections": [
+    "c0352",
+    "c0359",
+    "c0360"
+   ]
+  },
+  "joist-up-02": {
+   "name": "Upper joist",
+   "group": "floor",
+   "center": [
+    -0.455,
+    3.21,
+    0.015
+   ],
+   "size": [
+    0.06,
+    0.12,
+    3.55
+   ],
+   "connections": [
+    "c0353",
+    "c0361",
+    "c0362"
+   ]
+  },
+  "joist-up-03": {
+   "name": "Upper joist",
+   "group": "floor",
+   "center": [
+    0.455,
+    3.21,
+    0.015
+   ],
+   "size": [
+    0.06,
+    0.12,
+    3.55
+   ],
+   "connections": [
+    "c0354",
+    "c0363",
+    "c0364"
+   ]
+  },
+  "joist-up-04": {
+   "name": "Upper joist",
+   "group": "floor",
+   "center": [
+    1.365,
+    3.21,
+    0.015
+   ],
+   "size": [
+    0.06,
+    0.12,
+    3.55
+   ],
+   "connections": [
+    "c0355",
+    "c0365",
+    "c0366"
+   ]
+  },
+  "joist-up-05": {
+   "name": "Upper joist",
+   "group": "floor",
+   "center": [
+    2.275,
+    3.21,
+    0.015
+   ],
+   "size": [
+    0.06,
+    0.12,
+    3.55
+   ],
+   "connections": [
+    "c0356",
+    "c0367",
+    "c0368"
+   ]
+  },
+  "nuki-0-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -1.82,
+    1.5525,
+    -1.82
+   ],
+   "size": [
+    1.73,
+    0.105,
+    0.12
+   ],
+   "connections": [
+    "c0067",
+    "c0091",
+    "c0155"
+   ]
+  },
+  "nuki-0-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    0.0,
+    1.5525,
+    -1.82
+   ],
+   "size": [
+    1.73,
+    0.105,
+    0.12
+   ],
+   "connections": [
+    "c0092",
+    "c0107",
+    "c0163"
+   ]
+  },
+  "nuki-0-2": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    1.82,
+    1.5525,
+    -1.82
+   ],
+   "size": [
+    1.73,
+    0.105,
+    0.12
+   ],
+   "connections": [
+    "c0108",
+    "c0123",
+    "c0171"
+   ]
+  },
+  "nuki-1-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -1.82,
+    1.5525,
+    1.826
+   ],
+   "size": [
+    1.89,
+    0.105,
+    0.132
+   ],
+   "connections": [
+    "c0068",
+    "c0093",
+    "c0156"
+   ]
+  },
+  "nuki-1-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    0.0,
+    1.5525,
+    1.826
+   ],
+   "size": [
+    1.89,
+    0.105,
+    0.132
+   ],
+   "connections": [
+    "c0094",
+    "c0109",
+    "c0164"
+   ]
+  },
+  "nuki-1-2": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    1.82,
+    1.5525,
+    1.826
+   ],
+   "size": [
+    1.89,
+    0.105,
+    0.132
+   ],
+   "connections": [
+    "c0110",
+    "c0124",
+    "c0172"
+   ]
+  },
+  "nuki-2-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -2.73,
+    1.6175,
+    -0.91
+   ],
+   "size": [
+    0.12,
+    0.105,
+    1.73
+   ],
+   "connections": [
+    "c0069",
+    "c0070",
+    "c0147"
+   ]
+  },
+  "nuki-2-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -2.73,
+    1.6175,
+    0.91
+   ],
+   "size": [
+    0.12,
+    0.105,
+    1.73
+   ],
+   "connections": [
+    "c0071",
+    "c0072",
+    "c0148"
+   ]
+  },
+  "nuki-3-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    2.736,
+    1.6175,
+    -0.91
+   ],
+   "size": [
+    0.132,
+    0.105,
+    1.89
+   ],
+   "connections": [
+    "c0125",
+    "c0126",
+    "c0179"
+   ]
+  },
+  "nuki-3-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    2.736,
+    1.6175,
+    0.91
+   ],
+   "size": [
+    0.132,
+    0.105,
+    1.89
+   ],
+   "connections": [
+    "c0127",
+    "c0128",
+    "c0180"
+   ]
+  },
+  "nuki-4-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -1.82,
+    2.6025,
+    -1.82
+   ],
+   "size": [
+    1.73,
+    0.105,
+    0.12
+   ],
+   "connections": [
+    "c0073",
+    "c0095",
+    "c0157"
+   ]
+  },
+  "nuki-4-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    0.0,
+    2.6025,
+    -1.82
+   ],
+   "size": [
+    1.73,
+    0.105,
+    0.12
+   ],
+   "connections": [
+    "c0096",
+    "c0111",
+    "c0165"
+   ]
+  },
+  "nuki-4-2": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    1.82,
+    2.6025,
+    -1.82
+   ],
+   "size": [
+    1.73,
+    0.105,
+    0.12
+   ],
+   "connections": [
+    "c0112",
+    "c0129",
+    "c0173"
+   ]
+  },
+  "nuki-5-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -1.82,
+    2.6025,
+    1.826
+   ],
+   "size": [
+    1.89,
+    0.105,
+    0.132
+   ],
+   "connections": [
+    "c0074",
+    "c0097",
+    "c0158"
+   ]
+  },
+  "nuki-5-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    0.0,
+    2.6025,
+    1.826
+   ],
+   "size": [
+    1.89,
+    0.105,
+    0.132
+   ],
+   "connections": [
+    "c0098",
+    "c0113",
+    "c0166"
+   ]
+  },
+  "nuki-5-2": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    1.82,
+    2.6025,
+    1.826
+   ],
+   "size": [
+    1.89,
+    0.105,
+    0.132
+   ],
+   "connections": [
+    "c0114",
+    "c0130",
+    "c0174"
+   ]
+  },
+  "nuki-6-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -2.73,
+    2.6675,
+    -0.91
+   ],
+   "size": [
+    0.12,
+    0.105,
+    1.73
+   ],
+   "connections": [
+    "c0075",
+    "c0076",
+    "c0149"
+   ]
+  },
+  "nuki-6-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -2.73,
+    2.6675,
+    0.91
+   ],
+   "size": [
+    0.12,
+    0.105,
+    1.73
+   ],
+   "connections": [
+    "c0077",
+    "c0078",
+    "c0150"
+   ]
+  },
+  "nuki-7-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    2.736,
+    2.6675,
+    -0.91
+   ],
+   "size": [
+    0.132,
+    0.105,
+    1.89
+   ],
+   "connections": [
+    "c0131",
+    "c0132",
+    "c0181"
+   ]
+  },
+  "nuki-7-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    2.736,
+    2.6675,
+    0.91
+   ],
+   "size": [
+    0.132,
+    0.105,
+    1.89
+   ],
+   "connections": [
+    "c0133",
+    "c0134",
+    "c0182"
+   ]
+  },
+  "nuki-8-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -1.82,
+    4.3525,
+    -1.82
+   ],
+   "size": [
+    1.73,
+    0.105,
+    0.12
+   ],
+   "connections": [
+    "c0079",
+    "c0099",
+    "c0159"
+   ]
+  },
+  "nuki-8-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    0.0,
+    4.3525,
+    -1.82
+   ],
+   "size": [
+    1.73,
+    0.105,
+    0.12
+   ],
+   "connections": [
+    "c0100",
+    "c0115",
+    "c0167"
+   ]
+  },
+  "nuki-8-2": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    1.82,
+    4.3525,
+    -1.82
+   ],
+   "size": [
+    1.73,
+    0.105,
+    0.12
+   ],
+   "connections": [
+    "c0116",
+    "c0135",
+    "c0175"
+   ]
+  },
+  "nuki-9-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -1.82,
+    4.3525,
+    1.826
+   ],
+   "size": [
+    1.89,
+    0.105,
+    0.132
+   ],
+   "connections": [
+    "c0080",
+    "c0101",
+    "c0160"
+   ]
+  },
+  "nuki-9-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    0.0,
+    4.3525,
+    1.826
+   ],
+   "size": [
+    1.89,
+    0.105,
+    0.132
+   ],
+   "connections": [
+    "c0102",
+    "c0117",
+    "c0168"
+   ]
+  },
+  "nuki-9-2": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    1.82,
+    4.3525,
+    1.826
+   ],
+   "size": [
+    1.89,
+    0.105,
+    0.132
+   ],
+   "connections": [
+    "c0118",
+    "c0136",
+    "c0176"
+   ]
+  },
+  "nuki-10-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -2.73,
+    4.4175,
+    -0.91
+   ],
+   "size": [
+    0.12,
+    0.105,
+    1.73
+   ],
+   "connections": [
+    "c0081",
+    "c0082",
+    "c0151"
+   ]
+  },
+  "nuki-10-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -2.73,
+    4.4175,
+    0.91
+   ],
+   "size": [
+    0.12,
+    0.105,
+    1.73
+   ],
+   "connections": [
+    "c0083",
+    "c0084",
+    "c0152"
+   ]
+  },
+  "nuki-11-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    2.736,
+    4.4175,
+    -0.91
+   ],
+   "size": [
+    0.132,
+    0.105,
+    1.89
+   ],
+   "connections": [
+    "c0137",
+    "c0138",
+    "c0183"
+   ]
+  },
+  "nuki-11-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    2.736,
+    4.4175,
+    0.91
+   ],
+   "size": [
+    0.132,
+    0.105,
+    1.89
+   ],
+   "connections": [
+    "c0139",
+    "c0140",
+    "c0184"
+   ]
+  },
+  "nuki-12-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -1.82,
+    5.4025,
+    -1.82
+   ],
+   "size": [
+    1.73,
+    0.105,
+    0.12
+   ],
+   "connections": [
+    "c0085",
+    "c0103",
+    "c0161"
+   ]
+  },
+  "nuki-12-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    0.0,
+    5.4025,
+    -1.82
+   ],
+   "size": [
+    1.73,
+    0.105,
+    0.12
+   ],
+   "connections": [
+    "c0104",
+    "c0119",
+    "c0169"
+   ]
+  },
+  "nuki-12-2": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    1.82,
+    5.4025,
+    -1.82
+   ],
+   "size": [
+    1.73,
+    0.105,
+    0.12
+   ],
+   "connections": [
+    "c0120",
+    "c0141",
+    "c0177"
+   ]
+  },
+  "nuki-13-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -1.82,
+    5.4025,
+    1.826
+   ],
+   "size": [
+    1.89,
+    0.105,
+    0.132
+   ],
+   "connections": [
+    "c0086",
+    "c0105",
+    "c0162"
+   ]
+  },
+  "nuki-13-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    0.0,
+    5.4025,
+    1.826
+   ],
+   "size": [
+    1.89,
+    0.105,
+    0.132
+   ],
+   "connections": [
+    "c0106",
+    "c0121",
+    "c0170"
+   ]
+  },
+  "nuki-13-2": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    1.82,
+    5.4025,
+    1.826
+   ],
+   "size": [
+    1.89,
+    0.105,
+    0.132
+   ],
+   "connections": [
+    "c0122",
+    "c0142",
+    "c0178"
+   ]
+  },
+  "nuki-14-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -2.73,
+    5.4675,
+    -0.91
+   ],
+   "size": [
+    0.12,
+    0.105,
+    1.73
+   ],
+   "connections": [
+    "c0087",
+    "c0088",
+    "c0153"
+   ]
+  },
+  "nuki-14-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    -2.73,
+    5.4675,
+    0.91
+   ],
+   "size": [
+    0.12,
+    0.105,
+    1.73
+   ],
+   "connections": [
+    "c0089",
+    "c0090",
+    "c0154"
+   ]
+  },
+  "nuki-15-0": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    2.736,
+    5.4675,
+    -0.91
+   ],
+   "size": [
+    0.132,
+    0.105,
+    1.89
+   ],
+   "connections": [
+    "c0143",
+    "c0144",
+    "c0185"
+   ]
+  },
+  "nuki-15-1": {
+   "name": "Nuki",
+   "group": "axis",
+   "center": [
+    2.736,
+    5.4675,
+    0.91
+   ],
+   "size": [
+    0.132,
+    0.105,
+    1.89
+   ],
+   "connections": [
+    "c0145",
+    "c0146",
+    "c0186"
+   ]
+  },
+  "roofbeam-0": {
+   "name": "Roof beam",
+   "group": "roof",
+   "center": [
+    -1.82,
+    6.2685,
+    0.03
+   ],
+   "size": [
+    0.12,
+    0.18,
+    3.58
+   ],
+   "connections": [
+    "c0369",
+    "c0370",
+    "c0375",
+    "c0376"
+   ]
+  },
+  "roofbeam-1": {
+   "name": "Roof beam",
+   "group": "roof",
+   "center": [
+    0.0,
+    6.2685,
+    0.03
+   ],
+   "size": [
+    0.12,
+    0.18,
+    3.58
+   ],
+   "connections": [
+    "c0371",
+    "c0372",
+    "c0377",
+    "c0378",
+    "c0379"
+   ]
+  },
+  "roofbeam-2": {
+   "name": "Roof beam",
+   "group": "roof",
+   "center": [
+    1.82,
+    6.2685,
+    0.03
+   ],
+   "size": [
+    0.12,
+    0.18,
+    3.58
+   ],
+   "connections": [
+    "c0373",
+    "c0374",
+    "c0380",
+    "c0381"
+   ]
+  },
+  "roofpost-0": {
+   "name": "King post",
+   "group": "roof",
+   "center": [
+    0.0,
+    7.0493,
+    0.0
+   ],
+   "size": [
+    0.12,
+    1.4815,
+    0.12
+   ],
+   "connections": [
+    "c0378",
+    "c0388"
+   ]
+  },
+  "roofpost-1": {
+   "name": "Roof strut",
+   "group": "roof",
+   "center": [
+    -1.82,
+    6.6564,
+    -0.91
+   ],
+   "size": [
+    0.105,
+    0.6957,
+    0.105
+   ],
+   "connections": [
+    "c0375",
+    "c0382"
+   ]
+  },
+  "roofpost-2": {
+   "name": "Roof strut",
+   "group": "roof",
+   "center": [
+    -1.82,
+    6.6564,
+    0.91
+   ],
+   "size": [
+    0.105,
+    0.6957,
+    0.105
+   ],
+   "connections": [
+    "c0376",
+    "c0383"
+   ]
+  },
+  "roofpost-3": {
+   "name": "Roof strut",
+   "group": "roof",
+   "center": [
+    0.0,
+    6.6564,
+    -0.91
+   ],
+   "size": [
+    0.105,
+    0.6957,
+    0.105
+   ],
+   "connections": [
+    "c0377",
+    "c0384"
+   ]
+  },
+  "roofpost-4": {
+   "name": "Roof strut",
+   "group": "roof",
+   "center": [
+    0.0,
+    6.6564,
+    0.91
+   ],
+   "size": [
+    0.105,
+    0.6957,
+    0.105
+   ],
+   "connections": [
+    "c0379",
+    "c0385"
+   ]
+  },
+  "roofpost-5": {
+   "name": "Roof strut",
+   "group": "roof",
+   "center": [
+    1.82,
+    6.6564,
+    -0.91
+   ],
+   "size": [
+    0.105,
+    0.6957,
+    0.105
+   ],
+   "connections": [
+    "c0380",
+    "c0386"
+   ]
+  },
+  "roofpost-6": {
+   "name": "Roof strut",
+   "group": "roof",
+   "center": [
+    1.82,
+    6.6564,
+    0.91
+   ],
+   "size": [
+    0.105,
+    0.6957,
+    0.105
+   ],
+   "connections": [
+    "c0381",
+    "c0387"
+   ]
+  },
+  "purlin-b": {
+   "name": "Purlin",
+   "group": "roof",
+   "center": [
+    0.0,
+    7.0243,
+    -0.91
+   ],
+   "size": [
+    3.64,
+    0.12,
+    0.12
+   ],
+   "connections": [
+    "c0382",
+    "c0384",
+    "c0386",
+    "c0389",
+    "c0391",
+    "c0427",
+    "c0429",
+    "c0431",
+    "c0433",
+    "c0435",
+    "c0437",
+    "c0439"
+   ]
+  },
+  "purlin-f": {
+   "name": "Purlin",
+   "group": "roof",
+   "center": [
+    0.0,
+    7.0243,
+    0.91
+   ],
+   "size": [
+    3.64,
+    0.12,
+    0.12
+   ],
+   "connections": [
+    "c0383",
+    "c0385",
+    "c0387",
+    "c0390",
+    "c0392",
+    "c0428",
+    "c0430",
+    "c0432",
+    "c0434",
+    "c0436",
+    "c0438",
+    "c0440"
+   ]
+  },
+  "ridge": {
+   "name": "Ridge",
+   "group": "roof",
+   "center": [
+    0.0,
+    7.825,
+    0.0
+   ],
+   "size": [
+    1.82,
+    0.15,
+    0.15
+   ],
+   "connections": [
+    "c0388",
+    "c0393",
+    "c0394",
+    "c0395",
+    "c0396",
+    "c0401",
+    "c0402",
+    "c0403",
+    "c0404",
+    "c0405",
+    "c0406",
+    "c0407",
+    "c0408",
+    "c0409",
+    "c0410"
+   ]
+  },
+  "hip-lb": {
+   "name": "Hip rafter",
+   "group": "roof",
+   "center": [
+    -2.12,
+    6.845,
+    -1.21
+   ],
+   "size": [
+    2.5674,
+    2.0868,
+    2.5674
+   ],
+   "connections": [
+    "c0389",
+    "c0393",
+    "c0397",
+    "c0411",
+    "c0413",
+    "c0415",
+    "c0417",
+    "c0463",
+    "c0465",
+    "c0467",
+    "c0469",
+    "c0471"
+   ]
+  },
+  "hip-lf": {
+   "name": "Hip rafter",
+   "group": "roof",
+   "center": [
+    -2.12,
+    6.845,
+    1.21
+   ],
+   "size": [
+    2.5674,
+    2.0868,
+    2.5674
+   ],
+   "connections": [
+    "c0390",
+    "c0394",
+    "c0398",
+    "c0412",
+    "c0414",
+    "c0416",
+    "c0418",
+    "c0464",
+    "c0466",
+    "c0468",
+    "c0470"
+   ]
+  },
+  "hip-rb": {
+   "name": "Hip rafter",
+   "group": "roof",
+   "center": [
+    2.12,
+    6.845,
+    -1.21
+   ],
+   "size": [
+    2.5674,
+    2.0868,
+    2.5674
+   ],
+   "connections": [
+    "c0391",
+    "c0395",
+    "c0399",
+    "c0419",
+    "c0421",
+    "c0423",
+    "c0425",
+    "c0472",
+    "c0473",
+    "c0475",
+    "c0477",
+    "c0479"
+   ]
+  },
+  "hip-rf": {
+   "name": "Hip rafter",
+   "group": "roof",
+   "center": [
+    2.12,
+    6.845,
+    1.21
+   ],
+   "size": [
+    2.5674,
+    2.0868,
+    2.5674
+   ],
+   "connections": [
+    "c0392",
+    "c0396",
+    "c0400",
+    "c0420",
+    "c0422",
+    "c0424",
+    "c0426",
+    "c0474",
+    "c0476",
+    "c0478",
+    "c0480"
+   ]
+  },
+  "rafter-0-b": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    -2.73,
+    6.1643,
+    -2.12
+   ],
+   "size": [
+    0.045,
+    0.5489,
+    0.6561
+   ],
+   "connections": [
+    "c0411"
+   ]
+  },
+  "rafter-1-f": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    -2.73,
+    6.1643,
+    2.12
+   ],
+   "size": [
+    0.045,
+    0.5489,
+    0.6561
+   ],
+   "connections": [
+    "c0412"
+   ]
+  },
+  "rafter-2-b": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    -2.275,
+    6.3457,
+    -1.8925
+   ],
+   "size": [
+    0.045,
+    0.9117,
+    1.1111
+   ],
+   "connections": [
+    "c0413",
+    "c0441"
+   ]
+  },
+  "rafter-3-f": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    -2.275,
+    6.3457,
+    1.8925
+   ],
+   "size": [
+    0.045,
+    0.9117,
+    1.1111
+   ],
+   "connections": [
+    "c0414",
+    "c0442"
+   ]
+  },
+  "rafter-4-b": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    -1.82,
+    6.5271,
+    -1.665
+   ],
+   "size": [
+    0.045,
+    1.2746,
+    1.5661
+   ],
+   "connections": [
+    "c0415",
+    "c0443"
+   ]
+  },
+  "rafter-5-f": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    -1.82,
+    6.5271,
+    1.665
+   ],
+   "size": [
+    0.045,
+    1.2746,
+    1.5661
+   ],
+   "connections": [
+    "c0416",
+    "c0444"
+   ]
+  },
+  "rafter-6-b": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    -1.365,
+    6.7086,
+    -1.4375
+   ],
+   "size": [
+    0.045,
+    1.6375,
+    2.0211
+   ],
+   "connections": [
+    "c0417",
+    "c0427",
+    "c0445"
+   ]
+  },
+  "rafter-7-f": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    -1.365,
+    6.7086,
+    1.4375
+   ],
+   "size": [
+    0.045,
+    1.6375,
+    2.0211
+   ],
+   "connections": [
+    "c0418",
+    "c0428",
+    "c0446"
+   ]
+  },
+  "rafter-8-b": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    -0.91,
+    6.89,
+    -1.21
+   ],
+   "size": [
+    0.045,
+    2.0004,
+    2.4761
+   ],
+   "connections": [
+    "c0401",
+    "c0429",
+    "c0447"
+   ]
+  },
+  "rafter-9-f": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    -0.91,
+    6.89,
+    1.21
+   ],
+   "size": [
+    0.045,
+    2.0004,
+    2.4761
+   ],
+   "connections": [
+    "c0402",
+    "c0430",
+    "c0448"
+   ]
+  },
+  "rafter-10-b": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    -0.455,
+    6.89,
+    -1.21
+   ],
+   "size": [
+    0.045,
+    2.0004,
+    2.4761
+   ],
+   "connections": [
+    "c0403",
+    "c0431",
+    "c0449"
+   ]
+  },
+  "rafter-11-f": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    -0.455,
+    6.89,
+    1.21
+   ],
+   "size": [
+    0.045,
+    2.0004,
+    2.4761
+   ],
+   "connections": [
+    "c0404",
+    "c0432",
+    "c0450"
+   ]
+  },
+  "rafter-12-b": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    0.0,
+    6.89,
+    -1.21
+   ],
+   "size": [
+    0.045,
+    2.0004,
+    2.4761
+   ],
+   "connections": [
+    "c0405",
+    "c0433",
+    "c0451"
+   ]
+  },
+  "rafter-13-f": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    0.0,
+    6.89,
+    1.21
+   ],
+   "size": [
+    0.045,
+    2.0004,
+    2.4761
+   ],
+   "connections": [
+    "c0406",
+    "c0434",
+    "c0452"
+   ]
+  },
+  "rafter-14-b": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    0.455,
+    6.89,
+    -1.21
+   ],
+   "size": [
+    0.045,
+    2.0004,
+    2.4761
+   ],
+   "connections": [
+    "c0407",
+    "c0435",
+    "c0453"
+   ]
+  },
+  "rafter-15-f": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    0.455,
+    6.89,
+    1.21
+   ],
+   "size": [
+    0.045,
+    2.0004,
+    2.4761
+   ],
+   "connections": [
+    "c0408",
+    "c0436",
+    "c0454"
+   ]
+  },
+  "rafter-16-b": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    0.91,
+    6.89,
+    -1.21
+   ],
+   "size": [
+    0.045,
+    2.0004,
+    2.4761
+   ],
+   "connections": [
+    "c0409",
+    "c0437",
+    "c0455"
+   ]
+  },
+  "rafter-17-f": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    0.91,
+    6.89,
+    1.21
+   ],
+   "size": [
+    0.045,
+    2.0004,
+    2.4761
+   ],
+   "connections": [
+    "c0410",
+    "c0438",
+    "c0456"
+   ]
+  },
+  "rafter-18-b": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    1.365,
+    6.7086,
+    -1.4375
+   ],
+   "size": [
+    0.045,
+    1.6375,
+    2.0211
+   ],
+   "connections": [
+    "c0419",
+    "c0439",
+    "c0457"
+   ]
+  },
+  "rafter-19-f": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    1.365,
+    6.7086,
+    1.4375
+   ],
+   "size": [
+    0.045,
+    1.6375,
+    2.0211
+   ],
+   "connections": [
+    "c0420",
+    "c0440",
+    "c0458"
+   ]
+  },
+  "rafter-20-b": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    1.82,
+    6.5271,
+    -1.665
+   ],
+   "size": [
+    0.045,
+    1.2746,
+    1.5661
+   ],
+   "connections": [
+    "c0421",
+    "c0459"
+   ]
+  },
+  "rafter-21-f": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    1.82,
+    6.5271,
+    1.665
+   ],
+   "size": [
+    0.045,
+    1.2746,
+    1.5661
+   ],
+   "connections": [
+    "c0422",
+    "c0460"
+   ]
+  },
+  "rafter-22-b": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    2.275,
+    6.3457,
+    -1.8925
+   ],
+   "size": [
+    0.045,
+    0.9117,
+    1.1111
+   ],
+   "connections": [
+    "c0423",
+    "c0461"
+   ]
+  },
+  "rafter-23-f": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    2.275,
+    6.3457,
+    1.8925
+   ],
+   "size": [
+    0.045,
+    0.9117,
+    1.1111
+   ],
+   "connections": [
+    "c0424",
+    "c0462"
+   ]
+  },
+  "rafter-24-b": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    2.73,
+    6.1643,
+    -2.12
+   ],
+   "size": [
+    0.045,
+    0.5489,
+    0.6561
+   ],
+   "connections": [
+    "c0425"
+   ]
+  },
+  "rafter-25-f": {
+   "name": "Rafter",
+   "group": "roof",
+   "center": [
+    2.73,
+    6.1643,
+    2.12
+   ],
+   "size": [
+    0.045,
+    0.5489,
+    0.6561
+   ],
+   "connections": [
+    "c0426"
+   ]
+  },
+  "rafter-end-26-l": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    -3.03,
+    6.1643,
+    -1.82
+   ],
+   "size": [
+    0.6561,
+    0.5489,
+    0.045
+   ],
+   "connections": [
+    "c0463"
+   ]
+  },
+  "rafter-end-27-r": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    3.03,
+    6.1643,
+    -1.82
+   ],
+   "size": [
+    0.6561,
+    0.5489,
+    0.045
+   ],
+   "connections": [
+    "c0479"
+   ]
+  },
+  "rafter-end-28-l": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    -2.8025,
+    6.3457,
+    -1.365
+   ],
+   "size": [
+    1.1111,
+    0.9117,
+    0.045
+   ],
+   "connections": [
+    "c0465",
+    "c0481"
+   ]
+  },
+  "rafter-end-29-r": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    2.8025,
+    6.3457,
+    -1.365
+   ],
+   "size": [
+    1.1111,
+    0.9117,
+    0.045
+   ],
+   "connections": [
+    "c0477",
+    "c0488"
+   ]
+  },
+  "rafter-end-30-l": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    -2.575,
+    6.5271,
+    -0.91
+   ],
+   "size": [
+    1.5661,
+    1.2746,
+    0.045
+   ],
+   "connections": [
+    "c0467",
+    "c0482"
+   ]
+  },
+  "rafter-end-31-r": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    2.575,
+    6.5271,
+    -0.91
+   ],
+   "size": [
+    1.5661,
+    1.2746,
+    0.045
+   ],
+   "connections": [
+    "c0475",
+    "c0489"
+   ]
+  },
+  "rafter-end-32-l": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    -2.3475,
+    6.7086,
+    -0.455
+   ],
+   "size": [
+    2.0211,
+    1.6375,
+    0.045
+   ],
+   "connections": [
+    "c0469",
+    "c0483"
+   ]
+  },
+  "rafter-end-33-r": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    2.3475,
+    6.7086,
+    -0.455
+   ],
+   "size": [
+    2.0211,
+    1.6375,
+    0.045
+   ],
+   "connections": [
+    "c0473",
+    "c0490"
+   ]
+  },
+  "rafter-end-34-l": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    -2.12,
+    6.89,
+    0.0
+   ],
+   "size": [
+    2.4761,
+    2.0004,
+    0.045
+   ],
+   "connections": [
+    "c0471",
+    "c0484"
+   ]
+  },
+  "rafter-end-35-r": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    2.12,
+    6.89,
+    0.0
+   ],
+   "size": [
+    2.4761,
+    2.0004,
+    0.045
+   ],
+   "connections": [
+    "c0472",
+    "c0491"
+   ]
+  },
+  "rafter-end-36-l": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    -2.3475,
+    6.7086,
+    0.455
+   ],
+   "size": [
+    2.0211,
+    1.6375,
+    0.045
+   ],
+   "connections": [
+    "c0470",
+    "c0485"
+   ]
+  },
+  "rafter-end-37-r": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    2.3475,
+    6.7086,
+    0.455
+   ],
+   "size": [
+    2.0211,
+    1.6375,
+    0.045
+   ],
+   "connections": [
+    "c0474",
+    "c0492"
+   ]
+  },
+  "rafter-end-38-l": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    -2.575,
+    6.5271,
+    0.91
+   ],
+   "size": [
+    1.5661,
+    1.2746,
+    0.045
+   ],
+   "connections": [
+    "c0468",
+    "c0486"
+   ]
+  },
+  "rafter-end-39-r": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    2.575,
+    6.5271,
+    0.91
+   ],
+   "size": [
+    1.5661,
+    1.2746,
+    0.045
+   ],
+   "connections": [
+    "c0476",
+    "c0493"
+   ]
+  },
+  "rafter-end-40-l": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    -2.8025,
+    6.3457,
+    1.365
+   ],
+   "size": [
+    1.1111,
+    0.9117,
+    0.045
+   ],
+   "connections": [
+    "c0466",
+    "c0487"
+   ]
+  },
+  "rafter-end-41-r": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    2.8025,
+    6.3457,
+    1.365
+   ],
+   "size": [
+    1.1111,
+    0.9117,
+    0.045
+   ],
+   "connections": [
+    "c0478",
+    "c0494"
+   ]
+  },
+  "rafter-end-42-l": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    -3.03,
+    6.1643,
+    1.82
+   ],
+   "size": [
+    0.6561,
+    0.5489,
+    0.045
+   ],
+   "connections": [
+    "c0464"
+   ]
+  },
+  "rafter-end-43-r": {
+   "name": "Jack rafter",
+   "group": "roof",
+   "center": [
+    3.03,
+    6.1643,
+    1.82
+   ],
+   "size": [
+    0.6561,
+    0.5489,
+    0.045
+   ],
+   "connections": [
+    "c0480"
+   ]
+  }
+ },
+ "connections": [
+  {
+   "kind": "sill-corner",
+   "members": [
+    "sill-x-b",
+    "sill-z-l"
+   ],
+   "point": [
+    -2.73,
+    0.51,
+    -1.82
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0001"
+  },
+  {
+   "kind": "sill-corner",
+   "members": [
+    "sill-x-f",
+    "sill-z-l"
+   ],
+   "point": [
+    -2.73,
+    0.51,
+    1.82
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0002"
+  },
+  {
+   "kind": "sill-corner",
+   "members": [
+    "sill-x-b",
+    "sill-z-r"
+   ],
+   "point": [
+    2.73,
+    0.51,
+    -1.82
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0003"
+  },
+  {
+   "kind": "sill-corner",
+   "members": [
+    "sill-x-f",
+    "sill-z-r"
+   ],
+   "point": [
+    2.73,
+    0.51,
+    1.82
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0004"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-0-0",
+    "sill-x-b"
+   ],
+   "point": [
+    -2.73,
+    0.57,
+    -1.82
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0005"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-0-0",
+    "sill-z-l"
+   ],
+   "point": [
+    -2.73,
+    0.57,
+    -1.82
+   ],
+   "anchor": "sill-z-l",
+   "id": "c0006"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-0-1",
+    "sill-z-l"
+   ],
+   "point": [
+    -2.73,
+    0.57,
+    0.0
+   ],
+   "anchor": "sill-z-l",
+   "id": "c0007"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-0-2",
+    "sill-x-f"
+   ],
+   "point": [
+    -2.73,
+    0.57,
+    1.82
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0008"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-0-2",
+    "sill-z-l"
+   ],
+   "point": [
+    -2.73,
+    0.57,
+    1.82
+   ],
+   "anchor": "sill-z-l",
+   "id": "c0009"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-1-0",
+    "sill-x-b"
+   ],
+   "point": [
+    -0.91,
+    0.57,
+    -1.82
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0010"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-1-1",
+    "sill-x-centre"
+   ],
+   "point": [
+    -0.91,
+    0.57,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0011"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-1-2",
+    "sill-x-f"
+   ],
+   "point": [
+    -0.91,
+    0.57,
+    1.82
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0012"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-2-0",
+    "sill-x-b"
+   ],
+   "point": [
+    0.91,
+    0.57,
+    -1.82
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0013"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-2-1",
+    "sill-x-centre"
+   ],
+   "point": [
+    0.91,
+    0.57,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0014"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-2-2",
+    "sill-x-f"
+   ],
+   "point": [
+    0.91,
+    0.57,
+    1.82
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0015"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-3-0",
+    "sill-x-b"
+   ],
+   "point": [
+    2.73,
+    0.57,
+    -1.82
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0016"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-3-0",
+    "sill-z-r"
+   ],
+   "point": [
+    2.73,
+    0.57,
+    -1.82
+   ],
+   "anchor": "sill-z-r",
+   "id": "c0017"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-3-1",
+    "sill-z-r"
+   ],
+   "point": [
+    2.73,
+    0.57,
+    0.0
+   ],
+   "anchor": "sill-z-r",
+   "id": "c0018"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-3-2",
+    "sill-x-f"
+   ],
+   "point": [
+    2.73,
+    0.57,
+    1.82
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0019"
+  },
+  {
+   "kind": "post-sill",
+   "members": [
+    "post-3-2",
+    "sill-z-r"
+   ],
+   "point": [
+    2.73,
+    0.57,
+    1.82
+   ],
+   "anchor": "sill-z-r",
+   "id": "c0020"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-1-303-0",
+    "post-0-1"
+   ],
+   "point": [
+    -2.73,
+    3.15,
+    0.0
+   ],
+   "anchor": "post-0-1",
+   "id": "c0021"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-0-309-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.73,
+    3.18,
+    -1.82
+   ],
+   "anchor": "post-0-0",
+   "id": "c0022"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-0-309-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.73,
+    3.18,
+    -1.82
+   ],
+   "anchor": "post-0-0",
+   "id": "c0023"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-0-309-0",
+    "post-0-1"
+   ],
+   "point": [
+    -2.73,
+    3.18,
+    0.0
+   ],
+   "anchor": "post-0-1",
+   "id": "c0024"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-0-309-1",
+    "post-0-1"
+   ],
+   "point": [
+    -2.73,
+    3.18,
+    0.0
+   ],
+   "anchor": "post-0-1",
+   "id": "c0025"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-2-309-0",
+    "post-0-2"
+   ],
+   "point": [
+    -2.73,
+    3.18,
+    1.82
+   ],
+   "anchor": "post-0-2",
+   "id": "c0026"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-0-309-1",
+    "post-0-2"
+   ],
+   "point": [
+    -2.73,
+    3.18,
+    1.82
+   ],
+   "anchor": "post-0-2",
+   "id": "c0027"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-0-618-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.73,
+    6.2685,
+    -1.82
+   ],
+   "anchor": "post-0-0",
+   "id": "c0028"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-0-618-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.73,
+    6.2685,
+    -1.82
+   ],
+   "anchor": "post-0-0",
+   "id": "c0029"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-0-618-0",
+    "post-0-1"
+   ],
+   "point": [
+    -2.73,
+    6.2685,
+    0.0
+   ],
+   "anchor": "post-0-1",
+   "id": "c0030"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-0-618-1",
+    "post-0-1"
+   ],
+   "point": [
+    -2.73,
+    6.2685,
+    0.0
+   ],
+   "anchor": "post-0-1",
+   "id": "c0031"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-2-618-0",
+    "post-0-2"
+   ],
+   "point": [
+    -2.73,
+    6.2685,
+    1.82
+   ],
+   "anchor": "post-0-2",
+   "id": "c0032"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-0-618-1",
+    "post-0-2"
+   ],
+   "point": [
+    -2.73,
+    6.2685,
+    1.82
+   ],
+   "anchor": "post-0-2",
+   "id": "c0033"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-1-303-0",
+    "post-1-1"
+   ],
+   "point": [
+    -0.91,
+    3.15,
+    0.0
+   ],
+   "anchor": "post-1-1",
+   "id": "c0034"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-1-303-1",
+    "post-1-1"
+   ],
+   "point": [
+    -0.91,
+    3.15,
+    0.0
+   ],
+   "anchor": "post-1-1",
+   "id": "c0035"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-0-309-0",
+    "post-1-0"
+   ],
+   "point": [
+    -0.91,
+    3.18,
+    -1.82
+   ],
+   "anchor": "post-1-0",
+   "id": "c0036"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-0-309-1",
+    "post-1-0"
+   ],
+   "point": [
+    -0.91,
+    3.18,
+    -1.82
+   ],
+   "anchor": "post-1-0",
+   "id": "c0037"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-2-309-0",
+    "post-1-2"
+   ],
+   "point": [
+    -0.91,
+    3.18,
+    1.82
+   ],
+   "anchor": "post-1-2",
+   "id": "c0038"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-2-309-1",
+    "post-1-2"
+   ],
+   "point": [
+    -0.91,
+    3.18,
+    1.82
+   ],
+   "anchor": "post-1-2",
+   "id": "c0039"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-0-618-0",
+    "post-1-0"
+   ],
+   "point": [
+    -0.91,
+    6.2685,
+    -1.82
+   ],
+   "anchor": "post-1-0",
+   "id": "c0040"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-0-618-1",
+    "post-1-0"
+   ],
+   "point": [
+    -0.91,
+    6.2685,
+    -1.82
+   ],
+   "anchor": "post-1-0",
+   "id": "c0041"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-2-618-0",
+    "post-1-2"
+   ],
+   "point": [
+    -0.91,
+    6.2685,
+    1.82
+   ],
+   "anchor": "post-1-2",
+   "id": "c0042"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-2-618-1",
+    "post-1-2"
+   ],
+   "point": [
+    -0.91,
+    6.2685,
+    1.82
+   ],
+   "anchor": "post-1-2",
+   "id": "c0043"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-1-303-1",
+    "post-2-1"
+   ],
+   "point": [
+    0.91,
+    3.15,
+    0.0
+   ],
+   "anchor": "post-2-1",
+   "id": "c0044"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-1-303-2",
+    "post-2-1"
+   ],
+   "point": [
+    0.91,
+    3.15,
+    0.0
+   ],
+   "anchor": "post-2-1",
+   "id": "c0045"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-0-309-1",
+    "post-2-0"
+   ],
+   "point": [
+    0.91,
+    3.18,
+    -1.82
+   ],
+   "anchor": "post-2-0",
+   "id": "c0046"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-0-309-2",
+    "post-2-0"
+   ],
+   "point": [
+    0.91,
+    3.18,
+    -1.82
+   ],
+   "anchor": "post-2-0",
+   "id": "c0047"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-2-309-1",
+    "post-2-2"
+   ],
+   "point": [
+    0.91,
+    3.18,
+    1.82
+   ],
+   "anchor": "post-2-2",
+   "id": "c0048"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-2-309-2",
+    "post-2-2"
+   ],
+   "point": [
+    0.91,
+    3.18,
+    1.82
+   ],
+   "anchor": "post-2-2",
+   "id": "c0049"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-0-618-1",
+    "post-2-0"
+   ],
+   "point": [
+    0.91,
+    6.2685,
+    -1.82
+   ],
+   "anchor": "post-2-0",
+   "id": "c0050"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-0-618-2",
+    "post-2-0"
+   ],
+   "point": [
+    0.91,
+    6.2685,
+    -1.82
+   ],
+   "anchor": "post-2-0",
+   "id": "c0051"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-2-618-1",
+    "post-2-2"
+   ],
+   "point": [
+    0.91,
+    6.2685,
+    1.82
+   ],
+   "anchor": "post-2-2",
+   "id": "c0052"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-2-618-2",
+    "post-2-2"
+   ],
+   "point": [
+    0.91,
+    6.2685,
+    1.82
+   ],
+   "anchor": "post-2-2",
+   "id": "c0053"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-1-303-2",
+    "post-3-1"
+   ],
+   "point": [
+    2.73,
+    3.15,
+    0.0
+   ],
+   "anchor": "post-3-1",
+   "id": "c0054"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-0-309-2",
+    "post-3-0"
+   ],
+   "point": [
+    2.73,
+    3.18,
+    -1.82
+   ],
+   "anchor": "post-3-0",
+   "id": "c0055"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-3-309-0",
+    "post-3-0"
+   ],
+   "point": [
+    2.73,
+    3.18,
+    -1.82
+   ],
+   "anchor": "post-3-0",
+   "id": "c0056"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-3-309-0",
+    "post-3-1"
+   ],
+   "point": [
+    2.73,
+    3.18,
+    0.0
+   ],
+   "anchor": "post-3-1",
+   "id": "c0057"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-3-309-1",
+    "post-3-1"
+   ],
+   "point": [
+    2.73,
+    3.18,
+    0.0
+   ],
+   "anchor": "post-3-1",
+   "id": "c0058"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-2-309-2",
+    "post-3-2"
+   ],
+   "point": [
+    2.73,
+    3.18,
+    1.82
+   ],
+   "anchor": "post-3-2",
+   "id": "c0059"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-3-309-1",
+    "post-3-2"
+   ],
+   "point": [
+    2.73,
+    3.18,
+    1.82
+   ],
+   "anchor": "post-3-2",
+   "id": "c0060"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-0-618-2",
+    "post-3-0"
+   ],
+   "point": [
+    2.73,
+    6.2685,
+    -1.82
+   ],
+   "anchor": "post-3-0",
+   "id": "c0061"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-3-618-0",
+    "post-3-0"
+   ],
+   "point": [
+    2.73,
+    6.2685,
+    -1.82
+   ],
+   "anchor": "post-3-0",
+   "id": "c0062"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-3-618-0",
+    "post-3-1"
+   ],
+   "point": [
+    2.73,
+    6.2685,
+    0.0
+   ],
+   "anchor": "post-3-1",
+   "id": "c0063"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-3-618-1",
+    "post-3-1"
+   ],
+   "point": [
+    2.73,
+    6.2685,
+    0.0
+   ],
+   "anchor": "post-3-1",
+   "id": "c0064"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-x-2-618-2",
+    "post-3-2"
+   ],
+   "point": [
+    2.73,
+    6.2685,
+    1.82
+   ],
+   "anchor": "post-3-2",
+   "id": "c0065"
+  },
+  {
+   "kind": "post-beam",
+   "members": [
+    "beam-z-3-618-1",
+    "post-3-2"
+   ],
+   "point": [
+    2.73,
+    6.2685,
+    1.82
+   ],
+   "anchor": "post-3-2",
+   "id": "c0066"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-0-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.73,
+    1.5525,
+    -1.82
+   ],
+   "anchor": "post-0-0",
+   "id": "c0067"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-1-0",
+    "post-0-2"
+   ],
+   "point": [
+    -2.73,
+    1.5525,
+    1.82
+   ],
+   "anchor": "post-0-2",
+   "id": "c0068"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-2-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.73,
+    1.6175,
+    -1.82
+   ],
+   "anchor": "post-0-0",
+   "id": "c0069"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-2-0",
+    "post-0-1"
+   ],
+   "point": [
+    -2.73,
+    1.6175,
+    0.0
+   ],
+   "anchor": "post-0-1",
+   "id": "c0070"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-2-1",
+    "post-0-1"
+   ],
+   "point": [
+    -2.73,
+    1.6175,
+    0.0
+   ],
+   "anchor": "post-0-1",
+   "id": "c0071"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-2-1",
+    "post-0-2"
+   ],
+   "point": [
+    -2.73,
+    1.6175,
+    1.82
+   ],
+   "anchor": "post-0-2",
+   "id": "c0072"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-4-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.73,
+    2.6025,
+    -1.82
+   ],
+   "anchor": "post-0-0",
+   "id": "c0073"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-5-0",
+    "post-0-2"
+   ],
+   "point": [
+    -2.73,
+    2.6025,
+    1.82
+   ],
+   "anchor": "post-0-2",
+   "id": "c0074"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-6-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.73,
+    2.6675,
+    -1.82
+   ],
+   "anchor": "post-0-0",
+   "id": "c0075"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-6-0",
+    "post-0-1"
+   ],
+   "point": [
+    -2.73,
+    2.6675,
+    0.0
+   ],
+   "anchor": "post-0-1",
+   "id": "c0076"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-6-1",
+    "post-0-1"
+   ],
+   "point": [
+    -2.73,
+    2.6675,
+    0.0
+   ],
+   "anchor": "post-0-1",
+   "id": "c0077"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-6-1",
+    "post-0-2"
+   ],
+   "point": [
+    -2.73,
+    2.6675,
+    1.82
+   ],
+   "anchor": "post-0-2",
+   "id": "c0078"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-8-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.73,
+    4.3525,
+    -1.82
+   ],
+   "anchor": "post-0-0",
+   "id": "c0079"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-9-0",
+    "post-0-2"
+   ],
+   "point": [
+    -2.73,
+    4.3525,
+    1.82
+   ],
+   "anchor": "post-0-2",
+   "id": "c0080"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-10-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.73,
+    4.4175,
+    -1.82
+   ],
+   "anchor": "post-0-0",
+   "id": "c0081"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-10-0",
+    "post-0-1"
+   ],
+   "point": [
+    -2.73,
+    4.4175,
+    0.0
+   ],
+   "anchor": "post-0-1",
+   "id": "c0082"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-10-1",
+    "post-0-1"
+   ],
+   "point": [
+    -2.73,
+    4.4175,
+    0.0
+   ],
+   "anchor": "post-0-1",
+   "id": "c0083"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-10-1",
+    "post-0-2"
+   ],
+   "point": [
+    -2.73,
+    4.4175,
+    1.82
+   ],
+   "anchor": "post-0-2",
+   "id": "c0084"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-12-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.73,
+    5.4025,
+    -1.82
+   ],
+   "anchor": "post-0-0",
+   "id": "c0085"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-13-0",
+    "post-0-2"
+   ],
+   "point": [
+    -2.73,
+    5.4025,
+    1.82
+   ],
+   "anchor": "post-0-2",
+   "id": "c0086"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-14-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.73,
+    5.4675,
+    -1.82
+   ],
+   "anchor": "post-0-0",
+   "id": "c0087"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-14-0",
+    "post-0-1"
+   ],
+   "point": [
+    -2.73,
+    5.4675,
+    0.0
+   ],
+   "anchor": "post-0-1",
+   "id": "c0088"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-14-1",
+    "post-0-1"
+   ],
+   "point": [
+    -2.73,
+    5.4675,
+    0.0
+   ],
+   "anchor": "post-0-1",
+   "id": "c0089"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-14-1",
+    "post-0-2"
+   ],
+   "point": [
+    -2.73,
+    5.4675,
+    1.82
+   ],
+   "anchor": "post-0-2",
+   "id": "c0090"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-0-0",
+    "post-1-0"
+   ],
+   "point": [
+    -0.91,
+    1.5525,
+    -1.82
+   ],
+   "anchor": "post-1-0",
+   "id": "c0091"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-0-1",
+    "post-1-0"
+   ],
+   "point": [
+    -0.91,
+    1.5525,
+    -1.82
+   ],
+   "anchor": "post-1-0",
+   "id": "c0092"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-1-0",
+    "post-1-2"
+   ],
+   "point": [
+    -0.91,
+    1.5525,
+    1.82
+   ],
+   "anchor": "post-1-2",
+   "id": "c0093"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-1-1",
+    "post-1-2"
+   ],
+   "point": [
+    -0.91,
+    1.5525,
+    1.82
+   ],
+   "anchor": "post-1-2",
+   "id": "c0094"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-4-0",
+    "post-1-0"
+   ],
+   "point": [
+    -0.91,
+    2.6025,
+    -1.82
+   ],
+   "anchor": "post-1-0",
+   "id": "c0095"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-4-1",
+    "post-1-0"
+   ],
+   "point": [
+    -0.91,
+    2.6025,
+    -1.82
+   ],
+   "anchor": "post-1-0",
+   "id": "c0096"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-5-0",
+    "post-1-2"
+   ],
+   "point": [
+    -0.91,
+    2.6025,
+    1.82
+   ],
+   "anchor": "post-1-2",
+   "id": "c0097"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-5-1",
+    "post-1-2"
+   ],
+   "point": [
+    -0.91,
+    2.6025,
+    1.82
+   ],
+   "anchor": "post-1-2",
+   "id": "c0098"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-8-0",
+    "post-1-0"
+   ],
+   "point": [
+    -0.91,
+    4.3525,
+    -1.82
+   ],
+   "anchor": "post-1-0",
+   "id": "c0099"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-8-1",
+    "post-1-0"
+   ],
+   "point": [
+    -0.91,
+    4.3525,
+    -1.82
+   ],
+   "anchor": "post-1-0",
+   "id": "c0100"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-9-0",
+    "post-1-2"
+   ],
+   "point": [
+    -0.91,
+    4.3525,
+    1.82
+   ],
+   "anchor": "post-1-2",
+   "id": "c0101"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-9-1",
+    "post-1-2"
+   ],
+   "point": [
+    -0.91,
+    4.3525,
+    1.82
+   ],
+   "anchor": "post-1-2",
+   "id": "c0102"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-12-0",
+    "post-1-0"
+   ],
+   "point": [
+    -0.91,
+    5.4025,
+    -1.82
+   ],
+   "anchor": "post-1-0",
+   "id": "c0103"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-12-1",
+    "post-1-0"
+   ],
+   "point": [
+    -0.91,
+    5.4025,
+    -1.82
+   ],
+   "anchor": "post-1-0",
+   "id": "c0104"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-13-0",
+    "post-1-2"
+   ],
+   "point": [
+    -0.91,
+    5.4025,
+    1.82
+   ],
+   "anchor": "post-1-2",
+   "id": "c0105"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-13-1",
+    "post-1-2"
+   ],
+   "point": [
+    -0.91,
+    5.4025,
+    1.82
+   ],
+   "anchor": "post-1-2",
+   "id": "c0106"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-0-1",
+    "post-2-0"
+   ],
+   "point": [
+    0.91,
+    1.5525,
+    -1.82
+   ],
+   "anchor": "post-2-0",
+   "id": "c0107"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-0-2",
+    "post-2-0"
+   ],
+   "point": [
+    0.91,
+    1.5525,
+    -1.82
+   ],
+   "anchor": "post-2-0",
+   "id": "c0108"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-1-1",
+    "post-2-2"
+   ],
+   "point": [
+    0.91,
+    1.5525,
+    1.82
+   ],
+   "anchor": "post-2-2",
+   "id": "c0109"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-1-2",
+    "post-2-2"
+   ],
+   "point": [
+    0.91,
+    1.5525,
+    1.82
+   ],
+   "anchor": "post-2-2",
+   "id": "c0110"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-4-1",
+    "post-2-0"
+   ],
+   "point": [
+    0.91,
+    2.6025,
+    -1.82
+   ],
+   "anchor": "post-2-0",
+   "id": "c0111"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-4-2",
+    "post-2-0"
+   ],
+   "point": [
+    0.91,
+    2.6025,
+    -1.82
+   ],
+   "anchor": "post-2-0",
+   "id": "c0112"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-5-1",
+    "post-2-2"
+   ],
+   "point": [
+    0.91,
+    2.6025,
+    1.82
+   ],
+   "anchor": "post-2-2",
+   "id": "c0113"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-5-2",
+    "post-2-2"
+   ],
+   "point": [
+    0.91,
+    2.6025,
+    1.82
+   ],
+   "anchor": "post-2-2",
+   "id": "c0114"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-8-1",
+    "post-2-0"
+   ],
+   "point": [
+    0.91,
+    4.3525,
+    -1.82
+   ],
+   "anchor": "post-2-0",
+   "id": "c0115"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-8-2",
+    "post-2-0"
+   ],
+   "point": [
+    0.91,
+    4.3525,
+    -1.82
+   ],
+   "anchor": "post-2-0",
+   "id": "c0116"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-9-1",
+    "post-2-2"
+   ],
+   "point": [
+    0.91,
+    4.3525,
+    1.82
+   ],
+   "anchor": "post-2-2",
+   "id": "c0117"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-9-2",
+    "post-2-2"
+   ],
+   "point": [
+    0.91,
+    4.3525,
+    1.82
+   ],
+   "anchor": "post-2-2",
+   "id": "c0118"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-12-1",
+    "post-2-0"
+   ],
+   "point": [
+    0.91,
+    5.4025,
+    -1.82
+   ],
+   "anchor": "post-2-0",
+   "id": "c0119"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-12-2",
+    "post-2-0"
+   ],
+   "point": [
+    0.91,
+    5.4025,
+    -1.82
+   ],
+   "anchor": "post-2-0",
+   "id": "c0120"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-13-1",
+    "post-2-2"
+   ],
+   "point": [
+    0.91,
+    5.4025,
+    1.82
+   ],
+   "anchor": "post-2-2",
+   "id": "c0121"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-13-2",
+    "post-2-2"
+   ],
+   "point": [
+    0.91,
+    5.4025,
+    1.82
+   ],
+   "anchor": "post-2-2",
+   "id": "c0122"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-0-2",
+    "post-3-0"
+   ],
+   "point": [
+    2.73,
+    1.5525,
+    -1.82
+   ],
+   "anchor": "post-3-0",
+   "id": "c0123"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-1-2",
+    "post-3-2"
+   ],
+   "point": [
+    2.73,
+    1.5525,
+    1.82
+   ],
+   "anchor": "post-3-2",
+   "id": "c0124"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-3-0",
+    "post-3-0"
+   ],
+   "point": [
+    2.73,
+    1.6175,
+    -1.82
+   ],
+   "anchor": "post-3-0",
+   "id": "c0125"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-3-0",
+    "post-3-1"
+   ],
+   "point": [
+    2.73,
+    1.6175,
+    0.0
+   ],
+   "anchor": "post-3-1",
+   "id": "c0126"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-3-1",
+    "post-3-1"
+   ],
+   "point": [
+    2.73,
+    1.6175,
+    0.0
+   ],
+   "anchor": "post-3-1",
+   "id": "c0127"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-3-1",
+    "post-3-2"
+   ],
+   "point": [
+    2.73,
+    1.6175,
+    1.82
+   ],
+   "anchor": "post-3-2",
+   "id": "c0128"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-4-2",
+    "post-3-0"
+   ],
+   "point": [
+    2.73,
+    2.6025,
+    -1.82
+   ],
+   "anchor": "post-3-0",
+   "id": "c0129"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-5-2",
+    "post-3-2"
+   ],
+   "point": [
+    2.73,
+    2.6025,
+    1.82
+   ],
+   "anchor": "post-3-2",
+   "id": "c0130"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-7-0",
+    "post-3-0"
+   ],
+   "point": [
+    2.73,
+    2.6675,
+    -1.82
+   ],
+   "anchor": "post-3-0",
+   "id": "c0131"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-7-0",
+    "post-3-1"
+   ],
+   "point": [
+    2.73,
+    2.6675,
+    0.0
+   ],
+   "anchor": "post-3-1",
+   "id": "c0132"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-7-1",
+    "post-3-1"
+   ],
+   "point": [
+    2.73,
+    2.6675,
+    0.0
+   ],
+   "anchor": "post-3-1",
+   "id": "c0133"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-7-1",
+    "post-3-2"
+   ],
+   "point": [
+    2.73,
+    2.6675,
+    1.82
+   ],
+   "anchor": "post-3-2",
+   "id": "c0134"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-8-2",
+    "post-3-0"
+   ],
+   "point": [
+    2.73,
+    4.3525,
+    -1.82
+   ],
+   "anchor": "post-3-0",
+   "id": "c0135"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-9-2",
+    "post-3-2"
+   ],
+   "point": [
+    2.73,
+    4.3525,
+    1.82
+   ],
+   "anchor": "post-3-2",
+   "id": "c0136"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-11-0",
+    "post-3-0"
+   ],
+   "point": [
+    2.73,
+    4.4175,
+    -1.82
+   ],
+   "anchor": "post-3-0",
+   "id": "c0137"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-11-0",
+    "post-3-1"
+   ],
+   "point": [
+    2.73,
+    4.4175,
+    0.0
+   ],
+   "anchor": "post-3-1",
+   "id": "c0138"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-11-1",
+    "post-3-1"
+   ],
+   "point": [
+    2.73,
+    4.4175,
+    0.0
+   ],
+   "anchor": "post-3-1",
+   "id": "c0139"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-11-1",
+    "post-3-2"
+   ],
+   "point": [
+    2.73,
+    4.4175,
+    1.82
+   ],
+   "anchor": "post-3-2",
+   "id": "c0140"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-12-2",
+    "post-3-0"
+   ],
+   "point": [
+    2.73,
+    5.4025,
+    -1.82
+   ],
+   "anchor": "post-3-0",
+   "id": "c0141"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-13-2",
+    "post-3-2"
+   ],
+   "point": [
+    2.73,
+    5.4025,
+    1.82
+   ],
+   "anchor": "post-3-2",
+   "id": "c0142"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-15-0",
+    "post-3-0"
+   ],
+   "point": [
+    2.73,
+    5.4675,
+    -1.82
+   ],
+   "anchor": "post-3-0",
+   "id": "c0143"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-15-0",
+    "post-3-1"
+   ],
+   "point": [
+    2.73,
+    5.4675,
+    0.0
+   ],
+   "anchor": "post-3-1",
+   "id": "c0144"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-15-1",
+    "post-3-1"
+   ],
+   "point": [
+    2.73,
+    5.4675,
+    0.0
+   ],
+   "anchor": "post-3-1",
+   "id": "c0145"
+  },
+  {
+   "kind": "nuki-post",
+   "members": [
+    "nuki-15-1",
+    "post-3-2"
+   ],
+   "point": [
+    2.73,
+    5.4675,
+    1.82
+   ],
+   "anchor": "post-3-2",
+   "id": "c0146"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-2-0",
+    "stud-l-0"
+   ],
+   "point": [
+    -2.73,
+    1.6175,
+    -0.91
+   ],
+   "anchor": "stud-l-0",
+   "id": "c0147"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-2-1",
+    "stud-l-1"
+   ],
+   "point": [
+    -2.73,
+    1.6175,
+    0.91
+   ],
+   "anchor": "stud-l-1",
+   "id": "c0148"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-6-0",
+    "stud-l-0"
+   ],
+   "point": [
+    -2.73,
+    2.6675,
+    -0.91
+   ],
+   "anchor": "stud-l-0",
+   "id": "c0149"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-6-1",
+    "stud-l-1"
+   ],
+   "point": [
+    -2.73,
+    2.6675,
+    0.91
+   ],
+   "anchor": "stud-l-1",
+   "id": "c0150"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-10-0",
+    "stud-l-0-up"
+   ],
+   "point": [
+    -2.73,
+    4.4175,
+    -0.91
+   ],
+   "anchor": "stud-l-0-up",
+   "id": "c0151"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-10-1",
+    "stud-l-1-up"
+   ],
+   "point": [
+    -2.73,
+    4.4175,
+    0.91
+   ],
+   "anchor": "stud-l-1-up",
+   "id": "c0152"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-14-0",
+    "stud-l-0-up"
+   ],
+   "point": [
+    -2.73,
+    5.4675,
+    -0.91
+   ],
+   "anchor": "stud-l-0-up",
+   "id": "c0153"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-14-1",
+    "stud-l-1-up"
+   ],
+   "point": [
+    -2.73,
+    5.4675,
+    0.91
+   ],
+   "anchor": "stud-l-1-up",
+   "id": "c0154"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-0-0",
+    "stud-b-0"
+   ],
+   "point": [
+    -1.82,
+    1.5525,
+    -1.82
+   ],
+   "anchor": "stud-b-0",
+   "id": "c0155"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-1-0",
+    "stud-f-0"
+   ],
+   "point": [
+    -1.82,
+    1.5525,
+    1.82
+   ],
+   "anchor": "stud-f-0",
+   "id": "c0156"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-4-0",
+    "stud-b-0"
+   ],
+   "point": [
+    -1.82,
+    2.6025,
+    -1.82
+   ],
+   "anchor": "stud-b-0",
+   "id": "c0157"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-5-0",
+    "stud-f-0"
+   ],
+   "point": [
+    -1.82,
+    2.6025,
+    1.82
+   ],
+   "anchor": "stud-f-0",
+   "id": "c0158"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-8-0",
+    "stud-b-0-up"
+   ],
+   "point": [
+    -1.82,
+    4.3525,
+    -1.82
+   ],
+   "anchor": "stud-b-0-up",
+   "id": "c0159"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-9-0",
+    "stud-f-0-up"
+   ],
+   "point": [
+    -1.82,
+    4.3525,
+    1.82
+   ],
+   "anchor": "stud-f-0-up",
+   "id": "c0160"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-12-0",
+    "stud-b-0-up"
+   ],
+   "point": [
+    -1.82,
+    5.4025,
+    -1.82
+   ],
+   "anchor": "stud-b-0-up",
+   "id": "c0161"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-13-0",
+    "stud-f-0-up"
+   ],
+   "point": [
+    -1.82,
+    5.4025,
+    1.82
+   ],
+   "anchor": "stud-f-0-up",
+   "id": "c0162"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-0-1",
+    "stud-b-1"
+   ],
+   "point": [
+    0.0,
+    1.5525,
+    -1.82
+   ],
+   "anchor": "stud-b-1",
+   "id": "c0163"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-1-1",
+    "stud-f-1"
+   ],
+   "point": [
+    0.0,
+    1.5525,
+    1.82
+   ],
+   "anchor": "stud-f-1",
+   "id": "c0164"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-4-1",
+    "stud-b-1"
+   ],
+   "point": [
+    0.0,
+    2.6025,
+    -1.82
+   ],
+   "anchor": "stud-b-1",
+   "id": "c0165"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-5-1",
+    "stud-f-1"
+   ],
+   "point": [
+    0.0,
+    2.6025,
+    1.82
+   ],
+   "anchor": "stud-f-1",
+   "id": "c0166"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-8-1",
+    "stud-b-1-up"
+   ],
+   "point": [
+    0.0,
+    4.3525,
+    -1.82
+   ],
+   "anchor": "stud-b-1-up",
+   "id": "c0167"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-9-1",
+    "stud-f-1-up"
+   ],
+   "point": [
+    0.0,
+    4.3525,
+    1.82
+   ],
+   "anchor": "stud-f-1-up",
+   "id": "c0168"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-12-1",
+    "stud-b-1-up"
+   ],
+   "point": [
+    0.0,
+    5.4025,
+    -1.82
+   ],
+   "anchor": "stud-b-1-up",
+   "id": "c0169"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-13-1",
+    "stud-f-1-up"
+   ],
+   "point": [
+    0.0,
+    5.4025,
+    1.82
+   ],
+   "anchor": "stud-f-1-up",
+   "id": "c0170"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-0-2",
+    "stud-b-2"
+   ],
+   "point": [
+    1.82,
+    1.5525,
+    -1.82
+   ],
+   "anchor": "stud-b-2",
+   "id": "c0171"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-1-2",
+    "stud-f-2"
+   ],
+   "point": [
+    1.82,
+    1.5525,
+    1.82
+   ],
+   "anchor": "stud-f-2",
+   "id": "c0172"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-4-2",
+    "stud-b-2"
+   ],
+   "point": [
+    1.82,
+    2.6025,
+    -1.82
+   ],
+   "anchor": "stud-b-2",
+   "id": "c0173"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-5-2",
+    "stud-f-2"
+   ],
+   "point": [
+    1.82,
+    2.6025,
+    1.82
+   ],
+   "anchor": "stud-f-2",
+   "id": "c0174"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-8-2",
+    "stud-b-2-up"
+   ],
+   "point": [
+    1.82,
+    4.3525,
+    -1.82
+   ],
+   "anchor": "stud-b-2-up",
+   "id": "c0175"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-9-2",
+    "stud-f-2-up"
+   ],
+   "point": [
+    1.82,
+    4.3525,
+    1.82
+   ],
+   "anchor": "stud-f-2-up",
+   "id": "c0176"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-12-2",
+    "stud-b-2-up"
+   ],
+   "point": [
+    1.82,
+    5.4025,
+    -1.82
+   ],
+   "anchor": "stud-b-2-up",
+   "id": "c0177"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-13-2",
+    "stud-f-2-up"
+   ],
+   "point": [
+    1.82,
+    5.4025,
+    1.82
+   ],
+   "anchor": "stud-f-2-up",
+   "id": "c0178"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-3-0",
+    "stud-r-0"
+   ],
+   "point": [
+    2.73,
+    1.6175,
+    -0.91
+   ],
+   "anchor": "stud-r-0",
+   "id": "c0179"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-3-1",
+    "stud-r-1"
+   ],
+   "point": [
+    2.73,
+    1.6175,
+    0.91
+   ],
+   "anchor": "stud-r-1",
+   "id": "c0180"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-7-0",
+    "stud-r-0"
+   ],
+   "point": [
+    2.73,
+    2.6675,
+    -0.91
+   ],
+   "anchor": "stud-r-0",
+   "id": "c0181"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-7-1",
+    "stud-r-1"
+   ],
+   "point": [
+    2.73,
+    2.6675,
+    0.91
+   ],
+   "anchor": "stud-r-1",
+   "id": "c0182"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-11-0",
+    "stud-r-0-up"
+   ],
+   "point": [
+    2.73,
+    4.4175,
+    -0.91
+   ],
+   "anchor": "stud-r-0-up",
+   "id": "c0183"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-11-1",
+    "stud-r-1-up"
+   ],
+   "point": [
+    2.73,
+    4.4175,
+    0.91
+   ],
+   "anchor": "stud-r-1-up",
+   "id": "c0184"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-15-0",
+    "stud-r-0-up"
+   ],
+   "point": [
+    2.73,
+    5.4675,
+    -0.91
+   ],
+   "anchor": "stud-r-0-up",
+   "id": "c0185"
+  },
+  {
+   "kind": "nuki-stud",
+   "members": [
+    "nuki-15-1",
+    "stud-r-1-up"
+   ],
+   "point": [
+    2.73,
+    5.4675,
+    0.91
+   ],
+   "anchor": "stud-r-1-up",
+   "id": "c0186"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-end-l-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.75,
+    0.69,
+    -1.7
+   ],
+   "anchor": "post-0-0",
+   "id": "c0187"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-end-l-0",
+    "post-0-1"
+   ],
+   "point": [
+    -2.75,
+    2.97,
+    -0.12
+   ],
+   "anchor": "post-0-1",
+   "id": "c0188"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-end-l-1",
+    "post-0-1"
+   ],
+   "point": [
+    -2.75,
+    3.39,
+    0.12
+   ],
+   "anchor": "post-0-1",
+   "id": "c0189"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-end-l-1",
+    "post-0-2"
+   ],
+   "point": [
+    -2.75,
+    6.0585,
+    1.7
+   ],
+   "anchor": "post-0-2",
+   "id": "c0190"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-f-b-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.61,
+    0.69,
+    -1.84
+   ],
+   "anchor": "post-0-0",
+   "id": "c0191"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-f-f-0",
+    "post-0-2"
+   ],
+   "point": [
+    -2.61,
+    0.69,
+    1.84
+   ],
+   "anchor": "post-0-2",
+   "id": "c0192"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-u-b-0",
+    "post-0-0"
+   ],
+   "point": [
+    -2.61,
+    6.0585,
+    -1.84
+   ],
+   "anchor": "post-0-0",
+   "id": "c0193"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-u-f-0",
+    "post-0-2"
+   ],
+   "point": [
+    -2.61,
+    6.0585,
+    1.84
+   ],
+   "anchor": "post-0-2",
+   "id": "c0194"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-f-b-0",
+    "post-1-0"
+   ],
+   "point": [
+    -1.03,
+    2.97,
+    -1.84
+   ],
+   "anchor": "post-1-0",
+   "id": "c0195"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-f-f-0",
+    "post-1-2"
+   ],
+   "point": [
+    -1.03,
+    2.97,
+    1.84
+   ],
+   "anchor": "post-1-2",
+   "id": "c0196"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-u-b-0",
+    "post-1-0"
+   ],
+   "point": [
+    -1.03,
+    3.39,
+    -1.84
+   ],
+   "anchor": "post-1-0",
+   "id": "c0197"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-u-f-0",
+    "post-1-2"
+   ],
+   "point": [
+    -1.03,
+    3.39,
+    1.84
+   ],
+   "anchor": "post-1-2",
+   "id": "c0198"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-f-b-1",
+    "post-2-0"
+   ],
+   "point": [
+    1.03,
+    2.97,
+    -1.84
+   ],
+   "anchor": "post-2-0",
+   "id": "c0199"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-f-f-1",
+    "post-2-2"
+   ],
+   "point": [
+    1.03,
+    2.97,
+    1.84
+   ],
+   "anchor": "post-2-2",
+   "id": "c0200"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-u-b-1",
+    "post-2-0"
+   ],
+   "point": [
+    1.03,
+    3.39,
+    -1.84
+   ],
+   "anchor": "post-2-0",
+   "id": "c0201"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-u-f-1",
+    "post-2-2"
+   ],
+   "point": [
+    1.03,
+    3.39,
+    1.84
+   ],
+   "anchor": "post-2-2",
+   "id": "c0202"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-f-b-1",
+    "post-3-0"
+   ],
+   "point": [
+    2.61,
+    0.69,
+    -1.84
+   ],
+   "anchor": "post-3-0",
+   "id": "c0203"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-f-f-1",
+    "post-3-2"
+   ],
+   "point": [
+    2.61,
+    0.69,
+    1.84
+   ],
+   "anchor": "post-3-2",
+   "id": "c0204"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-u-b-1",
+    "post-3-0"
+   ],
+   "point": [
+    2.61,
+    6.0585,
+    -1.84
+   ],
+   "anchor": "post-3-0",
+   "id": "c0205"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-u-f-1",
+    "post-3-2"
+   ],
+   "point": [
+    2.61,
+    6.0585,
+    1.84
+   ],
+   "anchor": "post-3-2",
+   "id": "c0206"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-end-r-0",
+    "post-3-0"
+   ],
+   "point": [
+    2.75,
+    0.69,
+    -1.7
+   ],
+   "anchor": "post-3-0",
+   "id": "c0207"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-end-r-0",
+    "post-3-1"
+   ],
+   "point": [
+    2.75,
+    2.97,
+    -0.12
+   ],
+   "anchor": "post-3-1",
+   "id": "c0208"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-end-r-1",
+    "post-3-1"
+   ],
+   "point": [
+    2.75,
+    3.39,
+    0.12
+   ],
+   "anchor": "post-3-1",
+   "id": "c0209"
+  },
+  {
+   "kind": "brace",
+   "members": [
+    "brace-end-r-1",
+    "post-3-2"
+   ],
+   "point": [
+    2.75,
+    6.0585,
+    1.7
+   ],
+   "anchor": "post-3-2",
+   "id": "c0210"
+  },
+  {
+   "kind": "fire-beam",
+   "members": [
+    "fire-0-lb",
+    "sill-x-b",
+    "sill-z-l"
+   ],
+   "point": [
+    -2.41,
+    0.615,
+    -1.5
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0211"
+  },
+  {
+   "kind": "fire-beam",
+   "members": [
+    "fire-0-lf",
+    "sill-x-f",
+    "sill-z-l"
+   ],
+   "point": [
+    -2.41,
+    0.615,
+    1.5
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0212"
+  },
+  {
+   "kind": "fire-beam",
+   "members": [
+    "fire-1-lb",
+    "beam-x-0-309-0",
+    "beam-z-0-309-0"
+   ],
+   "point": [
+    -2.41,
+    3.315,
+    -1.5
+   ],
+   "anchor": "beam-x-0-309-0",
+   "id": "c0213"
+  },
+  {
+   "kind": "fire-beam",
+   "members": [
+    "fire-1-lf",
+    "beam-x-2-309-0",
+    "beam-z-0-309-1"
+   ],
+   "point": [
+    -2.41,
+    3.315,
+    1.5
+   ],
+   "anchor": "beam-x-2-309-0",
+   "id": "c0214"
+  },
+  {
+   "kind": "fire-beam",
+   "members": [
+    "fire-0-rb",
+    "sill-x-b",
+    "sill-z-r"
+   ],
+   "point": [
+    2.41,
+    0.615,
+    -1.5
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0215"
+  },
+  {
+   "kind": "fire-beam",
+   "members": [
+    "fire-0-rf",
+    "sill-x-f",
+    "sill-z-r"
+   ],
+   "point": [
+    2.41,
+    0.615,
+    1.5
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0216"
+  },
+  {
+   "kind": "fire-beam",
+   "members": [
+    "fire-1-rb",
+    "beam-x-0-309-2",
+    "beam-z-3-309-0"
+   ],
+   "point": [
+    2.41,
+    3.315,
+    -1.5
+   ],
+   "anchor": "beam-x-0-309-2",
+   "id": "c0217"
+  },
+  {
+   "kind": "fire-beam",
+   "members": [
+    "fire-1-rf",
+    "beam-x-2-309-2",
+    "beam-z-3-309-1"
+   ],
+   "point": [
+    2.41,
+    3.315,
+    1.5
+   ],
+   "anchor": "beam-x-2-309-2",
+   "id": "c0218"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-00",
+    "sleeper--140"
+   ],
+   "point": [
+    -2.5025,
+    0.495,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0219"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-00",
+    "sleeper--91"
+   ],
+   "point": [
+    -2.5025,
+    0.495,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0220"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-00",
+    "sill-x-centre"
+   ],
+   "point": [
+    -2.5025,
+    0.495,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0221"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-00",
+    "sleeper-91"
+   ],
+   "point": [
+    -2.5025,
+    0.495,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0222"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-00",
+    "sleeper-140"
+   ],
+   "point": [
+    -2.5025,
+    0.495,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0223"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-01",
+    "sleeper--140"
+   ],
+   "point": [
+    -2.0475,
+    0.495,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0224"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-01",
+    "sleeper--91"
+   ],
+   "point": [
+    -2.0475,
+    0.495,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0225"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-01",
+    "sill-x-centre"
+   ],
+   "point": [
+    -2.0475,
+    0.495,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0226"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-01",
+    "sleeper-91"
+   ],
+   "point": [
+    -2.0475,
+    0.495,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0227"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-01",
+    "sleeper-140"
+   ],
+   "point": [
+    -2.0475,
+    0.495,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0228"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-02",
+    "sleeper--140"
+   ],
+   "point": [
+    -1.5925,
+    0.495,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0229"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-02",
+    "sleeper--91"
+   ],
+   "point": [
+    -1.5925,
+    0.495,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0230"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-02",
+    "sill-x-centre"
+   ],
+   "point": [
+    -1.5925,
+    0.495,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0231"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-02",
+    "sleeper-91"
+   ],
+   "point": [
+    -1.5925,
+    0.495,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0232"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-02",
+    "sleeper-140"
+   ],
+   "point": [
+    -1.5925,
+    0.495,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0233"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-03",
+    "sleeper--140"
+   ],
+   "point": [
+    -1.1375,
+    0.495,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0234"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-03",
+    "sleeper--91"
+   ],
+   "point": [
+    -1.1375,
+    0.495,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0235"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-03",
+    "sill-x-centre"
+   ],
+   "point": [
+    -1.1375,
+    0.495,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0236"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-03",
+    "sleeper-91"
+   ],
+   "point": [
+    -1.1375,
+    0.495,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0237"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-03",
+    "sleeper-140"
+   ],
+   "point": [
+    -1.1375,
+    0.495,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0238"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-04",
+    "sleeper--140"
+   ],
+   "point": [
+    -0.6825,
+    0.495,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0239"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-04",
+    "sleeper--91"
+   ],
+   "point": [
+    -0.6825,
+    0.495,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0240"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-04",
+    "sill-x-centre"
+   ],
+   "point": [
+    -0.6825,
+    0.495,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0241"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-04",
+    "sleeper-91"
+   ],
+   "point": [
+    -0.6825,
+    0.495,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0242"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-04",
+    "sleeper-140"
+   ],
+   "point": [
+    -0.6825,
+    0.495,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0243"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-05",
+    "sleeper--140"
+   ],
+   "point": [
+    -0.2275,
+    0.495,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0244"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-05",
+    "sleeper--91"
+   ],
+   "point": [
+    -0.2275,
+    0.495,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0245"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-05",
+    "sill-x-centre"
+   ],
+   "point": [
+    -0.2275,
+    0.495,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0246"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-05",
+    "sleeper-91"
+   ],
+   "point": [
+    -0.2275,
+    0.495,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0247"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-05",
+    "sleeper-140"
+   ],
+   "point": [
+    -0.2275,
+    0.495,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0248"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-06",
+    "sleeper--140"
+   ],
+   "point": [
+    0.2275,
+    0.495,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0249"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-06",
+    "sleeper--91"
+   ],
+   "point": [
+    0.2275,
+    0.495,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0250"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-06",
+    "sill-x-centre"
+   ],
+   "point": [
+    0.2275,
+    0.495,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0251"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-06",
+    "sleeper-91"
+   ],
+   "point": [
+    0.2275,
+    0.495,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0252"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-06",
+    "sleeper-140"
+   ],
+   "point": [
+    0.2275,
+    0.495,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0253"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-07",
+    "sleeper--140"
+   ],
+   "point": [
+    0.6825,
+    0.495,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0254"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-07",
+    "sleeper--91"
+   ],
+   "point": [
+    0.6825,
+    0.495,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0255"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-07",
+    "sill-x-centre"
+   ],
+   "point": [
+    0.6825,
+    0.495,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0256"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-07",
+    "sleeper-91"
+   ],
+   "point": [
+    0.6825,
+    0.495,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0257"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-07",
+    "sleeper-140"
+   ],
+   "point": [
+    0.6825,
+    0.495,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0258"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-08",
+    "sleeper--140"
+   ],
+   "point": [
+    1.1375,
+    0.495,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0259"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-08",
+    "sleeper--91"
+   ],
+   "point": [
+    1.1375,
+    0.495,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0260"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-08",
+    "sill-x-centre"
+   ],
+   "point": [
+    1.1375,
+    0.495,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0261"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-08",
+    "sleeper-91"
+   ],
+   "point": [
+    1.1375,
+    0.495,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0262"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-08",
+    "sleeper-140"
+   ],
+   "point": [
+    1.1375,
+    0.495,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0263"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-09",
+    "sleeper--140"
+   ],
+   "point": [
+    1.5925,
+    0.495,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0264"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-09",
+    "sleeper--91"
+   ],
+   "point": [
+    1.5925,
+    0.495,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0265"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-09",
+    "sill-x-centre"
+   ],
+   "point": [
+    1.5925,
+    0.495,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0266"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-09",
+    "sleeper-91"
+   ],
+   "point": [
+    1.5925,
+    0.495,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0267"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-09",
+    "sleeper-140"
+   ],
+   "point": [
+    1.5925,
+    0.495,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0268"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-10",
+    "sleeper--140"
+   ],
+   "point": [
+    2.0475,
+    0.495,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0269"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-10",
+    "sleeper--91"
+   ],
+   "point": [
+    2.0475,
+    0.495,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0270"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-10",
+    "sill-x-centre"
+   ],
+   "point": [
+    2.0475,
+    0.495,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0271"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-10",
+    "sleeper-91"
+   ],
+   "point": [
+    2.0475,
+    0.495,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0272"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-10",
+    "sleeper-140"
+   ],
+   "point": [
+    2.0475,
+    0.495,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0273"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-11",
+    "sleeper--140"
+   ],
+   "point": [
+    2.5025,
+    0.495,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0274"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-11",
+    "sleeper--91"
+   ],
+   "point": [
+    2.5025,
+    0.495,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0275"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-11",
+    "sill-x-centre"
+   ],
+   "point": [
+    2.5025,
+    0.495,
+    0.0
+   ],
+   "anchor": "sill-x-centre",
+   "id": "c0276"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-11",
+    "sleeper-91"
+   ],
+   "point": [
+    2.5025,
+    0.495,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0277"
+  },
+  {
+   "kind": "joist-sleeper",
+   "members": [
+    "joist-11",
+    "sleeper-140"
+   ],
+   "point": [
+    2.5025,
+    0.495,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0278"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-00",
+    "sill-x-b"
+   ],
+   "point": [
+    -2.5025,
+    0.535,
+    -1.76
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0279"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-00",
+    "sill-x-f"
+   ],
+   "point": [
+    -2.5025,
+    0.535,
+    1.76
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0280"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-01",
+    "sill-x-b"
+   ],
+   "point": [
+    -2.0475,
+    0.535,
+    -1.76
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0281"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-01",
+    "sill-x-f"
+   ],
+   "point": [
+    -2.0475,
+    0.535,
+    1.76
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0282"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-02",
+    "sill-x-b"
+   ],
+   "point": [
+    -1.5925,
+    0.535,
+    -1.76
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0283"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-02",
+    "sill-x-f"
+   ],
+   "point": [
+    -1.5925,
+    0.535,
+    1.76
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0284"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-03",
+    "sill-x-b"
+   ],
+   "point": [
+    -1.1375,
+    0.535,
+    -1.76
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0285"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-03",
+    "sill-x-f"
+   ],
+   "point": [
+    -1.1375,
+    0.535,
+    1.76
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0286"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-04",
+    "sill-x-b"
+   ],
+   "point": [
+    -0.6825,
+    0.535,
+    -1.76
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0287"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-04",
+    "sill-x-f"
+   ],
+   "point": [
+    -0.6825,
+    0.535,
+    1.76
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0288"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-05",
+    "sill-x-b"
+   ],
+   "point": [
+    -0.2275,
+    0.535,
+    -1.76
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0289"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-05",
+    "sill-x-f"
+   ],
+   "point": [
+    -0.2275,
+    0.535,
+    1.76
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0290"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-06",
+    "sill-x-b"
+   ],
+   "point": [
+    0.2275,
+    0.535,
+    -1.76
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0291"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-06",
+    "sill-x-f"
+   ],
+   "point": [
+    0.2275,
+    0.535,
+    1.76
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0292"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-07",
+    "sill-x-b"
+   ],
+   "point": [
+    0.6825,
+    0.535,
+    -1.76
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0293"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-07",
+    "sill-x-f"
+   ],
+   "point": [
+    0.6825,
+    0.535,
+    1.76
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0294"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-08",
+    "sill-x-b"
+   ],
+   "point": [
+    1.1375,
+    0.535,
+    -1.76
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0295"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-08",
+    "sill-x-f"
+   ],
+   "point": [
+    1.1375,
+    0.535,
+    1.76
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0296"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-09",
+    "sill-x-b"
+   ],
+   "point": [
+    1.5925,
+    0.535,
+    -1.76
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0297"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-09",
+    "sill-x-f"
+   ],
+   "point": [
+    1.5925,
+    0.535,
+    1.76
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0298"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-10",
+    "sill-x-b"
+   ],
+   "point": [
+    2.0475,
+    0.535,
+    -1.76
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0299"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-10",
+    "sill-x-f"
+   ],
+   "point": [
+    2.0475,
+    0.535,
+    1.76
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0300"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-11",
+    "sill-x-b"
+   ],
+   "point": [
+    2.5025,
+    0.535,
+    -1.76
+   ],
+   "anchor": "sill-x-b",
+   "id": "c0301"
+  },
+  {
+   "kind": "joist-sill",
+   "members": [
+    "joist-11",
+    "sill-x-f"
+   ],
+   "point": [
+    2.5025,
+    0.535,
+    1.76
+   ],
+   "anchor": "sill-x-f",
+   "id": "c0302"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post--182--140",
+    "sleeper--140"
+   ],
+   "point": [
+    -1.82,
+    0.42,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0303"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post--182--91",
+    "sleeper--91"
+   ],
+   "point": [
+    -1.82,
+    0.42,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0304"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post--182-91",
+    "sleeper-91"
+   ],
+   "point": [
+    -1.82,
+    0.42,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0305"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post--182-140",
+    "sleeper-140"
+   ],
+   "point": [
+    -1.82,
+    0.42,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0306"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post--91--140",
+    "sleeper--140"
+   ],
+   "point": [
+    -0.91,
+    0.42,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0307"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post--91--91",
+    "sleeper--91"
+   ],
+   "point": [
+    -0.91,
+    0.42,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0308"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post--91-91",
+    "sleeper-91"
+   ],
+   "point": [
+    -0.91,
+    0.42,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0309"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post--91-140",
+    "sleeper-140"
+   ],
+   "point": [
+    -0.91,
+    0.42,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0310"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post-0--140",
+    "sleeper--140"
+   ],
+   "point": [
+    0.0,
+    0.42,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0311"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post-0--91",
+    "sleeper--91"
+   ],
+   "point": [
+    0.0,
+    0.42,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0312"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post-0-91",
+    "sleeper-91"
+   ],
+   "point": [
+    0.0,
+    0.42,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0313"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post-0-140",
+    "sleeper-140"
+   ],
+   "point": [
+    0.0,
+    0.42,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0314"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post-91--140",
+    "sleeper--140"
+   ],
+   "point": [
+    0.91,
+    0.42,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0315"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post-91--91",
+    "sleeper--91"
+   ],
+   "point": [
+    0.91,
+    0.42,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0316"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post-91-91",
+    "sleeper-91"
+   ],
+   "point": [
+    0.91,
+    0.42,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0317"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post-91-140",
+    "sleeper-140"
+   ],
+   "point": [
+    0.91,
+    0.42,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0318"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post-182--140",
+    "sleeper--140"
+   ],
+   "point": [
+    1.82,
+    0.42,
+    -1.4
+   ],
+   "anchor": "sleeper--140",
+   "id": "c0319"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post-182--91",
+    "sleeper--91"
+   ],
+   "point": [
+    1.82,
+    0.42,
+    -0.91
+   ],
+   "anchor": "sleeper--91",
+   "id": "c0320"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post-182-91",
+    "sleeper-91"
+   ],
+   "point": [
+    1.82,
+    0.42,
+    0.91
+   ],
+   "anchor": "sleeper-91",
+   "id": "c0321"
+  },
+  {
+   "kind": "floorpost-sleeper",
+   "members": [
+    "floor-post-182-140",
+    "sleeper-140"
+   ],
+   "point": [
+    1.82,
+    0.42,
+    1.4
+   ],
+   "anchor": "sleeper-140",
+   "id": "c0322"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post--182--140",
+    "floor-stone--182--140"
+   ],
+   "point": [
+    -1.82,
+    0.15,
+    -1.4
+   ],
+   "anchor": "floor-stone--182--140",
+   "id": "c0323"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post--182--91",
+    "floor-stone--182--91"
+   ],
+   "point": [
+    -1.82,
+    0.15,
+    -0.91
+   ],
+   "anchor": "floor-stone--182--91",
+   "id": "c0324"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post--182-91",
+    "floor-stone--182-91"
+   ],
+   "point": [
+    -1.82,
+    0.15,
+    0.91
+   ],
+   "anchor": "floor-stone--182-91",
+   "id": "c0325"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post--182-140",
+    "floor-stone--182-140"
+   ],
+   "point": [
+    -1.82,
+    0.15,
+    1.4
+   ],
+   "anchor": "floor-stone--182-140",
+   "id": "c0326"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post--91--140",
+    "floor-stone--91--140"
+   ],
+   "point": [
+    -0.91,
+    0.15,
+    -1.4
+   ],
+   "anchor": "floor-stone--91--140",
+   "id": "c0327"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post--91--91",
+    "floor-stone--91--91"
+   ],
+   "point": [
+    -0.91,
+    0.15,
+    -0.91
+   ],
+   "anchor": "floor-stone--91--91",
+   "id": "c0328"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post--91-91",
+    "floor-stone--91-91"
+   ],
+   "point": [
+    -0.91,
+    0.15,
+    0.91
+   ],
+   "anchor": "floor-stone--91-91",
+   "id": "c0329"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post--91-140",
+    "floor-stone--91-140"
+   ],
+   "point": [
+    -0.91,
+    0.15,
+    1.4
+   ],
+   "anchor": "floor-stone--91-140",
+   "id": "c0330"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post-0--140",
+    "floor-stone-0--140"
+   ],
+   "point": [
+    0.0,
+    0.15,
+    -1.4
+   ],
+   "anchor": "floor-stone-0--140",
+   "id": "c0331"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post-0--91",
+    "floor-stone-0--91"
+   ],
+   "point": [
+    0.0,
+    0.15,
+    -0.91
+   ],
+   "anchor": "floor-stone-0--91",
+   "id": "c0332"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post-0-91",
+    "floor-stone-0-91"
+   ],
+   "point": [
+    0.0,
+    0.15,
+    0.91
+   ],
+   "anchor": "floor-stone-0-91",
+   "id": "c0333"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post-0-140",
+    "floor-stone-0-140"
+   ],
+   "point": [
+    0.0,
+    0.15,
+    1.4
+   ],
+   "anchor": "floor-stone-0-140",
+   "id": "c0334"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post-91--140",
+    "floor-stone-91--140"
+   ],
+   "point": [
+    0.91,
+    0.15,
+    -1.4
+   ],
+   "anchor": "floor-stone-91--140",
+   "id": "c0335"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post-91--91",
+    "floor-stone-91--91"
+   ],
+   "point": [
+    0.91,
+    0.15,
+    -0.91
+   ],
+   "anchor": "floor-stone-91--91",
+   "id": "c0336"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post-91-91",
+    "floor-stone-91-91"
+   ],
+   "point": [
+    0.91,
+    0.15,
+    0.91
+   ],
+   "anchor": "floor-stone-91-91",
+   "id": "c0337"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post-91-140",
+    "floor-stone-91-140"
+   ],
+   "point": [
+    0.91,
+    0.15,
+    1.4
+   ],
+   "anchor": "floor-stone-91-140",
+   "id": "c0338"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post-182--140",
+    "floor-stone-182--140"
+   ],
+   "point": [
+    1.82,
+    0.15,
+    -1.4
+   ],
+   "anchor": "floor-stone-182--140",
+   "id": "c0339"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post-182--91",
+    "floor-stone-182--91"
+   ],
+   "point": [
+    1.82,
+    0.15,
+    -0.91
+   ],
+   "anchor": "floor-stone-182--91",
+   "id": "c0340"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post-182-91",
+    "floor-stone-182-91"
+   ],
+   "point": [
+    1.82,
+    0.15,
+    0.91
+   ],
+   "anchor": "floor-stone-182-91",
+   "id": "c0341"
+  },
+  {
+   "kind": "floorpost-stone",
+   "members": [
+    "floor-post-182-140",
+    "floor-stone-182-140"
+   ],
+   "point": [
+    1.82,
+    0.15,
+    1.4
+   ],
+   "anchor": "floor-stone-182-140",
+   "id": "c0342"
+  },
+  {
+   "kind": "sleeper-sill",
+   "members": [
+    "sleeper--140",
+    "sill-z-l"
+   ],
+   "point": [
+    -2.685,
+    0.465,
+    -1.4
+   ],
+   "anchor": "sill-z-l",
+   "id": "c0343"
+  },
+  {
+   "kind": "sleeper-sill",
+   "members": [
+    "sleeper--91",
+    "sill-z-l"
+   ],
+   "point": [
+    -2.685,
+    0.465,
+    -0.91
+   ],
+   "anchor": "sill-z-l",
+   "id": "c0344"
+  },
+  {
+   "kind": "sleeper-sill",
+   "members": [
+    "sleeper-91",
+    "sill-z-l"
+   ],
+   "point": [
+    -2.685,
+    0.465,
+    0.91
+   ],
+   "anchor": "sill-z-l",
+   "id": "c0345"
+  },
+  {
+   "kind": "sleeper-sill",
+   "members": [
+    "sleeper-140",
+    "sill-z-l"
+   ],
+   "point": [
+    -2.685,
+    0.465,
+    1.4
+   ],
+   "anchor": "sill-z-l",
+   "id": "c0346"
+  },
+  {
+   "kind": "sleeper-sill",
+   "members": [
+    "sleeper--140",
+    "sill-z-r"
+   ],
+   "point": [
+    2.685,
+    0.465,
+    -1.4
+   ],
+   "anchor": "sill-z-r",
+   "id": "c0347"
+  },
+  {
+   "kind": "sleeper-sill",
+   "members": [
+    "sleeper--91",
+    "sill-z-r"
+   ],
+   "point": [
+    2.685,
+    0.465,
+    -0.91
+   ],
+   "anchor": "sill-z-r",
+   "id": "c0348"
+  },
+  {
+   "kind": "sleeper-sill",
+   "members": [
+    "sleeper-91",
+    "sill-z-r"
+   ],
+   "point": [
+    2.685,
+    0.465,
+    0.91
+   ],
+   "anchor": "sill-z-r",
+   "id": "c0349"
+  },
+  {
+   "kind": "sleeper-sill",
+   "members": [
+    "sleeper-140",
+    "sill-z-r"
+   ],
+   "point": [
+    2.685,
+    0.465,
+    1.4
+   ],
+   "anchor": "sill-z-r",
+   "id": "c0350"
+  },
+  {
+   "kind": "upperjoist-beam",
+   "members": [
+    "joist-up-00",
+    "beam-x-1-303-0"
+   ],
+   "point": [
+    -2.275,
+    3.165,
+    0.0
+   ],
+   "anchor": "beam-x-1-303-0",
+   "id": "c0351"
+  },
+  {
+   "kind": "upperjoist-beam",
+   "members": [
+    "joist-up-01",
+    "beam-x-1-303-0"
+   ],
+   "point": [
+    -1.365,
+    3.165,
+    0.0
+   ],
+   "anchor": "beam-x-1-303-0",
+   "id": "c0352"
+  },
+  {
+   "kind": "upperjoist-beam",
+   "members": [
+    "joist-up-02",
+    "beam-x-1-303-1"
+   ],
+   "point": [
+    -0.455,
+    3.165,
+    0.0
+   ],
+   "anchor": "beam-x-1-303-1",
+   "id": "c0353"
+  },
+  {
+   "kind": "upperjoist-beam",
+   "members": [
+    "joist-up-03",
+    "beam-x-1-303-1"
+   ],
+   "point": [
+    0.455,
+    3.165,
+    0.0
+   ],
+   "anchor": "beam-x-1-303-1",
+   "id": "c0354"
+  },
+  {
+   "kind": "upperjoist-beam",
+   "members": [
+    "joist-up-04",
+    "beam-x-1-303-2"
+   ],
+   "point": [
+    1.365,
+    3.165,
+    0.0
+   ],
+   "anchor": "beam-x-1-303-2",
+   "id": "c0355"
+  },
+  {
+   "kind": "upperjoist-beam",
+   "members": [
+    "joist-up-05",
+    "beam-x-1-303-2"
+   ],
+   "point": [
+    2.275,
+    3.165,
+    0.0
+   ],
+   "anchor": "beam-x-1-303-2",
+   "id": "c0356"
+  },
+  {
+   "kind": "upperjoist-girder",
+   "members": [
+    "joist-up-00",
+    "beam-x-0-309-0"
+   ],
+   "point": [
+    -2.275,
+    3.195,
+    -1.775
+   ],
+   "anchor": "beam-x-0-309-0",
+   "id": "c0357"
+  },
+  {
+   "kind": "upperjoist-girder",
+   "members": [
+    "joist-up-00",
+    "beam-x-2-309-0"
+   ],
+   "point": [
+    -2.275,
+    3.195,
+    1.775
+   ],
+   "anchor": "beam-x-2-309-0",
+   "id": "c0358"
+  },
+  {
+   "kind": "upperjoist-girder",
+   "members": [
+    "joist-up-01",
+    "beam-x-0-309-0"
+   ],
+   "point": [
+    -1.365,
+    3.195,
+    -1.775
+   ],
+   "anchor": "beam-x-0-309-0",
+   "id": "c0359"
+  },
+  {
+   "kind": "upperjoist-girder",
+   "members": [
+    "joist-up-01",
+    "beam-x-2-309-0"
+   ],
+   "point": [
+    -1.365,
+    3.195,
+    1.775
+   ],
+   "anchor": "beam-x-2-309-0",
+   "id": "c0360"
+  },
+  {
+   "kind": "upperjoist-girder",
+   "members": [
+    "joist-up-02",
+    "beam-x-0-309-1"
+   ],
+   "point": [
+    -0.455,
+    3.195,
+    -1.775
+   ],
+   "anchor": "beam-x-0-309-1",
+   "id": "c0361"
+  },
+  {
+   "kind": "upperjoist-girder",
+   "members": [
+    "joist-up-02",
+    "beam-x-2-309-1"
+   ],
+   "point": [
+    -0.455,
+    3.195,
+    1.775
+   ],
+   "anchor": "beam-x-2-309-1",
+   "id": "c0362"
+  },
+  {
+   "kind": "upperjoist-girder",
+   "members": [
+    "joist-up-03",
+    "beam-x-0-309-1"
+   ],
+   "point": [
+    0.455,
+    3.195,
+    -1.775
+   ],
+   "anchor": "beam-x-0-309-1",
+   "id": "c0363"
+  },
+  {
+   "kind": "upperjoist-girder",
+   "members": [
+    "joist-up-03",
+    "beam-x-2-309-1"
+   ],
+   "point": [
+    0.455,
+    3.195,
+    1.775
+   ],
+   "anchor": "beam-x-2-309-1",
+   "id": "c0364"
+  },
+  {
+   "kind": "upperjoist-girder",
+   "members": [
+    "joist-up-04",
+    "beam-x-0-309-2"
+   ],
+   "point": [
+    1.365,
+    3.195,
+    -1.775
+   ],
+   "anchor": "beam-x-0-309-2",
+   "id": "c0365"
+  },
+  {
+   "kind": "upperjoist-girder",
+   "members": [
+    "joist-up-04",
+    "beam-x-2-309-2"
+   ],
+   "point": [
+    1.365,
+    3.195,
+    1.775
+   ],
+   "anchor": "beam-x-2-309-2",
+   "id": "c0366"
+  },
+  {
+   "kind": "upperjoist-girder",
+   "members": [
+    "joist-up-05",
+    "beam-x-0-309-2"
+   ],
+   "point": [
+    2.275,
+    3.195,
+    -1.775
+   ],
+   "anchor": "beam-x-0-309-2",
+   "id": "c0367"
+  },
+  {
+   "kind": "upperjoist-girder",
+   "members": [
+    "joist-up-05",
+    "beam-x-2-309-2"
+   ],
+   "point": [
+    2.275,
+    3.195,
+    1.775
+   ],
+   "anchor": "beam-x-2-309-2",
+   "id": "c0368"
+  },
+  {
+   "kind": "roofbeam-plate",
+   "members": [
+    "roofbeam-0",
+    "beam-x-0-618-0"
+   ],
+   "point": [
+    -1.82,
+    6.2685,
+    -1.76
+   ],
+   "anchor": "beam-x-0-618-0",
+   "id": "c0369"
+  },
+  {
+   "kind": "roofbeam-plate",
+   "members": [
+    "roofbeam-0",
+    "beam-x-2-618-0"
+   ],
+   "point": [
+    -1.82,
+    6.2685,
+    1.76
+   ],
+   "anchor": "beam-x-2-618-0",
+   "id": "c0370"
+  },
+  {
+   "kind": "roofbeam-plate",
+   "members": [
+    "roofbeam-1",
+    "beam-x-0-618-1"
+   ],
+   "point": [
+    0.0,
+    6.2685,
+    -1.76
+   ],
+   "anchor": "beam-x-0-618-1",
+   "id": "c0371"
+  },
+  {
+   "kind": "roofbeam-plate",
+   "members": [
+    "roofbeam-1",
+    "beam-x-2-618-1"
+   ],
+   "point": [
+    0.0,
+    6.2685,
+    1.76
+   ],
+   "anchor": "beam-x-2-618-1",
+   "id": "c0372"
+  },
+  {
+   "kind": "roofbeam-plate",
+   "members": [
+    "roofbeam-2",
+    "beam-x-0-618-2"
+   ],
+   "point": [
+    1.82,
+    6.2685,
+    -1.76
+   ],
+   "anchor": "beam-x-0-618-2",
+   "id": "c0373"
+  },
+  {
+   "kind": "roofbeam-plate",
+   "members": [
+    "roofbeam-2",
+    "beam-x-2-618-2"
+   ],
+   "point": [
+    1.82,
+    6.2685,
+    1.76
+   ],
+   "anchor": "beam-x-2-618-2",
+   "id": "c0374"
+  },
+  {
+   "kind": "roofpost-beam",
+   "members": [
+    "roofpost-1",
+    "roofbeam-0"
+   ],
+   "point": [
+    -1.82,
+    6.3585,
+    -0.91
+   ],
+   "anchor": "roofbeam-0",
+   "id": "c0375"
+  },
+  {
+   "kind": "roofpost-beam",
+   "members": [
+    "roofpost-2",
+    "roofbeam-0"
+   ],
+   "point": [
+    -1.82,
+    6.3585,
+    0.91
+   ],
+   "anchor": "roofbeam-0",
+   "id": "c0376"
+  },
+  {
+   "kind": "roofpost-beam",
+   "members": [
+    "roofpost-3",
+    "roofbeam-1"
+   ],
+   "point": [
+    0.0,
+    6.3585,
+    -0.91
+   ],
+   "anchor": "roofbeam-1",
+   "id": "c0377"
+  },
+  {
+   "kind": "roofpost-beam",
+   "members": [
+    "roofpost-0",
+    "roofbeam-1"
+   ],
+   "point": [
+    0.0,
+    6.3585,
+    0.0
+   ],
+   "anchor": "roofbeam-1",
+   "id": "c0378"
+  },
+  {
+   "kind": "roofpost-beam",
+   "members": [
+    "roofpost-4",
+    "roofbeam-1"
+   ],
+   "point": [
+    0.0,
+    6.3585,
+    0.91
+   ],
+   "anchor": "roofbeam-1",
+   "id": "c0379"
+  },
+  {
+   "kind": "roofpost-beam",
+   "members": [
+    "roofpost-5",
+    "roofbeam-2"
+   ],
+   "point": [
+    1.82,
+    6.3585,
+    -0.91
+   ],
+   "anchor": "roofbeam-2",
+   "id": "c0380"
+  },
+  {
+   "kind": "roofpost-beam",
+   "members": [
+    "roofpost-6",
+    "roofbeam-2"
+   ],
+   "point": [
+    1.82,
+    6.3585,
+    0.91
+   ],
+   "anchor": "roofbeam-2",
+   "id": "c0381"
+  },
+  {
+   "kind": "roofpost-purlin",
+   "members": [
+    "roofpost-1",
+    "purlin-b"
+   ],
+   "point": [
+    -1.82,
+    7.0043,
+    -0.91
+   ],
+   "anchor": "purlin-b",
+   "id": "c0382"
+  },
+  {
+   "kind": "roofpost-purlin",
+   "members": [
+    "roofpost-2",
+    "purlin-f"
+   ],
+   "point": [
+    -1.82,
+    7.0043,
+    0.91
+   ],
+   "anchor": "purlin-f",
+   "id": "c0383"
+  },
+  {
+   "kind": "roofpost-purlin",
+   "members": [
+    "roofpost-3",
+    "purlin-b"
+   ],
+   "point": [
+    0.0,
+    7.0043,
+    -0.91
+   ],
+   "anchor": "purlin-b",
+   "id": "c0384"
+  },
+  {
+   "kind": "roofpost-purlin",
+   "members": [
+    "roofpost-4",
+    "purlin-f"
+   ],
+   "point": [
+    0.0,
+    7.0043,
+    0.91
+   ],
+   "anchor": "purlin-f",
+   "id": "c0385"
+  },
+  {
+   "kind": "roofpost-purlin",
+   "members": [
+    "roofpost-5",
+    "purlin-b"
+   ],
+   "point": [
+    1.82,
+    7.0043,
+    -0.91
+   ],
+   "anchor": "purlin-b",
+   "id": "c0386"
+  },
+  {
+   "kind": "roofpost-purlin",
+   "members": [
+    "roofpost-6",
+    "purlin-f"
+   ],
+   "point": [
+    1.82,
+    7.0043,
+    0.91
+   ],
+   "anchor": "purlin-f",
+   "id": "c0387"
+  },
+  {
+   "kind": "roofpost-ridge",
+   "members": [
+    "roofpost-0",
+    "ridge"
+   ],
+   "point": [
+    0.0,
+    7.79,
+    0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0388"
+  },
+  {
+   "kind": "purlin-hip",
+   "members": [
+    "purlin-b",
+    "hip-lb"
+   ],
+   "point": [
+    -1.82,
+    7.0843,
+    -0.91
+   ],
+   "anchor": "purlin-b",
+   "id": "c0389"
+  },
+  {
+   "kind": "purlin-hip",
+   "members": [
+    "purlin-f",
+    "hip-lf"
+   ],
+   "point": [
+    -1.82,
+    7.0843,
+    0.91
+   ],
+   "anchor": "purlin-f",
+   "id": "c0390"
+  },
+  {
+   "kind": "purlin-hip",
+   "members": [
+    "purlin-b",
+    "hip-rb"
+   ],
+   "point": [
+    1.82,
+    7.0843,
+    -0.91
+   ],
+   "anchor": "purlin-b",
+   "id": "c0391"
+  },
+  {
+   "kind": "purlin-hip",
+   "members": [
+    "purlin-f",
+    "hip-rf"
+   ],
+   "point": [
+    1.82,
+    7.0843,
+    0.91
+   ],
+   "anchor": "purlin-f",
+   "id": "c0392"
+  },
+  {
+   "kind": "ridge-hip",
+   "members": [
+    "hip-lb",
+    "ridge"
+   ],
+   "point": [
+    -0.91,
+    7.81,
+    0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0393"
+  },
+  {
+   "kind": "ridge-hip",
+   "members": [
+    "hip-lf",
+    "ridge"
+   ],
+   "point": [
+    -0.91,
+    7.81,
+    0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0394"
+  },
+  {
+   "kind": "ridge-hip",
+   "members": [
+    "hip-rb",
+    "ridge"
+   ],
+   "point": [
+    0.91,
+    7.81,
+    0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0395"
+  },
+  {
+   "kind": "ridge-hip",
+   "members": [
+    "hip-rf",
+    "ridge"
+   ],
+   "point": [
+    0.91,
+    7.81,
+    0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0396"
+  },
+  {
+   "kind": "hip-plate",
+   "members": [
+    "hip-lb",
+    "beam-x-0-618-0",
+    "beam-z-0-618-0"
+   ],
+   "point": [
+    -2.73,
+    6.3585,
+    -1.82
+   ],
+   "anchor": "beam-x-0-618-0",
+   "id": "c0397"
+  },
+  {
+   "kind": "hip-plate",
+   "members": [
+    "hip-lf",
+    "beam-x-2-618-0",
+    "beam-z-0-618-1"
+   ],
+   "point": [
+    -2.73,
+    6.3585,
+    1.82
+   ],
+   "anchor": "beam-x-2-618-0",
+   "id": "c0398"
+  },
+  {
+   "kind": "hip-plate",
+   "members": [
+    "hip-rb",
+    "beam-x-0-618-2",
+    "beam-z-3-618-0"
+   ],
+   "point": [
+    2.73,
+    6.3585,
+    -1.82
+   ],
+   "anchor": "beam-x-0-618-2",
+   "id": "c0399"
+  },
+  {
+   "kind": "hip-plate",
+   "members": [
+    "hip-rf",
+    "beam-x-2-618-2",
+    "beam-z-3-618-1"
+   ],
+   "point": [
+    2.73,
+    6.3585,
+    1.82
+   ],
+   "anchor": "beam-x-2-618-2",
+   "id": "c0400"
+  },
+  {
+   "kind": "rafter-ridge",
+   "members": [
+    "rafter-8-b",
+    "ridge"
+   ],
+   "point": [
+    -0.91,
+    7.855,
+    -0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0401"
+  },
+  {
+   "kind": "rafter-ridge",
+   "members": [
+    "rafter-9-f",
+    "ridge"
+   ],
+   "point": [
+    -0.91,
+    7.855,
+    0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0402"
+  },
+  {
+   "kind": "rafter-ridge",
+   "members": [
+    "rafter-10-b",
+    "ridge"
+   ],
+   "point": [
+    -0.455,
+    7.855,
+    -0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0403"
+  },
+  {
+   "kind": "rafter-ridge",
+   "members": [
+    "rafter-11-f",
+    "ridge"
+   ],
+   "point": [
+    -0.455,
+    7.855,
+    0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0404"
+  },
+  {
+   "kind": "rafter-ridge",
+   "members": [
+    "rafter-12-b",
+    "ridge"
+   ],
+   "point": [
+    0.0,
+    7.855,
+    -0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0405"
+  },
+  {
+   "kind": "rafter-ridge",
+   "members": [
+    "rafter-13-f",
+    "ridge"
+   ],
+   "point": [
+    0.0,
+    7.855,
+    0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0406"
+  },
+  {
+   "kind": "rafter-ridge",
+   "members": [
+    "rafter-14-b",
+    "ridge"
+   ],
+   "point": [
+    0.455,
+    7.855,
+    -0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0407"
+  },
+  {
+   "kind": "rafter-ridge",
+   "members": [
+    "rafter-15-f",
+    "ridge"
+   ],
+   "point": [
+    0.455,
+    7.855,
+    0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0408"
+  },
+  {
+   "kind": "rafter-ridge",
+   "members": [
+    "rafter-16-b",
+    "ridge"
+   ],
+   "point": [
+    0.91,
+    7.855,
+    -0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0409"
+  },
+  {
+   "kind": "rafter-ridge",
+   "members": [
+    "rafter-17-f",
+    "ridge"
+   ],
+   "point": [
+    0.91,
+    7.855,
+    0.0
+   ],
+   "anchor": "ridge",
+   "id": "c0410"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-0-b",
+    "hip-lb"
+   ],
+   "point": [
+    -2.73,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "hip-lb",
+   "id": "c0411"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-1-f",
+    "hip-lf"
+   ],
+   "point": [
+    -2.73,
+    6.4035,
+    1.82
+   ],
+   "anchor": "hip-lf",
+   "id": "c0412"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-2-b",
+    "hip-lb"
+   ],
+   "point": [
+    -2.275,
+    6.7664,
+    -1.365
+   ],
+   "anchor": "hip-lb",
+   "id": "c0413"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-3-f",
+    "hip-lf"
+   ],
+   "point": [
+    -2.275,
+    6.7664,
+    1.365
+   ],
+   "anchor": "hip-lf",
+   "id": "c0414"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-4-b",
+    "hip-lb"
+   ],
+   "point": [
+    -1.82,
+    7.1293,
+    -0.91
+   ],
+   "anchor": "hip-lb",
+   "id": "c0415"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-5-f",
+    "hip-lf"
+   ],
+   "point": [
+    -1.82,
+    7.1293,
+    0.91
+   ],
+   "anchor": "hip-lf",
+   "id": "c0416"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-6-b",
+    "hip-lb"
+   ],
+   "point": [
+    -1.365,
+    7.4921,
+    -0.455
+   ],
+   "anchor": "hip-lb",
+   "id": "c0417"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-7-f",
+    "hip-lf"
+   ],
+   "point": [
+    -1.365,
+    7.4921,
+    0.455
+   ],
+   "anchor": "hip-lf",
+   "id": "c0418"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-18-b",
+    "hip-rb"
+   ],
+   "point": [
+    1.365,
+    7.4921,
+    -0.455
+   ],
+   "anchor": "hip-rb",
+   "id": "c0419"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-19-f",
+    "hip-rf"
+   ],
+   "point": [
+    1.365,
+    7.4921,
+    0.455
+   ],
+   "anchor": "hip-rf",
+   "id": "c0420"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-20-b",
+    "hip-rb"
+   ],
+   "point": [
+    1.82,
+    7.1293,
+    -0.91
+   ],
+   "anchor": "hip-rb",
+   "id": "c0421"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-21-f",
+    "hip-rf"
+   ],
+   "point": [
+    1.82,
+    7.1293,
+    0.91
+   ],
+   "anchor": "hip-rf",
+   "id": "c0422"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-22-b",
+    "hip-rb"
+   ],
+   "point": [
+    2.275,
+    6.7664,
+    -1.365
+   ],
+   "anchor": "hip-rb",
+   "id": "c0423"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-23-f",
+    "hip-rf"
+   ],
+   "point": [
+    2.275,
+    6.7664,
+    1.365
+   ],
+   "anchor": "hip-rf",
+   "id": "c0424"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-24-b",
+    "hip-rb"
+   ],
+   "point": [
+    2.73,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "hip-rb",
+   "id": "c0425"
+  },
+  {
+   "kind": "rafter-hip",
+   "members": [
+    "rafter-25-f",
+    "hip-rf"
+   ],
+   "point": [
+    2.73,
+    6.4035,
+    1.82
+   ],
+   "anchor": "hip-rf",
+   "id": "c0426"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-6-b",
+    "purlin-b"
+   ],
+   "point": [
+    -1.365,
+    7.1293,
+    -0.91
+   ],
+   "anchor": "purlin-b",
+   "id": "c0427"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-7-f",
+    "purlin-f"
+   ],
+   "point": [
+    -1.365,
+    7.1293,
+    0.91
+   ],
+   "anchor": "purlin-f",
+   "id": "c0428"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-8-b",
+    "purlin-b"
+   ],
+   "point": [
+    -0.91,
+    7.1293,
+    -0.91
+   ],
+   "anchor": "purlin-b",
+   "id": "c0429"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-9-f",
+    "purlin-f"
+   ],
+   "point": [
+    -0.91,
+    7.1293,
+    0.91
+   ],
+   "anchor": "purlin-f",
+   "id": "c0430"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-10-b",
+    "purlin-b"
+   ],
+   "point": [
+    -0.455,
+    7.1293,
+    -0.91
+   ],
+   "anchor": "purlin-b",
+   "id": "c0431"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-11-f",
+    "purlin-f"
+   ],
+   "point": [
+    -0.455,
+    7.1293,
+    0.91
+   ],
+   "anchor": "purlin-f",
+   "id": "c0432"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-12-b",
+    "purlin-b"
+   ],
+   "point": [
+    0.0,
+    7.1293,
+    -0.91
+   ],
+   "anchor": "purlin-b",
+   "id": "c0433"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-13-f",
+    "purlin-f"
+   ],
+   "point": [
+    0.0,
+    7.1293,
+    0.91
+   ],
+   "anchor": "purlin-f",
+   "id": "c0434"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-14-b",
+    "purlin-b"
+   ],
+   "point": [
+    0.455,
+    7.1293,
+    -0.91
+   ],
+   "anchor": "purlin-b",
+   "id": "c0435"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-15-f",
+    "purlin-f"
+   ],
+   "point": [
+    0.455,
+    7.1293,
+    0.91
+   ],
+   "anchor": "purlin-f",
+   "id": "c0436"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-16-b",
+    "purlin-b"
+   ],
+   "point": [
+    0.91,
+    7.1293,
+    -0.91
+   ],
+   "anchor": "purlin-b",
+   "id": "c0437"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-17-f",
+    "purlin-f"
+   ],
+   "point": [
+    0.91,
+    7.1293,
+    0.91
+   ],
+   "anchor": "purlin-f",
+   "id": "c0438"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-18-b",
+    "purlin-b"
+   ],
+   "point": [
+    1.365,
+    7.1293,
+    -0.91
+   ],
+   "anchor": "purlin-b",
+   "id": "c0439"
+  },
+  {
+   "kind": "rafter-purlin",
+   "members": [
+    "rafter-19-f",
+    "purlin-f"
+   ],
+   "point": [
+    1.365,
+    7.1293,
+    0.91
+   ],
+   "anchor": "purlin-f",
+   "id": "c0440"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-2-b",
+    "beam-x-0-618-0"
+   ],
+   "point": [
+    -2.275,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "beam-x-0-618-0",
+   "id": "c0441"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-3-f",
+    "beam-x-2-618-0"
+   ],
+   "point": [
+    -2.275,
+    6.4035,
+    1.82
+   ],
+   "anchor": "beam-x-2-618-0",
+   "id": "c0442"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-4-b",
+    "beam-x-0-618-0"
+   ],
+   "point": [
+    -1.82,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "beam-x-0-618-0",
+   "id": "c0443"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-5-f",
+    "beam-x-2-618-0"
+   ],
+   "point": [
+    -1.82,
+    6.4035,
+    1.82
+   ],
+   "anchor": "beam-x-2-618-0",
+   "id": "c0444"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-6-b",
+    "beam-x-0-618-0"
+   ],
+   "point": [
+    -1.365,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "beam-x-0-618-0",
+   "id": "c0445"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-7-f",
+    "beam-x-2-618-0"
+   ],
+   "point": [
+    -1.365,
+    6.4035,
+    1.82
+   ],
+   "anchor": "beam-x-2-618-0",
+   "id": "c0446"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-8-b",
+    "beam-x-0-618-0"
+   ],
+   "point": [
+    -0.91,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "beam-x-0-618-0",
+   "id": "c0447"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-9-f",
+    "beam-x-2-618-0"
+   ],
+   "point": [
+    -0.91,
+    6.4035,
+    1.82
+   ],
+   "anchor": "beam-x-2-618-0",
+   "id": "c0448"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-10-b",
+    "beam-x-0-618-1"
+   ],
+   "point": [
+    -0.455,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "beam-x-0-618-1",
+   "id": "c0449"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-11-f",
+    "beam-x-2-618-1"
+   ],
+   "point": [
+    -0.455,
+    6.4035,
+    1.82
+   ],
+   "anchor": "beam-x-2-618-1",
+   "id": "c0450"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-12-b",
+    "beam-x-0-618-1"
+   ],
+   "point": [
+    0.0,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "beam-x-0-618-1",
+   "id": "c0451"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-13-f",
+    "beam-x-2-618-1"
+   ],
+   "point": [
+    0.0,
+    6.4035,
+    1.82
+   ],
+   "anchor": "beam-x-2-618-1",
+   "id": "c0452"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-14-b",
+    "beam-x-0-618-1"
+   ],
+   "point": [
+    0.455,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "beam-x-0-618-1",
+   "id": "c0453"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-15-f",
+    "beam-x-2-618-1"
+   ],
+   "point": [
+    0.455,
+    6.4035,
+    1.82
+   ],
+   "anchor": "beam-x-2-618-1",
+   "id": "c0454"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-16-b",
+    "beam-x-0-618-1"
+   ],
+   "point": [
+    0.91,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "beam-x-0-618-1",
+   "id": "c0455"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-17-f",
+    "beam-x-2-618-1"
+   ],
+   "point": [
+    0.91,
+    6.4035,
+    1.82
+   ],
+   "anchor": "beam-x-2-618-1",
+   "id": "c0456"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-18-b",
+    "beam-x-0-618-2"
+   ],
+   "point": [
+    1.365,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "beam-x-0-618-2",
+   "id": "c0457"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-19-f",
+    "beam-x-2-618-2"
+   ],
+   "point": [
+    1.365,
+    6.4035,
+    1.82
+   ],
+   "anchor": "beam-x-2-618-2",
+   "id": "c0458"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-20-b",
+    "beam-x-0-618-2"
+   ],
+   "point": [
+    1.82,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "beam-x-0-618-2",
+   "id": "c0459"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-21-f",
+    "beam-x-2-618-2"
+   ],
+   "point": [
+    1.82,
+    6.4035,
+    1.82
+   ],
+   "anchor": "beam-x-2-618-2",
+   "id": "c0460"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-22-b",
+    "beam-x-0-618-2"
+   ],
+   "point": [
+    2.275,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "beam-x-0-618-2",
+   "id": "c0461"
+  },
+  {
+   "kind": "rafter-plate",
+   "members": [
+    "rafter-23-f",
+    "beam-x-2-618-2"
+   ],
+   "point": [
+    2.275,
+    6.4035,
+    1.82
+   ],
+   "anchor": "beam-x-2-618-2",
+   "id": "c0462"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-26-l",
+    "hip-lb"
+   ],
+   "point": [
+    -2.73,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "hip-lb",
+   "id": "c0463"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-42-l",
+    "hip-lf"
+   ],
+   "point": [
+    -2.73,
+    6.4035,
+    1.82
+   ],
+   "anchor": "hip-lf",
+   "id": "c0464"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-28-l",
+    "hip-lb"
+   ],
+   "point": [
+    -2.275,
+    6.7664,
+    -1.365
+   ],
+   "anchor": "hip-lb",
+   "id": "c0465"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-40-l",
+    "hip-lf"
+   ],
+   "point": [
+    -2.275,
+    6.7664,
+    1.365
+   ],
+   "anchor": "hip-lf",
+   "id": "c0466"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-30-l",
+    "hip-lb"
+   ],
+   "point": [
+    -1.82,
+    7.1293,
+    -0.91
+   ],
+   "anchor": "hip-lb",
+   "id": "c0467"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-38-l",
+    "hip-lf"
+   ],
+   "point": [
+    -1.82,
+    7.1293,
+    0.91
+   ],
+   "anchor": "hip-lf",
+   "id": "c0468"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-32-l",
+    "hip-lb"
+   ],
+   "point": [
+    -1.365,
+    7.4921,
+    -0.455
+   ],
+   "anchor": "hip-lb",
+   "id": "c0469"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-36-l",
+    "hip-lf"
+   ],
+   "point": [
+    -1.365,
+    7.4921,
+    0.455
+   ],
+   "anchor": "hip-lf",
+   "id": "c0470"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-34-l",
+    "hip-lb"
+   ],
+   "point": [
+    -0.91,
+    7.855,
+    0.0
+   ],
+   "anchor": "hip-lb",
+   "id": "c0471"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-35-r",
+    "hip-rb"
+   ],
+   "point": [
+    0.91,
+    7.855,
+    0.0
+   ],
+   "anchor": "hip-rb",
+   "id": "c0472"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-33-r",
+    "hip-rb"
+   ],
+   "point": [
+    1.365,
+    7.4921,
+    -0.455
+   ],
+   "anchor": "hip-rb",
+   "id": "c0473"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-37-r",
+    "hip-rf"
+   ],
+   "point": [
+    1.365,
+    7.4921,
+    0.455
+   ],
+   "anchor": "hip-rf",
+   "id": "c0474"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-31-r",
+    "hip-rb"
+   ],
+   "point": [
+    1.82,
+    7.1293,
+    -0.91
+   ],
+   "anchor": "hip-rb",
+   "id": "c0475"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-39-r",
+    "hip-rf"
+   ],
+   "point": [
+    1.82,
+    7.1293,
+    0.91
+   ],
+   "anchor": "hip-rf",
+   "id": "c0476"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-29-r",
+    "hip-rb"
+   ],
+   "point": [
+    2.275,
+    6.7664,
+    -1.365
+   ],
+   "anchor": "hip-rb",
+   "id": "c0477"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-41-r",
+    "hip-rf"
+   ],
+   "point": [
+    2.275,
+    6.7664,
+    1.365
+   ],
+   "anchor": "hip-rf",
+   "id": "c0478"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-27-r",
+    "hip-rb"
+   ],
+   "point": [
+    2.73,
+    6.4035,
+    -1.82
+   ],
+   "anchor": "hip-rb",
+   "id": "c0479"
+  },
+  {
+   "kind": "jack-hip",
+   "members": [
+    "rafter-end-43-r",
+    "hip-rf"
+   ],
+   "point": [
+    2.73,
+    6.4035,
+    1.82
+   ],
+   "anchor": "hip-rf",
+   "id": "c0480"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-28-l",
+    "beam-z-0-618-0"
+   ],
+   "point": [
+    -2.73,
+    6.4035,
+    -1.365
+   ],
+   "anchor": "beam-z-0-618-0",
+   "id": "c0481"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-30-l",
+    "beam-z-0-618-0"
+   ],
+   "point": [
+    -2.73,
+    6.4035,
+    -0.91
+   ],
+   "anchor": "beam-z-0-618-0",
+   "id": "c0482"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-32-l",
+    "beam-z-0-618-0"
+   ],
+   "point": [
+    -2.73,
+    6.4035,
+    -0.455
+   ],
+   "anchor": "beam-z-0-618-0",
+   "id": "c0483"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-34-l",
+    "beam-z-0-618-1"
+   ],
+   "point": [
+    -2.73,
+    6.4035,
+    0.0
+   ],
+   "anchor": "beam-z-0-618-1",
+   "id": "c0484"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-36-l",
+    "beam-z-0-618-1"
+   ],
+   "point": [
+    -2.73,
+    6.4035,
+    0.455
+   ],
+   "anchor": "beam-z-0-618-1",
+   "id": "c0485"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-38-l",
+    "beam-z-0-618-1"
+   ],
+   "point": [
+    -2.73,
+    6.4035,
+    0.91
+   ],
+   "anchor": "beam-z-0-618-1",
+   "id": "c0486"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-40-l",
+    "beam-z-0-618-1"
+   ],
+   "point": [
+    -2.73,
+    6.4035,
+    1.365
+   ],
+   "anchor": "beam-z-0-618-1",
+   "id": "c0487"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-29-r",
+    "beam-z-3-618-0"
+   ],
+   "point": [
+    2.73,
+    6.4035,
+    -1.365
+   ],
+   "anchor": "beam-z-3-618-0",
+   "id": "c0488"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-31-r",
+    "beam-z-3-618-0"
+   ],
+   "point": [
+    2.73,
+    6.4035,
+    -0.91
+   ],
+   "anchor": "beam-z-3-618-0",
+   "id": "c0489"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-33-r",
+    "beam-z-3-618-0"
+   ],
+   "point": [
+    2.73,
+    6.4035,
+    -0.455
+   ],
+   "anchor": "beam-z-3-618-0",
+   "id": "c0490"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-35-r",
+    "beam-z-3-618-1"
+   ],
+   "point": [
+    2.73,
+    6.4035,
+    0.0
+   ],
+   "anchor": "beam-z-3-618-1",
+   "id": "c0491"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-37-r",
+    "beam-z-3-618-1"
+   ],
+   "point": [
+    2.73,
+    6.4035,
+    0.455
+   ],
+   "anchor": "beam-z-3-618-1",
+   "id": "c0492"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-39-r",
+    "beam-z-3-618-1"
+   ],
+   "point": [
+    2.73,
+    6.4035,
+    0.91
+   ],
+   "anchor": "beam-z-3-618-1",
+   "id": "c0493"
+  },
+  {
+   "kind": "jack-plate",
+   "members": [
+    "rafter-end-41-r",
+    "beam-z-3-618-1"
+   ],
+   "point": [
+    2.73,
+    6.4035,
+    1.365
+   ],
+   "anchor": "beam-z-3-618-1",
+   "id": "c0494"
+  }
+ ]
+}
