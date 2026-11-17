@@ -347,6 +347,10 @@ its joints; hovering a marker ghosts every other timber and shows the joint's
 name, description and a link straight to the matching catalog specimen. A click
 or tap pins it, and the accessible **Browse** panel indexes all 494 connections
 by family with a filter.
+Focusing a joint writes a `#house/<id>?…` anchor with the connection id, camera
+position and target, peel stop and paused clip time; the page script selects the
+house tab for that prefix and `restoreFromHash()` rebuilds the exact view, so
+Back after following a catalog link (or a reload) lands where the reader left.
 The four peel stops ghost the roof, the upper storey or the masonry. Play/Pause,
 replay, `currentTime`, Space, R and Escape are wired to the same clip as the
 `<model-viewer>` specimens, and a WebGL or fetch failure falls back to the

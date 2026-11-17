@@ -86,7 +86,10 @@ house detail is the same, *related* where the catalog shows the family in
 another configuration. Every family has a specimen now: the 19 house-only ones
 live in the **House details** tab; the schedule below lists all 27.
 Click or tap a timber or marker to pin it; Escape or **Clear focus** releases
-it. **Browse** is the full connection index: 494 entries grouped by family,
+it. Focusing a joint writes a `#house/<id>?…` anchor holding the connection,
+camera orbit, peel and paused clip time, so following the catalog link and
+pressing Back (or reloading) returns to the exact view; the site selects the
+house tab for that anchor. **Browse** is the full connection index: 494 entries grouped by family,
 with a filter, and selecting one focuses it in the scene. **Solid / Roof /
 Upper / Frame** peel the frame back without moving the camera: hide the roof,
 the upper storey, or the masonry. A WebGL or fetch failure falls back to the

@@ -1256,6 +1256,9 @@
   </div>
   <script>
     const viewers = document.querySelectorAll('model-viewer');
+    // A focused house joint writes "#house/<id>?…" so the catalog link can be
+    // followed and Back restores the exact view.  It is not a section id.
+    const houseViewHash = hash => /^#house\//.test(hash);
     // The house module is large, so it is imported only when the house tab is
     // first opened. Until then <house-viewer> is an inert unknown element.
     const houseViewer = document.querySelector('house-viewer');
@@ -1364,7 +1367,12 @@
       v.addEventListener('error', () => stageOf(v).classList.remove('ready'));
     });
     if (houseViewer) {
-      houseViewer.addEventListener('load', () => show(houseViewer));
+      houseViewer.addEventListener('load', () => {
+        show(houseViewer);
+        // A cold load on a joint anchor selects the house tab before the module
+        // is defined; apply the pending view once the model is actually ready.
+        if (houseViewHash(location.hash)) houseViewer.restoreFromHash?.(location.hash);
+      });
       houseViewer.addEventListener('error', () => stageOf(houseViewer).classList.remove('ready'));
     }
     const applyLoads = () => {
@@ -1395,7 +1403,9 @@
         if (e.isIntersecting) {
           links.forEach(a => a.classList.remove('active'));
           links.get(e.target.id)?.classList.add('active');
-          if (mobile.matches && (scrolled() || location.hash)) history.replaceState(null, '', '#' + e.target.id);
+          if (mobile.matches && (scrolled() || location.hash) && !houseViewHash(location.hash)) {
+            history.replaceState(null, '', '#' + e.target.id);
+          }
         }
       }
     }, { rootMargin: '-35% 0px -55% 0px' });
@@ -1515,9 +1525,27 @@
     }));
 
     // A link into the other tab (or a reload on one of its joints) selects that
-    // tab before scrolling to the joint.
+    // tab before scrolling to the joint.  A "#house/<id>?…" anchor is the house
+    // viewer's own state: select its tab (and scroll there when arriving from
+    // another tab) and let the viewer rebuild the exact focused view.
     const showFromHash = () => {
-      const id = location.hash.slice(1);
+      const hash = location.hash;
+      if (houseViewHash(hash)) {
+        const arriving = tab !== 'house';
+        if (arriving) applyTab('house');
+        if (arriving) {
+          fit();
+          requestAnimationFrame(() => {
+            const house = document.getElementById('house');
+            if (house && !house.hidden) {
+              house.scrollIntoView({ behavior: 'instant', block: 'start' });
+            }
+          });
+        }
+        houseViewer?.restoreFromHash?.(hash);
+        return;
+      }
+      const id = hash.slice(1);
       if (!id) return;
       const el = document.getElementById(id);
       if (!el || !el.classList.contains('joint')) return;

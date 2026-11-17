@@ -16,6 +16,19 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// A focused house joint is written to the URL as an anchor so a reader can
+// follow the card's catalog link and come back to the exact view with the
+// browser's Back button (or a reload/bookmark).  The syntax is owned here; the
+// site template only needs to know that "#house/…" selects the house tab.
+const VIEW_HASH = /^#house\/([^?]+)(?:\?(.*))?$/;
+const isViewHash = hash => VIEW_HASH.test(hash || '');
+const triple = (value) => {
+  if (!value) return null;
+  const parts = value.split(',').map(Number);
+  return parts.length === 3 && parts.every(Number.isFinite) ? parts : null;
+};
+const round2 = value => String(Math.round(value * 100) / 100);
+
 const TEMPLATE = `
 <style>
   :host {
@@ -241,6 +254,7 @@ class HouseViewer extends HTMLElement {
     this._clipDuration = 0;
     this._pendingTime = 0;
     this._pulseUntil = 0;
+    this._pendingHash = null;
   }
 
   connectedCallback() {
@@ -497,6 +511,9 @@ class HouseViewer extends HTMLElement {
       this._loading = false;
       if (!this._ok) return;
       this._loaded = true;
+      const pending = this._pendingHash;
+      this._pendingHash = null;
+      if (pending) this.restoreFromHash(pending);
       this._loadingEl.setAttribute('hidden', '');
       this._stage?.classList.add('ready');
       this.dispatchEvent(new Event('load'));
@@ -801,7 +818,7 @@ class HouseViewer extends HTMLElement {
     this._refresh();
   }
 
-  _focus(conn) {
+  _focus(conn, { anchor = true } = {}) {
     this._focusedConnection = conn;
     this._hoveredConnection = conn;
     this._pinnedPiece = null;
@@ -809,6 +826,7 @@ class HouseViewer extends HTMLElement {
     this.pause();
     this._refresh();
     this._canvas.style.cursor = 'pointer';
+    if (anchor) this._writeAnchor(conn);
   }
 
   _clearFocus({ rehover = true } = {}) {
@@ -818,9 +836,59 @@ class HouseViewer extends HTMLElement {
     this._markerPiece = null;
     this._hoveredPiece = null;
     this._refresh();
+    if (isViewHash(location.hash)) history.replaceState(null, '', '#house');
     if (rehover && this._lastPointer) {
       this._hoverAt(this._lastPointer.x, this._lastPointer.y);
     }
+  }
+
+  // -- shareable view anchors ---------------------------------------------
+  // Focus pushes a hash entry, so the catalog link that follows pushes another
+  // one and Back lands here again.  Camera/target keep the orbit, peel keeps the
+  // layer visibility and time keeps the pose when the clip was paused.
+  _writeAnchor(conn) {
+    if (!this._controls) return;
+    const p = this._camera.position;
+    const t = this._controls.target;
+    const parts = [
+      'p=' + [p.x, p.y, p.z].map(round2).join(','),
+      't=' + [t.x, t.y, t.z].map(round2).join(','),
+    ];
+    if (this._peel !== 'solid') parts.push('peel=' + encodeURIComponent(this._peel));
+    if (this.currentTime > 0.01) parts.push('time=' + round2(this.currentTime));
+    const hash = '#house/' + encodeURIComponent(conn.id) + '?' + parts.join('&');
+    if (location.hash !== hash) location.hash = hash;
+  }
+
+  // Restore a "#house/<id>?…" anchor, including when the lazy viewer has not
+  // loaded its model yet.  Returns false for hashes that are not ours.
+  restoreFromHash(hash) {
+    const match = VIEW_HASH.exec(hash || '');
+    if (!match) return false;
+    if (!this._loaded) {
+      this._pendingHash = hash;
+      return true;
+    }
+    const conn = this._connById.get(decodeURIComponent(match[1]));
+    if (!conn) return false;
+    const params = new URLSearchParams(match[2] || '');
+    const peel = params.get('peel');
+    if (peel && this._peelBtns.some(button => button.dataset.peel === peel)) {
+      this._setPeel(peel);
+    }
+    const time = Number(params.get('time'));
+    if (params.has('time') && Number.isFinite(time)) this.currentTime = time;
+    this._focus(conn, { anchor: false });
+    const position = triple(params.get('p'));
+    const target = triple(params.get('t'));
+    if (position && target) {
+      this._camera.position.set(...position);
+      this._controls.target.set(...target);
+      this._controls.update();
+      this._userMoved = true;   // do not let a later resize reset to home
+      this._wake();
+    }
+    return true;
   }
 
   // -- materials, outlines and markers -----------------------------------
