@@ -1,14 +1,17 @@
 # joints
 
-Thirty-four Japanese timber joints (継ぎ手 / 仕口) in a pastel paper-sunrise
+Fifty-three Japanese timber joints (継ぎ手 / 仕口) in a pastel paper-sunrise
 style. Seventeen are from the [thejoinery](https://sketchfab.com/thejoinery)
-collection on Sketchfab, rebuilt and baked; the other seventeen, with no licensed
-source model, are authored in this repository. Fifteen of those are drawn from
-the reference sheet 柱（軸組）の納まり and two from published descriptions of
-joints the sheet does not show, with
+collection on Sketchfab, rebuilt and baked; seventeen more, with no licensed
+source model, are authored in this repository with
 [`tools/author_joint.py`](../tools/author_joint.py) (fourteen column-and-beam
-`shikuchi` joints, three splices). The site keeps the two off-sheet joints in a
-second tab. There is **no garden or ground plane**: the timbers float against
+`shikuchi` joints, three splices — fifteen drawn from the reference sheet
+柱（軸組）の納まり and two from published descriptions of joints the sheet does not
+show). A further nineteen are authored with
+[`tools/author_details.py`](../tools/author_details.py) for the connection
+families the house frame uses beyond the sheets. The site keeps the two
+off-sheet joints in a second tab, and the house details in a fourth tab after
+**The house**. There is **no garden or ground plane**: the timbers float against
 the paper backdrop, which keeps the focus on the cut geometry.
 
 ## Layout
@@ -69,6 +72,39 @@ seventeen authored joints carry the project as author; fifteen credit the
 reference sheet they were drawn from, and the two off-sheet joints
 (`doutsuki-ari-tsugi`, `tsutsumikomi-nuki`) credit the published descriptions
 they were drawn from.
+
+## House details
+
+The house frame has 494 connections in 27 families. Eight of those families
+already have a specimen in the set above; the other nineteen got their own at
+the house's 120 mm scale so that every house viewer card can link straight to
+the joint it names. They are original geometry, authored from the house's joinery
+with [`tools/author_details.py`](../tools/author_details.py), and released
+**CC BY 4.0** like the rest of the authored joints. Most are box CSG; the sloped
+roof members use a local member frame, arbitrary-plane trimming for square-cut
+hip and rafter ends, and a profile prism for a birdsmouth with a horizontal seat.
+
+| Asset | Japanese | License | Pieces |
+|---|---|---|---|
+| [`sill-corner`](../tools/author_details.py) | 土台の留め | CC BY 4.0 (authored) | 2 |
+| [`brace-into-post`](../tools/author_details.py) | 筋違 | CC BY 4.0 (authored) | 2 |
+| [`fire-beam-tie`](../tools/author_details.py) | 火打梁 | CC BY 4.0 (authored) | 3 |
+| [`joist-half-lap`](../tools/author_details.py) | 根太の相欠き | CC BY 4.0 (authored) | 2 |
+| [`joist-into-sill`](../tools/author_details.py) | 根太の土台差し | CC BY 4.0 (authored) | 2 |
+| [`floor-post-into-sleeper`](../tools/author_details.py) | 床束の大引差し | CC BY 4.0 (authored) | 2 |
+| [`floor-post-on-stone`](../tools/author_details.py) | 床束の礎石 | CC BY 4.0 (authored) | 2 |
+| [`sleeper-into-sill`](../tools/author_details.py) | 大引の土台差し | CC BY 4.0 (authored) | 2 |
+| [`upper-joist-half-lap`](../tools/author_details.py) | 二階根太の相欠き | CC BY 4.0 (authored) | 2 |
+| [`upper-joist-into-girder`](../tools/author_details.py) | 二階根太の胴差差し | CC BY 4.0 (authored) | 2 |
+| [`purlin-under-hip`](../tools/author_details.py) | 母屋と隅木 | CC BY 4.0 (authored) | 2 |
+| [`hip-into-ridge`](../tools/author_details.py) | 隅木と棟木 | CC BY 4.0 (authored) | 2 |
+| [`hip-over-plate`](../tools/author_details.py) | 隅木と軒桁 | CC BY 4.0 (authored) | 3 |
+| [`rafter-at-ridge`](../tools/author_details.py) | 垂木と棟木 | CC BY 4.0 (authored) | 2 |
+| [`rafter-at-hip`](../tools/author_details.py) | 垂木と隅木 | CC BY 4.0 (authored) | 2 |
+| [`rafter-over-purlin`](../tools/author_details.py) | 垂木と母屋 | CC BY 4.0 (authored) | 2 |
+| [`rafter-over-plate`](../tools/author_details.py) | 垂木と軒桁 | CC BY 4.0 (authored) | 2 |
+| [`jack-rafter-at-hip`](../tools/author_details.py) | 短垂木と隅木 | CC BY 4.0 (authored) | 2 |
+| [`jack-rafter-over-plate`](../tools/author_details.py) | 短垂木と軒桁 | CC BY 4.0 (authored) | 2 |
 
 ## Changes from the source models
 
@@ -263,7 +299,14 @@ joint definitions, then bake and preview the same way:
 ```sh
 python3 author_joint.py                 # rewrites all seventeen sources
 python3 author_joint.py daimochi-tsugi  # or one
+python3 author_details.py               # rewrites all nineteen house details
+python3 author_details.py sill-corner   # or one
 ```
+
+The house details use arbitrary-plane trimming and a profile-prism extruder for
+the sloped cuts; `author_details.py` rounds every vertex to the 1 µm grid so the
+welded solids stay closed. Check them with `python3 check_sources.py <id>` before
+baking.
 
 To browse the result:
 

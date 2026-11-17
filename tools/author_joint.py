@@ -115,8 +115,14 @@ def weld_edges(faces):
     a neighbouring face; splitting the long edge at that corner makes every edge
     shared by exactly two faces, as the imported meshes are.
     """
-    verts = sorted({tuple(round(c, 6) for c in q)
-                    for f in faces for q in f["points"]})
+    # Keep the exact coordinates of each vertex, not the rounded lookup key:
+    # inserting a rounded key would move a real corner by up to 5e-7 and leave
+    # a near-duplicate point in the face.
+    verts = {}
+    for f in faces:
+        for q in f["points"]:
+            verts.setdefault(tuple(round(c, 6) for c in q), list(q))
+    keys = sorted(verts)
     out = []
     for f in faces:
         P = f["points"]
@@ -125,12 +131,17 @@ def weld_edges(faces):
             pts.append(a)
             d = [b[i] - a[i] for i in range(3)]
             L2 = sum(c * c for c in d)
+            L = math.sqrt(L2)
             on = []
-            for v in verts:
+            for k in keys:
+                v = verts[k]
                 t = sum((v[i] - a[i]) * d[i] for i in range(3))
-                if t <= 1e-9 or t >= L2 - 1e-9:
+                if t <= 0.0 or t >= L2:
                     continue
-                if t / L2 > 1.0 - 1e-9:
+                # A vertex within a micron of an endpoint is that endpoint,
+                # not an interior point on the edge.
+                along = t / L
+                if along < 1e-6 or L - along < 1e-6:
                     continue
                 w = [a[i] + d[i] * t / L2 for i in range(3)]
                 if max(abs(w[i] - v[i]) for i in range(3)) < 1e-7:

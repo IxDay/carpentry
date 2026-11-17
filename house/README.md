@@ -77,13 +77,14 @@ the stud, a hip-to-plate crossing at the plate, a floor post on its stone.
 
 The house tab loads the frame with a small custom element,
 [`tools/house_viewer.js`](../tools/house_viewer.js), and only imports it when
-the tab is first opened. The 34 joint specimens stay on `<model-viewer>`. The
+the tab is first opened. The 53 joint specimens stay on `<model-viewer>`. The
 frame starts assembled; **Play / Pause** (or Space) runs the same 27 s clip and
 **R** replays it from the start. Hovering a timber outlines it and marks its
 connections. Hovering a marker ghosts every other timber, names the joint,
-describes it and links to the matching catalog specimen — *exact* where the
+describes it and links straight to its catalog specimen — *exact* where the
 house detail is the same, *related* where the catalog shows the family in
-another configuration — or to the schedule below when the detail is house-only.
+another configuration. Every family has a specimen now: the 19 house-only ones
+live in the **House details** tab; the schedule below lists all 27.
 Click or tap a timber or marker to pin it; Escape or **Clear focus** releases
 it. **Browse** is the full connection index: 494 entries grouped by family,
 with a filter, and selecting one focuses it in the scene. **Solid / Roof /
@@ -116,11 +117,12 @@ r160 under `docs/`; see [`tools/vendor/README.md`](../tools/vendor/README.md).
 | 胴差 / 軒桁 at posts | housed tenon, as at the other beam ends |
 
 The brace, fire-beam, joist and rafter connections do not appear on the joint
-reference sheets. They are authored in [`tools/author_house.py`](../tools/author_house.py)
-and are **not** part of the 34-joint catalog: the house is one model, not a
-joint specimen, and the site's joint counts do not change. If one of these
-connections is wanted as a specimen later, its cut geometry can be lifted into
-`tools/author_joint.py` and the catalog.
+reference sheets. Their cut geometry is authored in
+[`tools/author_house.py`](../tools/author_house.py) as part of the frame and, as
+representative 120 mm specimens, in
+[`tools/author_details.py`](../tools/author_details.py) for the **House details**
+tab of the catalog. Those 19 specimens make every family above linkable; the
+house remains one model, so the 34 original specimens are unchanged.
 
 ## Building
 

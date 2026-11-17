@@ -1,0 +1,475 @@
+[
+ {
+  "id": "floor-post-on-stone",
+  "index": -1,
+  "chapter": 0,
+  "number": 0,
+  "title": "Floor post on stone",
+  "jp": "\u5e8a\u675f\u306e\u790e\u77f3",
+  "gloss": "",
+  "guidance": "The \u5e8a\u675f floor post stands directly on its \u790e\u77f3 stone. There is no tenon: the post bears on the dressed top, and the stone carries the load into the ground.",
+  "forReal": "",
+  "fact": "",
+  "scale": 1.0,
+  "gift": "",
+  "mark": "",
+  "masterOf": "",
+  "source": {
+   "title": "Floor post on stone",
+   "author": "Japanese joinery project",
+   "authorUrl": "https://github.com/ixday/carpentry",
+   "url": "https://github.com/ixday/carpentry",
+   "license": "CC BY 4.0",
+   "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+   "modifications": "authored in closed pose from the house frame's joinery, exploded for the assemble animation, sunset lighting baked; the baking rig's ground slab is omitted",
+   "credit": "Original geometry authored for this collection from the house frame's connections; CC BY 4.0."
+  },
+  "assemble": {
+   "part-a": [
+    0,
+    0,
+    0
+   ],
+   "part-b": [
+    -0.0,
+    -0.38,
+    -0.0
+   ]
+  },
+  "pieces": [
+   {
+    "id": "part-a",
+    "name": "Floor stone",
+    "kind": "timber",
+    "group": "detail",
+    "solids": [
+     {
+      "faces": [
+       {
+        "points": [
+         [
+          -0.09,
+          -0.13,
+          -0.09
+         ],
+         [
+          -0.09,
+          -0.13,
+          0.09
+         ],
+         [
+          -0.09,
+          0.0,
+          0.09
+         ],
+         [
+          -0.09,
+          0.0,
+          -0.09
+         ]
+        ],
+        "normal": [
+         -1.0,
+         0.0,
+         0.0
+        ],
+        "color": [
+         0.55,
+         0.53,
+         0.49
+        ]
+       },
+       {
+        "points": [
+         [
+          0.09,
+          -0.13,
+          -0.09
+         ],
+         [
+          0.09,
+          0.0,
+          -0.09
+         ],
+         [
+          0.09,
+          0.0,
+          0.09
+         ],
+         [
+          0.09,
+          -0.13,
+          0.09
+         ]
+        ],
+        "normal": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "color": [
+         0.55,
+         0.53,
+         0.49
+        ]
+       },
+       {
+        "points": [
+         [
+          -0.09,
+          -0.13,
+          -0.09
+         ],
+         [
+          0.09,
+          -0.13,
+          -0.09
+         ],
+         [
+          0.09,
+          -0.13,
+          0.09
+         ],
+         [
+          -0.09,
+          -0.13,
+          0.09
+         ]
+        ],
+        "normal": [
+         0.0,
+         -1.0,
+         0.0
+        ],
+        "color": [
+         0.55,
+         0.53,
+         0.49
+        ]
+       },
+       {
+        "points": [
+         [
+          -0.09,
+          0.0,
+          -0.09
+         ],
+         [
+          -0.09,
+          0.0,
+          0.09
+         ],
+         [
+          0.09,
+          0.0,
+          0.09
+         ],
+         [
+          0.09,
+          0.0,
+          -0.09
+         ]
+        ],
+        "normal": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "color": [
+         0.55,
+         0.53,
+         0.49
+        ]
+       },
+       {
+        "points": [
+         [
+          -0.09,
+          -0.13,
+          -0.09
+         ],
+         [
+          -0.09,
+          0.0,
+          -0.09
+         ],
+         [
+          0.09,
+          0.0,
+          -0.09
+         ],
+         [
+          0.09,
+          -0.13,
+          -0.09
+         ]
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         -1.0
+        ],
+        "color": [
+         0.55,
+         0.53,
+         0.49
+        ]
+       },
+       {
+        "points": [
+         [
+          -0.09,
+          -0.13,
+          0.09
+         ],
+         [
+          0.09,
+          -0.13,
+          0.09
+         ],
+         [
+          0.09,
+          0.0,
+          0.09
+         ],
+         [
+          -0.09,
+          0.0,
+          0.09
+         ]
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ],
+        "color": [
+         0.55,
+         0.53,
+         0.49
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "part-b",
+    "name": "Floor post",
+    "kind": "timber",
+    "group": "detail",
+    "solids": [
+     {
+      "faces": [
+       {
+        "points": [
+         [
+          -0.045,
+          0.38,
+          -0.045
+         ],
+         [
+          -0.045,
+          0.38,
+          0.045
+         ],
+         [
+          -0.045,
+          0.83,
+          0.045
+         ],
+         [
+          -0.045,
+          0.83,
+          -0.045
+         ]
+        ],
+        "normal": [
+         -1.0,
+         0.0,
+         0.0
+        ],
+        "color": [
+         0.37,
+         0.46,
+         0.54
+        ]
+       },
+       {
+        "points": [
+         [
+          0.045,
+          0.38,
+          -0.045
+         ],
+         [
+          0.045,
+          0.83,
+          -0.045
+         ],
+         [
+          0.045,
+          0.83,
+          0.045
+         ],
+         [
+          0.045,
+          0.38,
+          0.045
+         ]
+        ],
+        "normal": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "color": [
+         0.37,
+         0.46,
+         0.54
+        ]
+       },
+       {
+        "points": [
+         [
+          -0.045,
+          0.38,
+          -0.045
+         ],
+         [
+          0.045,
+          0.38,
+          -0.045
+         ],
+         [
+          0.045,
+          0.38,
+          0.045
+         ],
+         [
+          -0.045,
+          0.38,
+          0.045
+         ]
+        ],
+        "normal": [
+         0.0,
+         -1.0,
+         0.0
+        ],
+        "color": [
+         0.37,
+         0.46,
+         0.54
+        ]
+       },
+       {
+        "points": [
+         [
+          -0.045,
+          0.83,
+          -0.045
+         ],
+         [
+          -0.045,
+          0.83,
+          0.045
+         ],
+         [
+          0.045,
+          0.83,
+          0.045
+         ],
+         [
+          0.045,
+          0.83,
+          -0.045
+         ]
+        ],
+        "normal": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "color": [
+         0.37,
+         0.46,
+         0.54
+        ]
+       },
+       {
+        "points": [
+         [
+          -0.045,
+          0.38,
+          -0.045
+         ],
+         [
+          -0.045,
+          0.83,
+          -0.045
+         ],
+         [
+          0.045,
+          0.83,
+          -0.045
+         ],
+         [
+          0.045,
+          0.38,
+          -0.045
+         ]
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         -1.0
+        ],
+        "color": [
+         0.37,
+         0.46,
+         0.54
+        ]
+       },
+       {
+        "points": [
+         [
+          -0.045,
+          0.38,
+          0.045
+         ],
+         [
+          0.045,
+          0.38,
+          0.045
+         ],
+         [
+          0.045,
+          0.83,
+          0.045
+         ],
+         [
+          -0.045,
+          0.83,
+          0.045
+         ]
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ],
+        "color": [
+         0.37,
+         0.46,
+         0.54
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "tab": "house-details"
+ }
+]

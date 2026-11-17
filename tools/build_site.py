@@ -32,6 +32,8 @@ TABS = [
      "Joints the reference sheets do not show, authored for this collection."),
     ("house", "The house",
      "The frame from house.jpg: it takes itself apart and builds itself back, joint by joint."),
+    ("house-details", "House details",
+     "The house-only connections, at 120 mm scale: sills, framing, floor and roof."),
 ]
 DEFAULT_TAB = TABS[0][0]
 
@@ -237,10 +239,11 @@ def footer(repo_url, joints=()):
     def number(n):
         return words[n] if n < len(words) else str(n)
 
-    authored = [j for j in joints if j.get("tab") in ("sheet", "extra")
+    authored = [j for j in joints if j.get("tab") in ("sheet", "extra", "house-details")
                 and "sketchfab.com" not in j["source"]["url"]]
     sheet = [j for j in authored if j.get("tab") == DEFAULT_TAB]
-    extra = [j for j in authored if j.get("tab") != DEFAULT_TAB]
+    extra = [j for j in authored if j.get("tab") == "extra"]
+    details = [j for j in authored if j.get("tab") == "house-details"]
     house = [j for j in joints if j.get("tab") == "house"]
     authored_line = ""
     if sheet:
@@ -260,6 +263,20 @@ def footer(repo_url, joints=()):
             "sheets: a dovetail splice and a 包み込み貫 tie, authored from the "
             "sources cited in %s.</p>"
             % (number(len(extra)).capitalize(), cited))
+    if details:
+        if repo_url:
+            cited = ('<a href="%s/tools/author_details.py">tools/author_details.py</a>'
+                     % esc(repo_url.rstrip("/")))
+        else:
+            cited = "tools/author_details.py"
+        authored_line += (
+            "\n      <p>The <em>House details</em> tab adds %s more specimens, one "
+            "for every connection family the house frame makes beyond the two "
+            "sheets: halved sills and joists, a braced post, floor posts on "
+            "sleepers and stones, and the hip, purlin and rafter cuts of the "
+            "roof. Each is a representative joint at the house's 120 mm scale, "
+            "authored by %s and released CC BY 4.0.</p>"
+            % (number(len(details)), cited))
     if house:
         if repo_url:
             cited = ('<a href="%s/house/README.md">house/README.md</a>'
@@ -273,9 +290,11 @@ def footer(repo_url, joints=()):
             "It comes apart from the ridge down and goes back together from the "
             "foundation up, one timber at a time. Its tab uses a three.js viewer "
             "(vendored, MIT) with connection-level hover: a timber marks its "
-            "joints, a joint names the connection and links to the catalog or "
-            "the schedule, and Browse indexes all 494. Notes and the joint "
-            "schedule: %s.</p>" % (house[0]["pieces"], cited))
+            "joints, a joint names the connection and links straight to its "
+            "catalog specimen &mdash; the House details tab covers the 19 "
+            "families the sheets do not show &mdash; and Browse indexes all "
+            "494. Notes and the joint schedule: %s."
+            % (house[0]["pieces"], cited))
     repo = ('\n      <p>Source and tooling: <a href="%s">%s</a>. Per-joint notes '
             'and references: <a href="%s/joints/README.md">joints/README.md</a>.</p>'
             % (esc(repo_url), esc(repo_url), esc(repo_url.rstrip("/")))

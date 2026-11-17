@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Japanese joinery</title>
-  <meta name="description" content="34 Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble, plus a two-storey house that unbuilds and rebuilds itself.">
+  <meta name="description" content="53 Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble, plus a two-storey house that unbuilds and rebuilds itself.">
   <meta property="og:title" content="Japanese joinery">
-  <meta property="og:description" content="34 Japanese timber joints as interactive 3D models, plus a two-storey house that unbuilds and rebuilds itself.">
+  <meta property="og:description" content="53 Japanese timber joints as interactive 3D models, plus a two-storey house that unbuilds and rebuilds itself.">
   <meta property="og:image" content="posters/daimochi-tsugi.png">
   <noscript>
     <style>
@@ -291,11 +291,12 @@
     <nav class="index" id="index" aria-label="Joints">
       <button class="menu-close" type="button" aria-label="Close the menu">&times;</button>
       <h1>Japanese joinery</h1>
-      <p>34 joints that assemble and come apart, and one house that takes itself apart and builds itself back.</p>
+      <p>53 joints that assemble and come apart, and one house that takes itself apart and builds itself back.</p>
       <div class="tabs" role="tablist" aria-label="Which joints">
         <button type="button" role="tab" id="tab-sheet" data-tab="sheet" data-note="Every family printed on the two reference sheets." aria-selected="true" tabindex="0" aria-controls="joint-list">On the sheets <span class="count">32</span></button>
         <button type="button" role="tab" id="tab-extra" data-tab="extra" data-note="Joints the reference sheets do not show, authored for this collection." aria-selected="false" tabindex="-1" aria-controls="joint-list">Off the sheets <span class="count">2</span></button>
         <button type="button" role="tab" id="tab-house" data-tab="house" data-note="The frame from house.jpg: it takes itself apart and builds itself back, joint by joint." aria-selected="false" tabindex="-1" aria-controls="joint-list">The house <span class="count">1</span></button>
+        <button type="button" role="tab" id="tab-house-details" data-tab="house-details" data-note="The house-only connections, at 120 mm scale: sills, framing, floor and roof." aria-selected="false" tabindex="-1" aria-controls="joint-list">House details <span class="count">19</span></button>
       </div>
       <p class="tab-note" id="tab-note"></p>
       <div class="search">
@@ -339,6 +340,25 @@
         <li data-tab="sheet"><a href="#yose-ari-hozo-shikuchi"><span class="name">Yose-ari-hozo-shikuchi</span><span class="jp" lang="ja">寄せ蟻枘仕口</span></a></li>
         <li data-tab="extra" hidden><a href="#doutsuki-ari-tsugi"><span class="name">Doutsuki-ari-tsugi</span><span class="jp" lang="ja">胴付き蟻継ぎ</span></a></li>
         <li data-tab="extra" hidden><a href="#tsutsumikomi-nuki"><span class="name">Tsutsumikomi-nuki</span><span class="jp" lang="ja">包み込み貫</span></a></li>
+        <li data-tab="house-details" hidden><a href="#brace-into-post"><span class="name">Brace into post</span><span class="jp" lang="ja">筋違</span></a></li>
+        <li data-tab="house-details" hidden><a href="#fire-beam-tie"><span class="name">Fire-beam tie</span><span class="jp" lang="ja">火打梁</span></a></li>
+        <li data-tab="house-details" hidden><a href="#floor-post-into-sleeper"><span class="name">Floor post into sleeper</span><span class="jp" lang="ja">床束の大引差し</span></a></li>
+        <li data-tab="house-details" hidden><a href="#floor-post-on-stone"><span class="name">Floor post on stone</span><span class="jp" lang="ja">床束の礎石</span></a></li>
+        <li data-tab="house-details" hidden><a href="#hip-into-ridge"><span class="name">Hip into ridge</span><span class="jp" lang="ja">隅木と棟木</span></a></li>
+        <li data-tab="house-details" hidden><a href="#hip-over-plate"><span class="name">Hip over plate</span><span class="jp" lang="ja">隅木と軒桁</span></a></li>
+        <li data-tab="house-details" hidden><a href="#jack-rafter-at-hip"><span class="name">Jack rafter at hip</span><span class="jp" lang="ja">短垂木と隅木</span></a></li>
+        <li data-tab="house-details" hidden><a href="#jack-rafter-over-plate"><span class="name">Jack rafter over plate</span><span class="jp" lang="ja">短垂木と軒桁</span></a></li>
+        <li data-tab="house-details" hidden><a href="#joist-half-lap"><span class="name">Joist half-lap</span><span class="jp" lang="ja">根太の相欠き</span></a></li>
+        <li data-tab="house-details" hidden><a href="#joist-into-sill"><span class="name">Joist into sill</span><span class="jp" lang="ja">根太の土台差し</span></a></li>
+        <li data-tab="house-details" hidden><a href="#purlin-under-hip"><span class="name">Purlin under hip</span><span class="jp" lang="ja">母屋と隅木</span></a></li>
+        <li data-tab="house-details" hidden><a href="#rafter-at-hip"><span class="name">Rafter at hip</span><span class="jp" lang="ja">垂木と隅木</span></a></li>
+        <li data-tab="house-details" hidden><a href="#rafter-at-ridge"><span class="name">Rafter at ridge</span><span class="jp" lang="ja">垂木と棟木</span></a></li>
+        <li data-tab="house-details" hidden><a href="#rafter-over-plate"><span class="name">Rafter over plate</span><span class="jp" lang="ja">垂木と軒桁</span></a></li>
+        <li data-tab="house-details" hidden><a href="#rafter-over-purlin"><span class="name">Rafter over purlin</span><span class="jp" lang="ja">垂木と母屋</span></a></li>
+        <li data-tab="house-details" hidden><a href="#sill-corner"><span class="name">Sill corner</span><span class="jp" lang="ja">土台の留め</span></a></li>
+        <li data-tab="house-details" hidden><a href="#sleeper-into-sill"><span class="name">Sleeper into sill</span><span class="jp" lang="ja">大引の土台差し</span></a></li>
+        <li data-tab="house-details" hidden><a href="#upper-joist-half-lap"><span class="name">Upper joist half-lap</span><span class="jp" lang="ja">二階根太の相欠き</span></a></li>
+        <li data-tab="house-details" hidden><a href="#upper-joist-into-girder"><span class="name">Upper joist into girder</span><span class="jp" lang="ja">二階根太の胴差差し</span></a></li>
         <li data-tab="house" hidden><a href="#house"><span class="name">The house</span><span class="jp" lang="ja">民家</span></a></li>
       </ol>
     </nav>
@@ -887,6 +907,310 @@
         <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
           <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
       </section>
+      <section class="joint" id="brace-into-post" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#brace-into-post">Brace into post<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">筋違</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-brace-into-post" data-src="models/brace-into-post.glb"
+              alt="Brace into post assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-brace-into-post">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="fire-beam-tie" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#fire-beam-tie">Fire-beam tie<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">火打梁</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-fire-beam-tie" data-src="models/fire-beam-tie.glb"
+              alt="Fire-beam tie assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-fire-beam-tie">Replay</button>
+        </div>
+        <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="floor-post-into-sleeper" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#floor-post-into-sleeper">Floor post into sleeper<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">床束の大引差し</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-floor-post-into-sleeper" data-src="models/floor-post-into-sleeper.glb"
+              alt="Floor post into sleeper assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-floor-post-into-sleeper">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="floor-post-on-stone" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#floor-post-on-stone">Floor post on stone<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">床束の礎石</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-floor-post-on-stone" data-src="models/floor-post-on-stone.glb"
+              alt="Floor post on stone assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-floor-post-on-stone">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="hip-into-ridge" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#hip-into-ridge">Hip into ridge<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">隅木と棟木</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-hip-into-ridge" data-src="models/hip-into-ridge.glb"
+              alt="Hip into ridge assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-hip-into-ridge">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="hip-over-plate" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#hip-over-plate">Hip over plate<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">隅木と軒桁</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-hip-over-plate" data-src="models/hip-over-plate.glb"
+              alt="Hip over plate assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-hip-over-plate">Replay</button>
+        </div>
+        <p class="meta">3 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="jack-rafter-at-hip" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#jack-rafter-at-hip">Jack rafter at hip<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">短垂木と隅木</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-jack-rafter-at-hip" data-src="models/jack-rafter-at-hip.glb"
+              alt="Jack rafter at hip assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-jack-rafter-at-hip">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="jack-rafter-over-plate" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#jack-rafter-over-plate">Jack rafter over plate<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">短垂木と軒桁</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-jack-rafter-over-plate" data-src="models/jack-rafter-over-plate.glb"
+              alt="Jack rafter over plate assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-jack-rafter-over-plate">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="joist-half-lap" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#joist-half-lap">Joist half-lap<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">根太の相欠き</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-joist-half-lap" data-src="models/joist-half-lap.glb"
+              alt="Joist half-lap assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-joist-half-lap">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="joist-into-sill" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#joist-into-sill">Joist into sill<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">根太の土台差し</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-joist-into-sill" data-src="models/joist-into-sill.glb"
+              alt="Joist into sill assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-joist-into-sill">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="purlin-under-hip" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#purlin-under-hip">Purlin under hip<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">母屋と隅木</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-purlin-under-hip" data-src="models/purlin-under-hip.glb"
+              alt="Purlin under hip assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-purlin-under-hip">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="rafter-at-hip" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#rafter-at-hip">Rafter at hip<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">垂木と隅木</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-rafter-at-hip" data-src="models/rafter-at-hip.glb"
+              alt="Rafter at hip assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-rafter-at-hip">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="rafter-at-ridge" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#rafter-at-ridge">Rafter at ridge<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">垂木と棟木</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-rafter-at-ridge" data-src="models/rafter-at-ridge.glb"
+              alt="Rafter at ridge assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-rafter-at-ridge">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="rafter-over-plate" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#rafter-over-plate">Rafter over plate<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">垂木と軒桁</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-rafter-over-plate" data-src="models/rafter-over-plate.glb"
+              alt="Rafter over plate assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-rafter-over-plate">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="rafter-over-purlin" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#rafter-over-purlin">Rafter over purlin<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">垂木と母屋</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-rafter-over-purlin" data-src="models/rafter-over-purlin.glb"
+              alt="Rafter over purlin assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-rafter-over-purlin">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="sill-corner" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#sill-corner">Sill corner<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">土台の留め</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-sill-corner" data-src="models/sill-corner.glb"
+              alt="Sill corner assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-sill-corner">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="sleeper-into-sill" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#sleeper-into-sill">Sleeper into sill<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">大引の土台差し</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-sleeper-into-sill" data-src="models/sleeper-into-sill.glb"
+              alt="Sleeper into sill assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-sleeper-into-sill">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="upper-joist-half-lap" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#upper-joist-half-lap">Upper joist half-lap<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">二階根太の相欠き</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-upper-joist-half-lap" data-src="models/upper-joist-half-lap.glb"
+              alt="Upper joist half-lap assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-upper-joist-half-lap">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
+      <section class="joint" id="upper-joist-into-girder" data-tab="house-details" data-tab-count="19" hidden>
+        <header>
+          <h2><a href="#upper-joist-into-girder">Upper joist into girder<span class="hash" aria-hidden="true">#</span></a></h2>
+          <p class="jp" lang="ja">二階根太の胴差差し</p>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-upper-joist-into-girder" data-src="models/upper-joist-into-girder.glb"
+              alt="Upper joist into girder assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-upper-joist-into-girder">Replay</button>
+        </div>
+        <p class="meta">2 pieces &middot; model by <a href="https://github.com/ixday/carpentry">Japanese joinery project</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/ixday/carpentry">Source in this repository</a>.</p>
+      </section>
       <section class="joint" id="house" data-tab="house" data-tab-count="1" hidden>
         <header>
           <h2><a href="#house">The house<span class="hash" aria-hidden="true">#</span></a></h2>
@@ -913,7 +1237,8 @@
         author's pose was not the true closed joint.</p>
       <p>Fifteen joints with no licensed source model &mdash; every family on the reference sheets, splices included &mdash; are authored for this collection from 柱（軸組）の納まり and released CC BY 4.0.</p>
       <p>Two more, in the <em>Off the sheets</em> tab, go beyond the sheets: a dovetail splice and a 包み込み貫 tie, authored from the sources cited in <a href="https://github.com/IxDay/carpentry/joints/README.md">joints/README.md</a>.</p>
-      <p><em>The house</em> is the open frame of the two-storey house in the reference drawings: 272 timbers, a 3 x 2 ken plan and a hip roof, with tenons, mortises, half-laps and wedges at the connections. It comes apart from the ridge down and goes back together from the foundation up, one timber at a time. Its tab uses a three.js viewer (vendored, MIT) with connection-level hover: a timber marks its joints, a joint names the connection and links to the catalog or the schedule, and Browse indexes all 494. Notes and the joint schedule: <a href="https://github.com/IxDay/carpentry/house/README.md">house/README.md</a>.</p>
+      <p>The <em>House details</em> tab adds nineteen more specimens, one for every connection family the house frame makes beyond the two sheets: halved sills and joists, a braced post, floor posts on sleepers and stones, and the hip, purlin and rafter cuts of the roof. Each is a representative joint at the house's 120 mm scale, authored by <a href="https://github.com/IxDay/carpentry/tools/author_details.py">tools/author_details.py</a> and released CC BY 4.0.</p>
+      <p><em>The house</em> is the open frame of the two-storey house in the reference drawings: 272 timbers, a 3 x 2 ken plan and a hip roof, with tenons, mortises, half-laps and wedges at the connections. It comes apart from the ridge down and goes back together from the foundation up, one timber at a time. Its tab uses a three.js viewer (vendored, MIT) with connection-level hover: a timber marks its joints, a joint names the connection and links straight to its catalog specimen &mdash; the House details tab covers the 19 families the sheets do not show &mdash; and Browse indexes all 494. Notes and the joint schedule: <a href="https://github.com/IxDay/carpentry/house/README.md">house/README.md</a>.
       <h2>References</h2>
       <ul>
         <li><a href="https://projects.mcah.columbia.edu/jaanus/node/3413">JAANUS, kanawa tsugi 金輪継</a></li>

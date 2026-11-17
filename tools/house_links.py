@@ -35,14 +35,17 @@ WH, DH = W / 2, D / 2
 
 # ---------------------------------------------------------------------------
 # Every connection family the frame actually models.  `catalog` names a joint
-# specimen in the 34-joint catalog; `match` is "exact" when the house joint is
-# the same detail, "related" when the catalog shows the same family in another
-# configuration.  The reader links house-only details to the joint schedule.
+# specimen in the catalog; `match` is "exact" when that specimen is the same
+# detail (the 34 sheet specimens plus the 19 House details), "related" when it
+# shows the same family in another configuration.  Every family has a catalog
+# link now; the schedule remains the source for the full list of instances.
 KINDS = {
     "sill-corner": {
         "title": "Sill corner",
         "description": ("The two 土台 sill members are halved across each "
                         "other, alternating which wall keeps the top half."),
+        "catalog": "sill-corner",
+        "match": "exact",
     },
     "post-sill": {
         "title": "Post on sill",
@@ -77,40 +80,58 @@ KINDS = {
         "title": "Brace into post",
         "description": ("The 筋違 brace is let into the post face; its own "
                         "thickness forms the housing and no peg is used."),
+        "catalog": "brace-into-post",
+        "match": "exact",
     },
     "fire-beam": {
         "title": "火打梁 tie",
         "description": ("A diagonal 火打梁 ties the two sill or girder members "
                         "across the corner, resting on both."),
+        "catalog": "fire-beam-tie",
+        "match": "exact",
     },
     "joist-sleeper": {
         "title": "Joist half-lap",
         "description": ("The 根太 joist and the 大引 sleeper are halved 30 mm "
                         "each where they cross."),
+        "catalog": "joist-half-lap",
+        "match": "exact",
     },
     "joist-sill": {
         "title": "Joist into sill",
         "description": "The joist end is housed 30 mm into the sill.",
+        "catalog": "joist-into-sill",
+        "match": "exact",
     },
     "floorpost-sleeper": {
         "title": "床束 into sleeper",
         "description": "The short 床束 floor post tenons up into the 大引 sleeper.",
+        "catalog": "floor-post-into-sleeper",
+        "match": "exact",
     },
     "floorpost-stone": {
         "title": "床束 on stone",
         "description": "The 床束 floor post bears on its foundation stone.",
+        "catalog": "floor-post-on-stone",
+        "match": "exact",
     },
     "sleeper-sill": {
         "title": "Sleeper into sill",
         "description": "The 大引 sleeper end is housed into the end sill.",
+        "catalog": "sleeper-into-sill",
+        "match": "exact",
     },
     "upperjoist-beam": {
         "title": "Upper joist half-lap",
         "description": "The upper 根太 is halved over the spine beam.",
+        "catalog": "upper-joist-half-lap",
+        "match": "exact",
     },
     "upperjoist-girder": {
         "title": "Upper joist into girder",
         "description": "The upper joist end is housed into the 胴差 girder.",
+        "catalog": "upper-joist-into-girder",
+        "match": "exact",
     },
     "roofbeam-plate": {
         "title": "小屋梁 into plate",
@@ -140,38 +161,56 @@ KINDS = {
     "purlin-hip": {
         "title": "Purlin under hip",
         "description": "The 母屋 purlin end carries the 隅木 hip rafter where their lines cross.",
+        "catalog": "purlin-under-hip",
+        "match": "exact",
     },
     "ridge-hip": {
         "title": "Hip into ridge",
         "description": "The 隅木 hip rafter butts the end of the ridge.",
+        "catalog": "hip-into-ridge",
+        "match": "exact",
     },
     "hip-plate": {
         "title": "Hip over plate",
         "description": "The hip rafter passes over the corner where the two 軒桁 plates meet.",
+        "catalog": "hip-over-plate",
+        "match": "exact",
     },
     "rafter-ridge": {
         "title": "Rafter at ridge",
         "description": "The common rafter butts the ridge at the top of the slope.",
+        "catalog": "rafter-at-ridge",
+        "match": "exact",
     },
     "rafter-hip": {
         "title": "Rafter at hip",
         "description": "The common rafter is cut square against the hip rafter.",
+        "catalog": "rafter-at-hip",
+        "match": "exact",
     },
     "rafter-purlin": {
         "title": "Rafter over purlin",
         "description": "A birdsmouth notch seats the rafter over the 母屋 purlin.",
+        "catalog": "rafter-over-purlin",
+        "match": "exact",
     },
     "rafter-plate": {
         "title": "Rafter over plate",
         "description": "A birdsmouth notch seats the rafter over the 軒桁 plate.",
+        "catalog": "rafter-over-plate",
+        "match": "exact",
     },
     "jack-hip": {
         "title": "Jack rafter at hip",
         "description": "The jack rafter is cut square against the hip rafter.",
+        "catalog": "jack-rafter-at-hip",
+        "match": "exact",
     },
     "jack-plate": {
         "title": "Jack rafter over plate",
         "description": "The jack rafter is notched over the 軒桁 plate at the hipped end.",
+        "catalog": "jack-rafter-over-plate",
+        "match": "exact",
     },
 }
 

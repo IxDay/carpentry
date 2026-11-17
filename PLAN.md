@@ -323,10 +323,10 @@ at every structural connection (not a massing model).
 | 隅木 ↔ 棟木 | halved/tenoned ridge seat |
 | 土台 / 胴差 / 軒桁 corners | halved corner lap |
 
-The brace, fire-beam, joist and rafter connections are new. They will live in
-`tools/author_house.py` first, with their cut geometry and a short note in
-`house/README.md`; if a connection proves useful as a specimen it can be
-promoted to the joint catalog later.
+The brace, fire-beam, joist and rafter connections are new. Their cut geometry
+lives in `tools/author_house.py`, with a short note in `house/README.md`, and a
+representative specimen for each now lives in `tools/author_details.py` so every
+house card can link to a real joint rather than only to the schedule.
 
 ### Output and size
 
@@ -338,8 +338,9 @@ no per-face subdivision and no baked AO, so it stays small (2.25 MB with the
 clip; aim: under 10 MB).
 If it grows past that, the fallback is `.gltf` + external `.bin`, or a
 Draco-compressed GLB; the source stays the editable deliverable either way.
-The site gets a third tab, **The house**, with one viewer section; the joint
-counts and the existing two tabs are unchanged.
+The site gets a third tab, **The house**, with one viewer section, and a fourth,
+**House details**, with the specimens below; the counts of the existing two tabs
+are unchanged.
 
 ### Built
 
@@ -348,10 +349,10 @@ The frame is in `house/`: 272 timbers, 15,530 triangles, a 2.25 MB GLB, and a
 and real joinery at the connections in the table above. The GLB carries a 27 s
 `assemble` clip that takes the frame apart and puts it back together, driven by
 the joint each timber is held by: 223 moving timbers in twelve stages, with the
-49 foundation and stone pieces static. The joint catalog is
-still 34; none of the house connections were promoted, so the two existing tabs
-and their counts are untouched. The third tab is live in `docs/` and links to
-[`house/README.md`](house/README.md).
+49 foundation and stone pieces static. The original 34-joint catalog is
+unchanged, so the two existing tabs and their counts are untouched; the new
+house specimens are a fourth tab instead. The third tab is live in `docs/` and
+links to [`house/README.md`](house/README.md).
 
 The house tab is now a connection-level viewer rather than a bare
 `<model-viewer>`. The GLB is unchanged: `tools/house_links.py` derives
@@ -365,6 +366,28 @@ Click/tap pins a connection, **Browse** is the accessible 494-entry index, and
 Play/Pause and replay run the same 27 s clip. The 34 joint specimens stay on
 `<model-viewer>`, and three.js r160 is vendored (MIT) with its notice under
 `tools/vendor/three/`.
+
+### House details
+
+The house sheet audit found 19 connection families with no catalog specimen —
+292 of the 494 instances. Rather than leave those cards pointing only at the
+schedule, `tools/author_details.py` builds one representative 120 mm specimen
+per family: `sill-corner`, `brace-into-post`, `fire-beam-tie`, `joist-half-lap`,
+`joist-into-sill`, `floor-post-into-sleeper`, `floor-post-on-stone`,
+`sleeper-into-sill`, `upper-joist-half-lap`, `upper-joist-into-girder`,
+`purlin-under-hip`, `hip-into-ridge`, `hip-over-plate`, `rafter-at-ridge`,
+`rafter-at-hip`, `rafter-over-purlin`, `rafter-over-plate`,
+`jack-rafter-at-hip` and `jack-rafter-over-plate`. Sloped members use a local
+frame, arbitrary-plane trimming for square hip and rafter ends, and a profile
+prism for a birdsmouth with a horizontal seat. All 19 pass
+`check_sources.py` (closed, wound, no overlap), are baked without a ground slab
+with the standard joint flags, and have sunset posters. `tools/house_links.py`
+maps all 27 families to a specimen: 20 `match: "exact"` (these 19 plus the
+wrapped nuki) and 7 `match: "related"` where the catalog shows the family in
+another configuration. The site therefore has 53
+joints in four tabs: 32 sheet, 2 extra, the house and 19 house details. All new
+geometry is original and CC BY 4.0; the three.js attribution and house geometry
+licensing are unchanged.
 
 The one deviation from the first sketch is the second-floor deck: the upper
 根太 are modelled but the boards are not, so the ground-floor frame stays

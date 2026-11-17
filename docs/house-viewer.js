@@ -4,10 +4,10 @@
  * raycasts the timbers, and reads house/connections.json for the joint
  * instances cut into them.  A hovered timber outlines and marks its
  * connections; a hovered or pinned connection ghosts everything else and shows
- * the joint's catalog link or the house joint schedule.
+ * a link straight to the matching catalog specimen.
  *
  * It is a custom element on purpose: the page can lazy-import this module when
- * the house tab is first opened, and <model-viewer> stays untouched for the 34
+ * the house tab is first opened, and <model-viewer> stays untouched for the 53
  * joint specimens.
  */
 import * as THREE from 'three';

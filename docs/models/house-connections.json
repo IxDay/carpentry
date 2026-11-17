@@ -22,6 +22,12 @@
   "sill-corner": {
    "title": "Sill corner",
    "description": "The two \u571f\u53f0 sill members are halved across each other, alternating which wall keeps the top half.",
+   "catalog": {
+    "slug": "sill-corner",
+    "title": "Sill corner",
+    "jp": "\u571f\u53f0\u306e\u7559\u3081"
+   },
+   "match": "exact",
    "count": 4
   },
   "post-sill": {
@@ -71,46 +77,100 @@
   "brace": {
    "title": "Brace into post",
    "description": "The \u7b4b\u9055 brace is let into the post face; its own thickness forms the housing and no peg is used.",
+   "catalog": {
+    "slug": "brace-into-post",
+    "title": "Brace into post",
+    "jp": "\u7b4b\u9055"
+   },
+   "match": "exact",
    "count": 24
   },
   "fire-beam": {
    "title": "\u706b\u6253\u6881 tie",
    "description": "A diagonal \u706b\u6253\u6881 ties the two sill or girder members across the corner, resting on both.",
+   "catalog": {
+    "slug": "fire-beam-tie",
+    "title": "Fire-beam tie",
+    "jp": "\u706b\u6253\u6881"
+   },
+   "match": "exact",
    "count": 8
   },
   "joist-sleeper": {
    "title": "Joist half-lap",
    "description": "The \u6839\u592a joist and the \u5927\u5f15 sleeper are halved 30 mm each where they cross.",
+   "catalog": {
+    "slug": "joist-half-lap",
+    "title": "Joist half-lap",
+    "jp": "\u6839\u592a\u306e\u76f8\u6b20\u304d"
+   },
+   "match": "exact",
    "count": 60
   },
   "joist-sill": {
    "title": "Joist into sill",
    "description": "The joist end is housed 30 mm into the sill.",
+   "catalog": {
+    "slug": "joist-into-sill",
+    "title": "Joist into sill",
+    "jp": "\u6839\u592a\u306e\u571f\u53f0\u5dee\u3057"
+   },
+   "match": "exact",
    "count": 24
   },
   "floorpost-sleeper": {
    "title": "\u5e8a\u675f into sleeper",
    "description": "The short \u5e8a\u675f floor post tenons up into the \u5927\u5f15 sleeper.",
+   "catalog": {
+    "slug": "floor-post-into-sleeper",
+    "title": "Floor post into sleeper",
+    "jp": "\u5e8a\u675f\u306e\u5927\u5f15\u5dee\u3057"
+   },
+   "match": "exact",
    "count": 20
   },
   "floorpost-stone": {
    "title": "\u5e8a\u675f on stone",
    "description": "The \u5e8a\u675f floor post bears on its foundation stone.",
+   "catalog": {
+    "slug": "floor-post-on-stone",
+    "title": "Floor post on stone",
+    "jp": "\u5e8a\u675f\u306e\u790e\u77f3"
+   },
+   "match": "exact",
    "count": 20
   },
   "sleeper-sill": {
    "title": "Sleeper into sill",
    "description": "The \u5927\u5f15 sleeper end is housed into the end sill.",
+   "catalog": {
+    "slug": "sleeper-into-sill",
+    "title": "Sleeper into sill",
+    "jp": "\u5927\u5f15\u306e\u571f\u53f0\u5dee\u3057"
+   },
+   "match": "exact",
    "count": 8
   },
   "upperjoist-beam": {
    "title": "Upper joist half-lap",
    "description": "The upper \u6839\u592a is halved over the spine beam.",
+   "catalog": {
+    "slug": "upper-joist-half-lap",
+    "title": "Upper joist half-lap",
+    "jp": "\u4e8c\u968e\u6839\u592a\u306e\u76f8\u6b20\u304d"
+   },
+   "match": "exact",
    "count": 6
   },
   "upperjoist-girder": {
    "title": "Upper joist into girder",
    "description": "The upper joist end is housed into the \u80f4\u5dee girder.",
+   "catalog": {
+    "slug": "upper-joist-into-girder",
+    "title": "Upper joist into girder",
+    "jp": "\u4e8c\u968e\u6839\u592a\u306e\u80f4\u5dee\u5dee\u3057"
+   },
+   "match": "exact",
    "count": 12
   },
   "roofbeam-plate": {
@@ -160,46 +220,100 @@
   "purlin-hip": {
    "title": "Purlin under hip",
    "description": "The \u6bcd\u5c4b purlin end carries the \u9685\u6728 hip rafter where their lines cross.",
+   "catalog": {
+    "slug": "purlin-under-hip",
+    "title": "Purlin under hip",
+    "jp": "\u6bcd\u5c4b\u3068\u9685\u6728"
+   },
+   "match": "exact",
    "count": 4
   },
   "ridge-hip": {
    "title": "Hip into ridge",
    "description": "The \u9685\u6728 hip rafter butts the end of the ridge.",
+   "catalog": {
+    "slug": "hip-into-ridge",
+    "title": "Hip into ridge",
+    "jp": "\u9685\u6728\u3068\u68df\u6728"
+   },
+   "match": "exact",
    "count": 4
   },
   "hip-plate": {
    "title": "Hip over plate",
    "description": "The hip rafter passes over the corner where the two \u8ed2\u6841 plates meet.",
+   "catalog": {
+    "slug": "hip-over-plate",
+    "title": "Hip over plate",
+    "jp": "\u9685\u6728\u3068\u8ed2\u6841"
+   },
+   "match": "exact",
    "count": 4
   },
   "rafter-ridge": {
    "title": "Rafter at ridge",
    "description": "The common rafter butts the ridge at the top of the slope.",
+   "catalog": {
+    "slug": "rafter-at-ridge",
+    "title": "Rafter at ridge",
+    "jp": "\u5782\u6728\u3068\u68df\u6728"
+   },
+   "match": "exact",
    "count": 10
   },
   "rafter-hip": {
    "title": "Rafter at hip",
    "description": "The common rafter is cut square against the hip rafter.",
+   "catalog": {
+    "slug": "rafter-at-hip",
+    "title": "Rafter at hip",
+    "jp": "\u5782\u6728\u3068\u9685\u6728"
+   },
+   "match": "exact",
    "count": 16
   },
   "rafter-purlin": {
    "title": "Rafter over purlin",
    "description": "A birdsmouth notch seats the rafter over the \u6bcd\u5c4b purlin.",
+   "catalog": {
+    "slug": "rafter-over-purlin",
+    "title": "Rafter over purlin",
+    "jp": "\u5782\u6728\u3068\u6bcd\u5c4b"
+   },
+   "match": "exact",
    "count": 14
   },
   "rafter-plate": {
    "title": "Rafter over plate",
    "description": "A birdsmouth notch seats the rafter over the \u8ed2\u6841 plate.",
+   "catalog": {
+    "slug": "rafter-over-plate",
+    "title": "Rafter over plate",
+    "jp": "\u5782\u6728\u3068\u8ed2\u6841"
+   },
+   "match": "exact",
    "count": 22
   },
   "jack-hip": {
    "title": "Jack rafter at hip",
    "description": "The jack rafter is cut square against the hip rafter.",
+   "catalog": {
+    "slug": "jack-rafter-at-hip",
+    "title": "Jack rafter at hip",
+    "jp": "\u77ed\u5782\u6728\u3068\u9685\u6728"
+   },
+   "match": "exact",
    "count": 18
   },
   "jack-plate": {
    "title": "Jack rafter over plate",
    "description": "The jack rafter is notched over the \u8ed2\u6841 plate at the hipped end.",
+   "catalog": {
+    "slug": "jack-rafter-over-plate",
+    "title": "Jack rafter over plate",
+    "jp": "\u77ed\u5782\u6728\u3068\u8ed2\u6841"
+   },
+   "match": "exact",
    "count": 14
   }
  },

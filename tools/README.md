@@ -261,6 +261,33 @@ descriptions of the joint", carry `tab: "extra"` so the site shows them in its
 second tab, and may give `approach` as a whole path (`tsutsumikomi-nuki`). After
 regenerating, run `check_sources.py` before baking.
 
+### `author_details.py` — house-only joint specimens
+
+```sh
+python3 author_details.py                  # rewrite all nineteen sources
+python3 author_details.py sill-corner      # just one, by id
+```
+
+The house has 494 connections in 27 families. Eight families already had a
+catalog specimen; the other nineteen (sill and joist half-laps, a brace in a
+post, fire-beam ties, floor posts on sleepers and stones, upper-floor framing,
+and the purlin, hip, ridge and rafter cuts) had only a line in the house joint
+schedule. This tool authors one 120 mm specimen for each, using the same
+`joint()` source shape, `house_geom` colours and bake flags as the rest of the
+catalog, with `tab: "house-details"`.
+
+Most pieces are box CSG, but the roof needs two extras in this file: `trim()`
+clips a convex prism with an arbitrary plane and stitches the cut cap, for the
+square ends of hips and rafters; `profile_piece()` extrudes a 2D side profile
+across the member width, so a rafter's 鳥口 birdsmouth has a horizontal seat
+rather than a notch parallel to its own underside. Most details are yawed about
+y in `yaw_detail()` so the fixed site camera sees the cut; geometry and explode
+vectors turn together. `round_points()` puts every vertex on the 1 µm grid the
+welding and topology checks use — without it an irrational sloped frame leaves
+near-duplicate points a fraction of a micron apart. Original geometry, CC BY
+4.0. Regenerate, then run `check_sources.py`, `bake.py` and `preview.py` as for
+any other specimen.
+
 ### `author_house.py` + `house_geom.py` + `house_anim.py` — the house frame
 
 ```sh
@@ -283,7 +310,8 @@ the joint that holds it, then parks clear of the frame; the house comes apart
 from the ridge down and goes back together from the foundation up in twelve
 stages. The rest pose stays assembled. The GLB is unlit, unsubdivided and
 un-occluded on purpose: it stays around 2.25 MB and reads at house scale. The
-joint catalog is not touched; the connection schedule is in
+34 original catalog specimens are untouched; the 19 house-only specimens come
+from `author_details.py`, and the full connection schedule is in
 [`../house/README.md`](../house/README.md).
 
 ### `house_links.py` — connection metadata for the viewer
@@ -301,12 +329,13 @@ and asserts each ID against the authored frame, so a renamed or removed timber
 fails instead of producing a marker in mid-air. Nothing is inferred from
 bounding-box proximity.
 
-The result is 272 pieces and 494 connections in 27 families, plus the catalog
-links: exact matches (`貫 ↔ post` → `tsutsumikomi-nuki`), related specimens
-(`post ↔ sill` → `shitakone-hozo-wari-kusabi`, roof tenons → `yatoi-hozo-shikuchi`,
-beam tenons → `naga-hozo-sashi-komisen-uchi`) and house-only details with no
-catalog entry. The 29 foundation and ground pieces have no connection and are
-recorded as such.
+The result is 272 pieces and 494 connections in 27 families, every one with a
+catalog link: exact matches to a sheet specimen (`貫 ↔ post` → `tsutsumikomi-nuki`)
+or to one of the 19 House details (`brace ↔ post` → `brace-into-post`,
+`垂木 ↔ 母屋` → `rafter-over-purlin`), and related specimens for the remaining
+families (`post ↔ sill` → `shitakone-hozo-wari-kusabi`, roof tenons →
+`yatoi-hozo-shikuchi`, beam tenons → `naga-hozo-sashi-komisen-uchi`). The 29
+foundation and ground pieces have no connection and are recorded as such.
 
 ### `house_viewer.js` — the interactive house
 
@@ -315,8 +344,9 @@ This is the custom element the house tab loads, published as
 the GLB and `connections.json`, raycasts the timbers, and draws screen-space
 marker sprites at the connection points. Hovering a timber outlines it and marks
 its joints; hovering a marker ghosts every other timber and shows the joint's
-name, description and catalog/schedule link. A click or tap pins it, and the
-accessible **Browse** panel indexes all 494 connections by family with a filter.
+name, description and a link straight to the matching catalog specimen. A click
+or tap pins it, and the accessible **Browse** panel indexes all 494 connections
+by family with a filter.
 The four peel stops ghost the roof, the upper storey or the masonry. Play/Pause,
 replay, `currentTime`, Space, R and Escape are wired to the same clip as the
 `<model-viewer>` specimens, and a WebGL or fetch failure falls back to the
@@ -336,10 +366,12 @@ Reads `joints/sources/*.json` (title, Japanese name, credit), copies every
 scrolling, a `<model-viewer>` that plays the `assemble` clip and the Japanese
 name in light gray under the romanised one. Sources with `tab: "extra"` (joints
 neither sheet shows) appear under a second tab, **Off the sheets**, so the
-reference-sheet set stays a clean 32; the house gets a third tab with a
+reference-sheet set stays a clean 32. The house gets a third tab with a
 `<house-viewer>` (the custom element above) instead of `<model-viewer>`, plus
-`models/house-connections.json`. The tab bar switches both the index and the
-sections, and a hash pointing at an off-sheet or house section selects its tab
+`models/house-connections.json`. Sources with `tab: "house-details"` appear in a
+fourth tab, **House details**, holding the 19 specimens authored by
+`author_details.py`. The tab bar switches both the index and the sections, and a
+hash pointing at an off-sheet, house or house-detail section selects its tab
 first. Up / Down arrow keys step through the joints of the active tab. Below
 56 rem the index becomes a slide-in menu (button at the top left)
 and every joint is a full-screen page: swipe up / down for the next / previous
@@ -375,8 +407,9 @@ python3 viewer.py --port 9000
 
 The models are reproduced under their own Creative Commons licenses (CC BY 4.0,
 except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The seventeen
-authored joints (listed in [`../joints/README.md`](../joints/README.md)) are
-original geometry released CC BY 4.0. The site's
+authored joints and the nineteen house details (listed in
+[`../joints/README.md`](../joints/README.md)) are original geometry released CC
+BY 4.0. The site's
 search box uses MIT-licensed `@leeoniya/uFuzzy`, copied unmodified from npm; its
 notice is in `vendor/ufuzzy.LICENSE`. The house viewer uses MIT-licensed
 three.js r160, likewise copied unmodified; its notice is in
