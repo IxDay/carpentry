@@ -130,7 +130,10 @@ timber with an `approach` first slides to its waiting pose before leaving; a
 list of poses is walked in order, so a firmly wrapped joint is offered up,
 slid home and lowered. This
 keeps the keys out of the surrounding timber and makes the locking action
-legible. The GLB writer is `export.py`.
+legible. A source may set `"duration": 12.0` (seconds per loop, default `6.0`);
+`bake.py` scales every stage by it, so a joint with several staged legs can run
+slower without the keys and timbers falling out of sequence. The GLB writer is
+`export.py`.
 
 ### `preview.py` — software renders
 
@@ -219,8 +222,8 @@ of one timber against the other's triangulated surface. A probe that lands well
 inside another timber means the animation drags a tenon through solid wood; the
 report gives the first time and the pair involved. Surfaces that merely touch
 are ignored, so a correctly seated joint reads clean. NumPy vectorises the
-closest-point and ray-parity kernels, so a whole 6-second track takes well under
-a second instead of a Python loop per triangle pair.
+closest-point and ray-parity kernels, so a whole track takes well under a second
+instead of a Python loop per triangle pair.
 
 A clean closed pose can still fail here. Blind mortises must be lifted clear
 before a timber slides sideways, and a timber that sits above another at rest

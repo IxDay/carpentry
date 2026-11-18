@@ -149,7 +149,7 @@ def make_series(jid, title, jp, bands, note=""):
 # (https://twitter.com/i/status/771307153583812610).
 W_POST_TOP = 0.42
 W_DEPTH = (W_POST_TOP, W_POST_TOP + 0.12)     # 桁: 120 mm deep
-W_HALF = 0.045                                # 90 mm wide timbers
+W_HALF = P                                    # 120 mm square post, girder and beam
 W_CROSS = 0.045                               # 渡り顎 jaw half-width, 1.3 sun
 W_TENON_LO = 0.030                            # 60 mm lower tenon
 W_TENON_HI = 0.020                            # 40 mm upper tenon
@@ -207,7 +207,8 @@ WATARI = joint(
         "beam-z": [[0.0, 0.36, 0.0], [0.0, 0.36, 0.30]],
         "girder-x": [[0.0, 0.0, 0.0], [0.0, 0.22, 0.0],
                      [-0.34, 0.22, 0.0]],
-    })
+    },
+    duration=12.0)
 
 SAMPO_SHACHI = make_series(
     "sampo-sashi-shachi-sen", "Sampo-sashi-shachi-sen", "三方差し車知栓",

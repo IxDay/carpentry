@@ -955,15 +955,19 @@ def assemble_animation(lv, fps=24):
     def ease(t, a, b):
         return smooth((t - a) / (b - a)) if b > a else (1.0 if t >= b else 0.0)
 
-    end = 6.0
+    # One loop is 6 s by default; a source can ask for a slower one (e.g. a
+    # joint with several staged legs). Scale every stage so the timing keeps
+    # the same shape, only stretched.
+    end = float(lv.get("duration", 6.0))
+    scale = end / 6.0
     # Keys: out along the long axis, then aside to the exploded pose. Timbers:
     # only after the keys are clear. The assembly mirrors that order.
-    k_ax0, k_ax1 = 0.9, 1.45
-    k_rest0, k_rest1 = 1.45, 1.85
-    b_out0, b_out1 = 1.9, 3.0
-    b_in0, b_in1 = 3.3, 4.4
-    k_in0, k_in1 = 4.45, 4.85
-    k_ax_in1 = 5.5
+    k_ax0, k_ax1 = 0.9 * scale, 1.45 * scale
+    k_rest0, k_rest1 = 1.45 * scale, 1.85 * scale
+    b_out0, b_out1 = 1.9 * scale, 3.0 * scale
+    b_in0, b_in1 = 3.3 * scale, 4.4 * scale
+    k_in0, k_in1 = 4.45 * scale, 4.85 * scale
+    k_ax_in1 = 5.5 * scale
 
     tracks = {}
     steps = int(round(end * fps))

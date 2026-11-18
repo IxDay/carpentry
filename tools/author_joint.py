@@ -211,7 +211,7 @@ def shift(piece_def, delta):
 
 
 def joint(jid, title, jp, pieces, exploded, guidance="", tab=None,
-          approach=None, credit=None, modifications=None):
+          approach=None, credit=None, modifications=None, duration=None):
     moved = [shift(p, exploded.get(p["id"], [0, 0, 0])) for p in pieces]
     out = {
         "id": jid, "index": -1, "chapter": 0, "number": 0,
@@ -243,6 +243,9 @@ def joint(jid, title, jp, pieces, exploded, guidance="", tab=None,
     # offsets from the closed pose (see bake.assemble_animation).
     if approach:
         out["approach"] = approach
+    # Seconds for one assemble loop; bake.py scales every stage by this value.
+    if duration:
+        out["duration"] = duration
     return out
 
 
