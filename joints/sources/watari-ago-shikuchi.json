@@ -1313,7 +1313,7 @@
    }
   ],
   "tab": "extra",
-  "beams": 2,
+  "beams": 3,
   "usage": "Notched crossing lap where a joist crosses a girder, or one purlin crosses another, directly over a post.  A cited gap in the 32-sheet catalog: 下山 recommends 渡りあご where a 90 mm+ joist bears on a beam, because it fixes the joist without damaging the beam.",
   "strengths": [
    "The notch stops the upper beam sliding sideways off the lower one.",

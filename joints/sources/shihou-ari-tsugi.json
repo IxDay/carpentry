@@ -2524,7 +2524,7 @@
     ]
    }
   ],
-  "beams": 4,
+  "beams": 2,
   "usage": "Four-way dovetail interlock for a junction where all four directions need pull-out resistance, not just friction or a pin.",
   "strengths": [
    "Dovetail geometry resists withdrawal on every face.",

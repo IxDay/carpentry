@@ -2,7 +2,7 @@
 
 > **Current state.** This is a working journal, so the tab counts and site notes
 > in the sections below record the state at the time each entry was written. The
-> published site is now a single **Joints** view of 39 specimens with a
+> published site is now a single **Joints** view of 36 specimens with a
 > beam-count filter and per-joint metadata; the 19 house-detail specimens and
 > the house frame are kept in the repository but withheld from the site until
 > corrected. See [`README.md`](README.md) and

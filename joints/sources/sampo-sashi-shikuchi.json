@@ -1956,7 +1956,7 @@
     ]
    }
   ],
-  "beams": 3,
+  "beams": 2,
   "usage": "Post at a T-junction, for example an interior wall meeting an exterior wall line, with beams arriving from three directions.",
   "strengths": [
    "Mortise opens on three faces, so the beam tenon drops straight in.",

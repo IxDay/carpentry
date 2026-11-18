@@ -1312,7 +1312,7 @@
     ]
    }
   ],
-  "beams": 1,
+  "beams": 2,
   "usage": "Light-duty connection where both receiving members are already fixed in place and neither can supply a tenon.",
   "strengths": [
    "A separate loose tenon seats in the post and the beam slides over it.",

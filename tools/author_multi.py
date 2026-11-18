@@ -1,22 +1,18 @@
 #!/usr/bin/env python3
 """Author multi-beam connection specimens for the joint catalogue.
 
-The sheets stop at the four-way post (四方).  This tool adds the next steps of
-the direction series and one common crossing lap that the sheets omit:
+This tool adds the two specimens whose geometry has direct written backing but
+which the 32-sheet catalogue omits:
 
     watari-ago-shikuchi      渡り頸仕口     two beams crossing over a post
-    sampo-sashi-shachi-sen   三方差し車知栓  three beams, paired wedge keys
     shihou-sashi-shachi-sen  四方差し車知栓  four beams, paired wedge keys
-    gohou-sashi-shikuchi     五方差し仕口   four beams plus a corner brace
-    roppou-sashi-shikuchi    六方差し仕口   four beams plus two corner braces
 
 Geometry uses the same box-CSG and loft helpers as ``author_joint.py``.  The
 post takes one tenon per direction, each at its own level inside the beam depth
 so that no two tenons share the post's core.  Paired shachi-sen pass through
-each tenon from opposite faces; the braces are sheared prisms that run through
-a corner pocket in the post.
+each tenon from opposite faces.
 
-    python3 author_multi.py                       # all five
+    python3 author_multi.py                       # all specimens
     python3 author_multi.py watari-ago-shikuchi   # one
 
 Sources are written with the catalogue metadata from ``joint_meta`` already
@@ -109,45 +105,7 @@ def key_axis(axis, sign, y0, y1):
     return faces, hole, move
 
 
-def brace(sx, sz):
-    """A diagonal 筋違 running through a corner pocket of the post.
-
-    ``sx`` / ``sz`` are +/-1 for the two corners used by the 5- and 6-way
-    joints.  The sheared prism is a single closed solid: a small square at the
-    foot inside the post, shifted diagonally outward as it rises.
-    """
-    h = 0.022
-    if sx > 0:
-        x0, x1 = 0.008, 0.052
-        xe0, xe1 = 0.162, 0.206
-    else:
-        x0, x1 = -0.052, -0.008
-        xe0, xe1 = -0.206, -0.162
-    if sz > 0:
-        z0, z1 = 0.008, 0.052
-        ze0, ze1 = 0.162, 0.206
-    else:
-        z0, z1 = -0.052, -0.008
-        ze0, ze1 = -0.206, -0.162
-    sec_a = [(z0, x0), (z1, x0), (z1, x1), (z0, x1)]
-    sec_b = [(ze0, xe0), (ze1, xe0), (ze1, xe1), (ze0, xe1)]
-    faces = loft(1, 0.30, 0.62, sec_a, sec_b)
-    # Inset each pocket from the post's centre lines (x=0 / z=0).  The 6-way
-    # joint uses two opposite corners; pockets that touch at the centre share a
-    # non-manifold edge, so leave a small gap between them.
-    px = (x0 - 0.004, P) if sx > 0 else (-P, x1 + 0.004)
-    pz = (z0 - 0.004, P) if sz > 0 else (-P, z1 + 0.004)
-    pocket = (px, (0.30, 0.38), pz)
-    return faces, pocket, [sx * 0.26, 0.06, sz * 0.26]
-
-
-def multi_post(bands, pockets=()):
-    cut = [tenon_box(axis, sign, y0, y1) for axis, sign, y0, y1 in bands]
-    cut += list(pockets)
-    return piece("part-a", "Post", [POST], cut)
-
-
-def make_series(jid, title, jp, bands, braces=(), note=""):
+def make_series(jid, title, jp, bands, note=""):
     pieces = []
     exploded = {}
     holes = []
@@ -168,13 +126,8 @@ def make_series(jid, title, jp, bands, braces=(), note=""):
         exploded[kid] = move
         holes.append(hole)
 
-    brace_data = [brace(sx, sz) for sx, sz in braces]
-    pockets = [d[1] for d in brace_data]
-    pieces.insert(0, multi_post(bands, holes + pockets))
-    for i, (faces, _, move) in enumerate(brace_data):
-        bid = "brace-%d" % (i + 1)
-        pieces.append(piece(bid, "Sujikai brace", [], extra=faces))
-        exploded[bid] = move
+    cut = [tenon_box(axis, sign, y0, y1) for axis, sign, y0, y1 in bands] + holes
+    pieces.insert(0, piece("part-a", "Post", [POST], cut))
     pieces.extend(keys)
 
     j = joint(jid, title, jp, pieces, exploded, note,
@@ -213,14 +166,6 @@ WATARI = joint(
     "90 mm+ joist because it fixes the joist without damaging the beam.",
     tab="extra", credit=OFFSHEET_CREDIT, modifications=KEY_MODS)
 
-SAMPO_SHACHI = make_series(
-    "sampo-sashi-shachi-sen", "Sampo-sashi-shachi-sen", "三方差し車知栓",
-    X_BANDS[:1] + Z_BANDS,
-    note="Three beams meet one post at a T-junction. Each tenon sits at its "
-         "own level, runs 100 mm into the post and is locked by a tapered "
-         "車知栓 driven through it from the beam's side; the pair of keys on "
-         "opposite faces draws the arrivals tight.")
-
 SHIHOU_SHACHI = make_series(
     "shihou-sashi-shachi-sen", "Shihou-sashi-shachi-sen", "四方差し車知栓",
     X_BANDS + Z_BANDS,
@@ -230,22 +175,7 @@ SHIHOU_SHACHI = make_series(
          "member in its 四方差し figure, while warning that the through "
          "tenons leave a large lost section in the post.")
 
-GOHOU = make_series(
-    "gohou-sashi-shikuchi", "Gohou-sashi-shikuchi", "五方差し仕口",
-    X_BANDS + Z_BANDS, braces=[(+1, +1)],
-    note="A braced corner: a sill and girder arrive from two directions "
-         "(four beams) and a diagonal 筋違 rises out of the post's corner "
-         "pocket as the fifth member. The brace closes the corner against "
-         "racking that a plain four-way post cannot resist.")
-
-ROPPOU = make_series(
-    "roppou-sashi-shikuchi", "Roppou-sashi-shikuchi", "六方差し仕口",
-    X_BANDS + Z_BANDS, braces=[(+1, +1), (-1, -1)],
-    note="The six-direction junction: four cardinal beams or nuki plus two "
-         "diagonal 筋違 at opposite corners, as at a hip-roof apex where "
-         "hip rafters, purlins and ridge members all land together.")
-
-JOINTS = [WATARI, SAMPO_SHACHI, SHIHOU_SHACHI, GOHOU, ROPPOU]
+JOINTS = [WATARI, SHIHOU_SHACHI]
 
 
 def main(argv):

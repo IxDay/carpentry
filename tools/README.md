@@ -20,7 +20,7 @@ A joint is described by `joints/sources/<id>.json`, a one-element list:
 | `rescaled` | the factor `rescale_joint.py` applied, if any |
 | `source` | author, URL, license, change list and credit text embedded in each GLB |
 | `tab` | original provenance group (`sheet`, `extra`, `house-details`); `house-details` sources are kept in the repo but skipped by `build_site.py`, the others are all published in one view |
-| `beams`, `usage`, `strengths`, `weaknesses` | catalogue metadata: how many beams meet at the joint (post, pegs, wedges and keys excluded), its use, and what is good / risky about it. Authored in `joint_meta.py` and stamped onto every source |
+| `beams`, `usage`, `strengths`, `weaknesses` | catalogue metadata: how many timber pieces meet at the joint (the post counts; pegs, wedges, keys and dowels excluded), its use, and what is good / risky about it. Authored in `joint_meta.py` and stamped onto every source |
 
 The generated `assemble` offsets are only a first guess; the real closed pose is
 found by scanning to contact and checking that every pair of mating faces
@@ -287,21 +287,18 @@ descriptions of the joint", carry `tab: "extra"` for provenance (the published
 site is a single view), and may give `approach` as a whole path
 (`tsutsumikomi-nuki`). After regenerating, run `check_sources.py` before baking.
 
-### `author_multi.py` — three- to six-beam specimens
+### `author_multi.py` — off-sheet specimens
 
 ```sh
-python3 author_multi.py                     # rewrite all five sources
+python3 author_multi.py                     # rewrite both sources
 python3 author_multi.py watari-ago-shikuchi  # just one, by id
 ```
 
-Five specimens extend the direction series 一方…六方 past the four-way post of
-the reference sheets and fill a gap the sheets leave. `watari-ago-shikuchi` is a
-crossing lap (`渡り頸`) where two 90 mm beams are halved at the cross; the other
-four are `差し` posts with one tenon per direction at its own level, locked by
-tapered 車知栓 driven crosswise through each tenon. The five- and six-way forms
-add one and two diagonal 筋違 braces out of corner pockets. The pockets are
-inset from the post's centre lines so the two opposite braces in the six-way
-joint do not leave a non-manifold edge. Geometry uses the same box CSG and
+Two specimens fill gaps the reference sheets leave, both with direct written
+backing. `watari-ago-shikuchi` is a crossing lap (`渡り頸`) where two 90 mm beams
+are halved at the cross; `shihou-sashi-shachi-sen` is the 建築用語集 四方差し
+post, with one tenon per direction at its own level, each locked by a tapered
+車知栓 driven crosswise through the tenon. Geometry uses the same box CSG and
 `loft()` helpers as `author_joint.py`; the sources are written with their
 catalogue metadata already stamped on. Original geometry, CC BY 4.0. Regenerate,
 then run `check_sources.py`, `check_contact.py`, `bake.py` and `preview.py`.
@@ -313,16 +310,15 @@ python3 joint_meta.py                       # re-stamp every joints/sources/*.js
 python3 joint_meta.py ../joints/sources kanawa-tsugi  # just one id
 ```
 
-The canonical table of `beams`, `usage`, `strengths` and `weaknesses` for all 58
+The canonical table of `beams`, `usage`, `strengths` and `weaknesses` for all 55
 specimens, with `SOURCE_NOTES` collecting the web references behind the prose.
 `apply(level)` stamps a decoded source (a fallback used by `build_site.py`), and
 `write_sources(src_dir, only)` rewrites source files in place. The `beams` count
-is the number of beams, girders, joists, rafters or braces meeting at the joint;
-the receiving post and any pegs, wedges, keys or loose tenons are not counted.
-Usage and strength notes come from the supplied naming guide, the reference
-sheets, the repository READMEs and the cited web pages; where a specimen is an
-extrapolation from the ippou…roppou naming series rather than a documented named
-joint, the usage text says so.
+is the number of timber pieces meeting at the joint: the post plus the beams,
+girders, joists, rafters or braces; pegs, wedges, keys, dowels and loose tenons
+are not counted. Usage and strength notes come from the supplied naming guide,
+the reference sheets, the repository READMEs and the cited web pages; only
+specimens with direct written, photographic or schematic backing are published.
 
 ### `author_details.py` — house-only joint specimens
 
@@ -430,7 +426,7 @@ python3 build_site.py --preview             # also serve it on :8000
 
 Reads `joints/sources/*.json` (title, Japanese name, credit, metadata), skipping
 the 19 with `tab: "house-details"` — those are kept in the repository but
-withheld from the site until corrected — copies the remaining 39
+withheld from the site until corrected — copies the remaining 36
 `joints/<id>.glb` files and their sunset previews, and writes `docs/index.html`
 from `site_template.html`: a single **Joints** view, one section per joint with a
 `#<id>` anchor, a `<model-viewer>` that plays the `assemble` clip, the Japanese
@@ -449,7 +445,7 @@ model fades in when it is ready.
 
 The top of the index (and so the top of the phone menu) has a **Filter by beams**
 menu and a full-text search box. The filter narrows the list to a beam count
-(1–6, with per-count totals; the post and loose hardware are not counted). The
+(with per-count totals; the post counts, loose hardware does not). The
 search covers each joint's romanised name, Japanese name, id and its metadata
 prose with [`@leeoniya/ufuzzy`](https://github.com/leeoniya/uFuzzy) (MIT,
 vendored under `vendor/` and copied into `docs/`): the query is filtered against
@@ -475,7 +471,7 @@ python3 viewer.py --port 9000
 
 The models are reproduced under their own Creative Commons licenses (CC BY 4.0,
 except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The seventeen
-authored joints, the nineteen house details and the five multi-beam specimens
+authored joints, the nineteen house details and the two multi-beam specimens
 (listed in [`../joints/README.md`](../joints/README.md)) are original geometry
 released CC BY 4.0. The site's
 search box uses MIT-licensed `@leeoniya/uFuzzy`, copied unmodified from npm; its

@@ -600,7 +600,7 @@
     ]
    }
   ],
-  "beams": 1,
+  "beams": 2,
   "usage": "Sloped member - brace or hip rafter - seating into a post or beam at an angle rather than square.",
   "strengths": [
    "The whole load bears on the sloped face and the beam cannot lift out.",

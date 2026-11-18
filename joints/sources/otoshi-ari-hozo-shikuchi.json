@@ -1971,7 +1971,7 @@
     0
    ]
   },
-  "beams": 1,
+  "beams": 2,
   "usage": "Joist-to-beam where the beam is fixed and the joist must be lowered into place but still resist pull-out.",
   "strengths": [
    "Dovetail tenon resists withdrawal after the vertical drop.",

@@ -3,12 +3,10 @@
 
 Each entry is keyed by the source id and holds four fields:
 
-* ``beams``     - number of beams/nuki/girders/joists/rafters/braces that meet at
-                  the joint.  The receiving post is *not* counted, and neither
-                  are pegs, wedges, keys or a separate loose tenon.  For a
-                  same-axis splice both timbers are counted (2).  This is the
-                  convention of the Japanese direction series ippou / nihou /
-                  sampou / shihou / gohou / roppou used on the reference sheets.
+* ``beams``     - number of timber pieces meeting at the joint: the receiving
+                  post plus each beam/nuki/girder/joist/rafter/brace.  Pegs,
+                  wedges, keys, dowels and a separate loose tenon are *not*
+                  counted.  For a same-axis splice both timbers are counted (2).
 * ``usage``     - the structural situation the joint is chosen for.
 * ``strengths`` - what the joint does well (bearing, tension, assembly, looks).
 * ``weaknesses``- what to watch for (lost section, loosening, difficult cut).
@@ -175,7 +173,7 @@ META = {
          "Uses the full section of a very large timber."],
         ["Only meaningful at oversized section: wasteful at normal scale.",
          "Very complex; historically a status display as much as a need."]),
-    "shihou-ari-tsugi": m(4,
+    "shihou-ari-tsugi": m(2,
         "Four-way dovetail interlock for a junction where all four directions "
         "need pull-out resistance, not just friction or a pin.",
         ["Dovetail geometry resists withdrawal on every face.",
@@ -185,21 +183,21 @@ META = {
          "the interlocking faces, not four separate beams."]),
 
     # --------------------------------------------------- post / beam (shikuchi)
-    "kata-kama-hozo-sashi": m(1,
+    "kata-kama-hozo-sashi": m(2,
         "Corner post foot with a one-sided hook, slid along the sill into a "
         "slot open at the sill's end; resists uplift in one direction.",
         ["The square back of the hook bears on the sill lip under uplift.",
          "Slides in along the sill, so no overhead access is needed."],
         ["Only one direction of pull-out is resisted.",
          "The hook needs a slot open at the sill end and sound grain."]),
-    "katagi-ooire": m(1,
+    "katagi-ooire": m(2,
         "Sloped member - brace or hip rafter - seating into a post or beam at "
         "an angle rather than square.",
         ["The whole load bears on the sloped face and the beam cannot lift out.",
          "No key is needed; withdrawn straight along its own axis."],
         ["The sloped rebate removes a large part of the post's section.",
          "One-directional and hard to adjust once seated."]),
-    "naga-hozo-sashi-komisen-uchi": m(1,
+    "naga-hozo-sashi-komisen-uchi": m(2,
         "Baseline post-to-sill or post-to-beam connection, and the recommended "
         "upper-storey post foot where a through tenon can be used.",
         ["Through tenon and side komisen give a reliable, inspectable lock.",
@@ -212,14 +210,14 @@ META = {
          "Easy to set out at an ordinary building corner."],
         ["The corner notch reduces the post's effective section.",
          "The driven pin is visible on the show face."]),
-    "otoshi-ari-hozo-shikuchi": m(1,
+    "otoshi-ari-hozo-shikuchi": m(2,
         "Joist-to-beam where the beam is fixed and the joist must be lowered "
         "into place but still resist pull-out.",
         ["Dovetail tenon resists withdrawal after the vertical drop.",
          "Closes with a straight lowering motion."],
         ["下山 warns that a dovetail neck can shear (蟻首がとぶ).",
          "Needs clearance above the beam to drop the joist in."]),
-    "sage-kama-oire": m(1,
+    "sage-kama-oire": m(2,
         "A secondary beam or nuki hung off a primary post: offered up raised, "
         "run home, then dropped so the hook bears behind the far face.",
         ["Hook bears on the post's far face and resists pull-out.",
@@ -227,14 +225,14 @@ META = {
         ["下山: wedges in nuki/post joints often loosen under vibration "
          "(Kiyomizu-dera's underfloor is inspected for this).",
          "The through mortise and hook are awkward to cut."]),
-    "sampo-sashi-shikuchi": m(3,
+    "sampo-sashi-shikuchi": m(2,
         "Post at a T-junction, for example an interior wall meeting an "
         "exterior wall line, with beams arriving from three directions.",
         ["Mortise opens on three faces, so the beam tenon drops straight in.",
          "A vertical komisen through beam, tenon and post locks the lot."],
         ["The open-top housing weakens the post head.",
          "Only moderate pull resistance; the pin must be driven down."]),
-    "shihou-sashi-shikuchi": m(4,
+    "shihou-sashi-shikuchi": m(5,
         "Free-standing interior post or central column with beams or nuki "
         "converging from all four sides at one level.",
         ["Opposite tenons pass through the post and 30 mm into the beam "
@@ -244,69 +242,69 @@ META = {
          "neat in appearance but not necessarily strong - consider metal "
          "reinforcement.",
          "Two plate komisen must be dropped accurately and trimmed flush."]),
-    "shitakone-hozo-hana-sen": m(1,
+    "shitakone-hozo-hana-sen": m(2,
         "Lower-tier through tenon locked by a nose peg where the pin must be "
         "visible and accessible from the outside face.",
         ["Tapered nose peg behind the post blocks withdrawal.",
          "The full 大根 bears at the shoulder, the 小根 runs through."],
         ["The through mortise removes a large part of the post.",
          "The peg stands proud and can be knocked or withdrawn."]),
-    "shitakone-hozo-tasuki-gake": m(1,
+    "shitakone-hozo-tasuki-gake": m(2,
         "Blind lower-tier tenon at a corner where a vertical 襷 bridge in the "
         "post must also tie the arriving beams together.",
         ["Forked small root straddles the 襷 bridge, resisting sideways pull.",
          "Blind mortise leaves the post's far face clean."],
         ["The bridge and twin pockets are intricate to lay out.",
          "Less accessible for repair than a through joint."]),
-    "shitakone-hozo-wari-kusabi": m(1,
+    "shitakone-hozo-wari-kusabi": m(2,
         "Lower-tier through tenon where the show face must stay clean and the "
         "lock is driven from inside the mortise.",
         ["Two wedges spread the split tenon and lift it against the 腰.",
          "No visible pin on the show face."],
         ["The through mortise reduces the post's section.",
          "Wedges in post joints can loosen under vibration."]),
-    "suitsuki-sashi-shikuchi": m(1,
+    "suitsuki-sashi-shikuchi": m(2,
         "Sliding dovetail cleat or batten fixed across a wide board or sill so "
         "it cannot warp away while the wood still moves seasonally.",
         ["Cross-grain dovetail holds the cleat down across the board.",
          "The sliding fit allows seasonal movement across the grain."],
         ["The long sliding fit must be cut accurately.",
          "An over-tight fit can split the board."]),
-    "tsutsumikomi-nuki": m(1,
+    "tsutsumikomi-nuki": m(2,
         "Nuki wrapped by the post: a shelf under its rebated end and a wall "
         "beyond it, used where a nuki must not pull out.",
         ["The end is caught between shelf and wall rather than merely housed.",
          "A wedge in the mouth gap holds it down."],
         ["Three-stage assembly (raise, slide, lower) needs access.",
          "A 90 mm insertion removes much of the post's section."]),
-    "uwakone-hozo-uchi-nuki-komisen": m(1,
+    "uwakone-hozo-uchi-nuki-komisen": m(2,
         "Upper-tier through tenon where the member above the post needs the "
         "fuller bearing shoulder and the pin passes through both cheeks.",
         ["Square komisen through post and big root is easy to inspect.",
          "The 腰 sits low so the upper shoulder carries bearing."],
         ["The through mortise and pin hole weaken the post.",
          "Cut flush on both faces, so re-pinning needs re-cutting."]),
-    "uwakone-hozo-wari-kusabi": m(1,
+    "uwakone-hozo-wari-kusabi": m(2,
         "Upper-tier through tenon with a concealed split-wedge lock.",
         ["Two wedges spread the nose and lock the tenon at the 腰.",
          "No visible pin on the show face."],
         ["The through mortise reduces the post's section.",
          "Wedge lock is sensitive to vibration and shrink/swell."]),
-    "yatoi-hozo-shachi-sen-shiguchi": m(1,
+    "yatoi-hozo-shachi-sen-shiguchi": m(2,
         "Repair or retrofit where both receiving timbers are already fixed "
         "and the connection is structurally critical.",
         ["Separate tenon plus paired wedge keys gives a strong, adjustable lock.",
          "Neither existing member has to supply the tenon."],
         ["Loose tenon and two keys need very accurate matching mortises.",
          "Keys can loosen; access to both faces is needed."]),
-    "yatoi-hozo-shikuchi": m(1,
+    "yatoi-hozo-shikuchi": m(2,
         "Light-duty connection where both receiving members are already fixed "
         "in place and neither can supply a tenon.",
         ["A separate loose tenon seats in the post and the beam slides over it.",
          "The tenon can be replaced without disturbing either timber."],
         ["Not cut from either member, so capacity is lower than an integral tenon.",
          "Blind mortises must line up exactly."]),
-    "yose-ari-hozo-shikuchi": m(1,
+    "yose-ari-hozo-shikuchi": m(2,
         "Mid-span joist connection assembled by sliding horizontally, where "
         "the dovetail draws the joint snug as it is driven.",
         ["The sloping dovetail pulls the members tight on entry.",
@@ -436,7 +434,7 @@ META = {
          "Deep housings into the girder reduce its section."]),
 
     # ------------------------------------------------------------- new specimens
-    "watari-ago-shikuchi": m(2,
+    "watari-ago-shikuchi": m(3,
         "Notched crossing lap where a joist crosses a girder, or one purlin "
         "crosses another, directly over a post.  A cited gap in the 32-sheet "
         "catalog: 下山 recommends 渡りあご where a 90 mm+ joist bears on a beam, "
@@ -448,19 +446,7 @@ META = {
          "framing."],
         ["Bearing and a bearing shoulder only: no peg or wedge resists uplift.",
          "The notch removes roughly half the depth of the upper member."]),
-    "sampo-sashi-shachi-sen": m(3,
-        "Three-direction T-junction post with beams arriving from three "
-        "directions, each locked by a tapered 車知栓 - the three-way member of "
-        "the 一方…六方 series, built like the 四方差し figure in 建築用語集 but "
-        "with one arrival omitted.",
-        ["A shachi-sen through each tenon resists withdrawal on all three "
-         "arrivals without a separate key per face.",
-         "Tenons sit at stacked levels, so none share the post's core."],
-        ["Through tenons leave a large lost section in the post (the same "
-         "warning 建築用語集 gives 四方差し).",
-         "Extrapolated from the naming series and the shachi-sen figure, not a "
-         "separately sourced named specimen."]),
-    "shihou-sashi-shachi-sen": m(4,
+    "shihou-sashi-shachi-sen": m(5,
         "Four-way post connection locked with paired 車知栓 wedge keys - the "
         "configuration shown in 建築用語集's 四方差し figure, where the red "
         "member is the shachi-sen.",
@@ -469,25 +455,6 @@ META = {
         ["Same warning as 四方差し: passing tenons leave a large lost post "
          "section; metal reinforcement may be needed.",
          "Four tenons and two keys must be set out at distinct levels."]),
-    "gohou-sashi-shikuchi": m(5,
-        "Corner post with a sill and girder arriving from two directions (four "
-        "members) plus a diagonal 筋違 brace as the fifth - the common braced "
-        "corner named by the 五方 step of the direction series.",
-        ["Brace closes the corner against racking that a four-way post alone "
-         "cannot resist.",
-         "Tenons are stacked at different levels so none share the post core."],
-        ["Five cuts leave little sound post section at that level.",
-         "Name and geometry follow the ippou…roppou convention; not documented "
-         "as a standalone named joint in the sources reviewed."]),
-    "roppou-sashi-shikuchi": m(6,
-        "Post with four cardinal beams or nuki plus two diagonal braces, or a "
-        "hip-roof apex post where hip rafters, purlins and ridge members all "
-        "land together - the 六方 step of the direction series.",
-        ["Six directions tie a genuinely three-dimensional junction.",
-         "Opposite pairs stagger their tenons and tie one another through the post."],
-        ["The most section-hungry of the series: post capacity can govern.",
-         "Extrapolated from the naming series for this catalogue; exact "
-         "geometry varies by school and drawing."]),
 }
 
 

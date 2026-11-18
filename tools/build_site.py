@@ -190,8 +190,8 @@ def section(j, counts, repo_url=""):
                 % (cls, label, lis))
 
     beams = j.get("beams")
-    badge = ('<span class="beam-badge" title="Beams meeting at this joint; '
-             'the post and any pegs, wedges or keys are not counted">%s beam%s</span>'
+    badge = ('<span class="beam-badge" title="Timber pieces meeting at this joint; '
+             'pegs, wedges, keys and dowels are not counted">%s beam%s</span>'
              % (beams if beams else "?", "" if beams == 1 else "s"))
     note_panel = ""
     if j.get("usage") or j.get("strengths") or j.get("weaknesses"):
@@ -251,10 +251,9 @@ def footer(repo_url, joints=()):
         "descriptions, and released CC BY 4.0. Per-joint notes and references "
         "are in %s.</p>" % (number(len(authored)).capitalize(), cited))
     authored_line += (
-        "\n      <p>The <em>beams</em> count is the number of beams, girders, "
-        "joists, rafters or braces meeting at the joint; the receiving post and "
-        "any pegs, wedges, keys or loose tenons are not counted. It follows the "
-        "direction series 一方 / 二方 / 三方 / 四方 / 五方 / 六方 (1-6). "
+        "\n      <p>The <em>beams</em> count is the number of timber pieces "
+        "meeting at the joint: the post plus the beams, girders, joists, rafters "
+        "or braces; pegs, wedges, keys, dowels and loose tenons are not counted. "
         "Counts in this collection: %s. The strength and weakness notes are "
         "compiled in %s from the naming guide, the reference sheets and the "
         "sources linked below.</p>" % (esc(by_beams), meta_cited))
