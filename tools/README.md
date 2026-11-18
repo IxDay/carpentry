@@ -19,7 +19,7 @@ A joint is described by `joints/sources/<id>.json`, a one-element list:
 | `approach` | optional `{piece: [x, y, z]}` waiting stage: that timber first slides to `closed + approach` before leaving along the straight line (kanawa's slide along the pitch, a dovetail's slide along its groove). A list of vectors is a path instead, visited in order (`tsutsumikomi-nuki`: raised, slid home, lowered) |
 | `rescaled` | the factor `rescale_joint.py` applied, if any |
 | `source` | author, URL, license, change list and credit text embedded in each GLB |
-| `tab` | original provenance group (`sheet`, `extra`, `house-details`); kept for the record but no longer used to filter the published site |
+| `tab` | original provenance group (`sheet`, `extra`, `house-details`); `house-details` sources are kept in the repo but skipped by `build_site.py`, the others are all published in one view |
 | `beams`, `usage`, `strengths`, `weaknesses` | catalogue metadata: how many beams meet at the joint (post, pegs, wedges and keys excluded), its use, and what is good / risky about it. Authored in `joint_meta.py` and stamped onto every source |
 
 The generated `assemble` offsets are only a first guess; the real closed pose is
@@ -428,9 +428,11 @@ python3 build_site.py --repo-url https://github.com/<you>/<repo>
 python3 build_site.py --preview             # also serve it on :8000
 ```
 
-Reads `joints/sources/*.json` (title, Japanese name, credit, metadata), copies
-every `joints/<id>.glb` and its sunset preview, and writes `docs/index.html` from
-`site_template.html`: a single **Joints** view, one section per joint with a
+Reads `joints/sources/*.json` (title, Japanese name, credit, metadata), skipping
+the 19 with `tab: "house-details"` — those are kept in the repository but
+withheld from the site until corrected — copies the remaining 39
+`joints/<id>.glb` files and their sunset previews, and writes `docs/index.html`
+from `site_template.html`: a single **Joints** view, one section per joint with a
 `#<id>` anchor, a `<model-viewer>` that plays the `assemble` clip, the Japanese
 name in light gray under the romanised one, a beam-count badge, the usage note
 and the strengths / weaknesses lists. The published site has no tabs: the

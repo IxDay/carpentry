@@ -78,6 +78,11 @@ def load_joints(joints_dir):
             continue
         with open(os.path.join(src_dir, name)) as fh:
             lv = json.load(fh)[0]
+        # The house-detail specimens are not accurate enough yet and do not
+        # belong in the single Joints view.  Keep their sources and baked GLBs
+        # in the repository; they will be published again once corrected.
+        if lv.get("tab") == "house-details":
+            continue
         slug = lv["id"]
         if slug != slugify(lv["title"]):
             print("note: id %r differs from slugified title %r" % (slug, slugify(lv["title"])),

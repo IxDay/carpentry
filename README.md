@@ -1,10 +1,13 @@
 # Japanese joinery
 
-Fifty-eight Japanese timber joints (継ぎ手 and 仕口) as interactive 3D models that
-assemble and come apart, each tagged with its beam count, use, strengths and
-weaknesses, with the tools that rebuild them and the site that shows them:
-**<https://ixday.github.io/carpentry/>**. The open frame of a two-storey house
-is kept in `house/` but is not published to the site.
+Thirty-nine Japanese timber joints (継ぎ手 and 仕口) as interactive 3D models
+that assemble and come apart, each tagged with its beam count, use, strengths
+and weaknesses, with the tools that rebuild them and the site that shows them:
+**<https://ixday.github.io/carpentry/>**. A further nineteen house-detail
+specimens and the open frame of a two-storey house are kept in the repository
+but are not published to the site yet: the house details are not accurate
+enough and will be added back later. All 58 sources are still built and
+checked locally.
 
 Seventeen models are by [thejoinery](https://sketchfab.com/thejoinery) on
 Sketchfab (CC BY 4.0, one CC BY-SA 4.0). They were read from the public viewer,
@@ -16,7 +19,8 @@ Seventeen joints with no licensed source model (fourteen column-and-beam
 descriptions of joints the sheet does not show. A further nineteen specimens,
 authored with `tools/author_details.py`, cover every connection family the house
 frame makes beyond the sheets: halved sills and joists, a brace in a post, floor
-posts, and the hip, purlin and rafter cuts of the roof. Five more, authored with
+posts, and the hip, purlin and rafter cuts of the roof. Those nineteen are kept
+in the repository but withheld from the published site for now. Five more, authored with
 `tools/author_multi.py`, extend the direction series to connections of three,
 four, five and six beams. Every source is tagged with `beams`, `usage`,
 `strengths` and `weaknesses` in `tools/joint_meta.py`. Per-model links,
@@ -65,7 +69,7 @@ with one anchored section per joint and no tabs. Each section shows the assembly
 animation, a beam-count badge, a short usage note and lists of strengths and
 things to watch for; the scroll wheel zooms the model and Up / Down step between
 joints. On a phone the index becomes a slide-in menu with one joint per screen.
-A **Filter by beams** menu narrows the 58 joints by how many beams meet at them
+A **Filter by beams** menu narrows the 39 published joints by how many beams meet at them
 (1–6; the post, pegs, wedges and keys are not counted). The index has a search
 box at the top (`/` focuses it): it matches romanised and Japanese names and
 the metadata prose, ranks the hits, and on a phone it filters the same
@@ -119,7 +123,7 @@ python3 build_site.py --repo-url https://github.com/IxDay/carpentry
 The `author_joint.py` line only touches the seventeen authored sources and
 `author_details.py` only the nineteen house details; the rest come from captures.
 The bake/preview loop processes every source, so all 58 specimens are kept in
-step. `--no-animation` drops the `assemble` clip. Importing a new Sketchfab model
+step; `build_site.py` publishes only the 39 non-house-detail specimens. `--no-animation` drops the `assemble` clip. Importing a new Sketchfab model
 and checking an animation for timbers passing through each other are described
 in [`tools/README.md`](tools/README.md).
 

@@ -1,7 +1,8 @@
 # joints
 
-Fifty-eight Japanese timber joints (継ぎ手 / 仕口) in a pastel paper-sunrise
-style. Seventeen are from the [thejoinery](https://sketchfab.com/thejoinery)
+Thirty-nine Japanese timber joints (継ぎ手 / 仕口) in the published, pastel
+paper-sunrise collection, from fifty-eight sources in the repository. Seventeen
+are from the [thejoinery](https://sketchfab.com/thejoinery)
 collection on Sketchfab, rebuilt and baked; seventeen more, with no licensed
 source model, are authored in this repository with
 [`tools/author_joint.py`](../tools/author_joint.py) (fourteen column-and-beam
@@ -14,10 +15,12 @@ families the house frame uses beyond the sheets, and a final five with
 six beams. Every joint is tagged in `joints/sources/<id>.json` with the number
 of beams meeting at it, its use, and its strengths and weaknesses
 (see [`tools/joint_meta.py`](../tools/joint_meta.py)); the published site is a
-single **Joints** view with a beam-count filter. The house frame and its
-connection schedule stay in the repository but are not published to the site.
-There is **no garden or ground plane**: the timbers float against the paper
-backdrop, which keeps the focus on the cut geometry.
+single **Joints** view with a beam-count filter. The nineteen house-detail
+specimens below are kept in the repository with their sources and baked GLBs,
+but are withheld from the published site for now: they are not accurate enough
+and will be added back later. The house frame and its connection schedule stay
+in the repository too. There is **no garden or ground plane**: the timbers
+float against the paper backdrop, which keeps the focus on the cut geometry.
 
 ## Layout
 
@@ -82,9 +85,10 @@ they were drawn from.
 
 The house frame has 494 connections in 27 families. Eight of those families
 already have a specimen in the set above; the other nineteen got their own at
-the house's 120 mm scale so that every connection family has a specimen. (The
-house frame itself is kept in `house/` but is not published to the site.) They
-are original geometry, authored from the house's joinery
+the house's 120 mm scale so that every connection family has a specimen. These
+nineteen are currently withheld from the published site (along with the house
+frame in `house/`) until their geometry is corrected; their sources and GLBs
+remain here. They are original geometry, authored from the house's joinery
 with [`tools/author_details.py`](../tools/author_details.py), and released
 **CC BY 4.0** like the rest of the authored joints. Most are box CSG; the sloped
 roof members use a local member frame, arbitrary-plane trimming for square-cut
@@ -408,7 +412,8 @@ groups. Nine specimens failed it: `brace-into-post`, `hip-over-plate`,
 neighbour: the brace bears on the bottom of its post housing, the hip/rafter
 end cuts meet their neighbours exactly, the birdsmouth seats sit on the purlin
 and plate tops, and the nose peg fills its mortise and bears on the post face.
-All 58 sources now have one connected piece graph in the closed pose.
+All 58 sources now have one connected piece graph in the closed pose (39
+published, 19 house details withheld).
 
 Research used for the dimensions and for deciding which connections need a
 recess (rather than only a bearing face):
