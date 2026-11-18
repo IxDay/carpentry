@@ -350,16 +350,21 @@ site is a single view), and may give `approach` as a whole path
 ### `author_multi.py` — off-sheet specimens
 
 ```sh
-python3 author_multi.py                     # rewrite all three sources
-python3 author_multi.py watari-ago-niju-hozo-shikuchi  # just one, by id
+python3 author_multi.py                     # rewrite all four sources
+python3 author_multi.py watari-ago-shikuchi  # just one, by id
 ```
 
-Three specimens fill gaps the reference sheets leave, each with written or
+Four specimens fill gaps the reference sheets leave, each with written or
 diagrammatic backing. `watari-ago-niju-hozo-shikuchi` is the stacked double
 tenon of the GIF by @thejoinery_jp and the carpentry-school build log: a post's
 lower tenon takes the 桁, its upper tenon runs through the girder and the 梁
 alike and is cut flush with the beam's top, and a 78 mm 渡り顎 housing in the
-girder takes the beam's matching chin at the crossing. `sampo-sashi-shachi-sen` and
+girder takes the beam's matching chin at the crossing. `watari-ago-shikuchi` is
+the frame-by-frame reading of the same GIF, published as a separate specimen:
+the plate tenon seats the girder and the square tenon above it runs through
+girder and beam to the beam's top, while a rib along each x edge of the girder
+fits a notch under the beam and a shallow slot opens beside the tenon hole.
+`sampo-sashi-shachi-sen` and
 `shihou-sashi-shachi-sen` adapt the 建築用語集 四方差し figure for three- and
 four-way posts, with one tenon per direction at its own level, each locked by a
 tapered 車知栓 driven crosswise through the tenon. Geometry uses the same box CSG and
@@ -535,7 +540,7 @@ python3 viewer.py --port 9000
 
 The models are reproduced under their own Creative Commons licenses (CC BY 4.0,
 except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The seventeen
-authored joints, the nineteen house details and the three multi-beam specimens
+authored joints, the nineteen house details and the four multi-beam specimens
 (listed in [`../joints/README.md`](../joints/README.md)) are original geometry
 released CC BY 4.0. The site's
 search box uses MIT-licensed `@leeoniya/uFuzzy`, copied unmodified from npm; its

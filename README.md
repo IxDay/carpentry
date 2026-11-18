@@ -133,7 +133,7 @@ The CC BY 4.0 models may be reused with attribution; each GLB's
 `asset.copyright` and `joints/sources/<id>.json` carry it. `yatoi-hozo-shachi-sen-shiguchi`
 is CC BY-SA 4.0: its baked GLB and pieces are a derivative and are distributed
 under the same license. The seventeen authored joints (three splices and fourteen
-column-and-beam `shikuchi`), the nineteen house details and the three multi-beam
+column-and-beam `shikuchi`), the nineteen house details and the four multi-beam
 specimens, all listed in [`joints/README.md`](joints/README.md), are original
 geometry released CC BY 4.0. The house frame in `house/` is likewise original
 geometry, released CC BY 4.0; the reference drawings remain under their own

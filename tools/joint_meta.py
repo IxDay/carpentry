@@ -450,6 +450,18 @@ META = {
          "The through tenon and the jaw must be set out together; the "
          "carpentry-school build log records over two hours of scribing and a "
          "struggle to open the mortise right through."]),
+    "watari-ago-shikuchi": m(3,
+        "Post, 桁 girder and 梁 beam crossing in one stack: the post's stepped "
+        "tenon (a flat plate under the girder, a square above) rises through "
+        "girder and beam and ends flush with the beam's top, and two ribs on the "
+        "girder's top fit notches under the beam either side of the tenon.",
+        ["The plate tenon seats the girder on the post; the square tenon ties "
+         "all three timbers in line and resists uplift.",
+         "The two ribs lock the beam between them, so it cannot twist or wander and the tenon carries little of the load."],
+        ["The square hole is cut through both horizontal timbers and must be "
+         "set out with the hook and notch together.",
+         "The hook, notch and side slot are read from one isometric view of "
+         "the GIF, so their depths are approximate."]),
     "sampo-sashi-shachi-sen": m(4,
         "Three-direction T-junction post with beams arriving from three "
         "directions, each locked by a tapered 車知栓 - built like the 四方差し "

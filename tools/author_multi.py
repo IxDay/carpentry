@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Author multi-beam connection specimens for the joint catalogue.
 
-This tool adds three specimens that fill gaps the 32-sheet catalogue leaves:
+This tool adds four specimens that fill gaps the 32-sheet catalogue leaves:
 
     watari-ago-niju-hozo-shikuchi  渡り顎二重枘仕口  stacked double tenon over a post
+    watari-ago-shikuchi            渡り顎仕口        plate and square tenon between ribs
     sampo-sashi-shachi-sen         三方差し車知栓   three beams, paired wedge keys
     shihou-sashi-shachi-sen        四方差し車知栓   four beams, paired wedge keys
 
@@ -12,8 +13,8 @@ post takes one tenon per direction, each at its own level inside the beam depth
 so that no two tenons share the post's core.  Paired shachi-sen pass through
 each tenon from opposite faces.
 
-    python3 author_multi.py                       # all three
-    python3 author_multi.py watari-ago-niju-hozo-shikuchi  # one
+    python3 author_multi.py                       # all four
+    python3 author_multi.py watari-ago-shikuchi   # one
 
 Sources are written with the catalogue metadata from ``joint_meta`` already
 stamped on.  Bake and preview them with the standard pipeline afterwards.
@@ -222,6 +223,71 @@ WATARI = joint(
     },
     duration=12.0)
 
+# ---------------------------------------------------------------------------
+# 渡り顎仕口, as drawn frame by frame in @thejoinery_jp's assembly GIF.  Post,
+# 桁 girder and 梁 beam are all 120 mm square (U = 120 mm); the girder runs
+# along x and is 3.75 U long, the beam runs along z and is 3.9 U long.  The
+# post's stepped tenon is a 0.75 U x 0.25 U plate into a blind mortise from the
+# girder's underside, topped by a 0.25 U square that comes up through a square
+# hole in the girder, through the beam, and ends flush with the beam's top.  The
+# girder's top keeps a raised rib at each x edge of the crossing, 0.78 U wide
+# (narrower than the girder, so a shoulder is left either side); the beam's
+# underside is notched at both x edges to take them, 0.24 U deep and 0.26 U
+# high, leaving a central tab between the ribs that locks the beam against
+# twisting and takes load off the tenon.
+# A shallow slot open to the girder's +z face sits beside the tenon hole.
+U = 0.12
+A_Y0 = 0.20                                   # post top, girder underside
+A_GIRDER = (A_Y0, A_Y0 + U)
+A_BEAM = (A_Y0 + U, A_Y0 + 2 * U)
+A_PLATE = (0.375 * U, 0.125 * U)              # tenon plate half x, half z
+A_PLATE_TOP = A_Y0 + 0.75 * U
+A_SQ = 0.125 * U                              # upper tenon half-section
+A_RIB_X = ((-U / 2, -U / 2 + 0.24 * U), (U / 2 - 0.24 * U, U / 2))
+A_HOOKS = [(x, (A_BEAM[0], A_BEAM[0] + 0.26 * U), (-0.39 * U, 0.39 * U))
+           for x in A_RIB_X]
+A_SLOT = ((-0.2 * U, 0.2 * U), (A_BEAM[0] - 0.2 * U, A_BEAM[0]),
+          (0.5 * U - 0.23 * U, 0.5 * U))
+A_MODS = ("authored from the frames of @thejoinery_jp's assembly GIF: post "
+          "with a stepped tenon, 桁 girder with a blind lower mortise, a square "
+          "through hole and a rib along each of its x edges, 梁 beam with the matching "
+          "notch under each x edge and a flush square mortise; the hook, the "
+          "notch and the side slot are read from a single isometric view, so "
+          "their depths are approximate; closed pose, each timber lifted "
+          "straight off the post for the assemble animation, sunset lighting "
+          "baked; the baking rig's ground slab is omitted")
+A_CREDIT = ("Original geometry authored for this collection from "
+            "@thejoinery_jp's assembly GIF; CC BY 4.0.")
+WATARI_AGO = joint(
+    "watari-ago-shikuchi", "Watari-ago-shikuchi", "渡り顎仕口",
+    [
+        piece("post", "Post", [
+            [(-U / 2, U / 2), (0.0, A_Y0), (-U / 2, U / 2)],
+            [(-A_PLATE[0], A_PLATE[0]), (A_Y0, A_PLATE_TOP),
+             (-A_PLATE[1], A_PLATE[1])],
+            [(-A_SQ, A_SQ), (A_PLATE_TOP, A_BEAM[1]), (-A_SQ, A_SQ)],
+        ]),
+        piece("girder-x", "Girder x",
+              [[(-1.875 * U, 1.875 * U), A_GIRDER, (-U / 2, U / 2)]] + A_HOOKS,
+              [[(-A_PLATE[0], A_PLATE[0]), (A_Y0, A_PLATE_TOP),
+                (-A_PLATE[1], A_PLATE[1])],
+               [(-A_SQ, A_SQ), (A_PLATE_TOP, A_GIRDER[1]), (-A_SQ, A_SQ)],
+               A_SLOT]),
+        piece("beam-z", "Beam z",
+              [[(-U / 2, U / 2), A_BEAM, (-1.95 * U, 1.95 * U)]],
+              [[(-A_SQ, A_SQ), A_BEAM, (-A_SQ, A_SQ)]] + A_HOOKS),
+    ],
+    {"girder-x": [0.0, 0.30, 0.0], "beam-z": [0.0, 0.62, 0.0]},
+    "A post carries a stepped tenon: a flat plate that sits in a blind mortise "
+    "under the 桁 girder, and a square tenon above it that rises through the "
+    "girder and the 梁 beam and ends flush with the beam's top.  The girder's "
+    "top carries a raised rib either side of the tenon, a little narrower than the "
+    "girder, and the beam's underside is notched at both edges to take them; the "
+    "central tab between the ribs locks the beam against twisting and takes "
+    "load off the tenon.  Drawn from "
+    "@thejoinery_jp's assembly GIF (tweet 771307153583812610).",
+    tab="extra", credit=A_CREDIT, modifications=A_MODS, duration=12.0)
+
 SAMPO_SHACHI = make_series(
     "sampo-sashi-shachi-sen", "Sampo-sashi-shachi-sen", "三方差し車知栓",
     X_BANDS[:1] + Z_BANDS,
@@ -239,7 +305,7 @@ SHIHOU_SHACHI = make_series(
          "member in its 四方差し figure, while warning that the through "
          "tenons leave a large lost section in the post.")
 
-JOINTS = [WATARI, SAMPO_SHACHI, SHIHOU_SHACHI]
+JOINTS = [WATARI, WATARI_AGO, SAMPO_SHACHI, SHIHOU_SHACHI]
 
 
 def main(argv):
