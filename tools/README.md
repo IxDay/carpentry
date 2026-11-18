@@ -232,6 +232,38 @@ a wait leg so the 梁 leaves the 桁 notch before the 桁 itself rises, and its
 exploded pose keeps both timbers lifted so the long members never drop back
 across the post on their way out.
 
+### `export_print.py` — printable meshes for a slicer
+
+```sh
+python3 export_print.py ../joints/sources/watari-ago-niju-hozo-shikuchi.json \
+    --outdir ../print --scale 0.1
+```
+
+Writes `<id>.3mf` and one `<id>_<piece>.stl` per timber, in millimetres. The
+source files store each timber in its exploded pose plus an `assemble` vector,
+so the exporter first moves every piece back to the closed joint (a tenon is
+only the right size when it is seated), triangulates the n-gons with the same
+ear-clipping the checks use, and flips any inward winding so the meshes have
+positive volume. `(x, y, z) → (x, −z, y)` turns the model's y-up frame into the
+slicer's z-up, and each piece is dropped onto z = 0 and laid left to right with
+a 12 mm gap, so a multi-object import arrives already separated.
+
+Each timber prints in the pose it holds in the joint, which keeps the parts
+recognisable and needs no supports. The one exception is the beam: its 18 mm
+chin hangs below the body, so at rest most of the beam would print in mid-air.
+If a pose leaves more than 15 % of its downward-facing area off the bed the
+exporter tries the 24 axis-aligned rotations and keeps the one with the most bed
+contact, which flips the beam onto its flat face with the chin up. The report
+prints each piece's footprint and either "no supports", a bridged area (a
+shallow pocket ceiling, as on the girder's post socket) or a warning.
+
+`--scale 0.1` is 1:10: the 120 mm timbers print 12 mm square and the 80 mm
+tenons 8 mm, which is about the smallest that still reads and holds together.
+`--scale 1` is full size, `--scale 0.05` is 1:20. The 3MF declares
+`unit="millimeter"` and carries three named objects — Cura (and any other
+slicer that reads 3MF) imports them as separate selected models. STL has no
+units, so the same scale is baked into the coordinates.
+
 ### `mate_faces.py` — make mating faces meet exactly
 
 ```sh
