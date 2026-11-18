@@ -290,15 +290,16 @@ site is a single view), and may give `approach` as a whole path
 ### `author_multi.py` — off-sheet specimens
 
 ```sh
-python3 author_multi.py                     # rewrite both sources
+python3 author_multi.py                     # rewrite all three sources
 python3 author_multi.py watari-ago-shikuchi  # just one, by id
 ```
 
-Two specimens fill gaps the reference sheets leave, both with direct written
-backing. `watari-ago-shikuchi` is a crossing lap (`渡り頸`) where two 90 mm beams
-are halved at the cross; `shihou-sashi-shachi-sen` is the 建築用語集 四方差し
-post, with one tenon per direction at its own level, each locked by a tapered
-車知栓 driven crosswise through the tenon. Geometry uses the same box CSG and
+Three specimens fill gaps the reference sheets leave, each with written or
+diagrammatic backing. `watari-ago-shikuchi` is a crossing lap (`渡り頸`) where two
+90 mm beams are halved at the cross; `sampo-sashi-shachi-sen` and
+`shihou-sashi-shachi-sen` adapt the 建築用語集 四方差し figure for three- and
+four-way posts, with one tenon per direction at its own level, each locked by a
+tapered 車知栓 driven crosswise through the tenon. Geometry uses the same box CSG and
 `loft()` helpers as `author_joint.py`; the sources are written with their
 catalogue metadata already stamped on. Original geometry, CC BY 4.0. Regenerate,
 then run `check_sources.py`, `check_contact.py`, `bake.py` and `preview.py`.
@@ -310,7 +311,7 @@ python3 joint_meta.py                       # re-stamp every joints/sources/*.js
 python3 joint_meta.py ../joints/sources kanawa-tsugi  # just one id
 ```
 
-The canonical table of `beams`, `usage`, `strengths` and `weaknesses` for all 55
+The canonical table of `beams`, `usage`, `strengths` and `weaknesses` for all 56
 specimens, with `SOURCE_NOTES` collecting the web references behind the prose.
 `apply(level)` stamps a decoded source (a fallback used by `build_site.py`), and
 `write_sources(src_dir, only)` rewrites source files in place. The `beams` count
@@ -426,7 +427,7 @@ python3 build_site.py --preview             # also serve it on :8000
 
 Reads `joints/sources/*.json` (title, Japanese name, credit, metadata), skipping
 the 19 with `tab: "house-details"` — those are kept in the repository but
-withheld from the site until corrected — copies the remaining 36
+withheld from the site until corrected — copies the remaining 37
 `joints/<id>.glb` files and their sunset previews, and writes `docs/index.html`
 from `site_template.html`: a single **Joints** view, one section per joint with a
 `#<id>` anchor, a `<model-viewer>` that plays the `assemble` clip, the Japanese
@@ -471,7 +472,7 @@ python3 viewer.py --port 9000
 
 The models are reproduced under their own Creative Commons licenses (CC BY 4.0,
 except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The seventeen
-authored joints, the nineteen house details and the two multi-beam specimens
+authored joints, the nineteen house details and the three multi-beam specimens
 (listed in [`../joints/README.md`](../joints/README.md)) are original geometry
 released CC BY 4.0. The site's
 search box uses MIT-licensed `@leeoniya/uFuzzy`, copied unmodified from npm; its

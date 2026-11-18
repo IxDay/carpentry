@@ -10,9 +10,9 @@ source model, are authored in this repository with
 柱（軸組）の納まり and two from published descriptions of joints the sheet does not
 show). Nineteen more are authored with
 [`tools/author_details.py`](../tools/author_details.py) for the connection
-families the house frame uses beyond the sheets, and two further specimens with
-[`tools/author_multi.py`](../tools/author_multi.py) for a crossing lap and the
-four-way post. Every joint is tagged in `joints/sources/<id>.json` with the number
+families the house frame uses beyond the sheets, and three further specimens
+with [`tools/author_multi.py`](../tools/author_multi.py) for a crossing lap and
+the three- and four-way posts. Every joint is tagged in `joints/sources/<id>.json` with the number
 of beams meeting at it, its use, and its strengths and weaknesses
 (see [`tools/joint_meta.py`](../tools/joint_meta.py)); the published site is a
 single **Joints** view with a beam-count filter. The nineteen house-detail
@@ -118,15 +118,16 @@ hip and rafter ends, and a profile prism for a birdsmouth with a horizontal seat
 
 ## Beyond the reference sheets
 
-Two specimens fill gaps the 32-sheet catalogue leaves: they are original
+Three specimens fill gaps the 32-sheet catalogue leaves: they are original
 geometry authored with [`tools/author_multi.py`](../tools/author_multi.py)
-and released **CC BY 4.0**. Both have direct written backing, listed with their
-references below; no specimen is published on the strength of a naming series
-alone.
+and released **CC BY 4.0**. Each has written or diagrammatic backing, listed
+with its references below; no specimen is published on the strength of a naming
+series alone.
 
 | Asset | Japanese | Beams | License | Pieces |
 |---|---|---|---|---|
 | [`watari-ago-shikuchi`](../tools/author_multi.py) | 渡り頸仕口 | 3 | CC BY 4.0 (authored) | 3 |
+| [`sampo-sashi-shachi-sen`](../tools/author_multi.py) | 三方差し車知栓 | 4 | CC BY 4.0 (authored) | 7 |
 | [`shihou-sashi-shachi-sen`](../tools/author_multi.py) | 四方差し車知栓 | 5 | CC BY 4.0 (authored) | 9 |
 
 `watari-ago-shikuchi` is the common crossing lap the sheets omit: two 90 mm
@@ -134,12 +135,13 @@ beams halved where they cross, so the upper beam's 頸 straddles the lower one
 and the pair sit on the post without cutting into it. 下山 recommends
 渡りあご for a 90 mm+ joist because it fixes the joist without damaging the
 supporting beam; the half-lap geometry here is an interpretation of that
-written description. `shihou-sashi-shachi-sen` is the 四方差し configuration
-shown in 建築用語集, where the red member in the figure is the 車知栓: four beams
-frame into one post, each tenon at its own level and locked by a tapered key.
-建築用語集 warns that through tenons leave a large lost section in the post and
-that metal reinforcement may be preferable; that caution is recorded in the
-specimen's weaknesses.
+written description. `sampo-sashi-shachi-sen` and `shihou-sashi-shachi-sen`
+adapt the 四方差し figure in 建築用語集, where the red member is the 車知栓:
+three- and four-way posts with one tenon per direction at its own level, each
+locked by a tapered key. The three-way form omits one arrival from that figure
+and is not a separately sourced named joint; that caveat is recorded in its
+weaknesses. 建築用語集 warns that through tenons leave a large lost section in
+the post and that metal reinforcement may be preferable.
 
 ## Changes from the source models
 
@@ -336,7 +338,7 @@ python3 author_joint.py                 # rewrites all seventeen sources
 python3 author_joint.py daimochi-tsugi  # or one
 python3 author_details.py               # rewrites all nineteen house details
 python3 author_details.py sill-corner   # or one
-python3 author_multi.py                 # rewrites the two off-sheet sources
+python3 author_multi.py                 # rewrites the three off-sheet sources
 python3 author_multi.py watari-ago-shikuchi  # or one
 python3 joint_meta.py                   # re-stamp beams/use/strengths/weaknesses
 ```
@@ -404,7 +406,7 @@ groups. Nine specimens failed it: `brace-into-post`, `hip-over-plate`,
 neighbour: the brace bears on the bottom of its post housing, the hip/rafter
 end cuts meet their neighbours exactly, the birdsmouth seats sit on the purlin
 and plate tops, and the nose peg fills its mortise and bears on the post face.
-All 55 sources now have one connected piece graph in the closed pose (36
+All 56 sources now have one connected piece graph in the closed pose (37
 published, 19 house details withheld).
 
 Research used for the dimensions and for deciding which connections need a

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Author multi-beam connection specimens for the joint catalogue.
 
-This tool adds the two specimens whose geometry has direct written backing but
-which the 32-sheet catalogue omits:
+This tool adds three specimens that fill gaps the 32-sheet catalogue leaves:
 
     watari-ago-shikuchi      渡り頸仕口     two beams crossing over a post
+    sampo-sashi-shachi-sen   三方差し車知栓  three beams, paired wedge keys
     shihou-sashi-shachi-sen  四方差し車知栓  four beams, paired wedge keys
 
 Geometry uses the same box-CSG and loft helpers as ``author_joint.py``.  The
@@ -12,7 +12,7 @@ post takes one tenon per direction, each at its own level inside the beam depth
 so that no two tenons share the post's core.  Paired shachi-sen pass through
 each tenon from opposite faces.
 
-    python3 author_multi.py                       # all specimens
+    python3 author_multi.py                       # all three
     python3 author_multi.py watari-ago-shikuchi   # one
 
 Sources are written with the catalogue metadata from ``joint_meta`` already
@@ -166,6 +166,14 @@ WATARI = joint(
     "90 mm+ joist because it fixes the joist without damaging the beam.",
     tab="extra", credit=OFFSHEET_CREDIT, modifications=KEY_MODS)
 
+SAMPO_SHACHI = make_series(
+    "sampo-sashi-shachi-sen", "Sampo-sashi-shachi-sen", "三方差し車知栓",
+    X_BANDS[:1] + Z_BANDS,
+    note="Three beams meet one post at a T-junction. Each tenon sits at its "
+         "own level, runs 100 mm into the post and is locked by a tapered "
+         "車知栓 driven through it from the beam's side; the pair of keys on "
+         "opposite faces draws the arrivals tight.")
+
 SHIHOU_SHACHI = make_series(
     "shihou-sashi-shachi-sen", "Shihou-sashi-shachi-sen", "四方差し車知栓",
     X_BANDS + Z_BANDS,
@@ -175,7 +183,7 @@ SHIHOU_SHACHI = make_series(
          "member in its 四方差し figure, while warning that the through "
          "tenons leave a large lost section in the post.")
 
-JOINTS = [WATARI, SHIHOU_SHACHI]
+JOINTS = [WATARI, SAMPO_SHACHI, SHIHOU_SHACHI]
 
 
 def main(argv):

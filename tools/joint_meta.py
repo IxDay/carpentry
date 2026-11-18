@@ -446,6 +446,17 @@ META = {
          "framing."],
         ["Bearing and a bearing shoulder only: no peg or wedge resists uplift.",
          "The notch removes roughly half the depth of the upper member."]),
+    "sampo-sashi-shachi-sen": m(4,
+        "Three-direction T-junction post with beams arriving from three "
+        "directions, each locked by a tapered 車知栓 - built like the 四方差し "
+        "figure in 建築用語集 but with one arrival omitted.",
+        ["A shachi-sen through each tenon resists withdrawal on all three "
+         "arrivals without a separate key per face.",
+         "Tenons sit at stacked levels, so none share the post's core."],
+        ["Through tenons leave a large lost section in the post (the same "
+         "warning 建築用語集 gives 四方差し).",
+         "Interpreted from the 四方差し figure with one arrival removed; it is "
+         "not a separately sourced named specimen."]),
     "shihou-sashi-shachi-sen": m(5,
         "Four-way post connection locked with paired 車知栓 wedge keys - the "
         "configuration shown in 建築用語集's 四方差し figure, where the red "
