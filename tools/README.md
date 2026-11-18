@@ -291,12 +291,14 @@ site is a single view), and may give `approach` as a whole path
 
 ```sh
 python3 author_multi.py                     # rewrite all three sources
-python3 author_multi.py watari-ago-shikuchi  # just one, by id
+python3 author_multi.py watari-ago-niju-hozo-shikuchi  # just one, by id
 ```
 
 Three specimens fill gaps the reference sheets leave, each with written or
-diagrammatic backing. `watari-ago-shikuchi` is a crossing lap (`渡り頸`) where two
-90 mm beams are halved at the cross; `sampo-sashi-shachi-sen` and
+diagrammatic backing. `watari-ago-niju-hozo-shikuchi` is the stacked double
+tenon of the GIF by @thejoinery_jp and the carpentry-school build log: a post's
+lower tenon takes the 桁, its upper tenon passes through into the 梁 above, and
+a 渡り顎 jaw locks the crossing. `sampo-sashi-shachi-sen` and
 `shihou-sashi-shachi-sen` adapt the 建築用語集 四方差し figure for three- and
 four-way posts, with one tenon per direction at its own level, each locked by a
 tapered 車知栓 driven crosswise through the tenon. Geometry uses the same box CSG and

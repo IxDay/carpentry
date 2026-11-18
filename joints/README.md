@@ -126,16 +126,20 @@ series alone.
 
 | Asset | Japanese | Beams | License | Pieces |
 |---|---|---|---|---|
-| [`watari-ago-shikuchi`](../tools/author_multi.py) | 渡り頸仕口 | 3 | CC BY 4.0 (authored) | 3 |
+| [`watari-ago-niju-hozo-shikuchi`](../tools/author_multi.py) | 渡り顎二重枘仕口 | 3 | CC BY 4.0 (authored) | 3 |
 | [`sampo-sashi-shachi-sen`](../tools/author_multi.py) | 三方差し車知栓 | 4 | CC BY 4.0 (authored) | 7 |
 | [`shihou-sashi-shachi-sen`](../tools/author_multi.py) | 四方差し車知栓 | 5 | CC BY 4.0 (authored) | 9 |
 
-`watari-ago-shikuchi` is the common crossing lap the sheets omit: two 90 mm
-beams halved where they cross, so the upper beam's 頸 straddles the lower one
-and the pair sit on the post without cutting into it. 下山 recommends
-渡りあご for a 90 mm+ joist because it fixes the joist without damaging the
-supporting beam; the half-lap geometry here is an interpretation of that
-written description. `sampo-sashi-shachi-sen` and `shihou-sashi-shachi-sen`
+`watari-ago-niju-hozo-shikuchi` is the double-tenon crossing shown in
+[@thejoinery_jp's assembly GIF](https://twitter.com/i/status/771307153583812610):
+a post carries two stacked tenons, the lower one taking the 桁 girder and the
+upper passing through it into the 梁 beam above, while a carved 渡り顎 jaw
+locks the crossing. The layout follows the first-hand build log of the same
+joint at the [榛南建築高等職業訓練校](https://hainankenchiku.jimdofree.com/2017/06/22/%E6%B8%A1%E3%82%8A%E9%A1%8E-%E3%81%82%E3%81%94-%E4%BA%8C%E9%87%8D%E3%81%BB%E3%81%9E%E4%BB%95%E5%8F%A3/)
+(mirrored at [セルフビルドの平屋でDIY生活](https://www.diyshufu.com/job-training-of-carpenter/1754/)),
+which describes "post below, 桁 in the middle, 梁 on top", tenons worked on the
+post and mortises opened in both horizontal timbers.
+`sampo-sashi-shachi-sen` and `shihou-sashi-shachi-sen`
 adapt the 四方差し figure in 建築用語集, where the red member is the 車知栓:
 three- and four-way posts with one tenon per direction at its own level, each
 locked by a tapered key. The three-way form omits one arrival from that figure
@@ -339,7 +343,7 @@ python3 author_joint.py daimochi-tsugi  # or one
 python3 author_details.py               # rewrites all nineteen house details
 python3 author_details.py sill-corner   # or one
 python3 author_multi.py                 # rewrites the three off-sheet sources
-python3 author_multi.py watari-ago-shikuchi  # or one
+python3 author_multi.py watari-ago-niju-hozo-shikuchi  # or one
 python3 joint_meta.py                   # re-stamp beams/use/strengths/weaknesses
 ```
 

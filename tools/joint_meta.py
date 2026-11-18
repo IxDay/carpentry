@@ -434,18 +434,20 @@ META = {
          "Deep housings into the girder reduce its section."]),
 
     # ------------------------------------------------------------- new specimens
-    "watari-ago-shikuchi": m(3,
-        "Notched crossing lap where a joist crosses a girder, or one purlin "
-        "crosses another, directly over a post.  A cited gap in the 32-sheet "
-        "catalog: 下山 recommends 渡りあご where a 90 mm+ joist bears on a beam, "
-        "because it fixes the joist without damaging the beam.",
-        ["The notch stops the upper beam sliding sideways off the lower one.",
-         "Leaves the supporting beam's section intact, unlike a Housing cut "
-         "into its top.",
-         "Closes with a straight drop, so it suits repetitive floor and roof "
-         "framing."],
-        ["Bearing and a bearing shoulder only: no peg or wedge resists uplift.",
-         "The notch removes roughly half the depth of the upper member."]),
+    "watari-ago-niju-hozo-shikuchi": m(3,
+        "Double-tenon crossing over a post: a 桁 girder sits on the post's lower "
+        "tenon, a 梁 beam crosses above it and is locked by the post's upper "
+        "tenon passing through the girder, and a carved 渡り顎 jaw joins the "
+        "crossing timbers.",
+        ["The lower tenon fixes the girder on the post without hollowing the "
+         "post's core.",
+         "The upper tenon runs through the girder into the beam, so the joint "
+         "resists uplift as well as side slip.",
+         "The 渡り顎 jaw bears on the girder and stops the beam shifting along "
+         "the crossing."],
+        ["The girder loses half its depth where the jaw is cut.",
+         "The through tenon and the jaw must be set out together; the "
+         "carpentry-school build log records over two hours of scribing."]),
     "sampo-sashi-shachi-sen": m(4,
         "Three-direction T-junction post with beams arriving from three "
         "directions, each locked by a tapered 車知栓 - built like the 四方差し "

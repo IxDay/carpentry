@@ -3,9 +3,9 @@
 
 This tool adds three specimens that fill gaps the 32-sheet catalogue leaves:
 
-    watari-ago-shikuchi      渡り頸仕口     two beams crossing over a post
-    sampo-sashi-shachi-sen   三方差し車知栓  three beams, paired wedge keys
-    shihou-sashi-shachi-sen  四方差し車知栓  four beams, paired wedge keys
+    watari-ago-niju-hozo-shikuchi  渡り顎二重枘仕口  stacked double tenon over a post
+    sampo-sashi-shachi-sen         三方差し車知栓   three beams, paired wedge keys
+    shihou-sashi-shachi-sen        四方差し車知栓   four beams, paired wedge keys
 
 Geometry uses the same box-CSG and loft helpers as ``author_joint.py``.  The
 post takes one tenon per direction, each at its own level inside the beam depth
@@ -13,7 +13,7 @@ so that no two tenons share the post's core.  Paired shachi-sen pass through
 each tenon from opposite faces.
 
     python3 author_multi.py                       # all three
-    python3 author_multi.py watari-ago-shikuchi   # one
+    python3 author_multi.py watari-ago-niju-hozo-shikuchi  # one
 
 Sources are written with the catalogue metadata from ``joint_meta`` already
 stamped on.  Bake and preview them with the standard pipeline afterwards.
@@ -136,35 +136,72 @@ def make_series(jid, title, jp, bands, note=""):
 
 
 # ---------------------------------------------------------------------------
-# 渡り頸: two beams crossing at right angles over a post, each halved at the
-# cross so the upper one's neck straddles the lower one without cutting into
-# the supporting post.  This is the common floor/roof crossing the sheets omit.
+# 渡り顎二重枘仕口: a post carries two tenons stacked one above the other. The
+# lower one takes the 桁 (girder) that sits directly on the post; the upper one
+# passes through that girder into the 梁 (beam) crossing above it. A carved
+# 渡り顎 jaw at the crossing stops the two horizontal timbers wandering.
+#
+# The layout follows the carpentry-school build log of the exact joint
+# (hainankenchiku.jimdofree.com, mirrored at diyshufu.com/job-training-of-
+# carpenter/1754/): "下から柱、真ん中のが桁、一番上を梁", a post with tenons
+# worked on top, and mortises opened in both the 桁 and the 梁. The stacked
+# arrangement is the one shown in @thejoinery_jp's assembly GIF
+# (https://twitter.com/i/status/771307153583812610).
 W_POST_TOP = 0.42
-W_DEPTH = (W_POST_TOP, W_POST_TOP + 0.12)
-W_HALF = 0.045
-W_CROSS = 0.045
-W_MID = W_POST_TOP + 0.06
+W_DEPTH = (W_POST_TOP, W_POST_TOP + 0.12)     # 桁: 120 mm deep
+W_HALF = 0.045                                # 90 mm wide timbers
+W_CROSS = 0.045                               # 渡り顎 jaw half-width, 1.3 sun
+W_TENON_LO = 0.030                            # 60 mm lower tenon
+W_TENON_HI = 0.020                            # 40 mm upper tenon
+W_TENON_MID = W_POST_TOP + 0.06               # step between the two tenons
+W_BEAM_BOT = W_DEPTH[1]                       # the 梁 sits on the 桁
+W_BEAM_TOP = W_BEAM_BOT + 0.12
+W_MODS = ("authored from the carpentry-school account of 渡り顎二重枘仕口 and "
+          "@thejoinery_jp's assembly GIF: post with a stacked double tenon, "
+          "桁 below, 梁 above, 渡り顎 jaw at the cross; closed pose, exploded "
+          "for the assemble animation, sunset lighting baked; the baking "
+          "rig's ground slab is omitted")
+W_CREDIT = ("Original geometry authored for this collection from the carpentry "
+            "school's 渡り顎・二重ほぞ仕口 build log and @thejoinery_jp's "
+            "assembly GIF; CC BY 4.0.")
 WATARI = joint(
-    "watari-ago-shikuchi", "Watari-ago-shikuchi", "渡り頸仕口",
+    "watari-ago-niju-hozo-shikuchi", "Watari-ago-niju-hozo-shikuchi",
+    "渡り顎二重枘仕口",
     [
-        piece("post", "Post", [[(-P, P), (0.0, W_POST_TOP), (-P, P)]]),
-        # Lower beam runs along x; its top half is removed at the cross.
-        piece("beam-x", "Beam x",
+        # The post's top is stepped: a wide lower tenon and a narrow upper one
+        # that runs on through the girder into the beam.
+        piece("post", "Post", [
+            [(-P, P), (0.0, W_POST_TOP), (-P, P)],
+            [(-W_TENON_LO, W_TENON_LO), (W_POST_TOP, W_TENON_MID),
+             (-W_TENON_LO, W_TENON_LO)],
+            [(-W_TENON_HI, W_TENON_HI), (W_TENON_MID, W_BEAM_BOT + 0.06),
+             (-W_TENON_HI, W_TENON_HI)],
+        ]),
+        # 桁 runs along x: a lower mortise for the post and a top notch that
+        # receives the 梁's downward jaw.
+        piece("girder-x", "Girder x",
               [[(-BEAM_OUT, BEAM_OUT), W_DEPTH, (-W_HALF, W_HALF)]],
-              [[(-W_CROSS, W_CROSS), (W_MID, W_DEPTH[1]),
+              [[(-W_TENON_LO, W_TENON_LO), (W_POST_TOP, W_TENON_MID),
+                (-W_TENON_LO, W_TENON_LO)],
+               [(-W_CROSS, W_CROSS), (W_TENON_MID, W_DEPTH[1]),
                 (-W_HALF, W_HALF)]]),
-        # Upper beam runs along z; its bottom half is removed at the cross.
+        # 梁 runs along z: a full-depth beam with a downward jaw at the cross,
+        # mortised to take the post's upper tenon.
         piece("beam-z", "Beam z",
-              [[(-W_HALF, W_HALF), W_DEPTH, (-BEAM_OUT, BEAM_OUT)]],
-              [[(-W_HALF, W_HALF), (W_DEPTH[0], W_MID),
-                (-W_CROSS, W_CROSS)]]),
+              [[(-W_HALF, W_HALF), (W_BEAM_BOT, W_BEAM_TOP),
+                (-BEAM_OUT, BEAM_OUT)],
+               [(-W_CROSS, W_CROSS), (W_TENON_MID, W_BEAM_BOT),
+                (-W_CROSS, W_CROSS)]],
+              [[(-W_TENON_HI, W_TENON_HI), (W_TENON_MID, W_BEAM_BOT + 0.06),
+                (-W_TENON_HI, W_TENON_HI)]]),
     ],
-    {"beam-x": [-0.34, 0.0, 0.0], "beam-z": [0.0, 0.24, 0.0]},
-    "A crossing lap: each 90 mm beam is halved where the two cross, so the "
-    "upper beam's 頸 straddles the lower beam and the pair sit on the post "
-    "without a mortise in the post itself. 下山 recommends 渡りあご for a "
-    "90 mm+ joist because it fixes the joist without damaging the beam.",
-    tab="extra", credit=OFFSHEET_CREDIT, modifications=KEY_MODS)
+    {"girder-x": [-0.34, 0.0, 0.0], "beam-z": [0.0, 0.24, 0.30]},
+    "A post carries two stacked tenons: the lower one takes the 桁 girder, "
+    "the upper passes through it into the 梁 beam above, and a carved 渡り顎 "
+    "jaw locks the crossing.  The layout follows the carpentry-school build "
+    "log (hainankenchiku.jimdofree.com; diyshufu.com/job-training-of-carpenter/"
+    "1754/) and the assembly GIF by @thejoinery_jp (tweet 771307153583812610).",
+    tab="extra", credit=W_CREDIT, modifications=W_MODS)
 
 SAMPO_SHACHI = make_series(
     "sampo-sashi-shachi-sen", "Sampo-sashi-shachi-sen", "三方差し車知栓",
