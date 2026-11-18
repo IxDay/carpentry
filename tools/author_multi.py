@@ -158,9 +158,10 @@ W_BEAM_BOT = W_DEPTH[1]                       # the 梁 sits on the 桁
 W_BEAM_TOP = W_BEAM_BOT + 0.12
 W_MODS = ("authored from the carpentry-school account of 渡り顎二重枘仕口 and "
           "@thejoinery_jp's assembly GIF: post with a stacked double tenon, "
-          "桁 below, 梁 above, 渡り顎 jaw at the cross; closed pose, exploded "
-          "for the assemble animation, sunset lighting baked; the baking "
-          "rig's ground slab is omitted")
+          "桁 below, 梁 above, 渡り顎 jaw at the cross; closed pose, each timber "
+          "lifted clear of its mortise before sliding out for the assemble "
+          "animation, sunset lighting baked; the baking rig's ground slab is "
+          "omitted")
 W_CREDIT = ("Original geometry authored for this collection from the carpentry "
             "school's 渡り顎・二重ほぞ仕口 build log and @thejoinery_jp's "
             "assembly GIF; CC BY 4.0.")
@@ -195,13 +196,18 @@ WATARI = joint(
               [[(-W_TENON_HI, W_TENON_HI), (W_TENON_MID, W_BEAM_BOT + 0.06),
                 (-W_TENON_HI, W_TENON_HI)]]),
     ],
-    {"girder-x": [-0.34, 0.0, 0.0], "beam-z": [0.0, 0.24, 0.30]},
+    {"girder-x": [-0.34, 0.22, 0.0], "beam-z": [0.0, 0.36, 0.30]},
     "A post carries two stacked tenons: the lower one takes the 桁 girder, "
     "the upper passes through it into the 梁 beam above, and a carved 渡り顎 "
     "jaw locks the crossing.  The layout follows the carpentry-school build "
     "log (hainankenchiku.jimdofree.com; diyshufu.com/job-training-of-carpenter/"
     "1754/) and the assembly GIF by @thejoinery_jp (tweet 771307153583812610).",
-    tab="extra", credit=W_CREDIT, modifications=W_MODS)
+    tab="extra", credit=W_CREDIT, modifications=W_MODS,
+    approach={
+        "beam-z": [[0.0, 0.36, 0.0], [0.0, 0.36, 0.30]],
+        "girder-x": [[0.0, 0.0, 0.0], [0.0, 0.22, 0.0],
+                     [-0.34, 0.22, 0.0]],
+    })
 
 SAMPO_SHACHI = make_series(
     "sampo-sashi-shachi-sen", "Sampo-sashi-shachi-sen", "三方差し車知栓",

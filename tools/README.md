@@ -204,6 +204,31 @@ neither. Run it alongside `check_sources.py` after any geometry edit; a joint
 with no disconnected pieces is the minimum bar, not proof that every intended
 mortise is present.
 
+### `check_animation.py` — watch the assembly path for collisions
+
+```sh
+python3 check_animation.py watari-ago-niju-hozo-shikuchi
+python3 check_animation.py              # every source with an animation
+python3 check_animation.py --json <id>
+```
+
+The two closed-pose gates above say nothing about the journey. This tracker
+samples the exact `assemble` tracks that `bake.py` writes into the GLB and, at
+each frame, tests probe points (vertices, edge midpoints and triangle centroids)
+of one timber against the other's triangulated surface. A probe that lands well
+inside another timber means the animation drags a tenon through solid wood; the
+report gives the first time and the pair involved. Surfaces that merely touch
+are ignored, so a correctly seated joint reads clean. NumPy vectorises the
+closest-point and ray-parity kernels, so a whole 6-second track takes well under
+a second instead of a Python loop per triangle pair.
+
+A clean closed pose can still fail here. Blind mortises must be lifted clear
+before a timber slides sideways, and a timber that sits above another at rest
+must stay above it while travelling. The Watari joint uses `approach` paths with
+a wait leg so the 梁 leaves the 桁 notch before the 桁 itself rises, and its
+exploded pose keeps both timbers lifted so the long members never drop back
+across the post on their way out.
+
 ### `mate_faces.py` — make mating faces meet exactly
 
 ```sh
