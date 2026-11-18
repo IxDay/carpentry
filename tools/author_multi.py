@@ -138,30 +138,37 @@ def make_series(jid, title, jp, bands, note=""):
 # ---------------------------------------------------------------------------
 # 渡り顎二重枘仕口: a post carries two tenons stacked one above the other. The
 # lower one takes the 桁 (girder) that sits directly on the post; the upper one
-# passes through that girder into the 梁 (beam) crossing above it. A carved
-# 渡り顎 jaw at the crossing stops the two horizontal timbers wandering.
+# runs right through that girder, right through the 梁 (beam) crossing above,
+# and is cut off flush with the beam's top face.  Where the two horizontal
+# timbers cross the girder's top is housed down over a band 1 sun 3 bu (78 mm)
+# wide, and the beam carries a chin of the same width that drops into it - the
+# 渡り顎 - so each timber keeps a pair of shoulders either side of the crossing.
 #
 # The layout follows the carpentry-school build log of the exact joint
 # (hainankenchiku.jimdofree.com, mirrored at diyshufu.com/job-training-of-
-# carpenter/1754/): "下から柱、真ん中のが桁、一番上を梁", a post with tenons
-# worked on top, and mortises opened in both the 桁 and the 梁. The stacked
-# arrangement is the one shown in @thejoinery_jp's assembly GIF
+# carpenter/1754/): "下から柱、真ん中のが桁、一番上を梁", the 峠 set 5 bu above
+# the 桁, the 渡り顎 widths taken 1 sun 3 bu from the centre, and the tenon
+# holes opened right through ("穴を貫通させるのに手間取っていた").  The
+# stacked arrangement is the one shown in @thejoinery_jp's assembly GIF
 # (https://twitter.com/i/status/771307153583812610).
 W_POST_TOP = 0.42
 W_DEPTH = (W_POST_TOP, W_POST_TOP + 0.12)     # 桁: 120 mm deep
 W_HALF = P                                    # 120 mm square post, girder and beam
-W_CROSS = 0.045                               # 渡り顎 jaw half-width, 1.3 sun
-W_TENON_LO = 0.030                            # 60 mm lower tenon
+W_AGO = 0.039                                 # 渡り顎 half-width, 1 sun 3 bu from the centre
+W_AGO_DROP = 0.018                            # jaw seating depth, 6 bu
+W_JAW_FLOOR = W_DEPTH[1] - W_AGO_DROP         # floor of the housing / foot of the chin
+W_TENON_LO = 0.040                            # 80 mm lower tenon
 W_TENON_HI = 0.020                            # 40 mm upper tenon
 W_TENON_MID = W_POST_TOP + 0.06               # step between the two tenons
 W_BEAM_BOT = W_DEPTH[1]                       # the 梁 sits on the 桁
 W_BEAM_TOP = W_BEAM_BOT + 0.12
 W_MODS = ("authored from the carpentry-school account of 渡り顎二重枘仕口 and "
           "@thejoinery_jp's assembly GIF: post with a stacked double tenon, "
-          "桁 below, 梁 above, 渡り顎 jaw at the cross; closed pose, each timber "
-          "lifted clear of its mortise before sliding out for the assemble "
-          "animation, sunset lighting baked; the baking rig's ground slab is "
-          "omitted")
+          "桁 below, 梁 above, the upper tenon passing through both timbers and "
+          "cut flush with the beam's top, a 78 mm 渡り顎 housing in the girder "
+          "taking the beam's chin; closed pose, each timber lifted clear of its "
+          "mortise before sliding out for the assemble animation, sunset "
+          "lighting baked; the baking rig's ground slab is omitted")
 W_CREDIT = ("Original geometry authored for this collection from the carpentry "
             "school's 渡り顎・二重ほぞ仕口 build log and @thejoinery_jp's "
             "assembly GIF; CC BY 4.0.")
@@ -170,43 +177,48 @@ WATARI = joint(
     "渡り顎二重枘仕口",
     [
         # The post's top is stepped: a wide lower tenon and a narrow upper one
-        # that runs on through the girder into the beam.
+        # that runs on through the girder and the beam.
         piece("post", "Post", [
             [(-P, P), (0.0, W_POST_TOP), (-P, P)],
             [(-W_TENON_LO, W_TENON_LO), (W_POST_TOP, W_TENON_MID),
              (-W_TENON_LO, W_TENON_LO)],
-            [(-W_TENON_HI, W_TENON_HI), (W_TENON_MID, W_BEAM_BOT + 0.06),
+            [(-W_TENON_HI, W_TENON_HI), (W_TENON_MID, W_BEAM_TOP),
              (-W_TENON_HI, W_TENON_HI)],
         ]),
-        # 桁 runs along x: a lower mortise for the post and a top notch that
-        # receives the 梁's downward jaw.
+        # 桁 runs along x: a lower mortise for the post, a through mortise for
+        # the upper tenon, and a transverse housing across the top for the 梁's
+        # chin.  The two shoulders left either side of the housing are the 顎.
         piece("girder-x", "Girder x",
               [[(-BEAM_OUT, BEAM_OUT), W_DEPTH, (-W_HALF, W_HALF)]],
               [[(-W_TENON_LO, W_TENON_LO), (W_POST_TOP, W_TENON_MID),
                 (-W_TENON_LO, W_TENON_LO)],
-               [(-W_CROSS, W_CROSS), (W_TENON_MID, W_DEPTH[1]),
+               [(-W_TENON_HI, W_TENON_HI), (W_TENON_MID, W_DEPTH[1]),
+                (-W_TENON_HI, W_TENON_HI)],
+               [(-W_AGO, W_AGO), (W_JAW_FLOOR, W_DEPTH[1]),
                 (-W_HALF, W_HALF)]]),
-        # 梁 runs along z: a full-depth beam with a downward jaw at the cross,
-        # mortised to take the post's upper tenon.
+        # 梁 runs along z: a full-depth beam whose underside carries a chin that
+        # drops into the girder's housing, with the through mortise for the
+        # post's upper tenon cut right through chin and beam alike.
         piece("beam-z", "Beam z",
               [[(-W_HALF, W_HALF), (W_BEAM_BOT, W_BEAM_TOP),
                 (-BEAM_OUT, BEAM_OUT)],
-               [(-W_CROSS, W_CROSS), (W_TENON_MID, W_BEAM_BOT),
-                (-W_CROSS, W_CROSS)]],
-              [[(-W_TENON_HI, W_TENON_HI), (W_TENON_MID, W_BEAM_BOT + 0.06),
+               [(-W_AGO, W_AGO), (W_JAW_FLOOR, W_BEAM_BOT),
+                (-W_HALF, W_HALF)]],
+              [[(-W_TENON_HI, W_TENON_HI), (W_JAW_FLOOR, W_BEAM_TOP),
                 (-W_TENON_HI, W_TENON_HI)]]),
     ],
-    {"girder-x": [-0.34, 0.22, 0.0], "beam-z": [0.0, 0.36, 0.30]},
-    "A post carries two stacked tenons: the lower one takes the 桁 girder, "
-    "the upper passes through it into the 梁 beam above, and a carved 渡り顎 "
-    "jaw locks the crossing.  The layout follows the carpentry-school build "
-    "log (hainankenchiku.jimdofree.com; diyshufu.com/job-training-of-carpenter/"
+    {"girder-x": [-0.34, 0.30, 0.0], "beam-z": [0.0, 0.36, 0.30]},
+    "A post carries two stacked tenons: the lower one takes the 桁 girder, the "
+    "upper one runs through both the girder and the 梁 beam above and is cut "
+    "flush with the beam's top, and a 渡り顎 housing across the girder takes the "
+    "beam's chin.  The layout follows the carpentry-school build log "
+    "(hainankenchiku.jimdofree.com; diyshufu.com/job-training-of-carpenter/"
     "1754/) and the assembly GIF by @thejoinery_jp (tweet 771307153583812610).",
     tab="extra", credit=W_CREDIT, modifications=W_MODS,
     approach={
         "beam-z": [[0.0, 0.36, 0.0], [0.0, 0.36, 0.30]],
-        "girder-x": [[0.0, 0.0, 0.0], [0.0, 0.22, 0.0],
-                     [-0.34, 0.22, 0.0]],
+        "girder-x": [[0.0, 0.0, 0.0], [0.0, 0.30, 0.0],
+                     [-0.34, 0.30, 0.0]],
     },
     duration=12.0)
 

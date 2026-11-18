@@ -436,18 +436,20 @@ META = {
     # ------------------------------------------------------------- new specimens
     "watari-ago-niju-hozo-shikuchi": m(3,
         "Double-tenon crossing over a post: a 桁 girder sits on the post's lower "
-        "tenon, a 梁 beam crosses above it and is locked by the post's upper "
-        "tenon passing through the girder, and a carved 渡り顎 jaw joins the "
-        "crossing timbers.",
+        "tenon, a 梁 beam crosses on it, the post's upper tenon runs through "
+        "girder and beam alike and is cut flush with the beam's top, and a 渡り顎 "
+        "housing in the girder takes the beam's chin at the crossing.",
         ["The lower tenon fixes the girder on the post without hollowing the "
          "post's core.",
-         "The upper tenon runs through the girder into the beam, so the joint "
-         "resists uplift as well as side slip.",
-         "The 渡り顎 jaw bears on the girder and stops the beam shifting along "
-         "the crossing."],
-        ["The girder loses half its depth where the jaw is cut.",
+         "The upper tenon runs right through the girder and the beam, so the "
+         "joint resists uplift and ties all three timbers in line.",
+         "The 渡り顎 housing and chin stop the beam shifting along the crossing, "
+         "and the shoulders either side keep the beam's bearing full width."],
+        ["The girder loses its housing depth (about 18 mm) across a 78 mm band, "
+         "and the beam loses the same at its chin.",
          "The through tenon and the jaw must be set out together; the "
-         "carpentry-school build log records over two hours of scribing."]),
+         "carpentry-school build log records over two hours of scribing and a "
+         "struggle to open the mortise right through."]),
     "sampo-sashi-shachi-sen": m(4,
         "Three-direction T-junction post with beams arriving from three "
         "directions, each locked by a tapered 車知栓 - built like the 四方差し "
