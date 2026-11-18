@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Kakeawase-komisen-tsugi",
-  "jp": "\u639b\u3051\u5408\u308f\u305b\u8fbc\u307f\u6813\u7d99\u304e",
+  "jp": "掛け合わせ込み栓継ぎ",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -2231,6 +2231,16 @@
      }
     ]
    }
+  ],
+  "beams": 2,
+  "usage": "General sill or beam splice needing some shear lock plus some pull-resistance, short of a full kanawa-class scarf.",
+  "strengths": [
+   "The hooked shoulder resists shear across the joint.",
+   "The driven komisen resists lengthwise withdrawal."
+  ],
+  "weaknesses": [
+   "Moderate capacity only: the hook can split a narrow timber.",
+   "Pin hole and hook reduce the effective section at the seam."
   ]
  }
 ]

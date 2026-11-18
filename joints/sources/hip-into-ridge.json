@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Hip into ridge",
-  "jp": "\u9685\u6728\u3068\u68df\u6728",
+  "jp": "隅木と棟木",
   "gloss": "",
-  "guidance": "The \u9685\u6728 hip butts the end of the \u68df\u6728 ridge. Its end is cut square to the ridge's end face, so the two meet on a vertical plane and the hip runs down the corner of the roof from there.",
+  "guidance": "The 隅木 hip butts the end of the 棟木 ridge. Its end is cut square to the ridge's end face, so the two meet on a vertical plane and the hip runs down the corner of the roof from there.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -514,6 +514,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "Hip rafter (隅木) butting into the end of the ridge (棟木), with the ridge notched over the king post.",
+  "strengths": [
+   "Square plumb cut gives a clean bearing transfer into the ridge.",
+   "The ridge end is kept short so four hips meet it symmetrically."
+  ],
+  "weaknesses": [
+   "Bearing-only cut: no mechanical lock against separation.",
+   "The notch over the king post removes ridge section."
+  ]
  }
 ]

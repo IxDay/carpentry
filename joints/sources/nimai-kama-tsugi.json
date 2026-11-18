@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Nimai-kama-tsugi",
-  "jp": "\u4e8c\u679a\u938c\u7d99\u304e",
+  "jp": "二枚鎌継ぎ",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -2527,6 +2527,16 @@
     0.0,
     0.0
    ]
-  }
+  },
+  "beams": 2,
+  "usage": "Heavier beam or more critical span than a single kama can serve.",
+  "strengths": [
+   "Two goosenecks share the tensile load.",
+   "Better bending capacity than the single-kama family."
+  ],
+  "weaknesses": [
+   "Needs a deeper section to fit two hooks.",
+   "One blade must lift clear of the other during assembly."
+  ]
  }
 ]

@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Miyajima-tsugi",
-  "jp": "\u5bae\u5cf6\u7d99\u304e",
+  "jp": "宮島継ぎ",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -1761,6 +1761,16 @@
      }
     ]
    }
+  ],
+  "beams": 2,
+  "usage": "Named regional scarf variant used like the kanawa family, often by school or local convention rather than a different structural need.",
+  "strengths": [
+   "Good tension and bending resistance in its tradition.",
+   "Interlocking steps give a large bearing area."
+  ],
+  "weaknesses": [
+   "Geometry is school-specific, so drawings do not generalise.",
+   "Complex to lay out and cut by hand."
   ]
  }
 ]

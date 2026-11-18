@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Hako-sen-tsugi",
-  "jp": "\u7bb1\u6813\u7d99\u304e",
+  "jp": "箱栓継ぎ",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -3378,6 +3378,16 @@
      }
     ]
    }
+  ],
+  "beams": 2,
+  "usage": "Low-stakes, short splice in a sill or light beam where only mild pull-resistance is needed and cutting speed matters.",
+  "strengths": [
+   "Box shoulders are quick to cut and give positive alignment.",
+   "The driven key adds mild resistance to withdrawal."
+  ],
+  "weaknesses": [
+   "Little bending or tension capacity; not for a structural span.",
+   "A loose key or shrink-fit can let the halves open."
   ]
  }
 ]

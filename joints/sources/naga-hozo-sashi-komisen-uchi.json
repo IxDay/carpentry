@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Naga-hozo-sashi-komisen-uchi",
-  "jp": "\u9577\u30db\u30be\u5dee\u3057\u8fbc\u307f\u6813\u6253\u3061",
+  "jp": "長ホゾ差し込み栓打ち",
   "gloss": "",
-  "guidance": "The long tenon passes clean through the post and stands 45 mm proud, so the joint reads as a true through-tenon. A tapered \u8fbc\u307f\u6813 is driven sideways through post and tenon and cut off flush with both cheeks.",
+  "guidance": "The long tenon passes clean through the post and stands 45 mm proud, so the joint reads as a true through-tenon. A tapered 込み栓 is driven sideways through post and tenon and cut off flush with both cheeks.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -22,7 +22,7 @@
    "license": "CC BY 4.0",
    "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
    "modifications": "authored from the reference sheet in closed pose, exploded for the assemble animation, sunset lighting baked; the baking rig's ground slab is omitted",
-   "credit": "Original geometry authored for this collection from the reference sheet \u67f1\uff08\u8ef8\u7d44\uff09\u306e\u7d0d\u307e\u308a; CC BY 4.0."
+   "credit": "Original geometry authored for this collection from the reference sheet 柱（軸組）の納まり; CC BY 4.0."
   },
   "assemble": {
    "part-a": [
@@ -2679,6 +2679,16 @@
      }
     ]
    }
+  ],
+  "beams": 1,
+  "usage": "Baseline post-to-sill or post-to-beam connection, and the recommended upper-storey post foot where a through tenon can be used.",
+  "strengths": [
+   "Through tenon and side komisen give a reliable, inspectable lock.",
+   "下山 recommends a long tenon with a driven pin for post ends."
+  ],
+  "weaknesses": [
+   "The mortise removes a large part of the post's core.",
+   "The pin hole can split the tenon; the proud nose can catch."
   ]
  }
 ]

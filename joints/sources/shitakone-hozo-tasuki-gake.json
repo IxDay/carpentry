@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Shitakone-hozo-tasuki-gake",
-  "jp": "\u4e0b\u5c0f\u6839\u30db\u30be\uff08\u8977\u639b\u4ed8\uff09",
+  "jp": "下小根ホゾ（襷掛付）",
   "gloss": "",
-  "guidance": "The tenon is blind, so nothing shows on the post's far face. Its small root is forked into two prongs and the post keeps a vertical \u8977 bridge between the two mortise pockets, so the joint resists sideways pull as well as withdrawal.",
+  "guidance": "The tenon is blind, so nothing shows on the post's far face. Its small root is forked into two prongs and the post keeps a vertical 襷 bridge between the two mortise pockets, so the joint resists sideways pull as well as withdrawal.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -22,7 +22,7 @@
    "license": "CC BY 4.0",
    "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
    "modifications": "authored from the reference sheet in closed pose, exploded for the assemble animation, sunset lighting baked; the baking rig's ground slab is omitted",
-   "credit": "Original geometry authored for this collection from the reference sheet \u67f1\uff08\u8ef8\u7d44\uff09\u306e\u7d0d\u307e\u308a; CC BY 4.0."
+   "credit": "Original geometry authored for this collection from the reference sheet 柱（軸組）の納まり; CC BY 4.0."
   },
   "assemble": {
    "part-a": [
@@ -2163,6 +2163,16 @@
      }
     ]
    }
+  ],
+  "beams": 1,
+  "usage": "Blind lower-tier tenon at a corner where a vertical 襷 bridge in the post must also tie the arriving beams together.",
+  "strengths": [
+   "Forked small root straddles the 襷 bridge, resisting sideways pull.",
+   "Blind mortise leaves the post's far face clean."
+  ],
+  "weaknesses": [
+   "The bridge and twin pockets are intricate to lay out.",
+   "Less accessible for repair than a through joint."
   ]
  }
 ]

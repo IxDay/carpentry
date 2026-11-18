@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Fire-beam tie",
-  "jp": "\u706b\u6253\u6881",
+  "jp": "火打梁",
   "gloss": "",
-  "guidance": "A \u706b\u6253\u6881 ties the two \u571f\u53f0 sills across the corner. Each end carries a 60 x 40 mm foot 30 mm deep in a matching \u304b\u305f\u304e\u5927\u5165\u308c housing cut into the sill top, so the diagonal tie is held in plan as well as in bearing.",
+  "guidance": "A 火打梁 ties the two 土台 sills across the corner. Each end carries a 60 x 40 mm foot 30 mm deep in a matching かたぎ大入れ housing cut into the sill top, so the diagonal tie is held in plan as well as in bearing.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -2387,6 +2387,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "火打梁 diagonal corner tie housed into a sill or girder to brace the floor plane.",
+  "strengths": [
+   "Triangulates the corner; the 傾ぎ大入れ housing stops it lifting out.",
+   "Flat35 and 中央工学校 specify 傾ぎ大入れ rather than a face bearing."
+  ],
+  "weaknesses": [
+   "Only braces one diagonal of the bay.",
+   "The sloped housing removes material from the sill top."
+  ]
  }
 ]

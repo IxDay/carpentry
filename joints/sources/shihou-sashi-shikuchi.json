@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Shihou-sashi-shikuchi",
-  "jp": "\u56db\u65b9\u5dee\u3057",
+  "jp": "四方差し",
   "gloss": "",
-  "guidance": "Four \u5e8a\u6881 frame into one post at a single level. Two through-tenons cannot share a core, so each beam's \u7aff is cut at its own level within the beam's depth: the two x beams stack in the lower half, the two z beams in the upper half. Each tenon passes clean through the post and 30 mm into the end of the beam opposite, so the four beams tie one another, and a plate komisen dropped through each pair of tenons from the post's top face, standing a little proud, pins the lot.",
+  "guidance": "Four 床梁 frame into one post at a single level. Two through-tenons cannot share a core, so each beam's 竿 is cut at its own level within the beam's depth: the two x beams stack in the lower half, the two z beams in the upper half. Each tenon passes clean through the post and 30 mm into the end of the beam opposite, so the four beams tie one another, and a plate komisen dropped through each pair of tenons from the post's top face, standing a little proud, pins the lot.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -22,7 +22,7 @@
    "license": "CC BY 4.0",
    "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
    "modifications": "authored from the reference sheet in closed pose, exploded for the assemble animation, sunset lighting baked; the baking rig's ground slab is omitted",
-   "credit": "Original geometry authored for this collection from the reference sheet \u67f1\uff08\u8ef8\u7d44\uff09\u306e\u7d0d\u307e\u308a; CC BY 4.0."
+   "credit": "Original geometry authored for this collection from the reference sheet 柱（軸組）の納まり; CC BY 4.0."
   },
   "assemble": {
    "part-a": [
@@ -7477,6 +7477,16 @@
      }
     ]
    }
+  ],
+  "beams": 4,
+  "usage": "Free-standing interior post or central column with beams or nuki converging from all four sides at one level.",
+  "strengths": [
+   "Opposite tenons pass through the post and 30 mm into the beam opposite, so the four beams tie one another.",
+   "Tenons are stacked at different levels instead of sharing one core."
+  ],
+  "weaknesses": [
+   "建築用語集: tenons through the post leave a large lost section; neat in appearance but not necessarily strong - consider metal reinforcement.",
+   "Two plate komisen must be dropped accurately and trimmed flush."
   ]
  }
 ]

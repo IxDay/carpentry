@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Rafter at hip",
-  "jp": "\u5782\u6728\u3068\u9685\u6728",
+  "jp": "垂木と隅木",
   "gloss": "",
-  "guidance": "The common \u5782\u6728 is cut square against the \u9685\u6728 hip rafter. The hip runs diagonally down the corner and the rafter end meets its side, so the rafters step down the hip with square cuts rather than crossing it.",
+  "guidance": "The common 垂木 is cut square against the 隅木 hip rafter. The hip runs diagonally down the corner and the rafter end meets its side, so the rafters step down the hip with square cuts rather than crossing it.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -470,6 +470,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "Common rafter (垂木) meeting the side of a hip rafter.",
+  "strengths": [
+   "Square plumb or side cut closes neatly against the hip.",
+   "Regular rafter layout can run right up to the hip."
+  ],
+  "weaknesses": [
+   "Bearing-only, with no mortise or key.",
+   "Needs an accurate cut to the hip's face."
+  ]
  }
 ]

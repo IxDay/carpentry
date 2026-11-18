@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Sill corner",
-  "jp": "\u571f\u53f0\u306e\u7559\u3081",
+  "jp": "土台の留め",
   "gloss": "",
-  "guidance": "Two \u571f\u53f0 sills cross at the corner and are halved into each other: the x-sill keeps its lower half, the z-sill its upper half, and the two alternate from corner to corner around the frame.",
+  "guidance": "Two 土台 sills cross at the corner and are halved into each other: the x-sill keeps its lower half, the z-sill its upper half, and the two alternate from corner to corner around the frame.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -1094,6 +1094,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "土台 sill corner, half-lapped and alternating by wall.",
+  "strengths": [
+   "Half-lap keeps the two sills at the same level at the corner.",
+   "Alternating which sill is upper avoids a weak pattern at every corner."
+  ],
+  "weaknesses": [
+   "Half the depth is removed from each sill at the lap.",
+   "Needs a pin or bolt to stop the lap opening."
+  ]
  }
 ]

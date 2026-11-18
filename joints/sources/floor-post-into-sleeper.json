@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Floor post into sleeper",
-  "jp": "\u5e8a\u675f\u306e\u5927\u5f15\u5dee\u3057",
+  "jp": "床束の大引差し",
   "gloss": "",
-  "guidance": "The short \u5e8a\u675f floor post carries a 60 mm tenon up into the \u5927\u5f15 sleeper. The post body stops under the sleeper and the tenon fills the mortise, so the floor load passes straight down to the stone.",
+  "guidance": "The short 床束 floor post carries a 60 mm tenon up into the 大引 sleeper. The post body stops under the sleeper and the tenon fills the mortise, so the floor load passes straight down to the stone.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -1094,6 +1094,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "床束 floor post carried by a 大引 sleeper on the ground floor.",
+  "strengths": [
+   "The tenon locates the post on the sleeper and resists sliding.",
+   "The post can be trimmed to height from above."
+  ],
+  "weaknesses": [
+   "No uplift resistance unless a pin is added.",
+   "Relies on the sleeper's bending capacity between floor stones."
+  ]
  }
 ]

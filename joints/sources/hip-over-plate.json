@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Hip over plate",
-  "jp": "\u9685\u6728\u3068\u8ed2\u6841",
+  "jp": "隅木と軒桁",
   "gloss": "",
-  "guidance": "The \u9685\u6728 hip passes over the corner where the two \u8ed2\u6841 plates meet. The plates are halved into each other at the corner, and the hip bears on the top, carrying the roof plane out over the eave.",
+  "guidance": "The 隅木 hip passes over the corner where the two 軒桁 plates meet. The plates are halved into each other at the corner, and the hip bears on the top, carrying the roof plane out over the eave.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -1315,6 +1315,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "Hip rafter crossing the wall plate (軒桁) at the eave.",
+  "strengths": [
+   "Birdsmouth-type seat bears on the plate and sets the eave line.",
+   "The side cut of the jack rafters registers against the hip."
+  ],
+  "weaknesses": [
+   "The seat removes depth from the hip at a highly loaded point.",
+   "The exact housing is drawing-specific."
+  ]
  }
 ]

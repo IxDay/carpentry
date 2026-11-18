@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Koshikake-ari-tsugi",
-  "jp": "\u8170\u639b\u3051\u87fb\u7d99\u304e",
+  "jp": "腰掛け蟻継ぎ",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -2211,6 +2211,16 @@
      }
     ]
    }
+  ],
+  "beams": 2,
+  "usage": "The classic sill splice: dovetail resists lengthwise pull, the seat takes vertical load, and the joint drops straight down as sills are laid in sequence.",
+  "strengths": [
+   "Dovetail resists pull; the koshikake seat takes vertical load.",
+   "Drops straight down, so sills can be laid one after another."
+  ],
+  "weaknesses": [
+   "下山: without a 竿 the two timbers are hard to keep in a straight line; a 目違い (mechigai) is added when that matters.",
+   "Plain ari is a weak joint; an over-tight dovetail neck can break."
   ]
  }
 ]

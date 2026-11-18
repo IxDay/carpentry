@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Floor post on stone",
-  "jp": "\u5e8a\u675f\u306e\u790e\u77f3",
+  "jp": "床束の礎石",
   "gloss": "",
-  "guidance": "The \u5e8a\u675f floor post stands directly on its \u790e\u77f3 stone. There is no tenon: the post bears on the dressed top, and the stone carries the load into the ground.",
+  "guidance": "The 床束 floor post stands directly on its 礎石 stone. There is no tenon: the post bears on the dressed top, and the stone carries the load into the ground.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -470,6 +470,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "Floor post bearing on a dressed stone or 礎石, isolated from the soil.",
+  "strengths": [
+   "Stone keeps the timber off damp ground and spreads the load.",
+   "Wedges can shim the post to level the floor."
+  ],
+  "weaknesses": [
+   "Bearing only: no positive lateral fix or uplift resistance.",
+   "Shim wedges can loosen and need periodic checking."
+  ]
  }
 ]

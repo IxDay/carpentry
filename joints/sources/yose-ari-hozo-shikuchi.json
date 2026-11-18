@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Yose-ari-hozo-shikuchi",
-  "jp": "\u5bc4\u305b\u87fb\u6798\u4ed5\u53e3",
+  "jp": "寄せ蟻枘仕口",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -1512,6 +1512,16 @@
     0.0,
     -0.105001
    ]
-  }
+  },
+  "beams": 1,
+  "usage": "Mid-span joist connection assembled by sliding horizontally, where the dovetail draws the joint snug as it is driven.",
+  "strengths": [
+   "The sloping dovetail pulls the members tight on entry.",
+   "Good where a drop-in joint is not possible."
+  ],
+  "weaknesses": [
+   "The dovetail neck can shear if overdriven (蟻首がとぶ).",
+   "Needs clear access along the slide direction."
+  ]
  }
 ]

@@ -1,9 +1,10 @@
 # Japanese joinery
 
-Fifty-three Japanese timber joints (継ぎ手 and 仕口) as interactive 3D models that
-assemble and come apart, and the open frame of a two-storey house, with the tools
-that rebuild them and the site that shows them:
-**<https://ixday.github.io/carpentry/>**.
+Fifty-eight Japanese timber joints (継ぎ手 and 仕口) as interactive 3D models that
+assemble and come apart, each tagged with its beam count, use, strengths and
+weaknesses, with the tools that rebuild them and the site that shows them:
+**<https://ixday.github.io/carpentry/>**. The open frame of a two-storey house
+is kept in `house/` but is not published to the site.
 
 Seventeen models are by [thejoinery](https://sketchfab.com/thejoinery) on
 Sketchfab (CC BY 4.0, one CC BY-SA 4.0). They were read from the public viewer,
@@ -15,7 +16,10 @@ Seventeen joints with no licensed source model (fourteen column-and-beam
 descriptions of joints the sheet does not show. A further nineteen specimens,
 authored with `tools/author_details.py`, cover every connection family the house
 frame makes beyond the sheets: halved sills and joists, a brace in a post, floor
-posts, and the hip, purlin and rafter cuts of the roof. Per-model links,
+posts, and the hip, purlin and rafter cuts of the roof. Five more, authored with
+`tools/author_multi.py`, extend the direction series to connections of three,
+four, five and six beams. Every source is tagged with `beams`, `usage`,
+`strengths` and `weaknesses` in `tools/joint_meta.py`. Per-model links,
 attribution, the change list and the references used are in
 [`joints/README.md`](joints/README.md).
 
@@ -56,21 +60,17 @@ frame at architectural scale, not a close-up specimen.
 python3 tools/viewer.py --open
 ```
 
-Serves the same page that is published on GitHub Pages: one anchored section per
-joint, the assembly animation, the scroll wheel zooms the model, Up / Down step
-between joints, and on a phone the index becomes a slide-in menu with one joint
-per screen. The first two tabs are **On the sheets** (32) and **Off the sheets**
-(2). The third, **The house**, is the frame, rendered by a small three.js viewer
-that is imported only when the tab is opened. It starts assembled, **Play /
-Pause** runs the 27 s clip, and hovering a timber outlines it and marks its
-connections; hovering a marker ghosts the rest of the frame and names the joint
-with a link straight to its catalog specimen. The fourth, **House details** (19),
-holds the house-only specimens. Click or tap to pin, **Browse** for the index of
-all 494 connections, and **Solid / Roof / Upper / Frame** to peel the frame back.
-The index has
-a search box at the top (`/` focuses it): it matches
-romanised and Japanese names, ranks the hits, and on a phone it filters the
-same slide-in menu.
+Serves the same page that is published on GitHub Pages: a single **Joints** view
+with one anchored section per joint and no tabs. Each section shows the assembly
+animation, a beam-count badge, a short usage note and lists of strengths and
+things to watch for; the scroll wheel zooms the model and Up / Down step between
+joints. On a phone the index becomes a slide-in menu with one joint per screen.
+A **Filter by beams** menu narrows the 58 joints by how many beams meet at them
+(1–6; the post, pegs, wedges and keys are not counted). The index has a search
+box at the top (`/` focuses it): it matches romanised and Japanese names and
+the metadata prose, ranks the hits, and on a phone it filters the same
+slide-in menu. The house frame and its viewer remain in `house/` and
+`tools/house_viewer.js` for local use but are not built into the published site.
 
 ## The baked look
 
@@ -100,6 +100,8 @@ occlusion gradients have vertices to land on. The rig constants and flags are in
 cd tools
 python3 author_joint.py                      # regenerate the authored sources
 python3 author_details.py                    # the 19 house-detail specimens
+python3 author_multi.py                      # the 5 joints with 3-6 beams
+python3 joint_meta.py                        # re-stamp joint metadata
 for f in ../joints/sources/*.json; do
     id=$(basename "$f" .json)
     python3 bake.py "$f" ../joints --level "$id" --pieces --no-ground \
@@ -116,7 +118,7 @@ python3 build_site.py --repo-url https://github.com/IxDay/carpentry
 
 The `author_joint.py` line only touches the seventeen authored sources and
 `author_details.py` only the nineteen house details; the rest come from captures.
-The bake/preview loop processes every source, so all 53 specimens are kept in
+The bake/preview loop processes every source, so all 58 specimens are kept in
 step. `--no-animation` drops the `assemble` clip. Importing a new Sketchfab model
 and checking an animation for timbers passing through each other are described
 in [`tools/README.md`](tools/README.md).
@@ -127,9 +129,10 @@ The CC BY 4.0 models may be reused with attribution; each GLB's
 `asset.copyright` and `joints/sources/<id>.json` carry it. `yatoi-hozo-shachi-sen-shiguchi`
 is CC BY-SA 4.0: its baked GLB and pieces are a derivative and are distributed
 under the same license. The seventeen authored joints (three splices and fourteen
-column-and-beam `shikuchi`, listed in [`joints/README.md`](joints/README.md)) are
-original geometry, released CC BY 4.0. The nineteen house details authored by
-`tools/author_details.py` and the house frame in `house/` are likewise original
+column-and-beam `shikuchi`), the nineteen house details and the five multi-beam
+specimens, all listed in [`joints/README.md`](joints/README.md), are original
+geometry released CC BY 4.0. The house frame in `house/` is likewise original
 geometry, released CC BY 4.0; the reference drawings remain under their own
-terms. The house viewer uses three.js r160 (MIT), vendored unmodified with its
-notice under `tools/vendor/three/`.
+terms. The house viewer source uses three.js r160 (MIT), vendored unmodified
+with its notice under `tools/vendor/three/`, but is no longer part of the
+published site.

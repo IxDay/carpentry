@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Suitsuki-sashi-shikuchi",
-  "jp": "\u5438\u4ed8\u5dee\u3057\u4ed5\u53e3",
+  "jp": "吸付差し仕口",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -2181,6 +2181,16 @@
      }
     ]
    }
+  ],
+  "beams": 1,
+  "usage": "Sliding dovetail cleat or batten fixed across a wide board or sill so it cannot warp away while the wood still moves seasonally.",
+  "strengths": [
+   "Cross-grain dovetail holds the cleat down across the board.",
+   "The sliding fit allows seasonal movement across the grain."
+  ],
+  "weaknesses": [
+   "The long sliding fit must be cut accurately.",
+   "An over-tight fit can split the board."
   ]
  }
 ]

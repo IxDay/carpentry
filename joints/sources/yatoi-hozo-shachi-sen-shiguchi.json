@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Yatoi-hozo-shachi-sen-shiguchi",
-  "jp": "\u96c7\u3044\u6798\u8eca\u77e5\u6813\u4ed5\u53e3",
+  "jp": "雇い枘車知栓仕口",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -4531,6 +4531,16 @@
      }
     ]
    }
+  ],
+  "beams": 1,
+  "usage": "Repair or retrofit where both receiving timbers are already fixed and the connection is structurally critical.",
+  "strengths": [
+   "Separate tenon plus paired wedge keys gives a strong, adjustable lock.",
+   "Neither existing member has to supply the tenon."
+  ],
+  "weaknesses": [
+   "Loose tenon and two keys need very accurate matching mortises.",
+   "Keys can loosen; access to both faces is needed."
   ]
  }
 ]

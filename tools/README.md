@@ -19,6 +19,8 @@ A joint is described by `joints/sources/<id>.json`, a one-element list:
 | `approach` | optional `{piece: [x, y, z]}` waiting stage: that timber first slides to `closed + approach` before leaving along the straight line (kanawa's slide along the pitch, a dovetail's slide along its groove). A list of vectors is a path instead, visited in order (`tsutsumikomi-nuki`: raised, slid home, lowered) |
 | `rescaled` | the factor `rescale_joint.py` applied, if any |
 | `source` | author, URL, license, change list and credit text embedded in each GLB |
+| `tab` | original provenance group (`sheet`, `extra`, `house-details`); kept for the record but no longer used to filter the published site |
+| `beams`, `usage`, `strengths`, `weaknesses` | catalogue metadata: how many beams meet at the joint (post, pegs, wedges and keys excluded), its use, and what is good / risky about it. Authored in `joint_meta.py` and stamped onto every source |
 
 The generated `assemble` offsets are only a first guess; the real closed pose is
 found by scanning to contact and checking that every pair of mating faces
@@ -281,9 +283,46 @@ added as a face list; the `片鎌` hook is kept square so it stays box work. The
 geometry is original, not derived from a
 Sketchfab model; the sources credit the project and the reference sheet, and are
 released CC BY 4.0. The two off-sheet joints instead credit "published
-descriptions of the joint", carry `tab: "extra"` so the site shows them in its
-second tab, and may give `approach` as a whole path (`tsutsumikomi-nuki`). After
-regenerating, run `check_sources.py` before baking.
+descriptions of the joint", carry `tab: "extra"` for provenance (the published
+site is a single view), and may give `approach` as a whole path
+(`tsutsumikomi-nuki`). After regenerating, run `check_sources.py` before baking.
+
+### `author_multi.py` — three- to six-beam specimens
+
+```sh
+python3 author_multi.py                     # rewrite all five sources
+python3 author_multi.py watari-ago-shikuchi  # just one, by id
+```
+
+Five specimens extend the direction series 一方…六方 past the four-way post of
+the reference sheets and fill a gap the sheets leave. `watari-ago-shikuchi` is a
+crossing lap (`渡り頸`) where two 90 mm beams are halved at the cross; the other
+four are `差し` posts with one tenon per direction at its own level, locked by
+tapered 車知栓 driven crosswise through each tenon. The five- and six-way forms
+add one and two diagonal 筋違 braces out of corner pockets. The pockets are
+inset from the post's centre lines so the two opposite braces in the six-way
+joint do not leave a non-manifold edge. Geometry uses the same box CSG and
+`loft()` helpers as `author_joint.py`; the sources are written with their
+catalogue metadata already stamped on. Original geometry, CC BY 4.0. Regenerate,
+then run `check_sources.py`, `check_contact.py`, `bake.py` and `preview.py`.
+
+### `joint_meta.py` — catalogue metadata
+
+```sh
+python3 joint_meta.py                       # re-stamp every joints/sources/*.json
+python3 joint_meta.py ../joints/sources kanawa-tsugi  # just one id
+```
+
+The canonical table of `beams`, `usage`, `strengths` and `weaknesses` for all 58
+specimens, with `SOURCE_NOTES` collecting the web references behind the prose.
+`apply(level)` stamps a decoded source (a fallback used by `build_site.py`), and
+`write_sources(src_dir, only)` rewrites source files in place. The `beams` count
+is the number of beams, girders, joists, rafters or braces meeting at the joint;
+the receiving post and any pegs, wedges, keys or loose tenons are not counted.
+Usage and strength notes come from the supplied naming guide, the reference
+sheets, the repository READMEs and the cited web pages; where a specimen is an
+extrapolation from the ippou…roppou naming series rather than a documented named
+joint, the usage text says so.
 
 ### `author_details.py` — house-only joint specimens
 
@@ -363,8 +402,9 @@ foundation and ground pieces have no connection and are recorded as such.
 
 ### `house_viewer.js` — the interactive house
 
-This is the custom element the house tab loads, published as
-`docs/house-viewer.js` and imported only when the tab is first opened. It reads
+This is the custom element the old house tab loaded. It is kept in the
+repository and served by `viewer.py`, but `build_site.py` no longer publishes it
+(a stale `docs/house-viewer.js` is removed on rebuild). It reads
 the GLB and `connections.json`, raycasts the timbers, and draws screen-space
 marker sprites at the connection points. Hovering a timber outlines it and marks
 its joints; hovering a marker ghosts every other timber and shows the joint's
@@ -388,38 +428,36 @@ python3 build_site.py --repo-url https://github.com/<you>/<repo>
 python3 build_site.py --preview             # also serve it on :8000
 ```
 
-Reads `joints/sources/*.json` (title, Japanese name, credit), copies every
-`joints/<id>.glb` and its sunset preview, and writes `docs/index.html` from
-`site_template.html`: one section per joint with a `#<id>` anchor, smooth
-scrolling, a `<model-viewer>` that plays the `assemble` clip and the Japanese
-name in light gray under the romanised one. Sources with `tab: "extra"` (joints
-neither sheet shows) appear under a second tab, **Off the sheets**, so the
-reference-sheet set stays a clean 32. The house gets a third tab with a
-`<house-viewer>` (the custom element above) instead of `<model-viewer>`, plus
-`models/house-connections.json`. Sources with `tab: "house-details"` appear in a
-fourth tab, **House details**, holding the 19 specimens authored by
-`author_details.py`. The tab bar switches both the index and the sections, and a
-hash pointing at an off-sheet, house or house-detail section selects its tab
-first. Up / Down arrow keys step through the joints of the active tab. Below
-56 rem the index becomes a slide-in menu (button at the top left)
-and every joint is a full-screen page: swipe up / down for the next / previous
-joint (scroll snapping), drag sideways to rotate, with an `n / <count>` counter and
-the credits along the bottom. Models load only near the viewport and only once
-scrolling has settled (never mid-swipe): each stage is an empty box of its final
-size with a spinner, the adjacent models are fetched at rest, and a model fades
-in when it is ready.
+Reads `joints/sources/*.json` (title, Japanese name, credit, metadata), copies
+every `joints/<id>.glb` and its sunset preview, and writes `docs/index.html` from
+`site_template.html`: a single **Joints** view, one section per joint with a
+`#<id>` anchor, a `<model-viewer>` that plays the `assemble` clip, the Japanese
+name in light gray under the romanised one, a beam-count badge, the usage note
+and the strengths / weaknesses lists. The published site has no tabs: the
+source `tab` values are kept for provenance only. The house frame, its
+`connections.json` and `house-viewer.js` are not loaded, and stale copies are
+removed from `docs/` on rebuild. Up / Down arrow keys step through the joints in
+view order. Below 56 rem the index becomes a slide-in menu (button at the top
+left) and every joint is a full-screen page: swipe up / down for the next /
+previous joint (scroll snapping), drag sideways to rotate, with an `n / <count>`
+counter and the credits along the bottom. Models load only near the viewport and
+only once scrolling has settled (never mid-swipe): each stage is an empty box of
+its final size with a spinner, the adjacent models are fetched at rest, and a
+model fades in when it is ready.
 
-The top of the index (and so the top of the phone menu) has a full-text search
-box. It searches each joint's romanised name, Japanese name and id with
-[`@leeoniya/ufuzzy`](https://github.com/leeoniya/uFuzzy) (MIT, vendored under
-`vendor/` and copied into `docs/`): the query is filtered against one haystack
-string per joint, ranked, and the list reordered to the ranking. The library's
-`unicode: true` regexps are switched on so `金輪` and `腰掛け` match as well as
-`kanawa`. Typing a single error still matches (`sanpo` finds Sampo, `kama` finds
-Nimai-kama), no match shows a live-region message, Enter follows the first hit,
-Escape clears the query, and `/` focuses the box from anywhere. The search pool
-and the arrow-key order are the joints of the active tab, so an Off-the-sheets
-query cannot surface a sheet joint and vice versa.
+The top of the index (and so the top of the phone menu) has a **Filter by beams**
+menu and a full-text search box. The filter narrows the list to a beam count
+(1–6, with per-count totals; the post and loose hardware are not counted). The
+search covers each joint's romanised name, Japanese name, id and its metadata
+prose with [`@leeoniya/ufuzzy`](https://github.com/leeoniya/uFuzzy) (MIT,
+vendored under `vendor/` and copied into `docs/`): the query is filtered against
+one haystack string per joint, ranked, and the list reordered to the ranking.
+The library's `unicode: true` regexps are switched on so `金輪` and `腰掛け`
+match as well as `kanawa`. Typing a single error still matches (`sanpo` finds
+Sampo, `kama` finds Nimai-kama), no match shows a live-region message, Enter
+follows the first hit, Escape clears the query, and `/` focuses the box from
+anywhere. The search pool and the arrow-key order are the joints left after the
+beam filter.
 
 Plain static files, stdlib only. Regenerate and commit `docs/` after changing a
 joint; publish with Pages set to the default branch, `/docs` folder.
@@ -435,12 +473,12 @@ python3 viewer.py --port 9000
 
 The models are reproduced under their own Creative Commons licenses (CC BY 4.0,
 except `yatoi-hozo-shachi-sen-shiguchi`, which is CC BY-SA 4.0). The seventeen
-authored joints and the nineteen house details (listed in
-[`../joints/README.md`](../joints/README.md)) are original geometry released CC
-BY 4.0. The site's
+authored joints, the nineteen house details and the five multi-beam specimens
+(listed in [`../joints/README.md`](../joints/README.md)) are original geometry
+released CC BY 4.0. The site's
 search box uses MIT-licensed `@leeoniya/uFuzzy`, copied unmodified from npm; its
-notice is in `vendor/ufuzzy.LICENSE`. The house viewer uses MIT-licensed
-three.js r160, likewise copied unmodified; its notice is in
+notice is in `vendor/ufuzzy.LICENSE`. The (unpublished) house viewer uses
+MIT-licensed three.js r160, likewise copied unmodified; its notice is in
 `vendor/three/LICENSE` and the vendored files and checksums are listed in
 [`vendor/README.md`](vendor/README.md). See
 [`../joints/README.md`](../joints/README.md) for the per-model credit.

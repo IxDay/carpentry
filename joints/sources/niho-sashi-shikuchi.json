@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Niho-sashi-shikuchi",
-  "jp": "\u4e8c\u65b9\u5dee\u3057\u4ed5\u53e3",
+  "jp": "二方差し仕口",
   "gloss": "",
   "guidance": "The post's corner is notched on two adjacent faces (L-shaped in plan); the beam's corner tongue fills it and the komisen is driven down into the post.",
   "forReal": "",
@@ -22,7 +22,7 @@
    "license": "CC BY 4.0",
    "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
    "modifications": "authored from the reference sheet in closed pose, exploded for the assemble animation, sunset lighting baked; the baking rig's ground slab is omitted",
-   "credit": "Original geometry authored for this collection from the reference sheet \u67f1\uff08\u8ef8\u7d44\uff09\u306e\u7d0d\u307e\u308a; CC BY 4.0."
+   "credit": "Original geometry authored for this collection from the reference sheet 柱（軸組）の納まり; CC BY 4.0."
   },
   "assemble": {
    "part-a": [
@@ -1887,6 +1887,16 @@
      }
     ]
    }
+  ],
+  "beams": 2,
+  "usage": "Corner post receiving beams or nuki from two adjoining faces.",
+  "strengths": [
+   "Simple two-face corner notch; the vertical komisen locks the tongue.",
+   "Easy to set out at an ordinary building corner."
+  ],
+  "weaknesses": [
+   "The corner notch reduces the post's effective section.",
+   "The driven pin is visible on the show face."
   ]
  }
 ]

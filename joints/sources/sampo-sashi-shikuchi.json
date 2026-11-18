@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Sampo-sashi-shikuchi",
-  "jp": "\u4e09\u65b9\u5dee\u3057\u4ed5\u53e3",
+  "jp": "三方差し仕口",
   "gloss": "",
   "guidance": "The post's end is housed through its width, so the mortise opens on the top and both sides (three faces); the beam's tenon drops in and the komisen is driven down through beam, tenon and post.",
   "forReal": "",
@@ -22,7 +22,7 @@
    "license": "CC BY 4.0",
    "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
    "modifications": "authored from the reference sheet in closed pose, exploded for the assemble animation, sunset lighting baked; the baking rig's ground slab is omitted",
-   "credit": "Original geometry authored for this collection from the reference sheet \u67f1\uff08\u8ef8\u7d44\uff09\u306e\u7d0d\u307e\u308a; CC BY 4.0."
+   "credit": "Original geometry authored for this collection from the reference sheet 柱（軸組）の納まり; CC BY 4.0."
   },
   "assemble": {
    "part-a": [
@@ -1955,6 +1955,16 @@
      }
     ]
    }
+  ],
+  "beams": 3,
+  "usage": "Post at a T-junction, for example an interior wall meeting an exterior wall line, with beams arriving from three directions.",
+  "strengths": [
+   "Mortise opens on three faces, so the beam tenon drops straight in.",
+   "A vertical komisen through beam, tenon and post locks the lot."
+  ],
+  "weaknesses": [
+   "The open-top housing weakens the post head.",
+   "Only moderate pull resistance; the pin must be driven down."
   ]
  }
 ]

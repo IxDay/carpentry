@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Shitakone-hozo-wari-kusabi",
-  "jp": "\u4e0b\u5c0f\u6839\u30db\u30be\u5272\u308a\u6954\u6253\u3061",
+  "jp": "下小根ホゾ割り楔打ち",
   "gloss": "",
-  "guidance": "The lower small root passes through the post and stands 30 mm proud. Two wedges driven into its horizontal kerf from the far face lift the upper half against the \u8170, so the tenon cannot work loose.",
+  "guidance": "The lower small root passes through the post and stands 30 mm proud. Two wedges driven into its horizontal kerf from the far face lift the upper half against the 腰, so the tenon cannot work loose.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -22,7 +22,7 @@
    "license": "CC BY 4.0",
    "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
    "modifications": "authored from the reference sheet in closed pose, exploded for the assemble animation, sunset lighting baked; the baking rig's ground slab is omitted",
-   "credit": "Original geometry authored for this collection from the reference sheet \u67f1\uff08\u8ef8\u7d44\uff09\u306e\u7d0d\u307e\u308a; CC BY 4.0."
+   "credit": "Original geometry authored for this collection from the reference sheet 柱（軸組）の納まり; CC BY 4.0."
   },
   "assemble": {
    "part-a": [
@@ -2487,6 +2487,16 @@
      }
     ]
    }
+  ],
+  "beams": 1,
+  "usage": "Lower-tier through tenon where the show face must stay clean and the lock is driven from inside the mortise.",
+  "strengths": [
+   "Two wedges spread the split tenon and lift it against the 腰.",
+   "No visible pin on the show face."
+  ],
+  "weaknesses": [
+   "The through mortise reduces the post's section.",
+   "Wedges in post joints can loosen under vibration."
   ]
  }
 ]

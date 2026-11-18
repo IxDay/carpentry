@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Japanese joinery</title>
-  <meta name="description" content="{{COUNT}} Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble, plus a two-storey house that unbuilds and rebuilds itself.">
+  <meta name="description" content="{{COUNT}} Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble, tagged by beam count, use, strengths and weaknesses.">
   <meta property="og:title" content="Japanese joinery">
-  <meta property="og:description" content="{{COUNT}} Japanese timber joints as interactive 3D models, plus a two-storey house that unbuilds and rebuilds itself.">
+  <meta property="og:description" content="{{COUNT}} Japanese timber joints as interactive 3D models, tagged by beam count, use, strengths and weaknesses.">
   <meta property="og:image" content="posters/{{OG_IMAGE}}.png">
   <noscript>
     <style>
-      /* Without the script every joint stays visible; the tabs do nothing. */
-      nav.index .tabs, nav.index .tab-note { display: none; }
+      /* Without the script every joint stays visible; the filters do nothing. */
+      nav.index .filters, nav.index .filter-note { display: none; }
       nav.index li[hidden], section.joint[hidden] { display: revert; }
     </style>
   </noscript>
@@ -86,21 +86,20 @@
     }
     nav.index h1 { font: 600 1.05rem/1.3 Georgia, "Iowan Old Style", serif; margin: 0 0 .25rem; letter-spacing: .01em; }
     nav.index p { margin: 0 0 1.25rem; color: var(--muted); font-size: .85rem; }
-    nav.index .tabs { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .4rem; }
-    nav.index .tabs button {
-      flex: 1 1 0; min-width: 0;
-      font: inherit; font-size: .78rem; line-height: 1.25;
+    nav.index .filters { margin: 0 0 .4rem; }
+    nav.index .filters label {
+      display: block; margin: 0 0 .3rem;
+      font-size: .72rem; letter-spacing: .04em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    nav.index .filters select {
+      display: block; width: 100%;
+      font: inherit; font-size: .85rem;
       padding: .4rem .5rem;
-      color: var(--muted); background: none;
-      border: 1px solid var(--line); border-radius: 999px;
-      cursor: pointer; text-align: center;
+      color: var(--ink); background: var(--card);
+      border: 1px solid var(--line); border-radius: 6px;
     }
-    nav.index .tabs button:hover { border-color: var(--accent); }
-    nav.index .tabs button[aria-selected="true"] {
-      color: var(--ink); background: var(--card); border-color: var(--accent);
-    }
-    nav.index .tabs .count { color: var(--jp); font-variant-numeric: tabular-nums; }
-    nav.index .tab-note { margin: 0 0 .9rem; font-size: .78rem; line-height: 1.35; }
+    nav.index .filter-note { margin: 0 0 .9rem; font-size: .78rem; line-height: 1.35; }
     nav.index .search { margin: 0 0 .9rem; }
     nav.index .search input {
       display: block; width: 100%;
@@ -128,6 +127,7 @@
     nav.index a:hover, nav.index a.active { border-left-color: var(--accent); background: var(--card); }
     nav.index .name { display: block; font-size: .9rem; }
     nav.index .jp { display: block; font-size: .75rem; color: var(--jp); }
+    nav.index .beams { display: block; font-size: .7rem; color: var(--accent); }
     main { padding: 2rem 0 4rem; min-width: 0; counter-reset: joint; }
     section.joint { padding: 0 0 3.5rem; counter-increment: joint; }
     section.joint + section.joint { padding-top: 1rem; }
@@ -151,15 +151,6 @@
       opacity: 0; transition: opacity .5s ease;
     }
     .stage.ready model-viewer { opacity: 1; }
-    /* The house is a three.js custom element. It fades in when its module has
-       loaded the GLB and the connection metadata; the stage spinner covers the
-       gap, and an import or WebGL failure reveals the viewer's own fallback. */
-    .stage house-viewer {
-      display: block; width: 100%; height: min(62vh, 34rem);
-      opacity: 0; transition: opacity .5s ease;
-    }
-    .stage.ready house-viewer, .stage.error house-viewer { opacity: 1; }
-    .stage.error .spinner { display: none; }
     .stage .viewer-fallback {
       position: absolute; inset: 0; display: grid; place-content: center;
       gap: .4rem; padding: 2rem; text-align: center;
@@ -174,7 +165,7 @@
     .stage.ready .spinner { opacity: 0; }
     @keyframes spin { to { transform: rotate(360deg); } }
     @media (prefers-reduced-motion: reduce) {
-      .stage model-viewer, .stage house-viewer { transition: none; }
+      .stage model-viewer { transition: none; }
       .spinner { animation-duration: 3s; }
     }
     .stage button {
@@ -193,6 +184,30 @@
     .stage button:hover { border-color: var(--accent); }
     .meta { margin: .6rem 0 0; font-size: .8rem; color: var(--muted); }
     .meta a { color: var(--muted); }
+    section.joint .beam-badge {
+      display: inline-block; margin: .35rem 0 0;
+      font-size: .72rem; letter-spacing: .03em;
+      padding: .15rem .5rem;
+      color: var(--accent); background: var(--card);
+      border: 1px solid var(--line); border-radius: 999px;
+    }
+    section.joint .notes {
+      margin: .9rem 0 0;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: .6rem 1.4rem;
+    }
+    section.joint .notes .usage { grid-column: 1 / -1; margin: 0; font-size: .88rem; }
+    section.joint .notes h3 {
+      margin: 0 0 .25rem; font: 600 .74rem/1.3 system-ui, sans-serif;
+      letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+    }
+    section.joint .notes ul { margin: 0; padding-left: 1rem; }
+    section.joint .notes li { margin-bottom: .2rem; font-size: .82rem; line-height: 1.4; }
+    section.joint .good h3 { color: #4b7a52; }
+    section.joint .bad h3 { color: var(--accent); }
+    section.joint .mechanics { margin: .8rem 0 0; font-size: .82rem; color: var(--muted); }
+    section.joint .mechanics summary { cursor: pointer; color: var(--accent); }
+    section.joint .mechanics p { margin: .4rem 0 0; }
     footer { grid-column: 2; padding: 0 0 4rem; font-size: .85rem; color: var(--muted); border-top: 1px solid var(--line); }
     footer h2 { font: 600 1rem/1.3 Georgia, serif; color: var(--ink); margin: 1.5rem 0 .5rem; }
     footer ul { padding-left: 1.1rem; margin: 0; }
@@ -249,7 +264,7 @@
         scroll-snap-align: start; scroll-snap-stop: always;
       }
       .stage { position: absolute; inset: 0; border: 0; border-radius: 0; }
-      .stage model-viewer, .stage house-viewer { height: 100%; }
+      .stage model-viewer { height: 100%; }
       section.joint header {
         position: absolute; z-index: 5; top: 0; left: 0; right: 0; margin: 0;
         padding: max(.7rem, env(safe-area-inset-top)) 4.5rem 2rem 4.2rem;
@@ -272,6 +287,15 @@
         font-size: .7rem; line-height: 1.4;
         background: linear-gradient(transparent, var(--paper) 55%);
       }
+      section.joint .notes {
+        position: absolute; z-index: 6; left: 0; right: 0; bottom: 2.6rem;
+        display: block; max-height: 32%; margin: 0; padding: .5rem 1rem;
+        overflow-y: auto; background: var(--paper);
+        border-top: 1px solid var(--line);
+      }
+      section.joint .notes .usage { font-size: .78rem; }
+      section.joint .notes li { font-size: .74rem; }
+      section.joint .mechanics { display: none; }
       .hint {
         display: block; position: fixed; z-index: 10; left: 50%; transform: translateX(-50%);
         top: calc(max(.7rem, env(safe-area-inset-top)) + 4.6rem);
@@ -291,11 +315,15 @@
     <nav class="index" id="index" aria-label="Joints">
       <button class="menu-close" type="button" aria-label="Close the menu">&times;</button>
       <h1>Japanese joinery</h1>
-      <p>{{COUNT}} joints that assemble and come apart, and one house that takes itself apart and builds itself back.</p>
-      <div class="tabs" role="tablist" aria-label="Which joints">
-{{TABS}}
+      <p>{{COUNT}} joints that assemble and come apart, each tagged with its beam count, use, strengths and weaknesses.</p>
+      <div class="filters">
+        <label for="beam-filter">Filter by beams</label>
+        <select id="beam-filter" aria-label="Filter joints by beam count">
+          <option value="">All beams</option>
+{{BEAM_OPTIONS}}
+        </select>
       </div>
-      <p class="tab-note" id="tab-note"></p>
+      <p class="filter-note" id="filter-note">The receiving post and any pegs, wedges or keys are not counted.</p>
       <div class="search">
         <input id="search" type="search" placeholder="Search joints" autocomplete="off"
             spellcheck="false" aria-label="Search joints" aria-controls="joint-list"
@@ -314,50 +342,25 @@
     </footer>
   </div>
   <script>
-    const viewers = document.querySelectorAll('model-viewer');
-    // A focused house joint writes "#house/<id>?…" so the catalog link can be
-    // followed and Back restores the exact view.  It is not a section id.
-    const houseViewHash = hash => /^#house\//.test(hash);
-    // The house module is large, so it is imported only when the house tab is
-    // first opened. Until then <house-viewer> is an inert unknown element.
-    const houseViewer = document.querySelector('house-viewer');
-    let houseViewerRequested = false;
-    function ensureHouseViewer() {
-      if (houseViewerRequested || !houseViewer) return;
-      houseViewerRequested = true;
-      import('./house-viewer.js').catch(error => {
-        console.error(error);
-        const stage = houseViewer.closest('.stage');
-        stage?.classList.add('error');
-        const note = document.createElement('p');
-        note.className = 'viewer-fallback';
-        note.innerHTML = 'The interactive house could not load. '
-          + '<a href="models/house.glb">Download the house GLB</a>.';
-        stage?.append(note);
-      });
-    }
+    const viewers = [...document.querySelectorAll('model-viewer')];
     const links = new Map([...document.querySelectorAll('nav.index a')].map(a => [a.hash.slice(1), a]));
     const sections = [...document.querySelectorAll('section.joint')];
     const navList = document.getElementById('joint-list');
-    const tabButtons = [...document.querySelectorAll('.tabs button')];
-    const tabNote = document.getElementById('tab-note');
+    const beamFilter = document.getElementById('beam-filter');
+    const filterNote = document.getElementById('filter-note');
     const searchInput = document.getElementById('search');
     const searchStatus = document.getElementById('search-status');
-    let tab = (tabButtons.find(b => b.getAttribute('aria-selected') === 'true') || tabButtons[0] || {}).dataset?.tab || 'sheet';
-    let cursor = -1, lastStep = 0;
 
-    // One list per tab: the index items and the sections carry data-tab, and the
-    // tab bar switches both. A hash pointing at a joint in the other tab selects
-    // that tab first, which is why the server leaves the first tab visible.
+    // One haystack per joint: the name, Japanese name, slug and the metadata
+    // prose, so a search for "dovetail" or "seismic" finds the right specimen.
     const rows = [...navList.children].map(li => {
       const a = li.querySelector('a');
-      const jp = li.querySelector('.jp');
-      return {
-        li, a, tab: li.dataset.tab,
-        hay: [a.querySelector('.name').textContent.trim(),
-              jp ? jp.textContent.trim() : '',
-              a.hash.slice(1)].join(' '),
-      };
+      const text = [...li.querySelectorAll('span')].map(s => s.textContent.trim()).join(' ');
+      const j = document.getElementById(a.hash.slice(1));
+      const meta = j ? [j.querySelector('.usage')?.textContent || '',
+                        ...[...j.querySelectorAll('.notes li')].map(li => li.textContent)].join(' ') : '';
+      return { li, a, beams: Number(li.dataset.beams) || 0,
+               hay: [text, meta, a.hash.slice(1)].join(' ') };
     });
     const uf = new uFuzzy({
       unicode: true,
@@ -369,54 +372,67 @@
       intraMode: 1,
     });
 
-    const resetNav = () => {
-      rows.forEach(r => { r.li.hidden = r.tab !== tab; navList.append(r.li); });
-      navList.closest('nav').scrollTop = 0;
-      searchStatus.hidden = true;
-      searchStatus.textContent = '';
-    };
+    const mobile = matchMedia('(max-width: 56rem)');
+    const layoutEl = document.querySelector('.layout');
+    let cursor = -1, lastStep = 0;
 
-    const applyTab = (next, { scroll = false } = {}) => {
-      if (!tabButtons.some(b => b.dataset.tab === next)) return;
-      tab = next;
-      tabButtons.forEach(b => {
-        const on = b.dataset.tab === tab;
-        b.setAttribute('aria-selected', String(on));
-        b.tabIndex = on ? 0 : -1;
-      });
-      const button = tabButtons.find(b => b.dataset.tab === tab);
-      tabNote.textContent = button ? button.dataset.note : '';
-      sections.forEach(s => { s.hidden = s.dataset.tab !== tab; });
-      links.forEach(a => a.classList.remove('active'));
-      searchInput.value = '';
+    const applyFilters = () => {
+      const q = searchInput.value.trim();
+      const want = beamFilter.value;
+      let pool = rows.filter(r => !want || r.beams === Number(want));
+      let hits = pool;
+      if (q) {
+        const hay = pool.map(r => r.hay);
+        const idxs = uf.filter(hay, q) || [];
+        if (idxs.length) {
+          const info = uf.info(idxs, hay, q);
+          const order = info ? uf.sort(info, hay, q) : idxs;
+          const idx = info ? info.idx : idxs;
+          hits = order.map(i => pool[idx[i]]);
+        } else {
+          hits = [];
+        }
+      }
+      const shown = new Set(hits);
+      rows.forEach(r => { r.li.hidden = !shown.has(r); });
+      hits.forEach(r => { r.li.hidden = false; navList.append(r.li); });
+      sections.forEach(s => { s.hidden = !shown.has(rows.find(r => r.a.hash === '#' + s.id)); });
+      navList.closest('nav').scrollTop = 0;
+      filterNote.textContent = want
+        ? `Showing ${hits.length} joint${hits.length === 1 ? '' : 's'} with ${want} beam${want === 1 ? '' : 's'}. The post is not counted.`
+        : 'The receiving post and any pegs, wedges or keys are not counted.';
+      searchStatus.hidden = !q;
+      searchStatus.textContent = q
+        ? `${hits.length} of ${pool.length} matching joints`
+        : '';
       cursor = -1;
       lastStep = 0;
-      resetNav();
-      if (tab === 'house') ensureHouseViewer();
-      if (scroll) {
-        const first = sections.find(s => s.dataset.tab === tab);
-        if (first) first.scrollIntoView({ behavior: 'instant', block: 'start' });
-      }
+      fit();
     };
-
-    tabButtons.forEach(b => b.addEventListener('click', () => applyTab(b.dataset.tab, { scroll: true })));
-    document.querySelector('.tabs').addEventListener('keydown', e => {
-      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      const at = tabButtons.indexOf(document.activeElement);
-      if (at < 0) return;
-      e.preventDefault();
-      const step = e.key === 'ArrowRight' ? 1 : -1;
-      const next = tabButtons[(at + step + tabButtons.length) % tabButtons.length];
-      next.focus();
-      applyTab(next.dataset.tab, { scroll: true });
+    beamFilter.addEventListener('change', applyFilters);
+    searchInput.addEventListener('input', applyFilters);
+    searchInput.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && searchInput.value) {
+        e.preventDefault();
+        e.stopPropagation();
+        searchInput.value = '';
+        applyFilters();
+      } else if (e.key === 'Enter') {
+        const first = rows.find(r => !r.li.hidden);
+        if (first) { e.preventDefault(); first.a.click(); }
+      }
     });
-    applyTab(tab);
+    addEventListener('keydown', e => {
+      if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+      const target = e.composedPath()[0];
+      if (target.closest && target.closest('input, textarea, select, [contenteditable]')) return;
+      e.preventDefault();
+      searchInput.focus();
+    });
 
-    // Keep at most a few WebGL contexts alive: load a model near the viewport,
-    // drop it once it is far away. Parsing a GLB and creating or destroying a WebGL
-    // context is heavy, so none of it happens while the page is moving: the stage is
-    // an empty box of its final size with a spinner, and the work starts once the
-    // scrolling has settled. The model then fades in.
+    // Keep a few WebGL contexts alive: load a model near the viewport and drop
+    // it once it is far away. Parsing a GLB and creating a context is heavy, so
+    // no work happens while the page is moving.
     const near = new Set();
     let settleTimer;
     const stageOf = v => v.closest('.stage');
@@ -425,25 +441,14 @@
       v.addEventListener('load', () => show(v));
       v.addEventListener('error', () => stageOf(v).classList.remove('ready'));
     });
-    if (houseViewer) {
-      houseViewer.addEventListener('load', () => {
-        show(houseViewer);
-        // A cold load on a joint anchor selects the house tab before the module
-        // is defined; apply the pending view once the model is actually ready.
-        if (houseViewHash(location.hash)) houseViewer.restoreFromHash?.(location.hash);
-      });
-      houseViewer.addEventListener('error', () => stageOf(houseViewer).classList.remove('ready'));
-    }
-    const applyLoads = () => {
-      viewers.forEach(v => {
-        if (near.has(v)) {
-          if (!v.getAttribute('src')) v.setAttribute('src', v.dataset.src);
-        } else if (v.getAttribute('src')) {
-          v.removeAttribute('src');
-          stageOf(v).classList.remove('ready');
-        }
-      });
-    };
+    const applyLoads = () => viewers.forEach(v => {
+      if (near.has(v)) {
+        if (!v.getAttribute('src')) v.setAttribute('src', v.dataset.src);
+      } else if (v.getAttribute('src')) {
+        v.removeAttribute('src');
+        stageOf(v).classList.remove('ready');
+      }
+    });
     const settle = () => { clearTimeout(settleTimer); settleTimer = setTimeout(applyLoads, 200); };
     const loader = new IntersectionObserver(entries => {
       for (const e of entries) (e.isIntersecting ? near.add(e.target) : near.delete(e.target));
@@ -452,22 +457,15 @@
     viewers.forEach(v => loader.observe(v));
     addEventListener('scroll', settle, { capture: true, passive: true });
 
-    // Highlight the joint being read; on small screens (one joint per page)
-    // keep the URL on the joint in view while swiping.
-    const mobile = matchMedia('(max-width: 56rem)');
-    const layoutEl = document.querySelector('.layout');
-    const scrolled = () => (mobile.matches ? layoutEl.scrollTop : scrollY) > 0;
     const active = new IntersectionObserver(entries => {
-      for (const e of entries) {
-        if (e.isIntersecting) {
-          links.forEach(a => a.classList.remove('active'));
-          links.get(e.target.id)?.classList.add('active');
-          if (mobile.matches && (scrolled() || location.hash) && !houseViewHash(location.hash)) {
-            history.replaceState(null, '', '#' + e.target.id);
-          }
-        }
+      for (const e of entries) if (e.isIntersecting) {
+        links.forEach(a => a.classList.remove('active'));
+        links.get(e.target.id)?.classList.add('active');
+        if (mobile.matches && scrollY0()) history.replaceState(null, '', '#' + e.target.id);
       }
     }, { rootMargin: '-35% 0px -55% 0px' });
+    const scrollY0 = () => (mobile.matches ? layoutEl.scrollTop : scrollY) > 0;
+    sections.forEach(s => active.observe(s));
 
     // Slide-in menu on small screens.
     const toggle = document.querySelector('.menu-toggle');
@@ -483,60 +481,6 @@
     mobile.addEventListener('change', () => setMenu(false));
     addEventListener('scroll', () => document.getElementById('hint')?.remove(), { once: true, passive: true, capture: true });
 
-    // Full-text search over the active tab: uFuzzy pre-filters the query against
-    // one haystack string per joint, ranks the hits and the list is reordered to
-    // the ranking. The options are uFuzzy's documented `unicode: true` set, so the
-    // Japanese names are searchable as well as the romanised ones.
-    {
-      const search = () => {
-        const q = searchInput.value.trim();
-        if (!q) return resetNav();
-        const pool = rows.filter(r => r.tab === tab);
-        const poolHay = pool.map(r => r.hay);
-        const idxs = uf.filter(poolHay, q);
-        let hits = [];
-        if (idxs && idxs.length) {
-          const info = uf.info(idxs, poolHay, q);
-          const order = info ? uf.sort(info, poolHay, q) : idxs;
-          const idx = info ? info.idx : idxs;
-          hits = order.map(i => pool[idx[i]]);
-        }
-        const found = new Set(hits);
-        rows.forEach(r => { r.li.hidden = r.tab !== tab || !found.has(r); });
-        hits.forEach(r => { r.li.hidden = false; navList.append(r.li); });
-        navList.closest('nav').scrollTop = 0;
-        searchStatus.hidden = false;
-        searchStatus.textContent = hits.length
-          ? `${hits.length} of ${pool.length} joints in this tab`
-          : `No joints match “${q}” in this tab`;
-      };
-
-      searchInput.addEventListener('input', search);
-      searchInput.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && searchInput.value) {
-          e.preventDefault();
-          e.stopPropagation();       // clear the query, do not close the menu
-          searchInput.value = '';
-          resetNav();
-        } else if (e.key === 'Enter') {
-          const first = rows.find(r => !r.li.hidden);
-          if (!first) return;
-          e.preventDefault();
-          first.a.click();           // follows the anchor, closes the mobile menu
-        }
-      });
-      addEventListener('keydown', e => {
-        if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
-        // composedPath sees the real target inside <house-viewer>'s shadow tree.
-        const target = e.composedPath()[0];
-        if (target.closest && target.closest('input, textarea, select, [contenteditable]')) return;
-        e.preventDefault();
-        searchInput.focus();
-      });
-    }
-
-    // One page = the visible height of the scroller, measured here (not 100dvh)
-    // and again only when the window really changes (rotation, resize).
     const visiblePages = () => sections.filter(s => !s.hidden);
     const fit = () => {
       if (!mobile.matches) { document.documentElement.style.removeProperty('--page-h'); return; }
@@ -548,10 +492,7 @@
     fit();
     addEventListener('resize', fit);
     mobile.addEventListener('change', fit);
-    sections.forEach(s => active.observe(s));
 
-    // Up / Down step through the joints in the active tab (also while a model has
-    // the focus).
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const current = () => {
       const pages = visiblePages();
@@ -565,10 +506,9 @@
       const target = e.composedPath()[0];
       if (target.closest && target.closest('input, textarea, select, [contenteditable]')) return;
       const pages = visiblePages();
-      // while a smooth scroll is still running, count from where it is heading
       const from = performance.now() - lastStep < 900 ? cursor : current();
       const to = Math.max(0, Math.min(pages.length - 1, from + (e.key === 'ArrowDown' ? 1 : -1)));
-      if (to === from) return;   // past either end: let the page scroll normally
+      if (to === from) return;
       e.preventDefault();
       e.stopPropagation();
       cursor = to;
@@ -583,32 +523,16 @@
       v.play();
     }));
 
-    // A link into the other tab (or a reload on one of its joints) selects that
-    // tab before scrolling to the joint.  A "#house/<id>?…" anchor is the house
-    // viewer's own state: select its tab (and scroll there when arriving from
-    // another tab) and let the viewer rebuild the exact focused view.
     const showFromHash = () => {
-      const hash = location.hash;
-      if (houseViewHash(hash)) {
-        const arriving = tab !== 'house';
-        if (arriving) applyTab('house');
-        if (arriving) {
-          fit();
-          requestAnimationFrame(() => {
-            const house = document.getElementById('house');
-            if (house && !house.hidden) {
-              house.scrollIntoView({ behavior: 'instant', block: 'start' });
-            }
-          });
-        }
-        houseViewer?.restoreFromHash?.(hash);
-        return;
-      }
-      const id = hash.slice(1);
+      const id = location.hash.slice(1);
       if (!id) return;
       const el = document.getElementById(id);
       if (!el || !el.classList.contains('joint')) return;
-      if (el.dataset.tab !== tab) applyTab(el.dataset.tab);
+      if (el.hidden) {
+        searchInput.value = '';
+        beamFilter.value = '';
+        applyFilters();
+      }
       fit();
       requestAnimationFrame(() => {
         if (!el.hidden) el.scrollIntoView({ behavior: 'instant', block: 'start' });
@@ -616,6 +540,7 @@
     };
     addEventListener('hashchange', showFromHash);
     showFromHash();
+    applyFilters();
   </script>
 </body>
 </html>

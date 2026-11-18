@@ -1,18 +1,23 @@
 # joints
 
-Fifty-three Japanese timber joints (継ぎ手 / 仕口) in a pastel paper-sunrise
+Fifty-eight Japanese timber joints (継ぎ手 / 仕口) in a pastel paper-sunrise
 style. Seventeen are from the [thejoinery](https://sketchfab.com/thejoinery)
 collection on Sketchfab, rebuilt and baked; seventeen more, with no licensed
 source model, are authored in this repository with
 [`tools/author_joint.py`](../tools/author_joint.py) (fourteen column-and-beam
 `shikuchi` joints, three splices — fifteen drawn from the reference sheet
 柱（軸組）の納まり and two from published descriptions of joints the sheet does not
-show). A further nineteen are authored with
+show). Nineteen more are authored with
 [`tools/author_details.py`](../tools/author_details.py) for the connection
-families the house frame uses beyond the sheets. The site keeps the two
-off-sheet joints in a second tab, and the house details in a fourth tab after
-**The house**. There is **no garden or ground plane**: the timbers float against
-the paper backdrop, which keeps the focus on the cut geometry.
+families the house frame uses beyond the sheets, and a final five with
+[`tools/author_multi.py`](../tools/author_multi.py) for connections of three to
+six beams. Every joint is tagged in `joints/sources/<id>.json` with the number
+of beams meeting at it, its use, and its strengths and weaknesses
+(see [`tools/joint_meta.py`](../tools/joint_meta.py)); the published site is a
+single **Joints** view with a beam-count filter. The house frame and its
+connection schedule stay in the repository but are not published to the site.
+There is **no garden or ground plane**: the timbers float against the paper
+backdrop, which keeps the focus on the cut geometry.
 
 ## Layout
 
@@ -77,8 +82,9 @@ they were drawn from.
 
 The house frame has 494 connections in 27 families. Eight of those families
 already have a specimen in the set above; the other nineteen got their own at
-the house's 120 mm scale so that every house viewer card can link straight to
-the joint it names. They are original geometry, authored from the house's joinery
+the house's 120 mm scale so that every connection family has a specimen. (The
+house frame itself is kept in `house/` but is not published to the site.) They
+are original geometry, authored from the house's joinery
 with [`tools/author_details.py`](../tools/author_details.py), and released
 **CC BY 4.0** like the rest of the authored joints. Most are box CSG; the sloped
 roof members use a local member frame, arbitrary-plane trimming for square-cut
@@ -105,6 +111,39 @@ hip and rafter ends, and a profile prism for a birdsmouth with a horizontal seat
 | [`rafter-over-plate`](../tools/author_details.py) | 垂木と軒桁 | CC BY 4.0 (authored) | 2 |
 | [`jack-rafter-at-hip`](../tools/author_details.py) | 短垂木と隅木 | CC BY 4.0 (authored) | 2 |
 | [`jack-rafter-over-plate`](../tools/author_details.py) | 短垂木と軒桁 | CC BY 4.0 (authored) | 2 |
+
+## Three to six beams
+
+The reference sheets stop at the four-way post (四方). Five more specimens
+extend the direction series 一方…六方 and fill a gap the sheets leave: they are
+original geometry authored with
+[`tools/author_multi.py`](../tools/author_multi.py) and released **CC BY 4.0**.
+Their metadata usage and strength/weakness notes record where each is a
+cited joint and where it is an extrapolation from the naming convention.
+
+| Asset | Japanese | Beams | License | Pieces |
+|---|---|---|---|---|
+| [`watari-ago-shikuchi`](../tools/author_multi.py) | 渡り頸仕口 | 2 | CC BY 4.0 (authored) | 3 |
+| [`sampo-sashi-shachi-sen`](../tools/author_multi.py) | 三方差し車知栓 | 3 | CC BY 4.0 (authored) | 7 |
+| [`shihou-sashi-shachi-sen`](../tools/author_multi.py) | 四方差し車知栓 | 4 | CC BY 4.0 (authored) | 9 |
+| [`gohou-sashi-shikuchi`](../tools/author_multi.py) | 五方差し仕口 | 5 | CC BY 4.0 (authored) | 10 |
+| [`roppou-sashi-shikuchi`](../tools/author_multi.py) | 六方差し仕口 | 6 | CC BY 4.0 (authored) | 11 |
+
+`watari-ago-shikuchi` is the common crossing lap the sheets omit: two 90 mm
+beams halved where they cross, so the upper beam's 頸 straddles the lower one
+and the pair sit on the post without cutting into it. 下山 recommends
+渡りあご for a 90 mm+ joist because it fixes the joist without damaging the
+supporting beam. The other four are `差し` posts with one tenon per direction,
+each at its own level so none share the post's core. The three-, four- and
+five-/six-way posts use tapered 車知栓 driven crosswise through each tenon to
+draw it tight — the lock shown as the red member in 建築用語集's 四方差し figure.
+The five- and six-way specimens add one and two diagonal 筋違 braces out of
+corner pockets to close the frame against racking. 建築用語集 warns that
+through tenons leave a large lost section in the post and that metal
+reinforcement may be preferable; that caution is recorded in each specimen's
+weaknesses. The three-way shachi-sen, five-way and six-way forms are
+extrapolations from the naming series rather than separately sourced named
+joints.
 
 ## Changes from the source models
 
@@ -301,6 +340,9 @@ python3 author_joint.py                 # rewrites all seventeen sources
 python3 author_joint.py daimochi-tsugi  # or one
 python3 author_details.py               # rewrites all nineteen house details
 python3 author_details.py sill-corner   # or one
+python3 author_multi.py                 # rewrites the five 3-6 beam sources
+python3 author_multi.py watari-ago-shikuchi  # or one
+python3 joint_meta.py                   # re-stamp beams/use/strengths/weaknesses
 ```
 
 The house details use arbitrary-plane trimming and a profile-prism extruder for
@@ -366,7 +408,7 @@ groups. Nine specimens failed it: `brace-into-post`, `hip-over-plate`,
 neighbour: the brace bears on the bottom of its post housing, the hip/rafter
 end cuts meet their neighbours exactly, the birdsmouth seats sit on the purlin
 and plate tops, and the nose peg fills its mortise and bears on the post face.
-All 53 sources now have one connected piece graph in the closed pose.
+All 58 sources now have one connected piece graph in the closed pose.
 
 Research used for the dimensions and for deciding which connections need a
 recess (rather than only a bearing face):
@@ -459,7 +501,10 @@ face each mortise opens on, where the key goes):
 - 建築用語集, *四方差し* — <http://kenchikuyogo.com/?page_id=5746>: members
   tenoned into one post from all four faces; the tenons pass through the post
   to fix the member opposite, and the red member in the figure is the
-  `車知栓`.
+  `車知栓`. The page also warns that the passing tenons greatly reduce the
+  post's section, that the result is neat but not necessarily strong, and that
+  metal reinforcement may be better — the caution recorded on the multi-beam
+  specimens.
 - 建築用語集, *傾き大入れ* — <http://kenchikuyogo.com/?page_id=3357>: a
   post-and-beam joint that carries the whole load into the post by cutting the
   beam at a slant and hooking its lower part onto the post, rather than relying

@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Sleeper into sill",
-  "jp": "\u5927\u5f15\u306e\u571f\u53f0\u5dee\u3057",
+  "jp": "大引の土台差し",
   "gloss": "",
-  "guidance": "The \u5927\u5f15 sleeper end is housed into the end \u571f\u53f0 sill. The sleeper runs 90 mm into the 120 mm sill, leaving a 30 mm wall of sill beyond it, and the shoulders sit against the sill face.",
+  "guidance": "The 大引 sleeper end is housed into the end 土台 sill. The sleeper runs 90 mm into the 120 mm sill, leaving a 30 mm wall of sill beyond it, and the shoulders sit against the sill face.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -782,6 +782,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "大引 sleeper housed into the sill (土台), often with 腰掛け蟻掛け.",
+  "strengths": [
+   "The housed dovetail stops the sleeper pulling out and adds bending resistance over a plain housing (下山).",
+   "Keeps sleeper and sill tops flush."
+  ],
+  "weaknesses": [
+   "A plain ooire can come apart on shrinkage (下山).",
+   "The small step at a 120 mm sill / 90 mm sleeper limits the cut."
+  ]
  }
 ]

@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Okkake-daisen-tsugi",
-  "jp": "\u8ffd\u639b\u3051\u5927\u6813\u7d99\u304e",
+  "jp": "追掛け大栓継ぎ",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -4571,6 +4571,16 @@
      }
     ]
    }
+  ],
+  "beams": 2,
+  "usage": "Strong splice that assembles by sliding horizontally - ridge beams already seated on posts, or anywhere a beam cannot be lifted in.",
+  "strengths": [
+   "下山 calls 追掛け大栓継ぎ きわめて堅固 (extremely firm).",
+   "Large driven keys give high capacity; slide-in needs no lifting."
+  ],
+  "weaknesses": [
+   "Needs a long lap (8 sun to 1 shaku) and accurate key slots.",
+   "Requires lateral clearance to slide the lap together."
   ]
  }
 ]

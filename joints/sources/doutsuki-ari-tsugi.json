@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Doutsuki-ari-tsugi",
-  "jp": "\u80f4\u4ed8\u304d\u87fb\u7d99\u304e",
+  "jp": "胴付き蟻継ぎ",
   "gloss": "",
   "guidance": "A dovetail cut in plan rather than in elevation: the tenon is 60 mm wide at the shoulders and 100 mm at the nose, so once B is lowered over it the two timbers cannot be pulled apart along their length. The socket runs the full 120 mm depth, which is what lets B drop straight down onto the tenon while the shoulders at the seam meet.",
   "forReal": "",
@@ -829,6 +829,16 @@
      0.0
     ]
    ]
-  }
+  },
+  "beams": 2,
+  "usage": "Simple dovetail splice cut in plan for a sill or beam that must not pull apart along its length, where a full-depth socket can be cut.",
+  "strengths": [
+   "Flared tenon resists axial withdrawal; the shoulders carry compression.",
+   "The socket is open top and bottom, so it closes with a straight drop."
+  ],
+  "weaknesses": [
+   "The full-depth socket weakens the receiving member at the seam.",
+   "The narrow dovetail neck can shear if the joint is driven hard."
+  ]
  }
 ]

@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Komisen-inro-tsugi",
-  "jp": "\u8fbc\u307f\u6813\u5165\u308c\u6798\u7d99\u304e",
+  "jp": "込み栓入れ枘継ぎ",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -3491,6 +3491,16 @@
      }
     ]
    }
+  ],
+  "beams": 2,
+  "usage": "General-purpose moderate-load splice in a beam or purlin, where no special assembly direction is available.",
+  "strengths": [
+   "Stepped scarf and tenon give moderate pull resistance.",
+   "The komisen is accessible for replacement."
+  ],
+  "weaknesses": [
+   "Not suitable for high bending or seismic tension.",
+   "The pin hole weakens the tenon where it crosses."
   ]
  }
 ]

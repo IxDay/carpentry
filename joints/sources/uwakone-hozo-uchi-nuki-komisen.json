@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Uwakone-hozo-uchi-nuki-komisen",
-  "jp": "\u4e0a\u5c0f\u6839\u30db\u30be\u6253\u3061\u629c\u304d\u8fbc\u307f\u6813\u6253\u3061",
+  "jp": "上小根ホゾ打ち抜き込み栓打ち",
   "gloss": "",
-  "guidance": "The upper small root passes through the post and carries the \u8170; a square \u8fbc\u307f\u6813 is driven horizontally through the post's cheeks and the big root and cut off flush with both faces, so the joint cannot be pulled apart.",
+  "guidance": "The upper small root passes through the post and carries the 腰; a square 込み栓 is driven horizontally through the post's cheeks and the big root and cut off flush with both faces, so the joint cannot be pulled apart.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -22,7 +22,7 @@
    "license": "CC BY 4.0",
    "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
    "modifications": "authored from the reference sheet in closed pose, exploded for the assemble animation, sunset lighting baked; the baking rig's ground slab is omitted",
-   "credit": "Original geometry authored for this collection from the reference sheet \u67f1\uff08\u8ef8\u7d44\uff09\u306e\u7d0d\u307e\u308a; CC BY 4.0."
+   "credit": "Original geometry authored for this collection from the reference sheet 柱（軸組）の納まり; CC BY 4.0."
   },
   "assemble": {
    "part-a": [
@@ -3215,6 +3215,16 @@
      }
     ]
    }
+  ],
+  "beams": 1,
+  "usage": "Upper-tier through tenon where the member above the post needs the fuller bearing shoulder and the pin passes through both cheeks.",
+  "strengths": [
+   "Square komisen through post and big root is easy to inspect.",
+   "The 腰 sits low so the upper shoulder carries bearing."
+  ],
+  "weaknesses": [
+   "The through mortise and pin hole weaken the post.",
+   "Cut flush on both faces, so re-pinning needs re-cutting."
   ]
  }
 ]

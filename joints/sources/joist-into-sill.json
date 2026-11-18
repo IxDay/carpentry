@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Joist into sill",
-  "jp": "\u6839\u592a\u306e\u571f\u53f0\u5dee\u3057",
+  "jp": "根太の土台差し",
   "gloss": "",
-  "guidance": "The \u6839\u592a joist end is housed 30 mm into the \u571f\u53f0 sill. Its lower 50 mm runs on as a tenon into the sill, and the full-depth body stops against the sill face.",
+  "guidance": "The 根太 joist end is housed 30 mm into the 土台 sill. Its lower 50 mm runs on as a tenon into the sill, and the full-depth body stops against the sill face.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -938,6 +938,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "Joist end housed 30 mm into the sill (土台) for a flush top.",
+  "strengths": [
+   "The housing locates the joist and keeps the floor flat.",
+   "Small cut for a light, short-span member."
+  ],
+  "weaknesses": [
+   "下山: a joist in a plain ooire acts as a simple beam and can loosen under load; use a dovetail (蟻掛け) for larger joists.",
+   "Housing depth is limited by the sill section."
+  ]
  }
 ]

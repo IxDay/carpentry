@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Upper joist half-lap",
-  "jp": "\u4e8c\u968e\u6839\u592a\u306e\u76f8\u6b20\u304d",
+  "jp": "二階根太の相欠き",
   "gloss": "",
-  "guidance": "The upper \u6839\u592a is halved over the \u5e8a\u6881 spine beam: 60 mm out of the beam top and 60 mm out of the joist underside, so the joist top finishes flush with the beam and the two share a bearing plane.",
+  "guidance": "The upper 根太 is halved over the 床梁 spine beam: 60 mm out of the beam top and 60 mm out of the joist underside, so the joist top finishes flush with the beam and the two share a bearing plane.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -1094,6 +1094,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "二階根太 upper-floor joist halved and lapped at a girder.",
+  "strengths": [
+   "Flush top for the upper floor finish.",
+   "Fast, repeatable cut at every joist."
+  ],
+  "weaknesses": [
+   "Halves the member depth at the lap.",
+   "Stagger laps on a girder to avoid a line of weakness."
+  ]
  }
 ]

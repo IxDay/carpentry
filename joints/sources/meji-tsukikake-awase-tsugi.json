@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Meji-tsukikake-awase-tsugi",
-  "jp": "\u76ee\u5730\u7a81\u639b\u3051\u5408\u308f\u305b\u7d99\u304e",
+  "jp": "目地突掛け合わせ継ぎ",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -2607,6 +2607,16 @@
      }
     ]
    }
+  ],
+  "beams": 2,
+  "usage": "Exposed splice on a reveal or joint line where a clean sight-line matters as much as the mechanics.",
+  "strengths": [
+   "Hooked shoulder gives some shear lock across the butt.",
+   "Keeps a clean continuous groove on the show face."
+  ],
+  "weaknesses": [
+   "Appearance-led: low structural capacity compared with kanawa.",
+   "The reveal line can open if the timber shrinks."
   ]
  }
 ]

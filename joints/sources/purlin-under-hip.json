@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Purlin under hip",
-  "jp": "\u6bcd\u5c4b\u3068\u9685\u6728",
+  "jp": "母屋と隅木",
   "gloss": "",
-  "guidance": "The \u6bcd\u5c4b purlin crosses under the \u9685\u6728 hip rafter where their lines meet in plan. The hip bears on the purlin top and runs on down the slope; the purlin carries the hip at the crossing.",
+  "guidance": "The 母屋 purlin crosses under the 隅木 hip rafter where their lines meet in plan. The hip bears on the purlin top and runs on down the slope; the purlin carries the hip at the crossing.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -470,6 +470,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "母屋 purlin meeting a hip rafter (隅木) under the roof slope.",
+  "strengths": [
+   "The hip receives the purlin end, continuing the load path to the plate.",
+   "Square-cut end keeps the joint readable in the open frame."
+  ],
+  "weaknesses": [
+   "Bearing surface only; the exact housing is drawing-specific.",
+   "The hip is the larger member and its section governs the cut."
+  ]
  }
 ]

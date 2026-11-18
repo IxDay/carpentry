@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Osaka-jo Otemon Hikae-bashira-tsugi",
-  "jp": "\u5927\u962a\u57ce\u5927\u624b\u9580\u63a7\u3048\u67f1\u7d99\u304e",
+  "jp": "大阪城大手門控え柱継ぎ",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -2079,6 +2079,16 @@
     ]
    }
   ],
-  "rescaled": 6.6667
+  "rescaled": 6.6667,
+  "beams": 2,
+  "usage": "Showcase/high-status splice on oversized gate brace posts where maximum splice strength and a large section are available.",
+  "strengths": [
+   "Two dovetail faces and two 'sword tip' shoulders with sloping shoulders that let the repair piece slide in; a pin or wedge locks it.",
+   "Uses the full section of a very large timber."
+  ],
+  "weaknesses": [
+   "Only meaningful at oversized section: wasteful at normal scale.",
+   "Very complex; historically a status display as much as a need."
+  ]
  }
 ]

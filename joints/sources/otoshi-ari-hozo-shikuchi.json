@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Otoshi-ari-hozo-shikuchi",
-  "jp": "\u843d\u3057\u87fb\u6798\u4ed5\u53e3",
+  "jp": "落し蟻枘仕口",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -1970,6 +1970,16 @@
     0.014851,
     0
    ]
-  }
+  },
+  "beams": 1,
+  "usage": "Joist-to-beam where the beam is fixed and the joist must be lowered into place but still resist pull-out.",
+  "strengths": [
+   "Dovetail tenon resists withdrawal after the vertical drop.",
+   "Closes with a straight lowering motion."
+  ],
+  "weaknesses": [
+   "下山 warns that a dovetail neck can shear (蟻首がとぶ).",
+   "Needs clearance above the beam to drop the joist in."
+  ]
  }
 ]

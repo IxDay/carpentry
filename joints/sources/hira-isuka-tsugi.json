@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Hira-isuka-tsugi",
-  "jp": "\u5e73\u5c45\u6728\u7d99\u304e",
+  "jp": "平居木継ぎ",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -1207,6 +1207,16 @@
      }
     ]
    }
+  ],
+  "beams": 2,
+  "usage": "Beveled (scissor) scarf placed directly over a post or support, used only for alignment and compression.",
+  "strengths": [
+   "Fastest of the scarves: two matching bevels and no key.",
+   "Bearing on the support keeps the bevel faces closed."
+  ],
+  "weaknesses": [
+   "No meaningful tension resistance: the bevels can slide apart.",
+   "Only valid while the splice stays directly over its support."
   ]
  }
 ]

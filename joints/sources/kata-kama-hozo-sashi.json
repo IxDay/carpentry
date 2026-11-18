@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Kata-kama-hozo-sashi",
-  "jp": "\u7247\u938c\u30db\u30be\u5dee\u3057",
+  "jp": "片鎌ホゾ差し",
   "gloss": "",
-  "guidance": "The tenon carries a \u938c hook along one lower edge only. The sill's mortise is a slot open at the sill's end, so the post is slid in along the sill: the hook runs under the sill's lip and the post can no longer be lifted out, while the square face of the hook bears on the lip under uplift. The post's shoulder seats on the sill and its tenon clears the mortise floor.",
+  "guidance": "The tenon carries a 鎌 hook along one lower edge only. The sill's mortise is a slot open at the sill's end, so the post is slid in along the sill: the hook runs under the sill's lip and the post can no longer be lifted out, while the square face of the hook bears on the lip under uplift. The post's shoulder seats on the sill and its tenon clears the mortise floor.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -22,7 +22,7 @@
    "license": "CC BY 4.0",
    "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
    "modifications": "authored from the reference sheet in closed pose, exploded for the assemble animation, sunset lighting baked; the baking rig's ground slab is omitted",
-   "credit": "Original geometry authored for this collection from the reference sheet \u67f1\uff08\u8ef8\u7d44\uff09\u306e\u7d0d\u307e\u308a; CC BY 4.0."
+   "credit": "Original geometry authored for this collection from the reference sheet 柱（軸組）の納まり; CC BY 4.0."
   },
   "assemble": {
    "part-a": [
@@ -1403,6 +1403,16 @@
      }
     ]
    }
+  ],
+  "beams": 1,
+  "usage": "Corner post foot with a one-sided hook, slid along the sill into a slot open at the sill's end; resists uplift in one direction.",
+  "strengths": [
+   "The square back of the hook bears on the sill lip under uplift.",
+   "Slides in along the sill, so no overhead access is needed."
+  ],
+  "weaknesses": [
+   "Only one direction of pull-out is resisted.",
+   "The hook needs a slot open at the sill end and sound grain."
   ]
  }
 ]

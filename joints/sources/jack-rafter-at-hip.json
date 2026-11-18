@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Jack rafter at hip",
-  "jp": "\u77ed\u5782\u6728\u3068\u9685\u6728",
+  "jp": "短垂木と隅木",
   "gloss": "",
-  "guidance": "A \u77ed\u5782\u6728 jack rafter is cut square against the \u9685\u6728 hip. It is shorter than the common rafters because it starts at the hip and stops at the next purlin or at the eave.",
+  "guidance": "A 短垂木 jack rafter is cut square against the 隅木 hip. It is shorter than the common rafters because it starts at the hip and stops at the next purlin or at the eave.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -470,6 +470,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "Short jack rafter (短垂木) stopping against the side face of a hip.",
+  "strengths": [
+   "A square cut to the hip's side face gives a clean, close fit.",
+   "Keeps the rafter spacing regular across the hip."
+  ],
+  "weaknesses": [
+   "Bearing-only: no tenon to hold the jack against the hip.",
+   "Cut angle must follow the hip's slope, not the common rafter's."
+  ]
  }
 ]

@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Rafter at ridge",
-  "jp": "\u5782\u6728\u3068\u68df\u6728",
+  "jp": "垂木と棟木",
   "gloss": "",
-  "guidance": "The common \u5782\u6728 butts the side of the \u68df\u6728 ridge at the top of the slope. Its end is cut square to the ridge face, and the ridge runs on past the pair of rafters on either side.",
+  "guidance": "The common 垂木 butts the side of the 棟木 ridge at the top of the slope. Its end is cut square to the ridge face, and the ridge runs on past the pair of rafters on either side.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -470,6 +470,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "Common rafter meeting the ridge (棟木) at the roof apex.",
+  "strengths": [
+   "Square plumb cut seats the rafter against the ridge.",
+   "Symmetric about the ridge line."
+  ],
+  "weaknesses": [
+   "Bearing-only: no lock against sliding down the slope.",
+   "Relies on the birdsmouth lower down for location."
+  ]
  }
 ]

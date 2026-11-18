@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Shitakone-hozo-hana-sen",
-  "jp": "\u4e0b\u5c0f\u6839\u30db\u30be\u9f3b\u6813\u6253\u3061",
+  "jp": "下小根ホゾ鼻栓打ち",
   "gloss": "",
-  "guidance": "The lower small root protrudes through the post and a tapered \u9f3b\u6813 is driven down through its nose, hard against the post's far face, so the tenon is blocked from withdrawing.",
+  "guidance": "The lower small root protrudes through the post and a tapered 鼻栓 is driven down through its nose, hard against the post's far face, so the tenon is blocked from withdrawing.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -22,7 +22,7 @@
    "license": "CC BY 4.0",
    "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
    "modifications": "authored from the reference sheet in closed pose, exploded for the assemble animation, sunset lighting baked; the baking rig's ground slab is omitted",
-   "credit": "Original geometry authored for this collection from the reference sheet \u67f1\uff08\u8ef8\u7d44\uff09\u306e\u7d0d\u307e\u308a; CC BY 4.0."
+   "credit": "Original geometry authored for this collection from the reference sheet 柱（軸組）の納まり; CC BY 4.0."
   },
   "assemble": {
    "part-a": [
@@ -2375,6 +2375,16 @@
      }
     ]
    }
+  ],
+  "beams": 1,
+  "usage": "Lower-tier through tenon locked by a nose peg where the pin must be visible and accessible from the outside face.",
+  "strengths": [
+   "Tapered nose peg behind the post blocks withdrawal.",
+   "The full 大根 bears at the shoulder, the 小根 runs through."
+  ],
+  "weaknesses": [
+   "The through mortise removes a large part of the post.",
+   "The peg stands proud and can be knocked or withdrawn."
   ]
  }
 ]

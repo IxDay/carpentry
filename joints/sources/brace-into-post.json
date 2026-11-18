@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Brace into post",
-  "jp": "\u7b4b\u9055",
+  "jp": "筋違",
   "gloss": "",
-  "guidance": "The \u7b4b\u9055 brace is let into the post face. Its own 90 mm thickness forms the housing, so there is no peg and no tenon: the end sits in the shallow notch and the brace withdraws square to the wall.",
+  "guidance": "The 筋違 brace is let into the post face. Its own 90 mm thickness forms the housing, so there is no peg and no tenon: the end sits in the shallow notch and the brace withdraws square to the wall.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -782,6 +782,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "筋違 brace let into the face of a post or sill to triangulate a bay.",
+  "strengths": [
+   "The housing carries both compression and tension along the brace.",
+   "Thickness of the housing sets the brace flush with the post face."
+  ],
+  "weaknesses": [
+   "The housing removes post section at an already busy corner.",
+   "Works in one diagonal only unless a paired brace is fitted."
+  ]
  }
 ]

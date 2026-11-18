@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Rafter over plate",
-  "jp": "\u5782\u6728\u3068\u8ed2\u6841",
+  "jp": "垂木と軒桁",
   "gloss": "",
-  "guidance": "The \u5782\u6728 rafter is notched over the \u8ed2\u6841 plate at the eave with the same 4\u5bf8 birdsmouth: a 50 mm horizontal seat and a 20 mm plumb cheek, with the rafter running on past the plate to the eave edge.",
+  "guidance": "The 垂木 rafter is notched over the 軒桁 plate at the eave with the same 4寸 birdsmouth: a 50 mm horizontal seat and a 20 mm plumb cheek, with the rafter running on past the plate to the eave edge.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -646,6 +646,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "Common rafter bearing on the wall plate (軒桁) at the eave.",
+  "strengths": [
+   "Birdsmouth seat carries the rafter load onto the plate.",
+   "The seat sets both the overhang and the roof plane."
+  ],
+  "weaknesses": [
+   "The seat cuts into the rafter's depth at the bearing.",
+   "Uplift needs separate fixing."
+  ]
  }
 ]

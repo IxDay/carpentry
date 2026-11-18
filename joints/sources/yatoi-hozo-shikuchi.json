@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Yatoi-hozo-shikuchi",
-  "jp": "\u96c7\u3044\u6798\u4ed5\u53e3",
+  "jp": "雇い枘仕口",
   "gloss": "",
   "guidance": "The loose tenon stays seated in the post; the beam's blind mortise slides over it, so the tenon is revealed when the beam is withdrawn.",
   "forReal": "",
@@ -22,7 +22,7 @@
    "license": "CC BY 4.0",
    "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
    "modifications": "authored from the reference sheet in closed pose, exploded for the assemble animation, sunset lighting baked; the baking rig's ground slab is omitted",
-   "credit": "Original geometry authored for this collection from the reference sheet \u67f1\uff08\u8ef8\u7d44\uff09\u306e\u7d0d\u307e\u308a; CC BY 4.0."
+   "credit": "Original geometry authored for this collection from the reference sheet 柱（軸組）の納まり; CC BY 4.0."
   },
   "assemble": {
    "part-a": [
@@ -1311,6 +1311,16 @@
      }
     ]
    }
+  ],
+  "beams": 1,
+  "usage": "Light-duty connection where both receiving members are already fixed in place and neither can supply a tenon.",
+  "strengths": [
+   "A separate loose tenon seats in the post and the beam slides over it.",
+   "The tenon can be replaced without disturbing either timber."
+  ],
+  "weaknesses": [
+   "Not cut from either member, so capacity is lower than an integral tenon.",
+   "Blind mortises must line up exactly."
   ]
  }
 ]

@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Kanawa-tsugi",
-  "jp": "\u91d1\u8f2a\u7d99\u304e",
+  "jp": "金輪継ぎ",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -4014,6 +4014,16 @@
      }
     ]
    }
+  ],
+  "beams": 2,
+  "usage": "Benchmark strong scarf for seismic sills, foundation footings, wall plates and important beams where real tension and bending resistance are required (JAANUS).",
+  "strengths": [
+   "Oblique housed rabbeted T-shaped tenon plus draw pin resists both tension and bending; two shachi keys may be used instead of the pin.",
+   "The pin is driven through the central opening to draw the halves tight."
+  ],
+  "weaknesses": [
+   "JAANUS: because tenon and mortise are blind it cannot be slipped together from the side - it must be inserted lengthwise.",
+   "Complex cut; the key gap and the mortised section must be accurate."
   ]
  }
 ]

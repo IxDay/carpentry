@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Okkake-daisen-tsugi (mochidashi)",
-  "jp": "\u8ffd\u639b\u3051\u5927\u6813\u7d99\u304e\uff08\u6301\u3061\u51fa\u3057\u7d99\u304e\uff09",
+  "jp": "追掛け大栓継ぎ（持ち出し継ぎ）",
   "gloss": "",
-  "guidance": "A long half-lap splice in which each tenon runs past the other timber's shoulder: its nose is carried out 20 mm proud of the surface into a shallow rebate, and two \u5927\u6813 driven down through the lap pin the two halves together.",
+  "guidance": "A long half-lap splice in which each tenon runs past the other timber's shoulder: its nose is carried out 20 mm proud of the surface into a shallow rebate, and two 大栓 driven down through the lap pin the two halves together.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -22,7 +22,7 @@
    "license": "CC BY 4.0",
    "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
    "modifications": "authored from the reference sheet in closed pose, exploded for the assemble animation, sunset lighting baked; the baking rig's ground slab is omitted",
-   "credit": "Original geometry authored for this collection from the reference sheet \u67f1\uff08\u8ef8\u7d44\uff09\u306e\u7d0d\u307e\u308a; CC BY 4.0."
+   "credit": "Original geometry authored for this collection from the reference sheet 柱（軸組）の納まり; CC BY 4.0."
   },
   "assemble": {
    "part-a": [
@@ -3307,6 +3307,16 @@
      }
     ]
    }
+  ],
+  "beams": 2,
+  "usage": "The same high-capacity slide-in splice where the joint must project past its bearing point, for example continuing a beam out over an eave.",
+  "strengths": [
+   "Keeps the okkake-daisen capacity while cantilevering past support.",
+   "Noses seat in shallow rebates, so the proud ends are controlled."
+  ],
+  "weaknesses": [
+   "Projecting noses need extra rebates and careful setting out.",
+   "The closed form is an interpretation: the sheet shows only the prepared end, not the assembled joint."
   ]
  }
 ]

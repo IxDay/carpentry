@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Sage-kama-oire",
-  "jp": "\u4e0b\u3052\u938c\uff08\u5927\u5165\u308c\uff09",
+  "jp": "下げ鎌（大入れ）",
   "gloss": "",
-  "guidance": "The nuki's end is cut with a \u938c hook on its underside. The mortise is one hook deeper than the nuki, so the nuki is offered up raised, run home and then dropped: the hook falls behind the post's far face and bears on it, so the nuki cannot be pulled back out. A wedge driven in over the nose seats the nuki on the mortise floor and keeps the hook tight. The nuki is housed at its full section with no shoulder \u2014 \u5927\u5165\u308c \u2014 and the mortise runs right through the post, leaving a narrow cheek either side.",
+  "guidance": "The nuki's end is cut with a 鎌 hook on its underside. The mortise is one hook deeper than the nuki, so the nuki is offered up raised, run home and then dropped: the hook falls behind the post's far face and bears on it, so the nuki cannot be pulled back out. A wedge driven in over the nose seats the nuki on the mortise floor and keeps the hook tight. The nuki is housed at its full section with no shoulder — 大入れ — and the mortise runs right through the post, leaving a narrow cheek either side.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -22,7 +22,7 @@
    "license": "CC BY 4.0",
    "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
    "modifications": "authored from the reference sheet in closed pose, exploded for the assemble animation, sunset lighting baked; the baking rig's ground slab is omitted",
-   "credit": "Original geometry authored for this collection from the reference sheet \u67f1\uff08\u8ef8\u7d44\uff09\u306e\u7d0d\u307e\u308a; CC BY 4.0."
+   "credit": "Original geometry authored for this collection from the reference sheet 柱（軸組）の納まり; CC BY 4.0."
   },
   "assemble": {
    "part-a": [
@@ -1307,6 +1307,16 @@
      }
     ]
    }
+  ],
+  "beams": 1,
+  "usage": "A secondary beam or nuki hung off a primary post: offered up raised, run home, then dropped so the hook bears behind the far face.",
+  "strengths": [
+   "Hook bears on the post's far face and resists pull-out.",
+   "A wedge over the nose seats it on the mortise floor."
+  ],
+  "weaknesses": [
+   "下山: wedges in nuki/post joints often loosen under vibration (Kiyomizu-dera's underfloor is inspected for this).",
+   "The through mortise and hook are awkward to cut."
   ]
  }
 ]

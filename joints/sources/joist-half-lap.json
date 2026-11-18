@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Joist half-lap",
-  "jp": "\u6839\u592a\u306e\u76f8\u6b20\u304d",
+  "jp": "根太の相欠き",
   "gloss": "",
-  "guidance": "The \u6839\u592a joist crosses the \u5927\u5f15 sleeper with 30 mm taken out of each: the sleeper keeps its lower half, the joist its upper half, and the two meet on a common bearing plane so the floor stays level.",
+  "guidance": "The 根太 joist crosses the 大引 sleeper with 30 mm taken out of each: the sleeper keeps its lower half, the joist its upper half, and the two meet on a common bearing plane so the floor stays level.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -1094,6 +1094,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "根太 joist halved and lapped to another joist or to a girder at the same top level.",
+  "strengths": [
+   "Half-lap keeps the top faces flush for the floor finish.",
+   "Simple to cut and quick to lay."
+  ],
+  "weaknesses": [
+   "Removes half the depth of each member at the lap.",
+   "No positive lock against pulling apart."
+  ]
  }
 ]

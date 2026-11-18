@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Tsutsumikomi-nuki",
-  "jp": "\u5305\u307f\u8fbc\u307f\u8cab",
+  "jp": "包み込み貫",
   "gloss": "",
   "guidance": "The nuki's end is wrapped by the post. It runs 90 mm into the 120 mm post and its last 15 mm is rebated 15 mm up from the underside; the post keeps a shelf under that rebate and a 30 mm wall beyond the end. Offer the nuki up 15 mm, run it home over the shelf, then lower it onto the shelf so the end is caught, and drive the wedge into the gap above its back.",
   "forReal": "",
@@ -1258,6 +1258,16 @@
      0.0
     ]
    ]
-  }
+  },
+  "beams": 1,
+  "usage": "Nuki wrapped by the post: a shelf under its rebated end and a wall beyond it, used where a nuki must not pull out.",
+  "strengths": [
+   "The end is caught between shelf and wall rather than merely housed.",
+   "A wedge in the mouth gap holds it down."
+  ],
+  "weaknesses": [
+   "Three-stage assembly (raise, slide, lower) needs access.",
+   "A 90 mm insertion removes much of the post's section."
+  ]
  }
 ]

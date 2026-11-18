@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Rafter over purlin",
-  "jp": "\u5782\u6728\u3068\u6bcd\u5c4b",
+  "jp": "垂木と母屋",
   "gloss": "",
-  "guidance": "A \u9ce5\u53e3 birdsmouth seats the \u5782\u6728 rafter over the \u6bcd\u5c4b purlin. At this 4\u5bf8 (0.4) roof slope the notch has a 50 mm horizontal seat on the purlin top and a 20 mm plumb cheek at its lower end, the usual \u7acb\u6c34 : \u5ea7 = 2 : 5 proportion, so the rafter cannot slide down the slope.",
+  "guidance": "A 鳥口 birdsmouth seats the 垂木 rafter over the 母屋 purlin. At this 4寸 (0.4) roof slope the notch has a 50 mm horizontal seat on the purlin top and a 20 mm plumb cheek at its lower end, the usual 立水 : 座 = 2 : 5 proportion, so the rafter cannot slide down the slope.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -646,6 +646,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "Common rafter bearing on an intermediate purlin (母屋).",
+  "strengths": [
+   "Birdsmouth seat spreads the roof load into the purlin.",
+   "Repeatable cut for the whole roof field."
+  ],
+  "weaknesses": [
+   "The seat reduces the rafter depth.",
+   "Bearing-only; no resistance to uplift or creep."
+  ]
  }
 ]

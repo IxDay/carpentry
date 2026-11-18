@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Upper joist into girder",
-  "jp": "\u4e8c\u968e\u6839\u592a\u306e\u80f4\u5dee\u5dee\u3057",
+  "jp": "二階根太の胴差差し",
   "gloss": "",
-  "guidance": "The upper \u6839\u592a end is housed 30 mm into the \u80f4\u5dee girder. The joist body stops at the girder face and a full-section stub runs into the shallow housing, with the girder left whole beyond it.",
+  "guidance": "The upper 根太 end is housed 30 mm into the 胴差 girder. The joist body stops at the girder face and a full-section stub runs into the shallow housing, with the girder left whole beyond it.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -782,6 +782,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "二階根太 upper-floor joist housed into a 胴差 girder.",
+  "strengths": [
+   "The housing locates the joist and keeps the floor flat.",
+   "Works with the upper storey's flush-top layout."
+  ],
+  "weaknesses": [
+   "A joist in a plain ooire behaves as a simple beam and can loosen.",
+   "Deep housings into the girder reduce its section."
+  ]
  }
 ]

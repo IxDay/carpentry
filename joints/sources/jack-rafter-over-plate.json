@@ -5,9 +5,9 @@
   "chapter": 0,
   "number": 0,
   "title": "Jack rafter over plate",
-  "jp": "\u77ed\u5782\u6728\u3068\u8ed2\u6841",
+  "jp": "短垂木と軒桁",
   "gloss": "",
-  "guidance": "At the hipped end a \u77ed\u5782\u6728 jack rafter is notched over the \u8ed2\u6841 plate with a \u9ce5\u53e3 birdsmouth. The plate carries the jack rafter where it meets the eave, and the rafter stops against the hip above.",
+  "guidance": "At the hipped end a 短垂木 jack rafter is notched over the 軒桁 plate with a 鳥口 birdsmouth. The plate carries the jack rafter where it meets the eave, and the rafter stops against the hip above.",
   "forReal": "",
   "fact": "",
   "scale": 1.0,
@@ -646,6 +646,16 @@
     ]
    }
   ],
-  "tab": "house-details"
+  "tab": "house-details",
+  "beams": 1,
+  "usage": "Short jack rafter bearing on the wall plate at the eave.",
+  "strengths": [
+   "A birdsmouth seats the rafter and fixes its overhang.",
+   "Repeats the common rafter detail at the hip end."
+  ],
+  "weaknesses": [
+   "The seat reduces the rafter depth at the bearing.",
+   "Relies on fixing against uplift."
+  ]
  }
 ]

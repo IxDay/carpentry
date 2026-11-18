@@ -5,7 +5,7 @@
   "chapter": 0,
   "number": 0,
   "title": "Kakushi-kanawa-tsugi",
-  "jp": "\u96a0\u3057\u91d1\u8f2a\u7d99\u304e",
+  "jp": "隠し金輪継ぎ",
   "gloss": "",
   "guidance": "",
   "forReal": "",
@@ -3378,6 +3378,16 @@
      }
     ]
    }
+  ],
+  "beams": 2,
+  "usage": "The kanawa structural case - seismic sill or important beam - on a visible face where the wedge pattern must not show.",
+  "strengths": [
+   "Keeps the kanawa-family tension and bending resistance.",
+   "Locking detail is concealed, so the show face stays clean."
+  ],
+  "weaknesses": [
+   "Concealment makes the lock hard to inspect or re-tighten.",
+   "At least as complex to cut as the open kanawa."
   ]
  }
 ]
