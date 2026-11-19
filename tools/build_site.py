@@ -27,6 +27,8 @@ TEMPLATE = os.path.join(HERE, "site_template.html")
 TABS = [
     ("joints", "Joints",
      "Every specimen: splices, post-and-beam connections and multi-beam junctions."),
+    ("furniture", "Furniture",
+     "Whole pieces, shown opening so the joinery inside is visible."),
 ]
 DEFAULT_TAB = TABS[0][0]
 
@@ -70,37 +72,55 @@ def esc(text):
     return html.escape(text, quote=True)
 
 
-def load_joints(joints_dir):
-    src_dir = os.path.join(joints_dir, "sources")
+def load_joints(joints_dir, furniture_dir=None):
+    src_dirs = [(joints_dir, DEFAULT_TAB)]
+    if furniture_dir and os.path.isdir(os.path.join(furniture_dir, "sources")):
+        src_dirs.append((furniture_dir, "furniture"))
     joints = []
+    for root, tab in src_dirs:
+        joints += load_pieces(root, tab)
+    order = {tid: i for i, (tid, _, _) in enumerate(TABS)}
+    joints.sort(key=lambda j: (order[j["tab"]], j["slug"]))
+    return joints
+
+
+def load_pieces(root, tab):
+    """Read one folder's sources and baked GLBs into section records."""
+    src_dir = os.path.join(root, "sources")
+    pieces = []
     for name in sorted(os.listdir(src_dir)):
         if not name.endswith(".json"):
             continue
         with open(os.path.join(src_dir, name)) as fh:
             lv = json.load(fh)[0]
         # The house-detail specimens are not accurate enough yet and do not
-        # belong in the single Joints view.  Keep their sources and baked GLBs
+        # belong in the published views.  Keep their sources and baked GLBs
         # in the repository; they will be published again once corrected.
         if lv.get("tab") == "house-details":
+            continue
+        # Only the furniture sources belong on the Furniture tab; every other
+        # source is a joint, whatever sheet it was drawn on.
+        if (lv.get("tab") == "furniture") != (tab == "furniture"):
             continue
         slug = lv["id"]
         if slug != slugify(lv["title"]):
             print("note: id %r differs from slugified title %r" % (slug, slugify(lv["title"])),
                   file=sys.stderr)
-        glb = os.path.join(joints_dir, slug + ".glb")
+        glb = os.path.join(root, slug + ".glb")
         if not os.path.exists(glb):
             print("skipping %s: no GLB" % slug, file=sys.stderr)
             continue
-        # Source records keep their original `tab` (sheet/extra/house-details)
-        # for provenance; the published site has a single Joints view.
-        tab = DEFAULT_TAB
         meta = JOINT_META.get(slug, {})
-        joints.append({
+        roles = [p.get("role", "timber") for p in lv["pieces"]]
+        pieces.append({
             "slug": slug,
             "title": lv["title"],
             "jp": lv["jp"],
             "tab": tab,
             "pieces": len(lv["pieces"]),
+            "timbers": sum(1 for r in roles if r != "pin"),
+            "pins": sum(1 for r in roles if r == "pin"),
+            "dimensions": lv.get("dimensions", ""),
             "source": lv["source"],
             "guidance": lv.get("guidance", ""),
             "beams": lv.get("beams", meta.get("beams")),
@@ -108,11 +128,9 @@ def load_joints(joints_dir):
             "strengths": lv.get("strengths", meta.get("strengths", [])),
             "weaknesses": lv.get("weaknesses", meta.get("weaknesses", [])),
             "glb": glb,
-            "poster": os.path.join(joints_dir, "previews", "sunset_%s.png" % slug),
+            "poster": os.path.join(root, "previews", "sunset_%s.png" % slug),
         })
-    order = {tid: i for i, (tid, _, _) in enumerate(TABS)}
-    joints.sort(key=lambda j: (order[j["tab"]], j["slug"]))
-    return joints
+    return pieces
 
 
 def tab_counts(joints):
@@ -132,14 +150,21 @@ def counts_by_beams(joints):
 
 def nav_item(j, counts):
     hidden = "" if j["tab"] == DEFAULT_TAB else " hidden"
+    jp = ('<span class="jp" lang="ja">%s</span>' % esc(j["jp"])
+          if j["jp"] else "")
+    if j["tab"] == "furniture":
+        tag = ('<span class="beams">%d timber%s%s</span>'
+               % (j["timbers"], "" if j["timbers"] == 1 else "s",
+                  ", %d pin%s" % (j["pins"], "" if j["pins"] == 1 else "s")
+                  if j["pins"] else ""))
+    else:
+        tag = ('<span class="beams">%s beam%s</span>'
+               % (j.get("beams") if j.get("beams") else "?",
+                  "" if j.get("beams") == 1 else "s"))
     return ('        <li data-tab="%s" data-beams="%s"%s>'
-            '<a href="#%s"><span class="name">%s</span>'
-            '<span class="jp" lang="ja">%s</span>'
-            '<span class="beams">%s beam%s</span></a></li>'
+            '<a href="#%s"><span class="name">%s</span>%s%s</a></li>'
             % (j["tab"], j.get("beams") or 0, hidden, j["slug"],
-               esc(j["title"]), esc(j["jp"]),
-               j.get("beams") if j.get("beams") else "?",
-               "" if j.get("beams") == 1 else "s"))
+               esc(j["title"]), jp, tag))
 
 
 def tab_bar(joints):
@@ -179,7 +204,13 @@ def section(j, counts, repo_url=""):
                       camera=camera, fov=fov))
     controls = ('\n          <button type="button" data-replay="viewer-%s">Replay</button>'
                 % j["slug"])
-    pieces = "%d pieces" % j["pieces"]
+    if j["tab"] == "furniture":
+        pieces = "%d timbers" % j["timbers"]
+        if j["pins"]:
+            pieces += " and %d draw-bore pin%s" % (
+                j["pins"], "" if j["pins"] == 1 else "s")
+    else:
+        pieces = "%d pieces" % j["pieces"]
 
     def bullets(label, items, cls):
         if not items:
@@ -190,9 +221,20 @@ def section(j, counts, repo_url=""):
                 % (cls, label, lis))
 
     beams = j.get("beams")
-    badge = ('<span class="beam-badge" title="Timber pieces meeting at this joint; '
-             'pegs, wedges, keys and dowels are not counted">%s beam%s</span>'
-             % (beams if beams else "?", "" if beams == 1 else "s"))
+    if j["tab"] == "furniture":
+        bits = [j["dimensions"]] if j.get("dimensions") else []
+        bits.append("%d timber%s" % (j["timbers"],
+                                     "" if j["timbers"] == 1 else "s"))
+        if j["pins"]:
+            bits.append("%d draw-bore pin%s" % (j["pins"],
+                                                "" if j["pins"] == 1 else "s"))
+        badge = ('<span class="beam-badge" title="Overall size; draw-bore pins '
+                 'are pegs, not timbers">%s</span>'
+                 % esc(" \u00b7 ".join(bits)))
+    else:
+        badge = ('<span class="beam-badge" title="Timber pieces meeting at this joint; '
+                 'pegs, wedges, keys and dowels are not counted">%s beam%s</span>'
+                 % (beams if beams else "?", "" if beams == 1 else "s"))
     note_panel = ""
     if j.get("usage") or j.get("strengths") or j.get("weaknesses"):
         parts = bullets("Strengths", j.get("strengths", []), "good")
@@ -205,10 +247,12 @@ def section(j, counts, repo_url=""):
     if j.get("guidance"):
         guidance = ('        <details class="mechanics"><summary>How it goes together</summary>'
                     '<p>%s</p></details>\n' % esc(j["guidance"]))
+    jp_line = ('<p class="jp" lang="ja">%s</p>' % esc(j["jp"])
+               if j["jp"] else "")
     return """      <section class="joint" id="{slug}" data-tab="{tab}" data-tab-count="{count}" data-beams="{beams}"{hidden}>
         <header>
           <h2><a href="#{slug}">{title}<span class="hash" aria-hidden="true">#</span></a></h2>
-          <p class="jp" lang="ja">{jp}</p>
+          {jp_line}
           {badge}
         </header>
         <div class="stage">
@@ -218,7 +262,7 @@ def section(j, counts, repo_url=""):
         <p class="meta">{pieces} &middot; model by <a href="{author_url}">{author}</a>,
           <a href="{license_url}">{license}</a>, modified.{note}{origin}</p>
 {note_panel}{guidance}      </section>""".format(
-        slug=j["slug"], title=esc(j["title"]), jp=esc(j["jp"]), pieces=pieces,
+        slug=j["slug"], title=esc(j["title"]), jp_line=jp_line, pieces=pieces,
         tab=j["tab"], count=counts[j["tab"]], hidden=hidden,
         beams=beams or 0, badge=badge, note_panel=note_panel, guidance=guidance,
         viewer=viewer, controls=controls,
@@ -235,9 +279,12 @@ def footer(repo_url, joints=()):
     def number(n):
         return words[n] if n < len(words) else str(n)
 
-    authored = [j for j in joints if "sketchfab.com" not in j["source"]["url"]]
+    authored = [j for j in joints if j["tab"] == DEFAULT_TAB
+                and "sketchfab.com" not in j["source"]["url"]]
     counts = {}
     for j in joints:
+        if j["tab"] != DEFAULT_TAB:
+            continue
         n = j.get("beams") or 0
         counts[n] = counts.get(n, 0) + 1
     by_beams = ", ".join("%d: %d" % (n, counts[n]) for n in sorted(counts))
@@ -259,17 +306,24 @@ def footer(repo_url, joints=()):
         "sources linked below.</p>" % (esc(by_beams), meta_cited))
     repo = ('\n      <p>Source and tooling: <a href="%s">%s</a>.</p>'
              % (esc(repo_url), esc(repo_url)) if repo_url else "")
+    furniture_line = ""
+    if any(j["tab"] == "furniture" for j in joints):
+        furniture_line = (
+            "\n      <p>The <em>Furniture</em> tab publishes whole pieces rather "
+            "than joints: the model is the assembled object and the animation "
+            "takes it apart, so the connections can be read in place. Sizes are "
+            "overall, and draw-bore pins are counted apart from the timbers.</p>")
     return """      <h2>About</h2>
       <p>Models by <a href="https://sketchfab.com/thejoinery">thejoinery</a> (CC BY 4.0, one
         CC BY-SA 4.0), read from the public Sketchfab viewer, split into timbers, re-lit with a
         baked paper-sunrise look and given an assembly animation. The animations were checked
         for timbers passing through each other, and some meshes were corrected where the
         author's pose was not the true closed joint.</p>
-%s
+%s%s
       <h2>References</h2>
       <ul>
 %s
-      </ul>%s""" % (authored_line, refs, repo)
+      </ul>%s""" % (authored_line, furniture_line, refs, repo)
 
 
 def copy_if_changed(src, dst):
@@ -311,8 +365,8 @@ def copy_vendor(out):
                 os.rmdir(path)
 
 
-def build(joints_dir, out, repo_url):
-    joints = load_joints(joints_dir)
+def build(joints_dir, out, repo_url, furniture_dir=None):
+    joints = load_joints(joints_dir, furniture_dir)
     for sub in ("models", "posters"):
         os.makedirs(os.path.join(out, sub), exist_ok=True)
     copy_vendor(out)
@@ -335,7 +389,12 @@ def build(joints_dir, out, repo_url):
     with open(TEMPLATE) as fh:
         page = fh.read()
     counts = tab_counts(joints)
-    beam_counts = counts_by_beams(joints)
+    joints_only = [j for j in joints if j["tab"] == DEFAULT_TAB]
+    beam_counts = counts_by_beams(joints_only)
+    n_furniture = counts.get("furniture", 0)
+    furniture_phrase = ((" and %d piece%s of furniture"
+                         % (n_furniture, "" if n_furniture == 1 else "s"))
+                        if n_furniture else "")
     beam_options = "\n".join(
         '        <option value="%d">%d beam%s (%d)</option>'
         % (n, n, "" if n == 1 else "s", beam_counts[n])
@@ -346,26 +405,31 @@ def build(joints_dir, out, repo_url):
                 .replace("{{SECTIONS}}", "\n".join(section(j, counts, repo_url)
                                                    for j in joints))
                 .replace("{{FOOTER}}", footer(repo_url, joints))
-                .replace("{{COUNT}}", str(len(joints)))
+                .replace("{{COUNT}}", str(len(joints_only)))
+                .replace("{{FURNITURE}}", furniture_phrase)
+                .replace("{{INTRO}}", esc(TABS[0][2]))
                 .replace("{{OG_IMAGE}}", joints[0]["slug"]))
     with open(os.path.join(out, "index.html"), "w") as fh:
         fh.write(page)
     # no Jekyll processing: the site is already static
     open(os.path.join(out, ".nojekyll"), "w").close()
-    print("wrote %s: %d joints" % (os.path.join(out, "index.html"), len(joints)))
+    print("wrote %s: %d joints, %d furniture"
+          % (os.path.join(out, "index.html"), len(joints_only), n_furniture))
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--joints", default=os.path.join(ROOT, "joints"),
                     help="folder with <id>.glb, previews/ and sources/")
+    ap.add_argument("--furniture", default=os.path.join(ROOT, "furniture"),
+                    help="folder with whole-piece <id>.glb, previews/ and sources/")
     ap.add_argument("--out", default=os.path.join(ROOT, "docs"))
     ap.add_argument("--repo-url", default="",
                     help="link to the source repository in the footer")
     ap.add_argument("--preview", action="store_true",
                     help="serve the result on http://localhost:8000 afterwards")
     args = ap.parse_args()
-    build(args.joints, args.out, args.repo_url)
+    build(args.joints, args.out, args.repo_url, args.furniture)
     if args.preview:
         import functools
         import http.server

@@ -975,7 +975,7 @@ def assemble_animation(lv, fps=24):
         if not any(abs(c) > 1e-9 for c in off):
             continue
         home = [0.0, 0.0, 0.0]
-        if is_key(pid):
+        if is_key(pid) and pid not in approach:
             axis = max(range(3), key=lambda i: dims[pid][i])
             clear = [off[i] if i != axis else 0.0 for i in range(3)]
             keys = []

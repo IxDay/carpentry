@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Japanese joinery</title>
-  <meta name="description" content="{{COUNT}} Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble, tagged by beam count, use, strengths and weaknesses.">
-  <meta property="og:title" content="Japanese joinery">
-  <meta property="og:description" content="{{COUNT}} Japanese timber joints as interactive 3D models, tagged by beam count, use, strengths and weaknesses.">
+  <title>Japanese joinery and furniture</title>
+  <meta name="description" content="{{COUNT}} Japanese timber joints (tsugite and shikuchi){{FURNITURE}} as interactive 3D models that assemble, tagged by beam count, use, strengths and weaknesses.">
+  <meta property="og:title" content="Japanese joinery and furniture">
+  <meta property="og:description" content="{{COUNT}} Japanese timber joints{{FURNITURE}} as interactive 3D models, tagged by beam count, use, strengths and weaknesses.">
   <meta property="og:image" content="posters/{{OG_IMAGE}}.png">
   <noscript>
     <style>
       /* Without the script every joint stays visible; the filters do nothing. */
-      nav.index .filters, nav.index .filter-note { display: none; }
+      nav.index .tabs, nav.index .filters, nav.index .filter-note { display: none; }
       nav.index li[hidden], section.joint[hidden] { display: revert; }
     </style>
   </noscript>
@@ -86,6 +86,19 @@
     }
     nav.index h1 { font: 600 1.05rem/1.3 Georgia, "Iowan Old Style", serif; margin: 0 0 .25rem; letter-spacing: .01em; }
     nav.index p { margin: 0 0 1.25rem; color: var(--muted); font-size: .85rem; }
+    nav.index .tabs { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 1rem; }
+    nav.index .tabs button {
+      font: inherit; font-size: .8rem; line-height: 1.2;
+      padding: .35rem .7rem;
+      color: var(--muted); background: var(--card);
+      border: 1px solid var(--line); border-radius: 999px;
+      cursor: pointer;
+    }
+    nav.index .tabs button:hover { border-color: var(--accent); }
+    nav.index .tabs button[aria-selected="true"] {
+      color: var(--paper); background: var(--accent); border-color: var(--accent);
+    }
+    nav.index .tabs .count { font-size: .7rem; opacity: .8; }
     nav.index .filters { margin: 0 0 .4rem; }
     nav.index .filters label {
       display: block; margin: 0 0 .3rem;
@@ -315,15 +328,20 @@
     <nav class="index" id="index" aria-label="Joints">
       <button class="menu-close" type="button" aria-label="Close the menu">&times;</button>
       <h1>Japanese joinery</h1>
-      <p>{{COUNT}} joints that assemble and come apart, each tagged with its beam count, use, strengths and weaknesses.</p>
-      <div class="filters">
-        <label for="beam-filter">Filter by beams</label>
-        <select id="beam-filter" aria-label="Filter joints by beam count">
-          <option value="">All beams</option>
-{{BEAM_OPTIONS}}
-        </select>
+      <div class="tabs" role="tablist" aria-label="Collections">
+{{TABS}}
       </div>
-      <p class="filter-note" id="filter-note">The receiving post and any pegs, wedges or keys are not counted.</p>
+      <p id="intro">{{INTRO}}</p>
+      <div id="beam-filter-wrap">
+        <div class="filters">
+          <label for="beam-filter">Filter by beams</label>
+          <select id="beam-filter" aria-label="Filter joints by beam count">
+            <option value="">All beams</option>
+{{BEAM_OPTIONS}}
+          </select>
+        </div>
+        <p class="filter-note" id="filter-note">The receiving post and any pegs, wedges or keys are not counted.</p>
+      </div>
       <div class="search">
         <input id="search" type="search" placeholder="Search joints" autocomplete="off"
             spellcheck="false" aria-label="Search joints" aria-controls="joint-list"
@@ -350,6 +368,11 @@
     const filterNote = document.getElementById('filter-note');
     const searchInput = document.getElementById('search');
     const searchStatus = document.getElementById('search-status');
+    const tabs = [...document.querySelectorAll('.tabs [role="tab"]')];
+    const intro = document.getElementById('intro');
+    const beamWrap = document.getElementById('beam-filter-wrap');
+    let selectedTab = (tabs.find(b => b.getAttribute('aria-selected') === 'true')
+                       || tabs[0])?.dataset.tab || 'joints';
 
     // One haystack per joint: the name, Japanese name, slug and the metadata
     // prose, so a search for "dovetail" or "seismic" finds the right specimen.
@@ -359,7 +382,7 @@
       const j = document.getElementById(a.hash.slice(1));
       const meta = j ? [j.querySelector('.usage')?.textContent || '',
                         ...[...j.querySelectorAll('.notes li')].map(li => li.textContent)].join(' ') : '';
-      return { li, a, beams: Number(li.dataset.beams) || 0,
+      return { li, a, tab: li.dataset.tab || 'joints', beams: Number(li.dataset.beams) || 0,
                hay: [text, meta, a.hash.slice(1)].join(' ') };
     });
     const uf = new uFuzzy({
@@ -378,8 +401,11 @@
 
     const applyFilters = () => {
       const q = searchInput.value.trim();
-      const want = beamFilter.value;
-      let pool = rows.filter(r => !want || r.beams === Number(want));
+      // The beam count is a joint property; furniture is sized instead.
+      const want = selectedTab === 'joints' ? beamFilter.value : '';
+      const noun = selectedTab === 'furniture' ? 'furniture pieces' : 'joints';
+      let pool = rows.filter(r => r.tab === selectedTab
+                                  && (!want || r.beams === Number(want)));
       let hits = pool;
       if (q) {
         const hay = pool.map(r => r.hay);
@@ -396,19 +422,49 @@
       const shown = new Set(hits);
       rows.forEach(r => { r.li.hidden = !shown.has(r); });
       hits.forEach(r => { r.li.hidden = false; navList.append(r.li); });
-      sections.forEach(s => { s.hidden = !shown.has(rows.find(r => r.a.hash === '#' + s.id)); });
+      const shownIds = new Set(hits.map(r => r.a.hash.slice(1)));
+      sections.forEach(s => { s.hidden = !shownIds.has(s.id); });
       navList.closest('nav').scrollTop = 0;
       filterNote.textContent = want
         ? `Showing ${hits.length} joint${hits.length === 1 ? '' : 's'} with ${want} beam${want === 1 ? '' : 's'}. The post is not counted.`
         : 'The receiving post and any pegs, wedges or keys are not counted.';
       searchStatus.hidden = !q;
       searchStatus.textContent = q
-        ? `${hits.length} of ${pool.length} matching joints`
+        ? `${hits.length} of ${pool.length} matching ${noun}`
         : '';
       cursor = -1;
       lastStep = 0;
       fit();
     };
+
+    const selectTab = tid => {
+      if (!tabs.some(b => b.dataset.tab === tid)) return;
+      selectedTab = tid;
+      tabs.forEach(b => {
+        const on = b.dataset.tab === tid;
+        b.setAttribute('aria-selected', String(on));
+        b.tabIndex = on ? 0 : -1;
+      });
+      intro.textContent = tabs.find(b => b.dataset.tab === tid).dataset.note || '';
+      beamWrap.hidden = tid !== 'joints';
+      searchInput.placeholder = tid === 'furniture' ? 'Search furniture' : 'Search joints';
+      applyFilters();
+    };
+    tabs.forEach(b => b.addEventListener('click', () => {
+      selectTab(b.dataset.tab);
+      setMenu(false);
+      const first = rows.find(r => !r.li.hidden);
+      const target = first && document.getElementById(first.a.hash.slice(1));
+      if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }));
+    tabs.forEach(b => b.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      const i = tabs.indexOf(b);
+      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+      next.focus();
+      selectTab(next.dataset.tab);
+    }));
     beamFilter.addEventListener('change', applyFilters);
     searchInput.addEventListener('input', applyFilters);
     searchInput.addEventListener('keydown', e => {
@@ -528,10 +584,10 @@
       if (!id) return;
       const el = document.getElementById(id);
       if (!el || !el.classList.contains('joint')) return;
-      if (el.hidden) {
+      if (el.hidden || el.dataset.tab !== selectedTab) {
         searchInput.value = '';
         beamFilter.value = '';
-        applyFilters();
+        selectTab(el.dataset.tab);
       }
       fit();
       requestAnimationFrame(() => {

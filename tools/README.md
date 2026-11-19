@@ -367,6 +367,40 @@ tapered 車知栓 driven crosswise through the tenon. Geometry uses the same box
 catalogue metadata already stamped on. Original geometry, CC BY 4.0. Regenerate,
 then run `check_sources.py`, `check_contact.py`, `bake.py` and `preview.py`.
 
+### `author_furniture.py` — whole pieces from CadQuery
+
+```sh
+cd ~/Documents/Dev/platipy/coffee-table
+pixi run python ~/Documents/Dev/misc/joinery/tools/author_furniture.py
+```
+
+The first whole piece is the coffee table from the separate CadQuery project:
+four legs, four aprons, two cross rails and a four-plank top, imported with the
+project's own environment (CadQuery is not a dependency here) and written in the
+catalogue's metre, y-up frame so `bake.py` can light it like the joints. Unlike a
+joint source, it is published as the assembled object: the top is the moving
+part, lifted 60 mm clear of the legs' locating tabs and then fanned open so the
+frame's joinery is visible. The paths are `approach` vectors, and the explode
+offsets become `assemble`, as in `author_joint.py`.
+
+Two inconsistencies in the source project are resolved here and noted in the
+source's `modifications`: the outer top planks' leg pockets are re-cut 10 mm
+outboard so they seat the leg tabs once the aprons line up, and the real height
+is 362 mm rather than the nominal 370 mm (`total_height`), because the apron
+tops and leg shoulders sit at 334 mm and the 28 mm top rests on them with the
+tabs let into its underside.
+
+The script also adds twelve draw-bore pins of its own, 6 mm pegs that lock the
+assembly: one through each leg into an end-apron tenon, one down through each
+long apron into a cross-rail tenon, and one through each outer top plank's edge
+into a leg tab. Bores use the same 16-gon prism as the pegs, so the hole rims
+and peg facets share their corners and the meshes stay closed; the pins are
+tagged `role: "pin"` so the site can count them apart from the fourteen timbers.
+Each pin's axis is sampled before cutting and must cross exactly the two named
+timbers. After regenerating, run `check_sources.py`, `check_contact.py` and
+`check_animation.py` before baking; `--no-ground` keeps the table on the paper
+background.
+
 ### `joint_meta.py` — catalogue metadata
 
 ```sh
@@ -488,38 +522,43 @@ python3 build_site.py --repo-url https://github.com/<you>/<repo>
 python3 build_site.py --preview             # also serve it on :8000
 ```
 
-Reads `joints/sources/*.json` (title, Japanese name, credit, metadata), skipping
-the 19 with `tab: "house-details"` — those are kept in the repository but
-withheld from the site until corrected — copies the remaining 37
-`joints/<id>.glb` files and their sunset previews, and writes `docs/index.html`
-from `site_template.html`: a single **Joints** view, one section per joint with a
-`#<id>` anchor, a `<model-viewer>` that plays the `assemble` clip, the Japanese
-name in light gray under the romanised one, a beam-count badge, the usage note
-and the strengths / weaknesses lists. The published site has no tabs: the
-source `tab` values are kept for provenance only. The house frame, its
-`connections.json` and `house-viewer.js` are not loaded, and stale copies are
-removed from `docs/` on rebuild. Up / Down arrow keys step through the joints in
-view order. Below 56 rem the index becomes a slide-in menu (button at the top
-left) and every joint is a full-screen page: swipe up / down for the next /
-previous joint (scroll snapping), drag sideways to rotate, with an `n / <count>`
-counter and the credits along the bottom. Models load only near the viewport and
-only once scrolling has settled (never mid-swipe): each stage is an empty box of
-its final size with a spinner, the adjacent models are fetched at rest, and a
-model fades in when it is ready.
+Reads `joints/sources/*.json` (title, Japanese name, credit, metadata) and
+`furniture/sources/*.json` (whole pieces), skipping the 19 with
+`tab: "house-details"` — those are kept in the repository but withheld from the
+site until corrected — copies the 37 joints, the furniture model and their
+sunset previews, and writes `docs/index.html` from `site_template.html`: two
+tabs, **Joints** and **Furniture**, with one section per specimen and a `#<id>`
+anchor, a `<model-viewer>` that plays the `assemble` clip, the Japanese name in
+light gray under the romanised one (when there is one), a badge, the usage note
+and the strengths / weaknesses lists. A source with `tab: "furniture"` is
+published as a whole piece: its badge gives the overall dimensions and the
+counts of timbers and draw-bore pins, and the beam filter is hidden and ignored.
+Every other published source is a joint, with the beam-count badge. The house
+frame, its `connections.json` and `house-viewer.js` are not loaded, and stale
+copies are removed from `docs/` on rebuild. Up / Down arrow keys step through
+the specimens in view order. Below 56 rem the index becomes a slide-in menu
+(button at the top left) and every specimen is a full-screen page: swipe up /
+down for the next / previous one (scroll snapping), drag sideways to rotate,
+with an `n / <count>` counter and the credits along the bottom. Models load only
+near the viewport and only once scrolling has settled (never mid-swipe): each
+stage is an empty box of its final size with a spinner, the adjacent models are
+fetched at rest, and a model fades in when it is ready.
 
-The top of the index (and so the top of the phone menu) has a **Filter by beams**
-menu and a full-text search box. The filter narrows the list to a beam count
-(with per-count totals; the post counts, loose hardware does not). The
-search covers each joint's romanised name, Japanese name, id and its metadata
+The top of the index (and so the top of the phone menu) has the tab bar, a
+**Filter by beams** menu and a full-text search box. The tabs narrow the list
+and the page to one collection; the filter narrows the Joints tab to a beam
+count (with per-count totals; the post counts, loose hardware does not). The
+search covers each specimen's romanised name, Japanese name, id and its metadata
 prose with [`@leeoniya/ufuzzy`](https://github.com/leeoniya/uFuzzy) (MIT,
 vendored under `vendor/` and copied into `docs/`): the query is filtered against
-one haystack string per joint, ranked, and the list reordered to the ranking.
+one haystack string per specimen, ranked, and the list reordered to the ranking.
 The library's `unicode: true` regexps are switched on so `金輪` and `腰掛け`
 match as well as `kanawa`. Typing a single error still matches (`sanpo` finds
 Sampo, `kama` finds Nimai-kama), no match shows a live-region message, Enter
 follows the first hit, Escape clears the query, and `/` focuses the box from
-anywhere. The search pool and the arrow-key order are the joints left after the
-beam filter.
+anywhere. The search pool and the arrow-key order are the specimens left after
+the tab and beam filters. A `#<id>` link to a piece on the other tab switches to
+that tab before scrolling.
 
 Plain static files, stdlib only. Regenerate and commit `docs/` after changing a
 joint; publish with Pages set to the default branch, `/docs` folder.

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Serve the joints site locally.
+"""Serve the joinery site locally.
 
 Builds the same site that is published on GitHub Pages (see ``build_site.py``)
 into a temporary folder and serves it, so the local page and the published one
 are identical.
 
-    python3 tools/viewer.py                       # joints site, port 8080
+    python3 tools/viewer.py                       # joints and furniture, port 8080
     python3 tools/viewer.py --port 9000 --open
 """
 import argparse
@@ -36,6 +36,9 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--dir", default=os.path.join(HERE, "..", "joints"),
                     help="directory with baked GLBs and sources/ (default: joints)")
+    ap.add_argument("--furniture", default=os.path.join(HERE, "..", "furniture"),
+                    help="directory with whole-piece GLBs and sources/ "
+                         "(default: furniture)")
     ap.add_argument("--port", type=int, default=8080, help="port (default 8080)")
     ap.add_argument("--host", default="127.0.0.1",
                     help="bind address (default 127.0.0.1)")
@@ -47,7 +50,7 @@ def main():
         sys.exit("no joints sources under %s" % root)
 
     with tempfile.TemporaryDirectory(prefix="joints-site-") as out:
-        build_site.build(root, out, "")
+        build_site.build(root, out, "", args.furniture)
         handler = functools.partial(SiteHandler, directory=out)
         httpd = ThreadingHTTPServer((args.host, args.port), handler)
         httpd.daemon_threads = True

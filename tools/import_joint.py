@@ -222,6 +222,28 @@ def area2(pts, n):
     return 0.5 * s
 
 
+def loop_inside(point, poly, n):
+    """Point-in-polygon for a loop on the plane with normal n."""
+    ax = max(range(3), key=lambda i: abs(n[i]))
+    u, v = [i for i in range(3) if i != ax]
+    x, y = point[u], point[v]
+    inside = False
+    m = len(poly)
+    for i in range(m):
+        x1, y1 = poly[i][u], poly[i][v]
+        x2, y2 = poly[(i + 1) % m][u], poly[(i + 1) % m][v]
+        if (y1 > y) != (y2 > y):
+            if x < x1 + (y - y1) * (x2 - x1) / (y2 - y1):
+                inside = not inside
+    return inside
+
+
+def loop_nested(points, loop, n):
+    """A loop lying inside another is a hole in that face."""
+    c = [sum(p[i] for p in points) / len(points) for i in range(3)]
+    return loop_inside(c, loop, n)
+
+
 def ear_clip(pts, n):
     if area2(pts, n) < 0:
         pts = list(reversed(pts))
@@ -305,9 +327,15 @@ def build_faces(upos, tris, scale, cx, cz, miny, wood, detail):
             if len(keys) != len(pts):
                 simple = False
                 break
-            if area2(pts, n) < 0:
-                pts = list(reversed(pts))
             polys.append(pts)
+        # A loop inside another is a hole. Filling it would cap the hole with
+        # a face, and a small hole slips under the area tolerance below, so
+        # any nesting must take the triangle fallback.
+        raws = [[upos[i] for i in loop] for loop in loops if len(loop) >= 3]
+        if any(loop_nested(raws[j], raws[i], n)
+               for i in range(len(raws))
+               for j in range(len(raws)) if i != j):
+            simple = False
         total = sum(tri_area(t) for t in gts)
         got = sum(abs(area2(p, n)) for p in polys)
         if (not simple or not polys or
@@ -315,6 +343,8 @@ def build_faces(upos, tris, scale, cx, cz, miny, wood, detail):
             faces += tri_faces(gts, n)
             continue
         for pts in polys:
+            if area2(pts, n) < 0:
+                pts = list(reversed(pts))
             if len(pts) <= 4:
                 faces.append({"points": [xf(p) for p in pts],
                               "normal": [round(c, 9) for c in n],

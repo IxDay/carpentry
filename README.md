@@ -1,12 +1,14 @@
 # Japanese joinery
 
-Thirty-seven Japanese timber joints (継ぎ手 and 仕口) as interactive 3D models
-that assemble and come apart, each tagged with its beam count, use, strengths
-and weaknesses, with the tools that rebuild them and the site that shows them:
+Thirty-seven Japanese timber joints (継ぎ手 and 仕口) and a coffee table as
+interactive 3D models that assemble and come apart. The joints are tagged with
+their beam count, use, strengths and weaknesses; the table is published as a
+whole piece with its dimensions, timbers and draw-bore pins. With them are the
+tools that rebuild them and the site that shows them:
 **<https://ixday.github.io/carpentry/>**. A further nineteen house-detail
 specimens and the open frame of a two-storey house are kept in the repository
 but are not published to the site yet: the house details are not accurate
-enough and will be added back later. All 56 sources are still built and
+enough and will be added back later. All 56 joint sources are still built and
 checked locally.
 
 Seventeen models are by [thejoinery](https://sketchfab.com/thejoinery) on
@@ -22,10 +24,18 @@ frame makes beyond the sheets: halved sills and joists, a brace in a post, floor
 posts, and the hip, purlin and rafter cuts of the roof. Those nineteen are kept
 in the repository but withheld from the published site for now. Three more,
 authored with `tools/author_multi.py`, cover a crossing lap and the three- and
-four-way posts. Every source is tagged with `beams`, `usage`,
+four-way posts. Every joint source is tagged with `beams`, `usage`,
 `strengths` and `weaknesses` in `tools/joint_meta.py`. Per-model links,
 attribution, the change list and the references used are in
 [`joints/README.md`](joints/README.md).
+
+The furniture comes from separate CAD projects. The coffee table is designed in
+[`~/Documents/Dev/platipy/coffee-table`](https://github.com/IxDay/coffee-table)
+with CadQuery; `tools/author_furniture.py` imports its part solids, checks them,
+adds twelve draw-bore pins that lock the frame and top together, and records the
+result here in the same catalogue form. It is published as the assembled table,
+not as a set of joints: the animation lifts the four-plank top clear and fans it
+open so the frame's joinery can be read.
 
 ## Layout
 
@@ -36,6 +46,11 @@ attribution, the change list and the references used are in
 - `joints/sources/<id>.json` — the source: faces of every timber (in the
   exploded pose), the closed-pose offsets (`assemble`), an optional `approach`
   stage, and the attribution
+- `furniture/<id>.glb` — a whole piece of furniture, every timber and pin its
+  own mesh node, with the `assemble` animation
+- `furniture/previews/sunset_<id>.png` — the poster renders
+- `furniture/sources/<id>.json` — the imported source: timbers and pins tagged
+  by `role`, the explode offsets, the `approach` and the overall dimensions
 - `house/` — the open frame of the house in `house.jpg`: `source.json`,
   `house.glb` with its unbuild/rebuild clip, `connections.json` with every joint
   instance, a poster and notes; see [`house/README.md`](house/README.md)
@@ -64,16 +79,18 @@ frame at architectural scale, not a close-up specimen.
 python3 tools/viewer.py --open
 ```
 
-Serves the same page that is published on GitHub Pages: a single **Joints** view
-with one anchored section per joint and no tabs. Each section shows the assembly
-animation, a beam-count badge, a short usage note and lists of strengths and
+Serves the same page that is published on GitHub Pages: two tabs, **Joints**
+and **Furniture**, with one anchored section per specimen. Each section shows
+the assembly animation, a badge, a short usage note and lists of strengths and
 things to watch for; the scroll wheel zooms the model and Up / Down step between
-joints. On a phone the index becomes a slide-in menu with one joint per screen.
-A **Filter by beams** menu narrows the 37 published joints by how many timber pieces meet at them
-(the post counts; pegs, wedges, keys and dowels do not). The index has a search
-box at the top (`/` focuses it): it matches romanised and Japanese names and
-the metadata prose, ranks the hits, and on a phone it filters the same
-slide-in menu. The house frame and its viewer remain in `house/` and
+specimens. On a phone the index becomes a slide-in menu with one specimen per
+screen. A **Filter by beams** menu narrows the 37 published joints by how many
+timber pieces meet at them (the post counts; pegs, wedges, keys and dowels do
+not); it is hidden on the Furniture tab, whose badge instead gives the whole
+piece's dimensions and its timber and pin counts. The index has a search box at
+the top (`/` focuses it): it matches romanised and Japanese names and the
+metadata prose, ranks the hits, and on a phone it filters the same slide-in
+menu. The house frame and its viewer remain in `house/` and
 `tools/house_viewer.js` for local use but are not built into the published site.
 
 ## The baked look
@@ -122,10 +139,28 @@ python3 build_site.py --repo-url https://github.com/IxDay/carpentry
 
 The `author_joint.py` line only touches the seventeen authored sources and
 `author_details.py` only the nineteen house details; the rest come from captures.
-The bake/preview loop processes every source, so all 56 specimens are kept in
-step; `build_site.py` publishes only the 37 non-house-detail specimens. `--no-animation` drops the `assemble` clip. Importing a new Sketchfab model
-and checking an animation for timbers passing through each other are described
-in [`tools/README.md`](tools/README.md).
+The bake/preview loop processes every joint source, so all 56 specimens are kept
+in step; `build_site.py` publishes only the 37 non-house-detail joints and the
+whole pieces. `--no-animation` drops the `assemble` clip. Importing a new
+Sketchfab model and checking an animation for timbers passing through each other
+are described in [`tools/README.md`](tools/README.md).
+
+The furniture is imported in the CadQuery project's own environment, then
+checked and baked here:
+
+```sh
+cd ~/Documents/Dev/platipy/coffee-table
+pixi run python ~/Documents/Dev/misc/joinery/tools/author_furniture.py
+
+cd ~/Documents/Dev/misc/joinery/tools
+python3 check_sources.py ../furniture/sources/coffee-table.json
+python3 check_contact.py ../furniture/sources/coffee-table.json
+python3 check_animation.py ../furniture/sources/coffee-table.json
+python3 bake.py ../furniture/sources/coffee-table.json ../furniture \
+    --no-ground --detail 0.03
+python3 preview.py ../furniture/sources/coffee-table.json --sunset --size 1100 \
+    --ss 2 --glbdir ../furniture --outdir ../furniture/previews --level coffee-table
+```
 
 ## Licensing
 
@@ -137,6 +172,10 @@ column-and-beam `shikuchi`), the nineteen house details and the three multi-beam
 specimens, all listed in [`joints/README.md`](joints/README.md), are original
 geometry released CC BY 4.0. The house frame in `house/` is likewise original
 geometry, released CC BY 4.0; the reference drawings remain under their own
-terms. The house viewer source uses three.js r160 (MIT), vendored unmodified
+terms. The coffee table is designed in
+[`IxDay/coffee-table`](https://github.com/IxDay/coffee-table) and published here
+under the same CC BY 4.0 licence, with the imported assembly, the re-cut top
+pockets and the added draw-bore pins listed as modifications in its source.
+The house viewer source uses three.js r160 (MIT), vendored unmodified
 with its notice under `tools/vendor/three/`, but is no longer part of the
 published site.

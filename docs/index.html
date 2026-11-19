@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Japanese joinery</title>
-  <meta name="description" content="37 Japanese timber joints (tsugite and shikuchi) as interactive 3D models that assemble, tagged by beam count, use, strengths and weaknesses.">
-  <meta property="og:title" content="Japanese joinery">
-  <meta property="og:description" content="37 Japanese timber joints as interactive 3D models, tagged by beam count, use, strengths and weaknesses.">
+  <title>Japanese joinery and furniture</title>
+  <meta name="description" content="37 Japanese timber joints (tsugite and shikuchi) and 1 piece of furniture as interactive 3D models that assemble, tagged by beam count, use, strengths and weaknesses.">
+  <meta property="og:title" content="Japanese joinery and furniture">
+  <meta property="og:description" content="37 Japanese timber joints and 1 piece of furniture as interactive 3D models, tagged by beam count, use, strengths and weaknesses.">
   <meta property="og:image" content="posters/daimochi-tsugi.png">
   <noscript>
     <style>
       /* Without the script every joint stays visible; the filters do nothing. */
-      nav.index .filters, nav.index .filter-note { display: none; }
+      nav.index .tabs, nav.index .filters, nav.index .filter-note { display: none; }
       nav.index li[hidden], section.joint[hidden] { display: revert; }
     </style>
   </noscript>
@@ -86,6 +86,19 @@
     }
     nav.index h1 { font: 600 1.05rem/1.3 Georgia, "Iowan Old Style", serif; margin: 0 0 .25rem; letter-spacing: .01em; }
     nav.index p { margin: 0 0 1.25rem; color: var(--muted); font-size: .85rem; }
+    nav.index .tabs { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 1rem; }
+    nav.index .tabs button {
+      font: inherit; font-size: .8rem; line-height: 1.2;
+      padding: .35rem .7rem;
+      color: var(--muted); background: var(--card);
+      border: 1px solid var(--line); border-radius: 999px;
+      cursor: pointer;
+    }
+    nav.index .tabs button:hover { border-color: var(--accent); }
+    nav.index .tabs button[aria-selected="true"] {
+      color: var(--paper); background: var(--accent); border-color: var(--accent);
+    }
+    nav.index .tabs .count { font-size: .7rem; opacity: .8; }
     nav.index .filters { margin: 0 0 .4rem; }
     nav.index .filters label {
       display: block; margin: 0 0 .3rem;
@@ -315,18 +328,24 @@
     <nav class="index" id="index" aria-label="Joints">
       <button class="menu-close" type="button" aria-label="Close the menu">&times;</button>
       <h1>Japanese joinery</h1>
-      <p>37 joints that assemble and come apart, each tagged with its beam count, use, strengths and weaknesses.</p>
-      <div class="filters">
-        <label for="beam-filter">Filter by beams</label>
-        <select id="beam-filter" aria-label="Filter joints by beam count">
-          <option value="">All beams</option>
+      <div class="tabs" role="tablist" aria-label="Collections">
+        <button type="button" role="tab" id="tab-joints" data-tab="joints" data-note="Every specimen: splices, post-and-beam connections and multi-beam junctions." aria-selected="true" tabindex="0" aria-controls="joint-list">Joints <span class="count">37</span></button>
+        <button type="button" role="tab" id="tab-furniture" data-tab="furniture" data-note="Whole pieces, shown opening so the joinery inside is visible." aria-selected="false" tabindex="-1" aria-controls="joint-list">Furniture <span class="count">1</span></button>
+      </div>
+      <p id="intro">Every specimen: splices, post-and-beam connections and multi-beam junctions.</p>
+      <div id="beam-filter-wrap">
+        <div class="filters">
+          <label for="beam-filter">Filter by beams</label>
+          <select id="beam-filter" aria-label="Filter joints by beam count">
+            <option value="">All beams</option>
         <option value="2">2 beams (33)</option>
         <option value="3">3 beams (1)</option>
         <option value="4">4 beams (1)</option>
         <option value="5">5 beams (2)</option>
-        </select>
+          </select>
+        </div>
+        <p class="filter-note" id="filter-note">The receiving post and any pegs, wedges or keys are not counted.</p>
       </div>
-      <p class="filter-note" id="filter-note">The receiving post and any pegs, wedges or keys are not counted.</p>
       <div class="search">
         <input id="search" type="search" placeholder="Search joints" autocomplete="off"
             spellcheck="false" aria-label="Search joints" aria-controls="joint-list"
@@ -371,6 +390,7 @@
         <li data-tab="joints" data-beams="2"><a href="#yatoi-hozo-shachi-sen-shiguchi"><span class="name">Yatoi-hozo-shachi-sen-shiguchi</span><span class="jp" lang="ja">雇い枘車知栓仕口</span><span class="beams">2 beams</span></a></li>
         <li data-tab="joints" data-beams="2"><a href="#yatoi-hozo-shikuchi"><span class="name">Yatoi-hozo-shikuchi</span><span class="jp" lang="ja">雇い枘仕口</span><span class="beams">2 beams</span></a></li>
         <li data-tab="joints" data-beams="2"><a href="#yose-ari-hozo-shikuchi"><span class="name">Yose-ari-hozo-shikuchi</span><span class="jp" lang="ja">寄せ蟻枘仕口</span><span class="beams">2 beams</span></a></li>
+        <li data-tab="furniture" data-beams="0" hidden><a href="#coffee-table"><span class="name">Coffee table</span><span class="beams">14 timbers, 12 pins</span></a></li>
       </ol>
     </nav>
     <main>
@@ -1579,6 +1599,24 @@
         </div>
         </div>
       </section>
+      <section class="joint" id="coffee-table" data-tab="furniture" data-tab-count="1" data-beams="0" hidden>
+        <header>
+          <h2><a href="#coffee-table">Coffee table<span class="hash" aria-hidden="true">#</span></a></h2>
+          
+          <span class="beam-badge" title="Overall size; draw-bore pins are pegs, not timbers">1400 × 600 × 362 mm · 14 timbers · 12 draw-bore pins</span>
+        </header>
+        <div class="stage">
+          <div class="spinner" aria-hidden="true"></div>
+          <model-viewer id="viewer-coffee-table" data-src="models/coffee-table.glb"
+              alt="Coffee table assembling" autoplay animation-name="assemble" camera-controls
+              touch-action="pan-y" interaction-prompt="none" shadow-intensity="0"
+              camera-orbit="38deg 64deg auto" loading="eager"></model-viewer>
+          <button type="button" data-replay="viewer-coffee-table">Replay</button>
+        </div>
+        <p class="meta">14 timbers and 12 draw-bore pins &middot; model by <a href="https://github.com/IxDay/coffee-table">Maxime Vidori</a>,
+          <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified. <a href="https://github.com/IxDay/coffee-table">Source in this repository</a>.</p>
+        <details class="mechanics"><summary>How it goes together</summary><p>Four legs are notched on their outer faces to take the long aprons, which run the whole length and are themselves mortised for two cross rails. The end aprons are tenoned through the legs and the long aprons and wedged outside; the top is four planks whose outer boards are recessed over the legs&#x27; 8 mm locating tabs. Twelve draw-bore pins lock it: one through each leg into an end-apron tenon, one down through each long apron into a cross-rail tenon, and one through each outer top plank into a leg tab. The pins withdraw first, then the top lifts off as one piece and fans open, which is how the frame&#x27;s joinery is shown.</p></details>
+      </section>
     </main>
     <footer>
       <h2>About</h2>
@@ -1589,6 +1627,7 @@
         author's pose was not the true closed joint.</p>
       <p>20 of the specimens have no licensed source model: they are authored for this collection from the reference sheets and published descriptions, and released CC BY 4.0. Per-joint notes and references are in <a href="https://github.com/IxDay/carpentry/joints/README.md">joints/README.md</a>.</p>
       <p>The <em>beams</em> count is the number of timber pieces meeting at the joint: the post plus the beams, girders, joists, rafters or braces; pegs, wedges, keys, dowels and loose tenons are not counted. Counts in this collection: 2: 33, 3: 1, 4: 1, 5: 2. The strength and weakness notes are compiled in <a href="https://github.com/IxDay/carpentry/tools/joint_meta.py">tools/joint_meta.py</a> from the naming guide, the reference sheets and the sources linked below.</p>
+      <p>The <em>Furniture</em> tab publishes whole pieces rather than joints: the model is the assembled object and the animation takes it apart, so the connections can be read in place. Sizes are overall, and draw-bore pins are counted apart from the timbers.</p>
       <h2>References</h2>
       <ul>
         <li><a href="https://projects.mcah.columbia.edu/jaanus/node/3413">JAANUS, kanawa tsugi 金輪継</a></li>
@@ -1613,6 +1652,11 @@
     const filterNote = document.getElementById('filter-note');
     const searchInput = document.getElementById('search');
     const searchStatus = document.getElementById('search-status');
+    const tabs = [...document.querySelectorAll('.tabs [role="tab"]')];
+    const intro = document.getElementById('intro');
+    const beamWrap = document.getElementById('beam-filter-wrap');
+    let selectedTab = (tabs.find(b => b.getAttribute('aria-selected') === 'true')
+                       || tabs[0])?.dataset.tab || 'joints';
 
     // One haystack per joint: the name, Japanese name, slug and the metadata
     // prose, so a search for "dovetail" or "seismic" finds the right specimen.
@@ -1622,7 +1666,7 @@
       const j = document.getElementById(a.hash.slice(1));
       const meta = j ? [j.querySelector('.usage')?.textContent || '',
                         ...[...j.querySelectorAll('.notes li')].map(li => li.textContent)].join(' ') : '';
-      return { li, a, beams: Number(li.dataset.beams) || 0,
+      return { li, a, tab: li.dataset.tab || 'joints', beams: Number(li.dataset.beams) || 0,
                hay: [text, meta, a.hash.slice(1)].join(' ') };
     });
     const uf = new uFuzzy({
@@ -1641,8 +1685,11 @@
 
     const applyFilters = () => {
       const q = searchInput.value.trim();
-      const want = beamFilter.value;
-      let pool = rows.filter(r => !want || r.beams === Number(want));
+      // The beam count is a joint property; furniture is sized instead.
+      const want = selectedTab === 'joints' ? beamFilter.value : '';
+      const noun = selectedTab === 'furniture' ? 'furniture pieces' : 'joints';
+      let pool = rows.filter(r => r.tab === selectedTab
+                                  && (!want || r.beams === Number(want)));
       let hits = pool;
       if (q) {
         const hay = pool.map(r => r.hay);
@@ -1659,19 +1706,49 @@
       const shown = new Set(hits);
       rows.forEach(r => { r.li.hidden = !shown.has(r); });
       hits.forEach(r => { r.li.hidden = false; navList.append(r.li); });
-      sections.forEach(s => { s.hidden = !shown.has(rows.find(r => r.a.hash === '#' + s.id)); });
+      const shownIds = new Set(hits.map(r => r.a.hash.slice(1)));
+      sections.forEach(s => { s.hidden = !shownIds.has(s.id); });
       navList.closest('nav').scrollTop = 0;
       filterNote.textContent = want
         ? `Showing ${hits.length} joint${hits.length === 1 ? '' : 's'} with ${want} beam${want === 1 ? '' : 's'}. The post is not counted.`
         : 'The receiving post and any pegs, wedges or keys are not counted.';
       searchStatus.hidden = !q;
       searchStatus.textContent = q
-        ? `${hits.length} of ${pool.length} matching joints`
+        ? `${hits.length} of ${pool.length} matching ${noun}`
         : '';
       cursor = -1;
       lastStep = 0;
       fit();
     };
+
+    const selectTab = tid => {
+      if (!tabs.some(b => b.dataset.tab === tid)) return;
+      selectedTab = tid;
+      tabs.forEach(b => {
+        const on = b.dataset.tab === tid;
+        b.setAttribute('aria-selected', String(on));
+        b.tabIndex = on ? 0 : -1;
+      });
+      intro.textContent = tabs.find(b => b.dataset.tab === tid).dataset.note || '';
+      beamWrap.hidden = tid !== 'joints';
+      searchInput.placeholder = tid === 'furniture' ? 'Search furniture' : 'Search joints';
+      applyFilters();
+    };
+    tabs.forEach(b => b.addEventListener('click', () => {
+      selectTab(b.dataset.tab);
+      setMenu(false);
+      const first = rows.find(r => !r.li.hidden);
+      const target = first && document.getElementById(first.a.hash.slice(1));
+      if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }));
+    tabs.forEach(b => b.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      const i = tabs.indexOf(b);
+      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+      next.focus();
+      selectTab(next.dataset.tab);
+    }));
     beamFilter.addEventListener('change', applyFilters);
     searchInput.addEventListener('input', applyFilters);
     searchInput.addEventListener('keydown', e => {
@@ -1791,10 +1868,10 @@
       if (!id) return;
       const el = document.getElementById(id);
       if (!el || !el.classList.contains('joint')) return;
-      if (el.hidden) {
+      if (el.hidden || el.dataset.tab !== selectedTab) {
         searchInput.value = '';
         beamFilter.value = '';
-        applyFilters();
+        selectTab(el.dataset.tab);
       }
       fit();
       requestAnimationFrame(() => {

@@ -14,8 +14,9 @@ families the house frame uses beyond the sheets, and three further specimens
 with [`tools/author_multi.py`](../tools/author_multi.py) for a crossing lap and
 the three- and four-way posts. Every joint is tagged in `joints/sources/<id>.json` with the number
 of beams meeting at it, its use, and its strengths and weaknesses
-(see [`tools/joint_meta.py`](../tools/joint_meta.py)); the published site is a
-single **Joints** view with a beam-count filter. The nineteen house-detail
+(see [`tools/joint_meta.py`](../tools/joint_meta.py)); the published site has
+two tabs, **Joints** with a beam-count filter and **Furniture** for whole
+pieces (the coffee table is the first). The nineteen house-detail
 specimens below are kept in the repository with their sources and baked GLBs,
 but are withheld from the published site for now: they are not accurate enough
 and will be added back later. The house frame and its connection schedule stay

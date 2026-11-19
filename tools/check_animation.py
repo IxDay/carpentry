@@ -170,6 +170,10 @@ def check(path, fps=None):
     data = {p["id"]: piece_data(p) for p in source["pieces"]}
     times = [t for t, _ in next(iter(tracks.values()))]
     hits = []
+    # Pieces only translate, so a pair's verdict depends on their relative
+    # offset alone: a clean pair is not tested again at an offset it has
+    # already passed (most frames are the closed or exploded pose).
+    clean = set()
     for t in times:
         # bake.py emits a key at every sample, so the key times are the frames.
         off = {}
@@ -188,8 +192,16 @@ def check(path, fps=None):
                 pts_b, tris_b, bmin, bmax = posed[b]
                 if not boxes_overlap((amin, amax), (bmin, bmax)):
                     continue
-                for src, dst, pts, tris in ((a, b, pts_a, tris_b),
-                                            (b, a, pts_b, tris_a)):
+                rel = tuple(round(x - y, 6) for x, y in zip(
+                    off.get(b, (0, 0, 0)), off.get(a, (0, 0, 0))))
+                if (a, b, rel) in clean:
+                    continue
+                found = False
+                for src, dst, pts, tris, lo, hi in (
+                        (a, b, pts_a, tris_b, bmin, bmax),
+                        (b, a, pts_b, tris_a, amin, amax)):
+                    # A probe outside the other piece's box cannot be inside it.
+                    pts = pts[np.all((pts >= lo) & (pts <= hi), axis=1)]
                     inside = probe_inside(pts, tris)
                     if inside.any():
                         p = pts[np.argmax(inside)]
@@ -198,7 +210,10 @@ def check(path, fps=None):
                             "pair": [src, dst],
                             "detail": "(%.4f, %.4f, %.4f)" % tuple(p),
                         })
+                        found = True
                         break
+                if not found:
+                    clean.add((a, b, rel))
     return source["id"], hits
 
 
