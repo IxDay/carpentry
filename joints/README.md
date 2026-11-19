@@ -118,7 +118,7 @@ hip and rafter ends, and a profile prism for a birdsmouth with a horizontal seat
 
 ## Beyond the reference sheets
 
-Four specimens fill gaps the 32-sheet catalogue leaves: they are original
+Three specimens fill gaps the 32-sheet catalogue leaves: they are original
 geometry authored with [`tools/author_multi.py`](../tools/author_multi.py)
 and released **CC BY 4.0**. Each has written or diagrammatic backing, listed
 with its references below; no specimen is published on the strength of a naming
@@ -127,7 +127,6 @@ series alone.
 | Asset | Japanese | Beams | License | Pieces |
 |---|---|---|---|---|
 | [`watari-ago-niju-hozo-shikuchi`](../tools/author_multi.py) | 渡り顎二重枘仕口 | 3 | CC BY 4.0 (authored) | 3 |
-| [`watari-ago-shikuchi`](../tools/author_multi.py) | 渡り顎仕口 | 3 | CC BY 4.0 (authored) | 3 |
 | [`sampo-sashi-shachi-sen`](../tools/author_multi.py) | 三方差し車知栓 | 4 | CC BY 4.0 (authored) | 7 |
 | [`shihou-sashi-shachi-sen`](../tools/author_multi.py) | 四方差し車知栓 | 5 | CC BY 4.0 (authored) | 9 |
 
@@ -140,15 +139,6 @@ joint at the [榛南建築高等職業訓練校](https://hainankenchiku.jimdofre
 (mirrored at [セルフビルドの平屋でDIY生活](https://www.diyshufu.com/job-training-of-carpenter/1754/)),
 which describes "post below, 桁 in the middle, 梁 on top", tenons worked on the
 post and mortises opened in both horizontal timbers.
-`watari-ago-shikuchi` records the same crossing as the GIF's frames read one by
-one: the post's lower tenon is a flat plate into a blind mortise in the girder's
-underside, the square tenon above it passes through the girder and the beam and
-ends flush with the beam's top, and a raised rib along each x edge of the girder
-fits a notch cut under each edge of the beam, leaving a central tab that takes
-load off the tenon. A shallow slot opens beside the tenon hole on the girder's
-+z face. The plate, square, notch and slot depths were read from a single
-isometric view, so they are approximate; that uncertainty is recorded in the
-joint's weaknesses.
 `sampo-sashi-shachi-sen` and `shihou-sashi-shachi-sen`
 adapt the 四方差し figure in 建築用語集, where the red member is the 車知栓:
 three- and four-way posts with one tenon per direction at its own level, each
@@ -352,8 +342,8 @@ python3 author_joint.py                 # rewrites all seventeen sources
 python3 author_joint.py daimochi-tsugi  # or one
 python3 author_details.py               # rewrites all nineteen house details
 python3 author_details.py sill-corner   # or one
-python3 author_multi.py                 # rewrites the four off-sheet sources
-python3 author_multi.py watari-ago-shikuchi  # or one
+python3 author_multi.py                 # rewrites the three off-sheet sources
+python3 author_multi.py watari-ago-niju-hozo-shikuchi  # or one
 python3 joint_meta.py                   # re-stamp beams/use/strengths/weaknesses
 ```
 

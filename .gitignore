@@ -5,6 +5,3 @@ __pycache__/
 
 # Sketchfab capture buffers: large, reproducible from tools/sketchfab_capture.mjs
 tools/caps/
-
-# Source captures (GIF frames, saved pages) for a joint under study
-/caps/
