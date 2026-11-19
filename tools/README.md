@@ -390,14 +390,12 @@ is 362 mm rather than the nominal 370 mm (`total_height`), because the apron
 tops and leg shoulders sit at 334 mm and the 28 mm top rests on them with the
 tabs let into its underside.
 
-The script also adds twelve draw-bore pins of its own, 6 mm pegs that lock the
-assembly: one through each leg into an end-apron tenon, one down through each
-long apron into a cross-rail tenon, and one through each outer top plank's edge
-into a leg tab. Bores use the same 16-gon prism as the pegs, so the hole rims
-and peg facets share their corners and the meshes stay closed; the pins are
-tagged `role: "pin"` so the site can count them apart from the fourteen timbers.
-Each pin's axis is sampled before cutting and must cross exactly the two named
-timbers. After regenerating, run `check_sources.py`, `check_contact.py` and
+The script also adds four wedges of its own, one beside each cross-rail tenon
+where it enters a long apron: a tapered gap (3 mm wide at the top, 1.5 mm at
+the bottom) is cut down from the apron top into the mortise and the wedge fills
+it exactly. The wedges are tagged `role: "wedge"` so the site can count them
+apart from the fourteen timbers, and they rise with the top's 60 mm lift before
+leaving the frame, since the top rests on their heads. After regenerating, run `check_sources.py`, `check_contact.py` and
 `check_animation.py` before baking; `--no-ground` keeps the table on the paper
 background.
 
@@ -532,7 +530,7 @@ anchor, a `<model-viewer>` that plays the `assemble` clip, the Japanese name in
 light gray under the romanised one (when there is one), a badge, the usage note
 and the strengths / weaknesses lists. A source with `tab: "furniture"` is
 published as a whole piece: its badge gives the overall dimensions and the
-counts of timbers and draw-bore pins, and the beam filter is hidden and ignored.
+counts of timbers and wedges, and the beam filter is hidden and ignored.
 Every other published source is a joint, with the beam-count badge. The house
 frame, its `connections.json` and `house-viewer.js` are not loaded, and stale
 copies are removed from `docs/` on rebuild. Up / Down arrow keys step through

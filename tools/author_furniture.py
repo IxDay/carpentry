@@ -44,8 +44,8 @@ import import_joint as ij  # noqa: E402  (needs HERE on the path)
 
 # Display-sRGB wood colour, the same timber as the authored joints.
 WOOD = [0.9137254901960784, 0.7607843137254902, 0.5490196078431373]
-# Draw-bore pins are the same timber, soaked a shade darker so the pegs read.
-PIN_WOOD = [0.7176470588235294, 0.5607843137254902, 0.3607843137254902]
+# Wedges are the same timber, a shade darker so they read.
+WEDGE_WOOD = [0.7176470588235294, 0.5607843137254902, 0.3607843137254902]
 
 # (piece id, name, explode offset in metres, in the catalogue frame)
 EXPLODE = {
@@ -64,65 +64,32 @@ APPROACH = {
     pid: [(0.0, 0.06, 0.0), (0.0, e[1], 0.0)] for pid, e in EXPLODE.items()
 }
 
-# The rail pins are driven from above, under the top, so they cannot be pulled
-# out until the top has lifted: they ride the same 60 mm lift as the planks
-# (bake.py leaves a piece with an approach path on its timber track).
-APPROACH.update({pid: [(0.0, 0.06, 0.0), (0.0, 0.06, 0.0)] for pid in (
-    "pin-rail-left-near", "pin-rail-left-far",
-    "pin-rail-right-near", "pin-rail-right-far")})
-
-# Draw-bore pins, six millimetres of peg through two timbers apiece:
+# Each cross-rail tenon is locked in its long-apron mortise by a wood wedge
+# driven down from the apron top into a tapered gap beside the tenon, 3 mm wide
+# at the top and 1.5 mm at the bottom.  The head is flush with the apron top,
+# so the top rests on it and the planks must lift before a wedge can be drawn:
+# the wedges ride the same 60 mm lift (bake.py leaves a piece with an approach
+# path on its timber track) and then rise clear.
 #
-#   * one through each leg into the end-apron tenon, driven from the leg's
-#     outer face (the tenon's hidden wedge slot sits below the peg);
-#   * one down through each long apron into a cross-rail tenon, the head sunk
-#     2 mm below the apron top because the top rests there;
-#   * one through each outer top plank's edge into a leg tab.
-#
-# Entries are (id, name, start end, finish end, timbers crossed, explode).
-# Positions are millimetres in the coffee-table frame used by build_parts;
-# the explode vector is metres in the catalogue frame and runs along the peg.
-PIN_R = 3.0
-PIN_BORE = 3.2
-PINS = [
-    ("pin-corner-near-left", "front left corner pin",
-     (47, -222, 315), (104, -222, 315),
-     ("leg-near-left", "apron-end-left"), (-0.09, 0.0, 0.0)),
-    ("pin-corner-near-right", "front right corner pin",
-     (1296, -222, 315), (1353, -222, 315),
-     ("leg-near-right", "apron-end-right"), (0.09, 0.0, 0.0)),
-    ("pin-corner-far-left", "back left corner pin",
-     (47, 222, 315), (104, 222, 315),
-     ("leg-far-left", "apron-end-left"), (-0.09, 0.0, 0.0)),
-    ("pin-corner-far-right", "back right corner pin",
-     (1296, 222, 315), (1353, 222, 315),
-     ("leg-far-right", "apron-end-right"), (0.09, 0.0, 0.0)),
-    ("pin-rail-left-near", "front left rail pin",
-     (492, -234, 267), (492, -234, 332),
-     ("apron-side-near", "rail-cross-left"), (0.0, 0.10, 0.0)),
-    ("pin-rail-left-far", "back left rail pin",
-     (492, 234, 267), (492, 234, 332),
-     ("apron-side-far", "rail-cross-left"), (0.0, 0.10, 0.0)),
-    ("pin-rail-right-near", "front right rail pin",
-     (908, -234, 267), (908, -234, 332),
-     ("apron-side-near", "rail-cross-right"), (0.0, 0.10, 0.0)),
-    ("pin-rail-right-far", "back right rail pin",
-     (908, 234, 267), (908, 234, 332),
-     ("apron-side-far", "rail-cross-right"), (0.0, 0.10, 0.0)),
-    ("pin-top-near-left", "front left top pin",
-     (77, -303, 338), (77, -258, 338),
-     ("top-near-outer", "leg-near-left"), (0.0, 0.0, -0.10)),
-    ("pin-top-near-right", "front right top pin",
-     (1323, -303, 338), (1323, -258, 338),
-     ("top-near-outer", "leg-near-right"), (0.0, 0.0, -0.10)),
-    ("pin-top-far-left", "back left top pin",
-     (77, 303, 338), (77, 258, 338),
-     ("top-far-outer", "leg-far-left"), (0.0, 0.0, 0.10)),
-    ("pin-top-far-right", "back right top pin",
-     (1323, 303, 338), (1323, 258, 338),
-     ("top-far-outer", "leg-far-right"), (0.0, 0.0, 0.10)),
+# (id, name, apron, rail, x of the tenon's edge, direction towards the gap in x,
+# y of the apron's inner face, direction into the apron in y)
+WEDGE_DEPTH = 8.0        # the tenon's length, the mortise's depth
+WEDGE_BOTTOM = 280.0     # the mortise's floor in z; the apron top is 334
+WEDGE_TOP = 334.0
+WEDGES = [
+    ("wedge-rail-left-near", "front left cross-rail wedge",
+     "apron-side-near", "rail-cross-left", 499.0, 1, -230.0, -1),
+    ("wedge-rail-left-far", "back left cross-rail wedge",
+     "apron-side-far", "rail-cross-left", 499.0, 1, 230.0, 1),
+    ("wedge-rail-right-near", "front right cross-rail wedge",
+     "apron-side-near", "rail-cross-right", 901.0, -1, -230.0, -1),
+    ("wedge-rail-right-far", "back right cross-rail wedge",
+     "apron-side-far", "rail-cross-right", 901.0, -1, 230.0, 1),
 ]
-PIN_OFFSETS = {p[0]: p[5] for p in PINS}
+WEDGE_OFFSET = (0.0, 0.10, 0.0)
+WEDGE_IDS = [w[0] for w in WEDGES]
+APPROACH.update({pid: [(0.0, 0.06, 0.0), (0.0, 0.06, 0.0)]
+                 for pid in WEDGE_IDS})
 
 # Part bounding box in the Coffee-table project: 1400 x 600 x 362 mm.
 CENTRE_X = 700.0
@@ -157,61 +124,26 @@ def fixed_top_external(top_external):
     return top_external.union(old).cut(new)
 
 
-def _peg(a, b, radius, sides=16):
-    """A faceted peg from a to b: a 16-gon reads round and bakes cheaply.
-
-    The bores use the same prism at ``PIN_BORE``, so the hole's rim and the
-    peg's facets share their corners and the mesh stays closed.
-    """
-    va, vb = cq.Vector(*a), cq.Vector(*b)
-    axis = vb - va
-    normal = axis.normalized()
-    ref = cq.Vector(1, 0, 0) if abs(normal.x) < 0.9 else cq.Vector(0, 0, 1)
-    xdir = ref.cross(normal).normalized()
-    plane = cq.Plane(origin=va, xDir=xdir, normal=normal)
-    return cq.Workplane(plane).polygon(sides, 2 * radius) \
-        .extrude(axis.Length).val()
+def _wedge(x, dx, y, dy):
+    """The tapered gap (and so the wedge) beside a tenon, in millimetres."""
+    pts = [(x, WEDGE_BOTTOM), (x + dx * 1.5, WEDGE_BOTTOM),
+           (x + dx * 3.0, WEDGE_TOP), (x, WEDGE_TOP)]
+    plane = cq.Workplane("XZ", origin=(0, y, 0))
+    # The XZ plane faces -y, so a positive extrusion runs towards -y.
+    return plane.polyline(pts).close().extrude(-dy * WEDGE_DEPTH).val()
 
 
-def add_pins(parts):
-    """Bore each pin's hole and add the pegs as pieces.
-
-    The peg is checked against the timbers before anything is cut: sampling
-    the pin's axis must find exactly the timbers named in ``PINS``, so a pin
-    can never quietly bore a third piece or miss one it was meant to lock.
-    """
+def add_wedges(parts):
+    """Cut each wedge's gap into its long apron and add the wedge as a piece."""
     shapes = {pid: sh.val() for pid, _name, sh in parts}
-    for pid, _name, a, b, timbers, _explode in PINS:
-        va, vb = cq.Vector(*a), cq.Vector(*b)
-        axis = vb - va
-        length = axis.Length
-        axis = axis.normalized()
-        crossed = set()
-        for i in range(61):
-            p = va + axis * (length * i / 60.0)
-            for tid, sh in shapes.items():
-                if sh.isInside((p.x, p.y, p.z), 1e-6):
-                    crossed.add(tid)
-        if crossed != set(timbers):
-            raise SystemExit("pin %s crosses %s, expected %s"
-                             % (pid, sorted(crossed), sorted(timbers)))
-
-    pegs = []
-    for pid, name, a, b, timbers, _explode in PINS:
-        # The rail pins are driven from above: their bore opens through the
-        # apron top, leaving the head sunk 2 mm in a recess, so the peg can be
-        # drawn out again (a blind bore under a 2 mm skin would trap it).
-        top = (b[0], b[1], b[2] + 4) if pid.startswith("pin-rail") else b
-        hole = _peg(a, top, PIN_BORE)
-        for tid in timbers:
-            shapes[tid] = shapes[tid].cut(hole)
-        pegs.append((pid, name,
-                     cq.Workplane("XY", obj=_peg(a, b, PIN_R))))
-
+    wedges = []
+    for pid, name, apron, _rail, x, dx, y, dy in WEDGES:
+        wedge = _wedge(x, dx, y, dy)
+        shapes[apron] = shapes[apron].cut(wedge)
+        wedges.append((pid, name, cq.Workplane("XY", obj=wedge)))
     out = [(pid, name, cq.Workplane("XY", obj=shapes[pid]))
            for pid, name, _sh in parts]
-    out += pegs
-    return out
+    return out + wedges
 
 
 def build_parts(project):
@@ -264,7 +196,7 @@ def build_parts(project):
          top.mirror("XZ", basePointVector=(0, d.top_width, 0))
          .translate((0, 0, 334))),
     ]
-    return add_pins(parts), d
+    return add_wedges(parts), d
 
 
 def check(parts):
@@ -332,14 +264,14 @@ def write_source(parts, out_path):
     pieces = []
     assemble = {}
     for pid, name, shape in parts:
-        offset = EXPLODE.get(pid) or PIN_OFFSETS.get(pid) or (0.0, 0.0, 0.0)
-        peg = pid in PIN_OFFSETS
+        offset = EXPLODE.get(pid) or (WEDGE_OFFSET if pid in WEDGE_IDS else (0.0, 0.0, 0.0))
+        peg = pid in WEDGE_IDS
         upos, tris = to_source(shape, offset,
-                               PIN_WOOD if peg else WOOD, 0.2)
+                               WEDGE_WOOD if peg else WOOD, 0.2)
         faces = ij.build_faces(upos, tris, 1.0, 0.0, 0.0, 0.0,
-                               PIN_WOOD if peg else WOOD, 0.04)
+                               WEDGE_WOOD if peg else WOOD, 0.04)
         pieces.append({"id": pid, "name": name, "kind": "furniture",
-                       "role": "pin" if peg else "timber",
+                       "role": "wedge" if peg else "timber",
                        "solids": [{"faces": faces}]})
         assemble[pid] = [round(-c, 9) for c in offset]
 
@@ -356,12 +288,11 @@ def write_source(parts, out_path):
             "which run the whole length and are themselves mortised for two cross "
             "rails. The end aprons are tenoned through the legs and the long "
             "aprons and wedged outside; the top is four planks whose outer boards "
-            "are recessed over the legs' 8 mm locating tabs. Twelve draw-bore pins "
-            "lock it: one through each leg into an end-apron tenon, one down "
-            "through each long apron into a cross-rail tenon, and one through "
-            "each outer top plank into a leg tab. The pins withdraw first, then "
-            "the top lifts off as one piece and fans open, which is how the "
-            "frame's joinery is shown."),
+            "are recessed over the legs' 8 mm locating tabs, and the planks lock "
+            "together through the aprons and rails. Four wood wedges, driven "
+            "down beside each cross-rail tenon, lock the rails into the long "
+            "aprons. The top lifts, the wedges rise clear, and the planks fan "
+            "open, which is how the frame's joinery is shown."),
         "fact": "",
         "forReal": "",
         "scale": 1.0,
@@ -378,7 +309,7 @@ def write_source(parts, out_path):
             "modifications": (
                 "Designed in CadQuery; parts imported and assembled here, the "
                 "outer top planks' leg pockets re-cut 10 mm outboard to seat the "
-                "frame, twelve draw-bore pins added to lock the joints, exploded "
+                "frame, four wedges added to lock the cross rails, exploded "
                 "and given the catalogue's paper-sunrise lighting"),
         },
         "tab": "furniture",

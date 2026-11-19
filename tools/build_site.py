@@ -118,8 +118,8 @@ def load_pieces(root, tab):
             "jp": lv["jp"],
             "tab": tab,
             "pieces": len(lv["pieces"]),
-            "timbers": sum(1 for r in roles if r != "pin"),
-            "pins": sum(1 for r in roles if r == "pin"),
+            "timbers": sum(1 for r in roles if r != "wedge"),
+            "wedges": sum(1 for r in roles if r == "wedge"),
             "dimensions": lv.get("dimensions", ""),
             "source": lv["source"],
             "guidance": lv.get("guidance", ""),
@@ -155,8 +155,8 @@ def nav_item(j, counts):
     if j["tab"] == "furniture":
         tag = ('<span class="beams">%d timber%s%s</span>'
                % (j["timbers"], "" if j["timbers"] == 1 else "s",
-                  ", %d pin%s" % (j["pins"], "" if j["pins"] == 1 else "s")
-                  if j["pins"] else ""))
+                  ", %d wedge%s" % (j["wedges"], "" if j["wedges"] == 1 else "s")
+                  if j["wedges"] else ""))
     else:
         tag = ('<span class="beams">%s beam%s</span>'
                % (j.get("beams") if j.get("beams") else "?",
@@ -206,9 +206,9 @@ def section(j, counts, repo_url=""):
                 % j["slug"])
     if j["tab"] == "furniture":
         pieces = "%d timbers" % j["timbers"]
-        if j["pins"]:
-            pieces += " and %d draw-bore pin%s" % (
-                j["pins"], "" if j["pins"] == 1 else "s")
+        if j["wedges"]:
+            pieces += " and %d wedge%s" % (
+                j["wedges"], "" if j["wedges"] == 1 else "s")
     else:
         pieces = "%d pieces" % j["pieces"]
 
@@ -225,11 +225,11 @@ def section(j, counts, repo_url=""):
         bits = [j["dimensions"]] if j.get("dimensions") else []
         bits.append("%d timber%s" % (j["timbers"],
                                      "" if j["timbers"] == 1 else "s"))
-        if j["pins"]:
-            bits.append("%d draw-bore pin%s" % (j["pins"],
-                                                "" if j["pins"] == 1 else "s"))
-        badge = ('<span class="beam-badge" title="Overall size; draw-bore pins '
-                 'are pegs, not timbers">%s</span>'
+        if j["wedges"]:
+            bits.append("%d wedge%s" % (j["wedges"],
+                                                "" if j["wedges"] == 1 else "s"))
+        badge = ('<span class="beam-badge" title="Overall size; wedges '
+                 'are not timbers">%s</span>'
                  % esc(" \u00b7 ".join(bits)))
     else:
         badge = ('<span class="beam-badge" title="Timber pieces meeting at this joint; '
@@ -312,7 +312,7 @@ def footer(repo_url, joints=()):
             "\n      <p>The <em>Furniture</em> tab publishes whole pieces rather "
             "than joints: the model is the assembled object and the animation "
             "takes it apart, so the connections can be read in place. Sizes are "
-            "overall, and draw-bore pins are counted apart from the timbers.</p>")
+            "overall, and wedges are counted apart from the timbers.</p>")
     return """      <h2>About</h2>
       <p>Models by <a href="https://sketchfab.com/thejoinery">thejoinery</a> (CC BY 4.0, one
         CC BY-SA 4.0), read from the public Sketchfab viewer, split into timbers, re-lit with a
