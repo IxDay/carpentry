@@ -34,7 +34,8 @@ The furniture comes from separate CAD projects. The coffee table is designed in
 with CadQuery; `tools/author_furniture.py` imports its part solids, checks them and records the
 result here in the same catalogue form. It is published as the assembled table,
 not as a set of joints: the animation lifts the four-plank top clear and fans it
-open so the frame's joinery can be read.
+open, knocks out the four wedges and takes the frame apart step by step, then
+plays it back closed, so the frame's joinery can be read.
 
 ## Layout
 
@@ -45,11 +46,12 @@ open so the frame's joinery can be read.
 - `joints/sources/<id>.json` — the source: faces of every timber (in the
   exploded pose), the closed-pose offsets (`assemble`), an optional `approach`
   stage, and the attribution
-- `furniture/<id>.glb` — a whole piece of furniture, every timber and pin its
+- `furniture/<id>.glb` — a whole piece of furniture, every timber and wedge its
   own mesh node, with the `assemble` animation
 - `furniture/previews/sunset_<id>.png` — the poster renders
 - `furniture/sources/<id>.json` — the imported source: timbers tagged
-  by `role`, the explode offsets, the `approach` and the overall dimensions
+  by `role`, the closed-pose offsets, the `stages` of the opening and the overall
+  dimensions
 - `house/` — the open frame of the house in `house.jpg`: `source.json`,
   `house.glb` with its unbuild/rebuild clip, `connections.json` with every joint
   instance, a poster and notes; see [`house/README.md`](house/README.md)

@@ -903,6 +903,64 @@ def bake_level(lv, ground=True, detail=0.06, detail_ground=0.015):
     return meshes, gmesh
 
 
+def staged_animation(lv, fps=24):
+    """Loop closed -> open -> closed through the level's ``stages``.
+
+    ``stages`` is a list of poses, each {piece id: offset in metres from the
+    closed pose}, one per step of the opening; a piece not listed is still
+    closed. The stored geometry is the last stage, so a track value is a pose
+    minus that one. Each step takes ``stage_seconds`` (default 1), eased, the
+    table rests closed and open for a moment, and the closing plays the steps
+    back in reverse.
+    """
+    stages = lv["stages"]
+    step = float(lv.get("stage_seconds", 1.0))
+    rest_closed, rest_open, rest_end = 1.0, 1.5, 0.5
+    n = len(stages)
+    poses = [{}] + stages
+    final = stages[-1]
+    open0 = rest_closed
+    open1 = open0 + n * step
+    close0 = open1 + rest_open
+    close1 = close0 + n * step
+    end = close1 + rest_end
+
+    def smooth(u):
+        u = max(0.0, min(1.0, u))
+        return u * u * (3.0 - 2.0 * u)
+
+    def pose(pid, k):
+        return poses[k].get(pid, (0.0, 0.0, 0.0))
+
+    def at(pid, t):
+        if t <= open0:
+            a = b = 0
+            u = 0.0
+        elif t < open1:
+            k, frac = divmod((t - open0) / step, 1.0)
+            a, b, u = int(k), int(k) + 1, smooth(frac)
+        elif t <= close0:
+            a = b = n
+            u = 0.0
+        elif t < close1:
+            k, frac = divmod((t - close0) / step, 1.0)
+            a, b, u = n - int(k), n - int(k) - 1, smooth(frac)
+        else:
+            a = b = 0
+            u = 0.0
+        pa, pb = pose(pid, a), pose(pid, b)
+        return [pa[i] + (pb[i] - pa[i]) * u - final.get(pid, (0, 0, 0))[i]
+                for i in range(3)]
+
+    moving = sorted({pid for st in stages for pid in st})
+    steps = int(round(end * fps))
+    tracks = {}
+    for pid in moving:
+        tracks[pid] = [(i / float(fps), at(pid, i / float(fps)))
+                       for i in range(steps + 1)]
+    return {"name": "assemble", "tracks": tracks}
+
+
 def assemble_animation(lv, fps=24):
     """Loop assembled -> exploded -> assembled as glTF node translations.
 
@@ -918,6 +976,8 @@ def assemble_animation(lv, fps=24):
     list of vectors gives a whole path of such poses, visited in order; the
     tsutsumikomi-nuki needs three legs to enter its wrapped mortise.
     """
+    if lv.get("stages"):
+        return staged_animation(lv, fps)
     offsets = lv.get("assemble") or {}
     approach = lv.get("approach") or {}
     if not offsets or not any(any(abs(c) > 1e-9 for c in v)

@@ -161,7 +161,8 @@ def check(path, fps=None):
     source = load(path)
     level = {"pieces": source["pieces"],
              "assemble": source.get("assemble") or {},
-             "approach": source.get("approach") or {}}
+             "approach": source.get("approach") or {},
+             "stages": source.get("stages") or []}
     anim = bake.assemble_animation(level, fps=fps) if fps else \
         bake.assemble_animation(level)
     if not anim:

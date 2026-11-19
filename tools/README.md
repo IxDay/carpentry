@@ -17,6 +17,7 @@ A joint is described by `joints/sources/<id>.json`, a one-element list:
 | `pieces[].solids[].faces[]` | each face: `points`, `normal`, `color`, optional `grid` (forces its barycentric resolution so ear-clipped triangles of one concave face share edge samples). Coordinates are the **author's exploded pose**, in metres |
 | `assemble` | `{piece: [x, y, z]}`, the translation that takes each timber from the exploded pose to the **closed** joint |
 | `approach` | optional `{piece: [x, y, z]}` waiting stage: that timber first slides to `closed + approach` before leaving along the straight line (kanawa's slide along the pitch, a dovetail's slide along its groove). A list of vectors is a path instead, visited in order (`tsutsumikomi-nuki`: raised, slid home, lowered) |
+| `stages` | optional list of poses `{piece: [x, y, z]}`, each an offset in metres from the closed pose, one per step of a staged opening (the coffee table). The stored geometry is the last stage; `bake.py` plays the steps one after another, eased and a second each, with rests when closed and open, then plays them back in reverse so the clip loops. It replaces `approach` and the default clip |
 | `rescaled` | the factor `rescale_joint.py` applied, if any |
 | `source` | author, URL, license, change list and credit text embedded in each GLB |
 | `tab` | original provenance group (`sheet`, `extra`, `house-details`); `house-details` sources are kept in the repo but skipped by `build_site.py`, the others are all published in one view |
@@ -379,9 +380,11 @@ four legs, four aprons, two cross rails and a four-plank top, imported with the
 project's own environment (CadQuery is not a dependency here) and written in the
 catalogue's metre, y-up frame so `bake.py` can light it like the joints. Unlike a
 joint source, it is published as the assembled object: the top is the moving
-part, lifted 60 mm clear of the legs' locating tabs and then fanned open so the
-frame's joinery is visible. The paths are `approach` vectors, and the explode
-offsets become `assemble`, as in `author_joint.py`.
+part, lifted 60 mm clear of the legs' locating tabs and then fanned open; then
+the wedges are knocked out, each side slides off the end aprons' tenons and the
+long aprons lift out of the legs, so the frame's joinery is visible. The steps
+are the source's `stages`, and the last stage's offsets, negated, become
+`assemble`.
 
 The geometry itself is authored in the coffee-table project, not here: its
 `table.py` places every timber in the closed pose (`parts()`), so a

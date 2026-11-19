@@ -19,7 +19,7 @@ visible in the open pose. The motion lives in the project's ``motion.py`` and be
 ``assemble`` vectors, exactly as in ``author_joint.py``.
 
 The table's geometry, including the corrected leg pockets, lives in the coffee-table project (``table.py``); this tool
-only places it in the catalogue frame, adds the explode and approach motion and
+only places it in the catalogue frame, adds the staged opening motion and
 writes the source. The table stands 362 mm high (``dimensions.table_height``):
 the top seats on the frame at 334 and the legs' 8 mm tabs enter its pockets.
 """
@@ -37,22 +37,25 @@ import import_joint as ij  # noqa: E402  (needs HERE on the path)
 # Display-sRGB wood colour, the same timber as the authored joints.
 WOOD = [0.9137254901960784, 0.7607843137254902, 0.5490196078431373]
 
+# Wedges are the same timber, a shade darker so they read.
+WEDGE_WOOD = [0.7176470588235294, 0.5607843137254902, 0.3607843137254902]
+
 # The motion is authored with the table (motion.py in the coffee-table
-# project) in millimetres and its z-up frame: each path lists poses from the
-# closed pose, the last being the exploded one. Here it becomes metres in the
-# catalogue's y-up frame: the last pose is the stored ``EXPLODE`` offset and the
-# poses before it are the ``approach`` waypoints (see bake.py).
+# project) in millimetres and its z-up frame: a list of stages, each the pose of
+# the parts that have moved, from the closed table to the fully open one. Here
+# it becomes metres in the catalogue's y-up frame; the last stage is the stored
+# (exploded) geometry and ``bake.py`` plays the stages as a loop.
 def _catalogue(v):
     return (v[0] / 1000.0, v[2] / 1000.0, v[1] / 1000.0)
 
 
 def load_motion(project):
+    """The motion as ``assemble`` offsets (the last stage, negated) and the
+    ``stages`` the opening passes through, all in the catalogue's frame."""
     sys.path.insert(0, project)
-    from motion import PATHS
-    explode = {pid: _catalogue(path[-1]) for pid, path in PATHS.items()}
-    approach = {pid: [_catalogue(p) for p in path[:-1]]
-                for pid, path in PATHS.items()}
-    return explode, approach
+    from motion import stages
+    out = [{pid: _catalogue(v) for pid, v in st.items()} for st in stages()]
+    return out[-1], out
 
 
 # Part bounding box in the Coffee-table project: 1400 x 600 x 362 mm.
@@ -131,15 +134,17 @@ def to_source(shape, offset, colour=WOOD, detail=0.2):
     return welded, tris
 
 
-def write_source(parts, out_path, explode, approach):
+def write_source(parts, out_path, explode, stages):
     pieces = []
     assemble = {}
     for pid, name, shape in parts:
         offset = explode.get(pid, (0.0, 0.0, 0.0))
-        upos, tris = to_source(shape, offset, WOOD, 0.2)
-        faces = ij.build_faces(upos, tris, 1.0, 0.0, 0.0, 0.0, WOOD, 0.04)
+        wedge = pid.startswith("wedge-")
+        colour = WEDGE_WOOD if wedge else WOOD
+        upos, tris = to_source(shape, offset, colour, 0.2)
+        faces = ij.build_faces(upos, tris, 1.0, 0.0, 0.0, 0.0, colour, 0.04)
         pieces.append({"id": pid, "name": name, "kind": "furniture",
-                       "role": "timber",
+                       "role": "wedge" if wedge else "timber",
                        "solids": [{"faces": faces}]})
         assemble[pid] = [round(-c, 9) for c in offset]
 
@@ -158,7 +163,11 @@ def write_source(parts, out_path, explode, approach):
             "aprons and wedged outside; the top is four planks whose outer boards "
             "are recessed over the legs' 8 mm locating tabs, and the planks lock "
             "together through the aprons and rails. The top lifts off as four "
-            "planks and fans open, which is how the frame's joinery is shown."),
+            "planks and fans open; four triangular wedges, driven through the end "
+            "aprons' tenons beside the legs, hold the frame tight and come out "
+            "first. Each side then slides off the tenons as one unit and the "
+            "long aprons lift out of the legs, which is how the frame's "
+            "joinery is shown."),
         "fact": "",
         "forReal": "",
         "scale": 1.0,
@@ -175,13 +184,13 @@ def write_source(parts, out_path, explode, approach):
             "modifications": (
                 "Designed in CadQuery; parts imported and assembled here, the "
                 "outer top planks' leg pockets re-cut 10 mm outboard to seat the "
-                "frame, exploded "
+                "frame, four triangular wedges added to hold the end aprons tight, "
+                "exploded "
                 "and given the catalogue's paper-sunrise lighting"),
         },
         "tab": "furniture",
         "dimensions": "1400 \u00d7 600 \u00d7 362 mm",
-        "duration": 10.0,
-        "approach": approach,
+        "stages": stages,
         "assemble": assemble,
         "pieces": pieces,
     }
@@ -207,8 +216,8 @@ def main():
     problems = check(parts)
     if problems:
         sys.exit("%d geometry problem(s); source not written" % problems)
-    explode, approach = load_motion(args.coffee_table)
-    level = write_source(parts, args.out, explode, approach)
+    explode, stages = load_motion(args.coffee_table)
+    level = write_source(parts, args.out, explode, stages)
     faces = sum(len(s["faces"]) for p in level["pieces"] for s in p["solids"])
     print("coffee-table  %2d pieces  %4d faces -> %s"
           % (len(level["pieces"]), faces, args.out))
