@@ -31,8 +31,7 @@ attribution, the change list and the references used are in
 
 The furniture comes from separate CAD projects. The coffee table is designed in
 [`~/Documents/Dev/platipy/coffee-table`](https://github.com/IxDay/coffee-table)
-with CadQuery; `tools/author_furniture.py` imports its part solids, checks them,
-adds four wedges that lock the cross rails into the long aprons, and records the
+with CadQuery; `tools/author_furniture.py` imports its part solids, checks them and records the
 result here in the same catalogue form. It is published as the assembled table,
 not as a set of joints: the animation lifts the four-plank top clear and fans it
 open so the frame's joinery can be read.
@@ -49,7 +48,7 @@ open so the frame's joinery can be read.
 - `furniture/<id>.glb` — a whole piece of furniture, every timber and pin its
   own mesh node, with the `assemble` animation
 - `furniture/previews/sunset_<id>.png` — the poster renders
-- `furniture/sources/<id>.json` — the imported source: timbers and wedges tagged
+- `furniture/sources/<id>.json` — the imported source: timbers tagged
   by `role`, the explode offsets, the `approach` and the overall dimensions
 - `house/` — the open frame of the house in `house.jpg`: `source.json`,
   `house.glb` with its unbuild/rebuild clip, `connections.json` with every joint
@@ -174,8 +173,8 @@ geometry released CC BY 4.0. The house frame in `house/` is likewise original
 geometry, released CC BY 4.0; the reference drawings remain under their own
 terms. The coffee table is designed in
 [`IxDay/coffee-table`](https://github.com/IxDay/coffee-table) and published here
-under the same CC BY 4.0 licence, with the imported assembly, the re-cut top
-pockets and the added wedges listed as modifications in its source.
+under the same CC BY 4.0 licence, with the imported assembly, and the re-cut top
+pockets listed as modifications in its source.
 The house viewer source uses three.js r160 (MIT), vendored unmodified
 with its notice under `tools/vendor/three/`, but is no longer part of the
 published site.

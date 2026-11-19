@@ -18,8 +18,7 @@ lifts the four planks off the frame and fans them out, so the frame's joinery is
 visible in the open pose. The motion lives in the project's ``motion.py`` and becomes the
 ``assemble`` vectors, exactly as in ``author_joint.py``.
 
-The table's geometry, including the corrected leg pockets and the four
-cross-rail wedges, lives in the coffee-table project (``table.py``); this tool
+The table's geometry, including the corrected leg pockets, lives in the coffee-table project (``table.py``); this tool
 only places it in the catalogue frame, adds the explode and approach motion and
 writes the source. The table stands 362 mm high (``dimensions.table_height``):
 the top seats on the frame at 334 and the legs' 8 mm tabs enter its pockets.
@@ -37,8 +36,6 @@ import import_joint as ij  # noqa: E402  (needs HERE on the path)
 
 # Display-sRGB wood colour, the same timber as the authored joints.
 WOOD = [0.9137254901960784, 0.7607843137254902, 0.5490196078431373]
-# Wedges are the same timber, a shade darker so they read.
-WEDGE_WOOD = [0.7176470588235294, 0.5607843137254902, 0.3607843137254902]
 
 # The motion is authored with the table (motion.py in the coffee-table
 # project) in millimetres and its z-up frame: each path lists poses from the
@@ -139,13 +136,10 @@ def write_source(parts, out_path, explode, approach):
     assemble = {}
     for pid, name, shape in parts:
         offset = explode.get(pid, (0.0, 0.0, 0.0))
-        peg = pid.startswith("wedge-")
-        upos, tris = to_source(shape, offset,
-                               WEDGE_WOOD if peg else WOOD, 0.2)
-        faces = ij.build_faces(upos, tris, 1.0, 0.0, 0.0, 0.0,
-                               WEDGE_WOOD if peg else WOOD, 0.04)
+        upos, tris = to_source(shape, offset, WOOD, 0.2)
+        faces = ij.build_faces(upos, tris, 1.0, 0.0, 0.0, 0.0, WOOD, 0.04)
         pieces.append({"id": pid, "name": name, "kind": "furniture",
-                       "role": "wedge" if peg else "timber",
+                       "role": "timber",
                        "solids": [{"faces": faces}]})
         assemble[pid] = [round(-c, 9) for c in offset]
 
@@ -163,10 +157,8 @@ def write_source(parts, out_path, explode, approach):
             "rails. The end aprons are tenoned through the legs and the long "
             "aprons and wedged outside; the top is four planks whose outer boards "
             "are recessed over the legs' 8 mm locating tabs, and the planks lock "
-            "together through the aprons and rails. Four wood wedges, driven "
-            "down beside each cross-rail tenon, lock the rails into the long "
-            "aprons. The top lifts, the wedges rise clear, and the planks fan "
-            "open, which is how the frame's joinery is shown."),
+            "together through the aprons and rails. The top lifts off as four "
+            "planks and fans open, which is how the frame's joinery is shown."),
         "fact": "",
         "forReal": "",
         "scale": 1.0,
@@ -183,7 +175,7 @@ def write_source(parts, out_path, explode, approach):
             "modifications": (
                 "Designed in CadQuery; parts imported and assembled here, the "
                 "outer top planks' leg pockets re-cut 10 mm outboard to seat the "
-                "frame, four wedges added to lock the cross rails, exploded "
+                "frame, exploded "
                 "and given the catalogue's paper-sunrise lighting"),
         },
         "tab": "furniture",

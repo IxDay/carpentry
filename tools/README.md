@@ -384,18 +384,14 @@ frame's joinery is visible. The paths are `approach` vectors, and the explode
 offsets become `assemble`, as in `author_joint.py`.
 
 The geometry itself is authored in the coffee-table project, not here: its
-`table.py` places every timber and wedge in the closed pose (`parts()`), so a
+`table.py` places every timber in the closed pose (`parts()`), so a
 fix to the pockets, the aprons or the wedges (`wedges.py`) is made there and the
 script is re-run. The outer top planks' leg pockets are cut to seat the leg tabs
 (`top_leg_pocket_shift`), and the real height is 362 mm rather than the nominal
 370 mm (`total_height`), because the apron tops and leg shoulders sit at 334 mm
 and the 28 mm top rests on them with the tabs let into its underside.
 
-Four wedges sit one beside each cross-rail tenon where it enters a long apron:
-a tapered gap (3 mm wide at the top, 1.5 mm at the bottom) is cut down from the
-apron top into the mortise and the wedge fills it exactly. The wedges are tagged `role: "wedge"` so the site can count them
-apart from the fourteen timbers, and they rise with the top's 60 mm lift before
-leaving the frame, since the top rests on their heads. After regenerating, run `check_sources.py`, `check_contact.py` and
+After regenerating, run `check_sources.py`, `check_contact.py` and
 `check_animation.py` before baking; `--no-ground` keeps the table on the paper
 background.
 
