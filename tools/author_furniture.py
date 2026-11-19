@@ -18,23 +18,16 @@ lifts the four planks off the frame and fans them out, so the frame's joinery is
 visible in the open pose. The offsets live in ``EXPLODE`` below and become the
 ``assemble`` vectors, exactly as in ``author_joint.py``.
 
-Two things in the source project do not close, and are resolved here:
-
-* The top's leg pockets are 40-60 mm from the outer edge, but the legs sit at
-  30-50 mm once their apron notches are lined up with the long aprons. The
-  pockets are re-cut 10 mm outboard on the outer planks; nothing else on the
-  top changes.
-* ``total_height = 370`` in ``dimensions.py`` is 8 mm more than the modelled
-  parts reach. The apron tops and the legs' shoulders are at 334, the top is
-  28 thick, so the table is 362 high. The top seats on 334 and the legs' 8 mm
-  tabs enter the top's pockets. The published height is 362.
+The table's geometry, including the corrected leg pockets and the four
+cross-rail wedges, lives in the coffee-table project (``table.py``); this tool
+only places it in the catalogue frame, adds the explode and approach motion and
+writes the source. The table stands 362 mm high (``dimensions.table_height``):
+the top seats on the frame at 334 and the legs' 8 mm tabs enter its pockets.
 """
 import argparse
 import json
 import os
 import sys
-
-import cadquery as cq
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -64,30 +57,14 @@ APPROACH = {
     pid: [(0.0, 0.06, 0.0), (0.0, e[1], 0.0)] for pid, e in EXPLODE.items()
 }
 
-# Each cross-rail tenon is locked in its long-apron mortise by a wood wedge
-# driven down from the apron top into a tapered gap beside the tenon, 3 mm wide
-# at the top and 1.5 mm at the bottom.  The head is flush with the apron top,
-# so the top rests on it and the planks must lift before a wedge can be drawn:
-# the wedges ride the same 60 mm lift (bake.py leaves a piece with an approach
-# path on its timber track) and then rise clear.
-#
-# (id, name, apron, rail, x of the tenon's edge, direction towards the gap in x,
-# y of the apron's inner face, direction into the apron in y)
-WEDGE_DEPTH = 8.0        # the tenon's length, the mortise's depth
-WEDGE_BOTTOM = 280.0     # the mortise's floor in z; the apron top is 334
-WEDGE_TOP = 334.0
-WEDGES = [
-    ("wedge-rail-left-near", "front left cross-rail wedge",
-     "apron-side-near", "rail-cross-left", 499.0, 1, -230.0, -1),
-    ("wedge-rail-left-far", "back left cross-rail wedge",
-     "apron-side-far", "rail-cross-left", 499.0, 1, 230.0, 1),
-    ("wedge-rail-right-near", "front right cross-rail wedge",
-     "apron-side-near", "rail-cross-right", 901.0, -1, -230.0, -1),
-    ("wedge-rail-right-far", "back right cross-rail wedge",
-     "apron-side-far", "rail-cross-right", 901.0, -1, 230.0, 1),
-]
+# The wedges are modelled with the table (wedges.py in the coffee-table
+# project).  Each is driven down beside a cross-rail tenon and its head is flush
+# with the apron top, so the top rests on it: the planks must lift before a
+# wedge can be drawn.  The wedges ride the same 60 mm lift (bake.py leaves a
+# piece with an approach path on its timber track) and then rise clear.
+WEDGE_IDS = ["wedge-rail-%s-%s" % (rail, where)
+             for rail in ("left", "right") for where in ("near", "far")]
 WEDGE_OFFSET = (0.0, 0.10, 0.0)
-WEDGE_IDS = [w[0] for w in WEDGES]
 APPROACH.update({pid: [(0.0, 0.06, 0.0), (0.0, 0.06, 0.0)]
                  for pid in WEDGE_IDS})
 
@@ -98,105 +75,12 @@ FLOOR_Z = 0.0
 SCALE = 0.001
 
 
-def xform(shape, rot_z=0.0, translate=(0.0, 0.0, 0.0), mirror_y=False):
-    """Mirror in y, then turn about z, then translate (millimetres)."""
-    out = shape
-    if mirror_y:
-        out = out.mirror("XZ")
-    if rot_z:
-        out = out.rotate((0, 0, 0), (0, 0, 1), rot_z)
-    if any(translate):
-        out = out.translate(translate)
-    return out
-
-
-def fixed_top_external(top_external):
-    """Re-cut the outer planks' leg pockets 10 mm outboard (see module doc)."""
-    # The authored pocket sits at y 40..60 on a plank whose local y runs 0..150.
-    # Fill it, then cut the corrected pocket at y 30..50. Both ends of the plank
-    # carry a pocket (x 50..104 and 1296..1350).
-    old = (cq.Workplane("XY")
-           .pushPoints([(77, 50), (1323, 50)])
-           .rect(54, 20).extrude(8))
-    new = (cq.Workplane("XY")
-           .pushPoints([(77, 40), (1323, 40)])
-           .rect(54, 20).extrude(8))
-    return top_external.union(old).cut(new)
-
-
-def _wedge(x, dx, y, dy):
-    """The tapered gap (and so the wedge) beside a tenon, in millimetres."""
-    pts = [(x, WEDGE_BOTTOM), (x + dx * 1.5, WEDGE_BOTTOM),
-           (x + dx * 3.0, WEDGE_TOP), (x, WEDGE_TOP)]
-    plane = cq.Workplane("XZ", origin=(0, y, 0))
-    # The XZ plane faces -y, so a positive extrusion runs towards -y.
-    return plane.polyline(pts).close().extrude(-dy * WEDGE_DEPTH).val()
-
-
-def add_wedges(parts):
-    """Cut each wedge's gap into its long apron and add the wedge as a piece."""
-    shapes = {pid: sh.val() for pid, _name, sh in parts}
-    wedges = []
-    for pid, name, apron, _rail, x, dx, y, dy in WEDGES:
-        wedge = _wedge(x, dx, y, dy)
-        shapes[apron] = shapes[apron].cut(wedge)
-        wedges.append((pid, name, cq.Workplane("XY", obj=wedge)))
-    out = [(pid, name, cq.Workplane("XY", obj=shapes[pid]))
-           for pid, name, _sh in parts]
-    return out + wedges
-
-
 def build_parts(project):
-    """Import the Coffee-table parts and place them in the table's frame."""
+    """The coffee-table project's parts, placed and closed (``table.parts``)."""
     sys.path.insert(0, project)
-    import dimensions as d  # noqa: F401  (the project's parameters)
-    from aprons import end_apron, end_apron_internal, side_apron
-    from legs import leg
-    from top_external import top_external
-    from top_internal import top_internal
-
-    # The frame is built in y 0..600; the top is centred on y 0. Translate the
-    # whole frame by -300 so both use the top's frame.
-    fy = -d.total_width / 2.0
-
-    parts = [
-        ("leg-near-left", "front left leg",
-         xform(leg, 0, (77, fy + 30, 0))),
-        ("leg-near-right", "front right leg",
-         xform(leg, 0, (1323, fy + 30, 0))),
-        ("leg-far-left", "back left leg",
-         xform(leg, 180, (77, fy + 570, 0))),
-        ("leg-far-right", "back right leg",
-         xform(leg, 180, (1323, fy + 570, 0))),
-        # The long aprons carry the cross-rail mortises on their inner face, so
-        # the near one is mirrored to keep that face towards the table centre.
-        ("apron-side-near", "front long apron",
-         xform(side_apron, 0, (30, fy + 60, 302), mirror_y=True)),
-        ("apron-side-far", "back long apron",
-         xform(side_apron, 0, (30, fy + 540, 302))),
-        ("apron-end-left", "left end apron",
-         xform(end_apron, 90, (77, fy + 99, 302))),
-        ("apron-end-right", "right end apron",
-         xform(end_apron, 90, (1323, fy + 99, 302))),
-        ("rail-cross-left", "left cross rail",
-         xform(end_apron_internal, 90, (492, fy + 415, 302))),
-        ("rail-cross-right", "right cross rail",
-         xform(end_apron_internal, 90, (908, fy + 415, 302))),
-    ]
-
-    top = fixed_top_external(top_external)
-    parts += [
-        ("top-near-outer", "front outer top plank",
-         xform(top, 0, (0, -2 * d.top_width, 334))),
-        ("top-near-inner", "front inner top plank",
-         xform(top_internal, 0, (0, -d.top_width, 334))),
-        ("top-far-inner", "back inner top plank",
-         xform(top_internal, 0, (0, 0, 334))),
-        ("top-far-outer", "back outer top plank",
-         top.mirror("XZ", basePointVector=(0, d.top_width, 0))
-         .translate((0, 0, 334))),
-    ]
-    return add_wedges(parts), d
+    import dimensions as d
+    from table import parts
+    return parts(), d
 
 
 def check(parts):
