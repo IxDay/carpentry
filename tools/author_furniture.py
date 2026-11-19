@@ -15,7 +15,7 @@ coffee-table project's own environment:
 
 The table is published as a whole piece. The top is the moving part: the clip
 lifts the four planks off the frame and fans them out, so the frame's joinery is
-visible in the open pose. The offsets live in ``EXPLODE`` below and become the
+visible in the open pose. The motion lives in the project's ``motion.py`` and becomes the
 ``assemble`` vectors, exactly as in ``author_joint.py``.
 
 The table's geometry, including the corrected leg pockets and the four
@@ -40,33 +40,23 @@ WOOD = [0.9137254901960784, 0.7607843137254902, 0.5490196078431373]
 # Wedges are the same timber, a shade darker so they read.
 WEDGE_WOOD = [0.7176470588235294, 0.5607843137254902, 0.3607843137254902]
 
-# (piece id, name, explode offset in metres, in the catalogue frame)
-EXPLODE = {
-    "top-near-outer": (0.0, 0.20, -0.16),
-    "top-near-inner": (0.0, 0.26, -0.04),
-    "top-far-inner": (0.0, 0.26, 0.04),
-    "top-far-outer": (0.0, 0.20, 0.16),
-}
+# The motion is authored with the table (motion.py in the coffee-table
+# project) in millimetres and its z-up frame: each path lists poses from the
+# closed pose, the last being the exploded one. Here it becomes metres in the
+# catalogue's y-up frame: the last pose is the stored ``EXPLODE`` offset and the
+# poses before it are the ``approach`` waypoints (see bake.py).
+def _catalogue(v):
+    return (v[0] / 1000.0, v[2] / 1000.0, v[1] / 1000.0)
 
-# The top's outer planks sit over the legs' 8 mm tabs with no side clearance,
-# so the fan has to start with a straight lift; a diagonal would drag the
-# pocket walls sideways through the tabs.  The planks then rise to their own
-# heights (the inner pair higher) and only slide sideways once they are stacked
-# clear of one another.
-APPROACH = {
-    pid: [(0.0, 0.06, 0.0), (0.0, e[1], 0.0)] for pid, e in EXPLODE.items()
-}
 
-# The wedges are modelled with the table (wedges.py in the coffee-table
-# project).  Each is driven down beside a cross-rail tenon and its head is flush
-# with the apron top, so the top rests on it: the planks must lift before a
-# wedge can be drawn.  The wedges ride the same 60 mm lift (bake.py leaves a
-# piece with an approach path on its timber track) and then rise clear.
-WEDGE_IDS = ["wedge-rail-%s-%s" % (rail, where)
-             for rail in ("left", "right") for where in ("near", "far")]
-WEDGE_OFFSET = (0.0, 0.10, 0.0)
-APPROACH.update({pid: [(0.0, 0.06, 0.0), (0.0, 0.06, 0.0)]
-                 for pid in WEDGE_IDS})
+def load_motion(project):
+    sys.path.insert(0, project)
+    from motion import PATHS
+    explode = {pid: _catalogue(path[-1]) for pid, path in PATHS.items()}
+    approach = {pid: [_catalogue(p) for p in path[:-1]]
+                for pid, path in PATHS.items()}
+    return explode, approach
+
 
 # Part bounding box in the Coffee-table project: 1400 x 600 x 362 mm.
 CENTRE_X = 700.0
@@ -144,12 +134,12 @@ def to_source(shape, offset, colour=WOOD, detail=0.2):
     return welded, tris
 
 
-def write_source(parts, out_path):
+def write_source(parts, out_path, explode, approach):
     pieces = []
     assemble = {}
     for pid, name, shape in parts:
-        offset = EXPLODE.get(pid) or (WEDGE_OFFSET if pid in WEDGE_IDS else (0.0, 0.0, 0.0))
-        peg = pid in WEDGE_IDS
+        offset = explode.get(pid, (0.0, 0.0, 0.0))
+        peg = pid.startswith("wedge-")
         upos, tris = to_source(shape, offset,
                                WEDGE_WOOD if peg else WOOD, 0.2)
         faces = ij.build_faces(upos, tris, 1.0, 0.0, 0.0, 0.0,
@@ -199,7 +189,7 @@ def write_source(parts, out_path):
         "tab": "furniture",
         "dimensions": "1400 \u00d7 600 \u00d7 362 mm",
         "duration": 10.0,
-        "approach": APPROACH,
+        "approach": approach,
         "assemble": assemble,
         "pieces": pieces,
     }
@@ -225,7 +215,8 @@ def main():
     problems = check(parts)
     if problems:
         sys.exit("%d geometry problem(s); source not written" % problems)
-    level = write_source(parts, args.out)
+    explode, approach = load_motion(args.coffee_table)
+    level = write_source(parts, args.out, explode, approach)
     faces = sum(len(s["faces"]) for p in level["pieces"] for s in p["solids"])
     print("coffee-table  %2d pieces  %4d faces -> %s"
           % (len(level["pieces"]), faces, args.out))
