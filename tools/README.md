@@ -395,8 +395,10 @@ script is re-run. The outer top planks' leg pockets are cut to seat the leg tabs
 and the 28 mm top rests on them with the tabs let into its underside.
 
 After regenerating, run `check_sources.py`, `check_contact.py` and
-`check_animation.py` before baking; `--no-ground` keeps the table on the paper
-background.
+`check_animation.py` before baking; bake the table with the joints' fine settings, which keep its corners crisp
+(`python3 bake.py ../furniture/sources/coffee-table.json ../furniture --no-ground
+--detail 0.03 --edge 0.0015 --edge-lift 0.0004 --ao-dist 0.10`); `--no-ground` keeps
+the table on the paper background.
 
 ### `joint_meta.py` — catalogue metadata
 
